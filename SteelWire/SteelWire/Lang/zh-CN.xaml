@@ -1,0 +1,189 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <system:String x:Key="AppTitle">
+        钢丝绳钻井吨公里计算工具
+    </system:String>
+    <system:String x:Key="Welcome">
+        欢迎，
+    </system:String>
+
+    <system:String x:Key="DrillingTypeTopDrive">
+        顶驱动
+    </system:String>
+    <system:String x:Key="DrillingTypeReamerAndTopDrive">
+        铰刀和顶驱连接
+    </system:String>
+    <system:String x:Key="DrillingTypeNoRedressing">
+        无划眼
+    </system:String>
+    <system:String x:Key="DrillingTypeRedressingOnce">
+        划眼一遍
+    </system:String>
+    <system:String x:Key="DrillingTypeRedressingTwice">
+        划眼两遍
+    </system:String>
+
+    <system:String x:Key="DrillingDifficultyEasy">
+        容易
+    </system:String>
+    <system:String x:Key="DrillingDifficultyNormal">
+        中等
+    </system:String>
+    <system:String x:Key="DrillingDifficultyHard">
+        难
+    </system:String>
+    <system:String x:Key="DrillingDifficultyDifficult">
+        非常难
+    </system:String>
+
+    <system:String x:Key="GroupWirelineCuttingCriticalValueTitle">
+        计算切绳临界值
+    </system:String>
+    <system:String x:Key="LblDerrickHeight">
+        井架高度：
+    </system:String>
+    <system:String x:Key="LblWirelineMaxPower">
+        破断拉力：
+    </system:String>
+    <system:String x:Key="LblRotaryHookWorkload">
+        大钩载荷：
+    </system:String>
+    <system:String x:Key="LblRollerDiameter">
+        滚筒直径：
+    </system:String>
+    <system:String x:Key="LblWirelineDiameter">
+        钢丝绳直径：
+    </system:String>
+    <system:String x:Key="LblRopeCount">
+        承载绳根数：
+    </system:String>
+    <system:String x:Key="LblWirelineCuttingTitle">
+        切绳临界值：
+    </system:String>
+
+    <system:String x:Key="GroupCommonCoefficientTitle">
+        公用系数
+    </system:String>
+    <system:String x:Key="LblFluidDensity">
+        钻井液密度：
+    </system:String>
+    <system:String x:Key="LblElevatorWeight">
+        游车-吊卡总质量：
+    </system:String>
+    <system:String x:Key="DrillPipeNameDrillPipe1">
+        钻杆
+    </system:String>
+    <system:String x:Key="DrillPipeNameDrillPipe2">
+        加重钻杆
+    </system:String>
+    <system:String x:Key="DrillPipeWeight">
+        公称质量：
+    </system:String>
+    <system:String x:Key="DrillPipeLength">
+        立根长度：
+    </system:String>
+    <system:String x:Key="DrillCollarNameDrillCollar1">
+        钻铤1
+    </system:String>
+    <system:String x:Key="DrillCollarNameDrillCollar2">
+        钻铤2
+    </system:String>
+    <system:String x:Key="DrillCollarWeight">
+        公称质量：
+    </system:String>
+    <system:String x:Key="DrillCollarLength">
+        长度：
+    </system:String>
+
+    <system:String x:Key="LblShallowHeight">
+        深度从：
+    </system:String>
+    <system:String x:Key="LblDeepHeight">
+        到：
+    </system:String>
+    <system:String x:Key="LblValueTitle">
+        计算：
+    </system:String>
+    <system:String x:Key="LblUnitTitle">
+        (吨•公里)
+    </system:String>
+
+    <system:String x:Key="GroupDrillingWorkTitle">
+        计算钻井作业钢丝绳吨公里
+    </system:String>
+    <system:String x:Key="LblDrillingType">
+        类型：
+    </system:String>
+    <system:String x:Key="LblDrillingDifficulty">
+        难度：
+    </system:String>
+
+    <system:String x:Key="GroupTripWorkTitle">
+        计算起下钻作业钢丝绳吨公里
+    </system:String>
+    <system:String x:Key="LblTripCount">
+        次数：
+    </system:String>
+
+    <system:String x:Key="GroupBushingWorkTitle">
+        计算下套管作业钢丝绳吨公里
+    </system:String>
+    <system:String x:Key="LblBushingWeight">
+        套管公称质量：
+    </system:String>
+    <system:String x:Key="LblBushingLength">
+        套管单根长度：
+    </system:String>
+    <system:String x:Key="LblBushingHeight">
+        下套管深度：
+    </system:String>
+
+    <system:String x:Key="GroupCoringWorkTitle">
+        计算取岩心作业钢丝绳吨公里
+    </system:String>
+
+    <system:String x:Key="GroupTotalWorkTitle">
+        计算钻井钢丝绳吨公里总和
+    </system:String>
+    <system:String x:Key="LblTotalValueTitle">
+        合计：
+    </system:String>
+
+    <system:String x:Key="GroupCumulationAndResetTitle">
+        累计 &amp; 重置
+    </system:String>
+    <system:String x:Key="LblCurrentDateTitle">
+        当前日期：
+    </system:String>
+    <system:String x:Key="LblCurrentCritical">
+        当前临界：
+    </system:String>
+    <system:String x:Key="LblCurrentCumulation">
+        当前累计：
+    </system:String>
+    <system:String x:Key="BtnLogin">
+        登录
+    </system:String>
+    <system:String x:Key="BtnRefresh">
+        刷新
+    </system:String>
+    <system:String x:Key="BtnCumulate">
+        累计
+    </system:String>
+    <system:String x:Key="BtnReset">
+        重置
+    </system:String>
+
+    <system:String x:Key="ErrorCriticalValueInvalid">ErrorCriticalValueInvalid</system:String>
+    <system:String x:Key="ErrorCriticalDictionaryFileNotFound">ErrorCriticalDictionaryFileNotFound</system:String>
+    <system:String x:Key="ErrorCriticalConfigFileNotFound">ErrorCriticalConfigFileNotFound</system:String>
+    <system:String x:Key="ErrorCumulationValueInvalid">ErrorCumulationValueInvalid</system:String>
+    <system:String x:Key="ErrorCumulationDictionaryFileNotFound">ErrorCumulationDictionaryFileNotFound</system:String>
+    <system:String x:Key="ErrorCumulationConfigFileNotFound">ErrorCumulationConfigFileNotFound</system:String>
+    <system:String x:Key="ErrorCumulationDataNotFound">ErrorCumulationDataNotFound</system:String>
+    <system:String x:Key="ErrorAccountEmpty">ErrorAccountEmpty</system:String>
+    <system:String x:Key="ErrorPasswordEmpty">ErrorPasswordEmpty</system:String>
+    <system:String x:Key="ErrorUserNotExist">ErrorUserNotExist</system:String>
+    <system:String x:Key="ErrorPasswordNotEqual">ErrorPasswordNotEqual</system:String>
+</ResourceDictionary>

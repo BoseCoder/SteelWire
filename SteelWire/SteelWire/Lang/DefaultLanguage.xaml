@@ -1,0 +1,189 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <system:String x:Key="AppTitle">
+        Wireline Of Well Drilling Calculate Tool
+    </system:String>
+    <system:String x:Key="Welcome">
+        Welcome,
+    </system:String>
+
+    <system:String x:Key="DrillingTypeTopDrive">
+        TopDrive
+    </system:String>
+    <system:String x:Key="DrillingTypeReamerAndTopDrive">
+        ReamerAndTopDrive
+    </system:String>
+    <system:String x:Key="DrillingTypeNoRedressing">
+        NoRedressing
+    </system:String>
+    <system:String x:Key="DrillingTypeRedressingOnce">
+        RedressingOnce
+    </system:String>
+    <system:String x:Key="DrillingTypeRedressingTwice">
+        RedressingTwice
+    </system:String>
+
+    <system:String x:Key="DrillingDifficultyEasy">
+        Easy
+    </system:String>
+    <system:String x:Key="DrillingDifficultyNormal">
+        Normal
+    </system:String>
+    <system:String x:Key="DrillingDifficultyHard">
+        Hard
+    </system:String>
+    <system:String x:Key="DrillingDifficultyDifficult">
+        Difficult
+    </system:String>
+
+    <system:String x:Key="GroupWirelineCuttingCriticalValueTitle">
+        Calculate Critical Value Of Wireline Cutting
+    </system:String>
+    <system:String x:Key="LblDerrickHeight">
+        Derrick Height:
+    </system:String>
+    <system:String x:Key="LblWirelineMaxPower">
+        Wireline Max Power:
+    </system:String>
+    <system:String x:Key="LblRotaryHookWorkload">
+        Hook Workload:
+    </system:String>
+    <system:String x:Key="LblRollerDiameter">
+        Roller Diameter:
+    </system:String>
+    <system:String x:Key="LblWirelineDiameter">
+        Wireline Diameter:
+    </system:String>
+    <system:String x:Key="LblRopeCount">
+        Rope Count:
+    </system:String>
+    <system:String x:Key="LblWirelineCuttingTitle">
+        Critical Value Of Wireline Cutting:
+    </system:String>
+
+    <system:String x:Key="GroupCommonCoefficientTitle">
+        Common Coefficient
+    </system:String>
+    <system:String x:Key="LblFluidDensity">
+        Fluid Density:
+    </system:String>
+    <system:String x:Key="LblElevatorWeight">
+        Elevator Weight:
+    </system:String>
+    <system:String x:Key="DrillPipeNameDrillPipe1">
+        Drill Pipe 1
+    </system:String>
+    <system:String x:Key="DrillPipeNameDrillPipe2">
+        Drill Pipe 2
+    </system:String>
+    <system:String x:Key="DrillPipeWeight">
+        Weight:
+    </system:String>
+    <system:String x:Key="DrillPipeLength">
+        Length:
+    </system:String>
+    <system:String x:Key="DrillCollarNameDrillCollar1">
+        Drill Collar 1
+    </system:String>
+    <system:String x:Key="DrillCollarNameDrillCollar2">
+        Drill Collar 2
+    </system:String>
+    <system:String x:Key="DrillCollarWeight">
+        Weight:
+    </system:String>
+    <system:String x:Key="DrillCollarLength">
+        Length:
+    </system:String>
+
+    <system:String x:Key="LblShallowHeight">
+        Shallow Height:
+    </system:String>
+    <system:String x:Key="LblDeepHeight">
+        Deep Height:
+    </system:String>
+    <system:String x:Key="LblValueTitle">
+        Value:
+    </system:String>
+    <system:String x:Key="LblUnitTitle">
+        (t·km)
+    </system:String>
+
+    <system:String x:Key="GroupDrillingWorkTitle">
+        Calculate For Drilling Work
+    </system:String>
+    <system:String x:Key="LblDrillingType">
+        Type:
+    </system:String>
+    <system:String x:Key="LblDrillingDifficulty">
+        Difficulty:
+    </system:String>
+
+    <system:String x:Key="GroupTripWorkTitle">
+        Calculate For Trip Work
+    </system:String>
+    <system:String x:Key="LblTripCount">
+        Trip Count:
+    </system:String>
+
+    <system:String x:Key="GroupBushingWorkTitle">
+        Calculate For Bushing Work
+    </system:String>
+    <system:String x:Key="LblBushingWeight">
+        Bushing Weight:
+    </system:String>
+    <system:String x:Key="LblBushingLength">
+        Bushing Length:
+    </system:String>
+    <system:String x:Key="LblBushingHeight">
+        Bushing Height:
+    </system:String>
+
+    <system:String x:Key="GroupCoringWorkTitle">
+        Calculate For Coring Work
+    </system:String>
+
+    <system:String x:Key="GroupTotalWorkTitle">
+        Calculate For Total Work
+    </system:String>
+    <system:String x:Key="LblTotalValueTitle">
+        Total:
+    </system:String>
+
+    <system:String x:Key="GroupCumulationAndResetTitle">
+        Cumulation &amp; Reset
+    </system:String>
+    <system:String x:Key="LblCurrentDateTitle">
+        Current Date:
+    </system:String>
+    <system:String x:Key="LblCurrentCritical">
+        Current Critical:
+    </system:String>
+    <system:String x:Key="LblCurrentCumulation">
+        Current Cumulation:
+    </system:String>
+    <system:String x:Key="BtnLogin">
+        Sign In
+    </system:String>
+    <system:String x:Key="BtnRefresh">
+        Refresh
+    </system:String>
+    <system:String x:Key="BtnCumulate">
+        Cumulate
+    </system:String>
+    <system:String x:Key="BtnReset">
+        Reset
+    </system:String>
+
+    <system:String x:Key="ErrorCriticalValueInvalid">ErrorCriticalValueInvalid</system:String>
+    <system:String x:Key="ErrorCriticalDictionaryFileNotFound">ErrorCriticalDictionaryFileNotFound</system:String>
+    <system:String x:Key="ErrorCriticalConfigFileNotFound">ErrorCriticalConfigFileNotFound</system:String>
+    <system:String x:Key="ErrorCumulationValueInvalid">ErrorCumulationValueInvalid</system:String>
+    <system:String x:Key="ErrorCumulationDictionaryFileNotFound">ErrorCumulationDictionaryFileNotFound</system:String>
+    <system:String x:Key="ErrorCumulationConfigFileNotFound">ErrorCumulationConfigFileNotFound</system:String>
+    <system:String x:Key="ErrorCumulationDataNotFound">ErrorCumulationDataNotFound</system:String>
+    <system:String x:Key="ErrorAccountEmpty">ErrorAccountEmpty</system:String>
+    <system:String x:Key="ErrorPasswordEmpty">ErrorPasswordEmpty</system:String>
+    <system:String x:Key="ErrorUserNotExist">ErrorUserNotExist</system:String>
+    <system:String x:Key="ErrorPasswordNotEqual">ErrorPasswordNotEqual</system:String>
+</ResourceDictionary>

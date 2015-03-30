@@ -1,0 +1,14 @@
+﻿<Application x:Class="SteelWire.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converter="clr-namespace:SteelWire.AppCode.Converter"
+             StartupUri="Windows\MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary x:Name="LangDictionary"  Source="lang\DefaultLanguage.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <converter:StringConcatConverter x:Key="WindowTitleConverter" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

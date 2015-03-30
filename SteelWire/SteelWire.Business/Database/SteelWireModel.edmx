@@ -1,0 +1,1073 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SteelWireModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="SteelWireModelStoreContainer">
+          <EntitySet Name="CumulationReset" EntityType="SteelWireModel.Store.CumulationReset" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CuttingCriticalConfig" EntityType="SteelWireModel.Store.CuttingCriticalConfig" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CuttingCriticalDictionary" EntityType="SteelWireModel.Store.CuttingCriticalDictionary" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DrillCollarConfig" EntityType="SteelWireModel.Store.DrillCollarConfig" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DrillingDifficulty" EntityType="SteelWireModel.Store.DrillingDifficulty" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DrillingType" EntityType="SteelWireModel.Store.DrillingType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DrillPipeConfig" EntityType="SteelWireModel.Store.DrillPipeConfig" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Machine" EntityType="SteelWireModel.Store.Machine" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SecurityUser" EntityType="SteelWireModel.Store.SecurityUser" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="WireropeCutRole" EntityType="SteelWireModel.Store.WireropeCutRole" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="WireropeEfficiency" EntityType="SteelWireModel.Store.WireropeEfficiency" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="WireropeWorkload" EntityType="SteelWireModel.Store.WireropeWorkload" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="WorkConfig" EntityType="SteelWireModel.Store.WorkConfig" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="WorkDictionary" EntityType="SteelWireModel.Store.WorkDictionary" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_CUMULATI_RELATIONS_USER" Association="SteelWireModel.Store.FK_CUMULATI_RELATIONS_USER">
+            <End Role="SecurityUser" EntitySet="SecurityUser" />
+            <End Role="CumulationReset" EntitySet="CumulationReset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUTCONF_RELATIONS_CUTDIC" Association="SteelWireModel.Store.FK_CUTCONF_RELATIONS_CUTDIC">
+            <End Role="CuttingCriticalDictionary" EntitySet="CuttingCriticalDictionary" />
+            <End Role="CuttingCriticalConfig" EntitySet="CuttingCriticalConfig" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUTCONF_RELATIONS_USER" Association="SteelWireModel.Store.FK_CUTCONF_RELATIONS_USER">
+            <End Role="SecurityUser" EntitySet="SecurityUser" />
+            <End Role="CuttingCriticalConfig" EntitySet="CuttingCriticalConfig" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUTDIC_RELATIONS_USER" Association="SteelWireModel.Store.FK_CUTDIC_RELATIONS_USER">
+            <End Role="SecurityUser" EntitySet="SecurityUser" />
+            <End Role="CuttingCriticalDictionary" EntitySet="CuttingCriticalDictionary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUTROLE_RELATIONS_CUTDIC" Association="SteelWireModel.Store.FK_CUTROLE_RELATIONS_CUTDIC">
+            <End Role="CuttingCriticalDictionary" EntitySet="CuttingCriticalDictionary" />
+            <End Role="WireropeCutRole" EntitySet="WireropeCutRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DRILDIFF_RELATIONS_WORKDIC" Association="SteelWireModel.Store.FK_DRILDIFF_RELATIONS_WORKDIC">
+            <End Role="WorkDictionary" EntitySet="WorkDictionary" />
+            <End Role="DrillingDifficulty" EntitySet="DrillingDifficulty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DRILLCOL_RELATIONS_WORKCONF" Association="SteelWireModel.Store.FK_DRILLCOL_RELATIONS_WORKCONF">
+            <End Role="WorkConfig" EntitySet="WorkConfig" />
+            <End Role="DrillCollarConfig" EntitySet="DrillCollarConfig" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DRILLPIP_RELATIONS_WORKCONF" Association="SteelWireModel.Store.FK_DRILLPIP_RELATIONS_WORKCONF">
+            <End Role="WorkConfig" EntitySet="WorkConfig" />
+            <End Role="DrillPipeConfig" EntitySet="DrillPipeConfig" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DRILTYPE_RELATIONS_WORKDIC" Association="SteelWireModel.Store.FK_DRILTYPE_RELATIONS_WORKDIC">
+            <End Role="WorkDictionary" EntitySet="WorkDictionary" />
+            <End Role="DrillingType" EntitySet="DrillingType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EFFIC_RELATIONS_CUTDIC" Association="SteelWireModel.Store.FK_EFFIC_RELATIONS_CUTDIC">
+            <End Role="CuttingCriticalDictionary" EntitySet="CuttingCriticalDictionary" />
+            <End Role="WireropeEfficiency" EntitySet="WireropeEfficiency" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MACHINE_RELATIONS_USER" Association="SteelWireModel.Store.FK_MACHINE_RELATIONS_USER">
+            <End Role="SecurityUser" EntitySet="SecurityUser" />
+            <End Role="Machine" EntitySet="Machine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WORKCONF_RELATIONS_USER" Association="SteelWireModel.Store.FK_WORKCONF_RELATIONS_USER">
+            <End Role="SecurityUser" EntitySet="SecurityUser" />
+            <End Role="WorkConfig" EntitySet="WorkConfig" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WORKCONF_RELATIONS_WORKDIC" Association="SteelWireModel.Store.FK_WORKCONF_RELATIONS_WORKDIC">
+            <End Role="WorkDictionary" EntitySet="WorkDictionary" />
+            <End Role="WorkConfig" EntitySet="WorkConfig" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WORKDIC_RELATIONS_USER" Association="SteelWireModel.Store.FK_WORKDIC_RELATIONS_USER">
+            <End Role="SecurityUser" EntitySet="SecurityUser" />
+            <End Role="WorkDictionary" EntitySet="WorkDictionary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WORKLOAD_RELATIONS_CUTDIC" Association="SteelWireModel.Store.FK_WORKLOAD_RELATIONS_CUTDIC">
+            <End Role="CuttingCriticalDictionary" EntitySet="CuttingCriticalDictionary" />
+            <End Role="WireropeWorkload" EntitySet="WireropeWorkload" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CumulationReset">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UpdateUserID" Type="int" Nullable="false" />
+          <Property Name="CriticalValue" Type="decimal" Nullable="false" Scale="8" />
+          <Property Name="CumulationValue" Type="decimal" Nullable="false" Scale="8" />
+          <Property Name="ResetValue" Type="decimal" Nullable="false" Scale="8" />
+          <Property Name="RemainValue" Type="decimal" Nullable="false" Scale="8" />
+          <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CuttingCriticalConfig">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DictionaryID" Type="int" Nullable="false" />
+          <Property Name="ConfigUserID" Type="int" Nullable="false" />
+          <Property Name="DerrickHeight" Type="decimal" Nullable="false" Scale="8" />
+          <Property Name="WirelineMaxPower" Type="decimal" Nullable="false" Scale="8" />
+          <Property Name="RotaryHookWorkload" Type="decimal" Nullable="false" Scale="8" />
+          <Property Name="RollerDiameter" Type="decimal" Nullable="false" Scale="8" />
+          <Property Name="WirelineDiameter" Type="decimal" Nullable="false" Scale="8" />
+          <Property Name="RopeCount" Type="int" Nullable="false" />
+          <Property Name="ConfigTime" Type="datetime" Nullable="false" />
+          <Property Name="CuttingCriticalValue" Type="decimal" Nullable="false" Scale="8" />
+        </EntityType>
+        <EntityType Name="CuttingCriticalDictionary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ConfigUserID" Type="int" Nullable="false" />
+          <Property Name="ConfigTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DrillCollarConfig">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="WorkConfigID" Type="int" Nullable="false" />
+          <Property Name="DrillCollarName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="DrillCollarWeight" Type="decimal" Nullable="false" Scale="8" />
+          <Property Name="DrillCollarLength" Type="decimal" Nullable="false" Scale="8" />
+        </EntityType>
+        <EntityType Name="DrillingDifficulty">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DictionaryID" Type="int" Nullable="false" />
+          <Property Name="DrillingDifficultyName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="DrillingDifficultyValue" Type="decimal" Nullable="false" Scale="8" />
+        </EntityType>
+        <EntityType Name="DrillingType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DictionaryID" Type="int" Nullable="false" />
+          <Property Name="DrillingTypeName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Coefficient" Type="decimal" Nullable="false" Scale="8" />
+        </EntityType>
+        <EntityType Name="DrillPipeConfig">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="WorkConfigID" Type="int" Nullable="false" />
+          <Property Name="DrillPipeName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="DrillPipeWeight" Type="decimal" Nullable="false" Scale="8" />
+          <Property Name="DrillPipeLength" Type="decimal" Nullable="false" Scale="8" />
+        </EntityType>
+        <EntityType Name="Machine">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RegisterUserID" Type="int" Nullable="false" />
+          <Property Name="MachineCode" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="RegistTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SecurityUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Account" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Password" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Checked" Type="bit" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="RegistTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WireropeCutRole">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DictionaryID" Type="int" Nullable="false" />
+          <Property Name="Key" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="MinDerrickHeight" Type="decimal" Nullable="false" Scale="8" />
+          <Property Name="MaxDerrickHeight" Type="decimal" Nullable="false" Scale="8" />
+          <Property Name="MinCutLength" Type="decimal" Nullable="false" Scale="8" />
+          <Property Name="MaxCutLength" Type="decimal" Nullable="false" Scale="8" />
+        </EntityType>
+        <EntityType Name="WireropeEfficiency">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DictionaryID" Type="int" Nullable="false" />
+          <Property Name="RopeCount" Type="int" Nullable="false" />
+          <Property Name="SlidingValue" Type="decimal" Nullable="false" Scale="8" />
+          <Property Name="RollingValue" Type="decimal" Nullable="false" Scale="8" />
+        </EntityType>
+        <EntityType Name="WireropeWorkload">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DictionaryID" Type="int" Nullable="false" />
+          <Property Name="Diameter" Type="decimal" Nullable="false" Scale="8" />
+          <Property Name="Workload" Type="decimal" Nullable="false" Scale="8" />
+        </EntityType>
+        <EntityType Name="WorkConfig">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DictionaryID" Type="int" Nullable="false" />
+          <Property Name="ConfigUserID" Type="int" Nullable="false" />
+          <Property Name="FluidDensity" Type="decimal" Nullable="false" Scale="8" />
+          <Property Name="ElevatorWeight" Type="decimal" Nullable="false" Scale="8" />
+          <Property Name="DrillingShallowHeight" Type="decimal" Nullable="false" Scale="8" />
+          <Property Name="DrillingDeepHeight" Type="decimal" Nullable="false" Scale="8" />
+          <Property Name="DrillingType" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="DrillingDifficulty" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="TripShallowHeight" Type="decimal" Nullable="false" Scale="8" />
+          <Property Name="TripDeepHeight" Type="decimal" Nullable="false" Scale="8" />
+          <Property Name="TripCount" Type="int" Nullable="false" />
+          <Property Name="BushingWeight" Type="decimal" Nullable="false" Scale="8" />
+          <Property Name="BushingLength" Type="decimal" Nullable="false" Scale="8" />
+          <Property Name="BushingHeight" Type="decimal" Nullable="false" Scale="8" />
+          <Property Name="CoringShallowHeight" Type="decimal" Nullable="false" Scale="8" />
+          <Property Name="CoringDeepHeight" Type="decimal" Nullable="false" Scale="8" />
+          <Property Name="ConfigTime" Type="datetime" Nullable="false" />
+          <Property Name="WorkValue" Type="decimal" Nullable="false" Scale="8" />
+        </EntityType>
+        <EntityType Name="WorkDictionary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ConfigUserID" Type="int" Nullable="false" />
+          <Property Name="ConfigTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CUMULATI_RELATIONS_USER">
+          <End Role="SecurityUser" Type="SteelWireModel.Store.SecurityUser" Multiplicity="1" />
+          <End Role="CumulationReset" Type="SteelWireModel.Store.CumulationReset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CumulationReset">
+              <PropertyRef Name="UpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUTCONF_RELATIONS_CUTDIC">
+          <End Role="CuttingCriticalDictionary" Type="SteelWireModel.Store.CuttingCriticalDictionary" Multiplicity="1" />
+          <End Role="CuttingCriticalConfig" Type="SteelWireModel.Store.CuttingCriticalConfig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CuttingCriticalDictionary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CuttingCriticalConfig">
+              <PropertyRef Name="DictionaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUTCONF_RELATIONS_USER">
+          <End Role="SecurityUser" Type="SteelWireModel.Store.SecurityUser" Multiplicity="1" />
+          <End Role="CuttingCriticalConfig" Type="SteelWireModel.Store.CuttingCriticalConfig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CuttingCriticalConfig">
+              <PropertyRef Name="ConfigUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUTDIC_RELATIONS_USER">
+          <End Role="SecurityUser" Type="SteelWireModel.Store.SecurityUser" Multiplicity="1" />
+          <End Role="CuttingCriticalDictionary" Type="SteelWireModel.Store.CuttingCriticalDictionary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CuttingCriticalDictionary">
+              <PropertyRef Name="ConfigUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUTROLE_RELATIONS_CUTDIC">
+          <End Role="CuttingCriticalDictionary" Type="SteelWireModel.Store.CuttingCriticalDictionary" Multiplicity="1" />
+          <End Role="WireropeCutRole" Type="SteelWireModel.Store.WireropeCutRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CuttingCriticalDictionary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WireropeCutRole">
+              <PropertyRef Name="DictionaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DRILDIFF_RELATIONS_WORKDIC">
+          <End Role="WorkDictionary" Type="SteelWireModel.Store.WorkDictionary" Multiplicity="1" />
+          <End Role="DrillingDifficulty" Type="SteelWireModel.Store.DrillingDifficulty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkDictionary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DrillingDifficulty">
+              <PropertyRef Name="DictionaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DRILLCOL_RELATIONS_WORKCONF">
+          <End Role="WorkConfig" Type="SteelWireModel.Store.WorkConfig" Multiplicity="1" />
+          <End Role="DrillCollarConfig" Type="SteelWireModel.Store.DrillCollarConfig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkConfig">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DrillCollarConfig">
+              <PropertyRef Name="WorkConfigID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DRILLPIP_RELATIONS_WORKCONF">
+          <End Role="WorkConfig" Type="SteelWireModel.Store.WorkConfig" Multiplicity="1" />
+          <End Role="DrillPipeConfig" Type="SteelWireModel.Store.DrillPipeConfig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkConfig">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DrillPipeConfig">
+              <PropertyRef Name="WorkConfigID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DRILTYPE_RELATIONS_WORKDIC">
+          <End Role="WorkDictionary" Type="SteelWireModel.Store.WorkDictionary" Multiplicity="1" />
+          <End Role="DrillingType" Type="SteelWireModel.Store.DrillingType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkDictionary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DrillingType">
+              <PropertyRef Name="DictionaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EFFIC_RELATIONS_CUTDIC">
+          <End Role="CuttingCriticalDictionary" Type="SteelWireModel.Store.CuttingCriticalDictionary" Multiplicity="1" />
+          <End Role="WireropeEfficiency" Type="SteelWireModel.Store.WireropeEfficiency" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CuttingCriticalDictionary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WireropeEfficiency">
+              <PropertyRef Name="DictionaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MACHINE_RELATIONS_USER">
+          <End Role="SecurityUser" Type="SteelWireModel.Store.SecurityUser" Multiplicity="1" />
+          <End Role="Machine" Type="SteelWireModel.Store.Machine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Machine">
+              <PropertyRef Name="RegisterUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WORKCONF_RELATIONS_USER">
+          <End Role="SecurityUser" Type="SteelWireModel.Store.SecurityUser" Multiplicity="1" />
+          <End Role="WorkConfig" Type="SteelWireModel.Store.WorkConfig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WorkConfig">
+              <PropertyRef Name="ConfigUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WORKCONF_RELATIONS_WORKDIC">
+          <End Role="WorkDictionary" Type="SteelWireModel.Store.WorkDictionary" Multiplicity="1" />
+          <End Role="WorkConfig" Type="SteelWireModel.Store.WorkConfig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkDictionary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WorkConfig">
+              <PropertyRef Name="DictionaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WORKDIC_RELATIONS_USER">
+          <End Role="SecurityUser" Type="SteelWireModel.Store.SecurityUser" Multiplicity="1" />
+          <End Role="WorkDictionary" Type="SteelWireModel.Store.WorkDictionary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WorkDictionary">
+              <PropertyRef Name="ConfigUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WORKLOAD_RELATIONS_CUTDIC">
+          <End Role="CuttingCriticalDictionary" Type="SteelWireModel.Store.CuttingCriticalDictionary" Multiplicity="1" />
+          <End Role="WireropeWorkload" Type="SteelWireModel.Store.WireropeWorkload" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CuttingCriticalDictionary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WireropeWorkload">
+              <PropertyRef Name="DictionaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SteelWireModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="SteelWireContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CumulationReset" EntityType="SteelWireModel.CumulationReset" />
+          <EntitySet Name="CuttingCriticalConfig" EntityType="SteelWireModel.CuttingCriticalConfig" />
+          <EntitySet Name="CuttingCriticalDictionary" EntityType="SteelWireModel.CuttingCriticalDictionary" />
+          <EntitySet Name="DrillCollarConfig" EntityType="SteelWireModel.DrillCollarConfig" />
+          <EntitySet Name="DrillingDifficulty" EntityType="SteelWireModel.DrillingDifficulty" />
+          <EntitySet Name="DrillingType" EntityType="SteelWireModel.DrillingType" />
+          <EntitySet Name="DrillPipeConfig" EntityType="SteelWireModel.DrillPipeConfig" />
+          <EntitySet Name="Machine" EntityType="SteelWireModel.Machine" />
+          <EntitySet Name="SecurityUser" EntityType="SteelWireModel.SecurityUser" />
+          <EntitySet Name="WireropeCutRole" EntityType="SteelWireModel.WireropeCutRole" />
+          <EntitySet Name="WireropeEfficiency" EntityType="SteelWireModel.WireropeEfficiency" />
+          <EntitySet Name="WireropeWorkload" EntityType="SteelWireModel.WireropeWorkload" />
+          <EntitySet Name="WorkConfig" EntityType="SteelWireModel.WorkConfig" />
+          <EntitySet Name="WorkDictionary" EntityType="SteelWireModel.WorkDictionary" />
+          <AssociationSet Name="FK_CUMULATI_RELATIONS_USER" Association="SteelWireModel.FK_CUMULATI_RELATIONS_USER">
+            <End Role="SecurityUser" EntitySet="SecurityUser" />
+            <End Role="CumulationReset" EntitySet="CumulationReset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUTCONF_RELATIONS_CUTDIC" Association="SteelWireModel.FK_CUTCONF_RELATIONS_CUTDIC">
+            <End Role="CuttingCriticalDictionary" EntitySet="CuttingCriticalDictionary" />
+            <End Role="CuttingCriticalConfig" EntitySet="CuttingCriticalConfig" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUTCONF_RELATIONS_USER" Association="SteelWireModel.FK_CUTCONF_RELATIONS_USER">
+            <End Role="SecurityUser" EntitySet="SecurityUser" />
+            <End Role="CuttingCriticalConfig" EntitySet="CuttingCriticalConfig" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUTDIC_RELATIONS_USER" Association="SteelWireModel.FK_CUTDIC_RELATIONS_USER">
+            <End Role="SecurityUser" EntitySet="SecurityUser" />
+            <End Role="CuttingCriticalDictionary" EntitySet="CuttingCriticalDictionary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUTROLE_RELATIONS_CUTDIC" Association="SteelWireModel.FK_CUTROLE_RELATIONS_CUTDIC">
+            <End Role="CuttingCriticalDictionary" EntitySet="CuttingCriticalDictionary" />
+            <End Role="WireropeCutRole" EntitySet="WireropeCutRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EFFIC_RELATIONS_CUTDIC" Association="SteelWireModel.FK_EFFIC_RELATIONS_CUTDIC">
+            <End Role="CuttingCriticalDictionary" EntitySet="CuttingCriticalDictionary" />
+            <End Role="WireropeEfficiency" EntitySet="WireropeEfficiency" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WORKLOAD_RELATIONS_CUTDIC" Association="SteelWireModel.FK_WORKLOAD_RELATIONS_CUTDIC">
+            <End Role="CuttingCriticalDictionary" EntitySet="CuttingCriticalDictionary" />
+            <End Role="WireropeWorkload" EntitySet="WireropeWorkload" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DRILLCOL_RELATIONS_WORKCONF" Association="SteelWireModel.FK_DRILLCOL_RELATIONS_WORKCONF">
+            <End Role="WorkConfig" EntitySet="WorkConfig" />
+            <End Role="DrillCollarConfig" EntitySet="DrillCollarConfig" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DRILDIFF_RELATIONS_WORKDIC" Association="SteelWireModel.FK_DRILDIFF_RELATIONS_WORKDIC">
+            <End Role="WorkDictionary" EntitySet="WorkDictionary" />
+            <End Role="DrillingDifficulty" EntitySet="DrillingDifficulty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DRILTYPE_RELATIONS_WORKDIC" Association="SteelWireModel.FK_DRILTYPE_RELATIONS_WORKDIC">
+            <End Role="WorkDictionary" EntitySet="WorkDictionary" />
+            <End Role="DrillingType" EntitySet="DrillingType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DRILLPIP_RELATIONS_WORKCONF" Association="SteelWireModel.FK_DRILLPIP_RELATIONS_WORKCONF">
+            <End Role="WorkConfig" EntitySet="WorkConfig" />
+            <End Role="DrillPipeConfig" EntitySet="DrillPipeConfig" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MACHINE_RELATIONS_USER" Association="SteelWireModel.FK_MACHINE_RELATIONS_USER">
+            <End Role="SecurityUser" EntitySet="SecurityUser" />
+            <End Role="Machine" EntitySet="Machine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WORKCONF_RELATIONS_USER" Association="SteelWireModel.FK_WORKCONF_RELATIONS_USER">
+            <End Role="SecurityUser" EntitySet="SecurityUser" />
+            <End Role="WorkConfig" EntitySet="WorkConfig" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WORKDIC_RELATIONS_USER" Association="SteelWireModel.FK_WORKDIC_RELATIONS_USER">
+            <End Role="SecurityUser" EntitySet="SecurityUser" />
+            <End Role="WorkDictionary" EntitySet="WorkDictionary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WORKCONF_RELATIONS_WORKDIC" Association="SteelWireModel.FK_WORKCONF_RELATIONS_WORKDIC">
+            <End Role="WorkDictionary" EntitySet="WorkDictionary" />
+            <End Role="WorkConfig" EntitySet="WorkConfig" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CumulationReset">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="UpdateUserID" Type="Int32" Nullable="false" />
+          <Property Name="CriticalValue" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="CumulationValue" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="ResetValue" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="RemainValue" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SecurityUser" Relationship="SteelWireModel.FK_CUMULATI_RELATIONS_USER" FromRole="CumulationReset" ToRole="SecurityUser" />
+        </EntityType>
+        <EntityType Name="CuttingCriticalConfig">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="DictionaryID" Type="Int32" Nullable="false" />
+          <Property Name="ConfigUserID" Type="Int32" Nullable="false" />
+          <Property Name="DerrickHeight" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="WirelineMaxPower" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="RotaryHookWorkload" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="RollerDiameter" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="WirelineDiameter" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="RopeCount" Type="Int32" Nullable="false" />
+          <Property Name="ConfigTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CuttingCriticalValue" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <NavigationProperty Name="CuttingCriticalDictionary" Relationship="SteelWireModel.FK_CUTCONF_RELATIONS_CUTDIC" FromRole="CuttingCriticalConfig" ToRole="CuttingCriticalDictionary" />
+          <NavigationProperty Name="SecurityUser" Relationship="SteelWireModel.FK_CUTCONF_RELATIONS_USER" FromRole="CuttingCriticalConfig" ToRole="SecurityUser" />
+        </EntityType>
+        <EntityType Name="CuttingCriticalDictionary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ConfigUserID" Type="Int32" Nullable="false" />
+          <Property Name="ConfigTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CuttingCriticalConfig" Relationship="SteelWireModel.FK_CUTCONF_RELATIONS_CUTDIC" FromRole="CuttingCriticalDictionary" ToRole="CuttingCriticalConfig" />
+          <NavigationProperty Name="SecurityUser" Relationship="SteelWireModel.FK_CUTDIC_RELATIONS_USER" FromRole="CuttingCriticalDictionary" ToRole="SecurityUser" />
+          <NavigationProperty Name="WireropeCutRole" Relationship="SteelWireModel.FK_CUTROLE_RELATIONS_CUTDIC" FromRole="CuttingCriticalDictionary" ToRole="WireropeCutRole" />
+          <NavigationProperty Name="WireropeEfficiency" Relationship="SteelWireModel.FK_EFFIC_RELATIONS_CUTDIC" FromRole="CuttingCriticalDictionary" ToRole="WireropeEfficiency" />
+          <NavigationProperty Name="WireropeWorkload" Relationship="SteelWireModel.FK_WORKLOAD_RELATIONS_CUTDIC" FromRole="CuttingCriticalDictionary" ToRole="WireropeWorkload" />
+        </EntityType>
+        <EntityType Name="DrillCollarConfig">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="WorkConfigID" Type="Int32" Nullable="false" />
+          <Property Name="DrillCollarWeight" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="DrillCollarLength" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <NavigationProperty Name="WorkConfig" Relationship="SteelWireModel.FK_DRILLCOL_RELATIONS_WORKCONF" FromRole="DrillCollarConfig" ToRole="WorkConfig" />
+          <Property Type="String" Name="DrillCollarName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DrillingDifficulty">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="DictionaryID" Type="Int32" Nullable="false" />
+          <Property Name="DrillingDifficultyName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="DrillingDifficultyValue" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <NavigationProperty Name="WorkDictionary" Relationship="SteelWireModel.FK_DRILDIFF_RELATIONS_WORKDIC" FromRole="DrillingDifficulty" ToRole="WorkDictionary" />
+        </EntityType>
+        <EntityType Name="DrillingType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="DictionaryID" Type="Int32" Nullable="false" />
+          <Property Name="DrillingTypeName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Coefficient" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <NavigationProperty Name="WorkDictionary" Relationship="SteelWireModel.FK_DRILTYPE_RELATIONS_WORKDIC" FromRole="DrillingType" ToRole="WorkDictionary" />
+        </EntityType>
+        <EntityType Name="DrillPipeConfig">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="WorkConfigID" Type="Int32" Nullable="false" />
+          <Property Name="DrillPipeWeight" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="DrillPipeLength" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <NavigationProperty Name="WorkConfig" Relationship="SteelWireModel.FK_DRILLPIP_RELATIONS_WORKCONF" FromRole="DrillPipeConfig" ToRole="WorkConfig" />
+          <Property Type="String" Name="DrillPipeName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Machine">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="RegisterUserID" Type="Int32" Nullable="false" />
+          <Property Name="MachineCode" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="RegistTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SecurityUser" Relationship="SteelWireModel.FK_MACHINE_RELATIONS_USER" FromRole="Machine" ToRole="SecurityUser" />
+        </EntityType>
+        <EntityType Name="SecurityUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Account" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Checked" Type="Boolean" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="RegistTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CumulationReset" Relationship="SteelWireModel.FK_CUMULATI_RELATIONS_USER" FromRole="SecurityUser" ToRole="CumulationReset" />
+          <NavigationProperty Name="CuttingCriticalConfig" Relationship="SteelWireModel.FK_CUTCONF_RELATIONS_USER" FromRole="SecurityUser" ToRole="CuttingCriticalConfig" />
+          <NavigationProperty Name="CuttingCriticalDictionary" Relationship="SteelWireModel.FK_CUTDIC_RELATIONS_USER" FromRole="SecurityUser" ToRole="CuttingCriticalDictionary" />
+          <NavigationProperty Name="Machine" Relationship="SteelWireModel.FK_MACHINE_RELATIONS_USER" FromRole="SecurityUser" ToRole="Machine" />
+          <NavigationProperty Name="WorkConfig" Relationship="SteelWireModel.FK_WORKCONF_RELATIONS_USER" FromRole="SecurityUser" ToRole="WorkConfig" />
+          <NavigationProperty Name="WorkDictionary" Relationship="SteelWireModel.FK_WORKDIC_RELATIONS_USER" FromRole="SecurityUser" ToRole="WorkDictionary" />
+        </EntityType>
+        <EntityType Name="WireropeCutRole">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="DictionaryID" Type="Int32" Nullable="false" />
+          <Property Name="Key" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="MinDerrickHeight" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="MaxDerrickHeight" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="MinCutLength" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="MaxCutLength" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <NavigationProperty Name="CuttingCriticalDictionary" Relationship="SteelWireModel.FK_CUTROLE_RELATIONS_CUTDIC" FromRole="WireropeCutRole" ToRole="CuttingCriticalDictionary" />
+        </EntityType>
+        <EntityType Name="WireropeEfficiency">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="DictionaryID" Type="Int32" Nullable="false" />
+          <Property Name="RopeCount" Type="Int32" Nullable="false" />
+          <Property Name="SlidingValue" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="RollingValue" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <NavigationProperty Name="CuttingCriticalDictionary" Relationship="SteelWireModel.FK_EFFIC_RELATIONS_CUTDIC" FromRole="WireropeEfficiency" ToRole="CuttingCriticalDictionary" />
+        </EntityType>
+        <EntityType Name="WireropeWorkload">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="DictionaryID" Type="Int32" Nullable="false" />
+          <Property Name="Diameter" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="Workload" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <NavigationProperty Name="CuttingCriticalDictionary" Relationship="SteelWireModel.FK_WORKLOAD_RELATIONS_CUTDIC" FromRole="WireropeWorkload" ToRole="CuttingCriticalDictionary" />
+        </EntityType>
+        <EntityType Name="WorkConfig">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="DictionaryID" Type="Int32" Nullable="false" />
+          <Property Name="ConfigUserID" Type="Int32" Nullable="false" />
+          <Property Name="FluidDensity" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="ElevatorWeight" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="DrillingShallowHeight" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="DrillingDeepHeight" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="DrillingType" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="DrillingDifficulty" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="TripShallowHeight" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="TripDeepHeight" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="TripCount" Type="Int32" Nullable="false" />
+          <Property Name="BushingWeight" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="BushingLength" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="BushingHeight" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="CoringShallowHeight" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="CoringDeepHeight" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="ConfigTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="WorkValue" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <NavigationProperty Name="DrillCollarConfig" Relationship="SteelWireModel.FK_DRILLCOL_RELATIONS_WORKCONF" FromRole="WorkConfig" ToRole="DrillCollarConfig" />
+          <NavigationProperty Name="DrillPipeConfig" Relationship="SteelWireModel.FK_DRILLPIP_RELATIONS_WORKCONF" FromRole="WorkConfig" ToRole="DrillPipeConfig" />
+          <NavigationProperty Name="SecurityUser" Relationship="SteelWireModel.FK_WORKCONF_RELATIONS_USER" FromRole="WorkConfig" ToRole="SecurityUser" />
+          <NavigationProperty Name="WorkDictionary" Relationship="SteelWireModel.FK_WORKCONF_RELATIONS_WORKDIC" FromRole="WorkConfig" ToRole="WorkDictionary" />
+        </EntityType>
+        <EntityType Name="WorkDictionary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ConfigUserID" Type="Int32" Nullable="false" />
+          <Property Name="ConfigTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="DrillingDifficulty" Relationship="SteelWireModel.FK_DRILDIFF_RELATIONS_WORKDIC" FromRole="WorkDictionary" ToRole="DrillingDifficulty" />
+          <NavigationProperty Name="DrillingType" Relationship="SteelWireModel.FK_DRILTYPE_RELATIONS_WORKDIC" FromRole="WorkDictionary" ToRole="DrillingType" />
+          <NavigationProperty Name="SecurityUser" Relationship="SteelWireModel.FK_WORKDIC_RELATIONS_USER" FromRole="WorkDictionary" ToRole="SecurityUser" />
+          <NavigationProperty Name="WorkConfig" Relationship="SteelWireModel.FK_WORKCONF_RELATIONS_WORKDIC" FromRole="WorkDictionary" ToRole="WorkConfig" />
+        </EntityType>
+        <Association Name="FK_CUMULATI_RELATIONS_USER">
+          <End Role="SecurityUser" Type="SteelWireModel.SecurityUser" Multiplicity="1" />
+          <End Role="CumulationReset" Type="SteelWireModel.CumulationReset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CumulationReset">
+              <PropertyRef Name="UpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUTCONF_RELATIONS_CUTDIC">
+          <End Role="CuttingCriticalDictionary" Type="SteelWireModel.CuttingCriticalDictionary" Multiplicity="1" />
+          <End Role="CuttingCriticalConfig" Type="SteelWireModel.CuttingCriticalConfig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CuttingCriticalDictionary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CuttingCriticalConfig">
+              <PropertyRef Name="DictionaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUTCONF_RELATIONS_USER">
+          <End Role="SecurityUser" Type="SteelWireModel.SecurityUser" Multiplicity="1" />
+          <End Role="CuttingCriticalConfig" Type="SteelWireModel.CuttingCriticalConfig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CuttingCriticalConfig">
+              <PropertyRef Name="ConfigUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUTDIC_RELATIONS_USER">
+          <End Role="SecurityUser" Type="SteelWireModel.SecurityUser" Multiplicity="1" />
+          <End Role="CuttingCriticalDictionary" Type="SteelWireModel.CuttingCriticalDictionary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CuttingCriticalDictionary">
+              <PropertyRef Name="ConfigUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUTROLE_RELATIONS_CUTDIC">
+          <End Role="CuttingCriticalDictionary" Type="SteelWireModel.CuttingCriticalDictionary" Multiplicity="1" />
+          <End Role="WireropeCutRole" Type="SteelWireModel.WireropeCutRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CuttingCriticalDictionary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WireropeCutRole">
+              <PropertyRef Name="DictionaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EFFIC_RELATIONS_CUTDIC">
+          <End Role="CuttingCriticalDictionary" Type="SteelWireModel.CuttingCriticalDictionary" Multiplicity="1" />
+          <End Role="WireropeEfficiency" Type="SteelWireModel.WireropeEfficiency" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CuttingCriticalDictionary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WireropeEfficiency">
+              <PropertyRef Name="DictionaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WORKLOAD_RELATIONS_CUTDIC">
+          <End Role="CuttingCriticalDictionary" Type="SteelWireModel.CuttingCriticalDictionary" Multiplicity="1" />
+          <End Role="WireropeWorkload" Type="SteelWireModel.WireropeWorkload" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CuttingCriticalDictionary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WireropeWorkload">
+              <PropertyRef Name="DictionaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DRILLCOL_RELATIONS_WORKCONF">
+          <End Role="WorkConfig" Type="SteelWireModel.WorkConfig" Multiplicity="1" />
+          <End Role="DrillCollarConfig" Type="SteelWireModel.DrillCollarConfig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkConfig">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DrillCollarConfig">
+              <PropertyRef Name="WorkConfigID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DRILDIFF_RELATIONS_WORKDIC">
+          <End Role="WorkDictionary" Type="SteelWireModel.WorkDictionary" Multiplicity="1" />
+          <End Role="DrillingDifficulty" Type="SteelWireModel.DrillingDifficulty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkDictionary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DrillingDifficulty">
+              <PropertyRef Name="DictionaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DRILTYPE_RELATIONS_WORKDIC">
+          <End Role="WorkDictionary" Type="SteelWireModel.WorkDictionary" Multiplicity="1" />
+          <End Role="DrillingType" Type="SteelWireModel.DrillingType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkDictionary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DrillingType">
+              <PropertyRef Name="DictionaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DRILLPIP_RELATIONS_WORKCONF">
+          <End Role="WorkConfig" Type="SteelWireModel.WorkConfig" Multiplicity="1" />
+          <End Role="DrillPipeConfig" Type="SteelWireModel.DrillPipeConfig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkConfig">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DrillPipeConfig">
+              <PropertyRef Name="WorkConfigID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MACHINE_RELATIONS_USER">
+          <End Role="SecurityUser" Type="SteelWireModel.SecurityUser" Multiplicity="1" />
+          <End Role="Machine" Type="SteelWireModel.Machine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Machine">
+              <PropertyRef Name="RegisterUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WORKCONF_RELATIONS_USER">
+          <End Role="SecurityUser" Type="SteelWireModel.SecurityUser" Multiplicity="1" />
+          <End Role="WorkConfig" Type="SteelWireModel.WorkConfig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WorkConfig">
+              <PropertyRef Name="ConfigUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WORKDIC_RELATIONS_USER">
+          <End Role="SecurityUser" Type="SteelWireModel.SecurityUser" Multiplicity="1" />
+          <End Role="WorkDictionary" Type="SteelWireModel.WorkDictionary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WorkDictionary">
+              <PropertyRef Name="ConfigUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WORKCONF_RELATIONS_WORKDIC">
+          <End Role="WorkDictionary" Type="SteelWireModel.WorkDictionary" Multiplicity="1" />
+          <End Role="WorkConfig" Type="SteelWireModel.WorkConfig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkDictionary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WorkConfig">
+              <PropertyRef Name="DictionaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SteelWireModelStoreContainer" CdmEntityContainer="SteelWireContext">
+          <EntitySetMapping Name="CumulationReset">
+            <EntityTypeMapping TypeName="SteelWireModel.CumulationReset">
+              <MappingFragment StoreEntitySet="CumulationReset">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="CriticalValue" ColumnName="CriticalValue" />
+                <ScalarProperty Name="CumulationValue" ColumnName="CumulationValue" />
+                <ScalarProperty Name="ResetValue" ColumnName="ResetValue" />
+                <ScalarProperty Name="RemainValue" ColumnName="RemainValue" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CuttingCriticalConfig">
+            <EntityTypeMapping TypeName="SteelWireModel.CuttingCriticalConfig">
+              <MappingFragment StoreEntitySet="CuttingCriticalConfig">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DictionaryID" ColumnName="DictionaryID" />
+                <ScalarProperty Name="ConfigUserID" ColumnName="ConfigUserID" />
+                <ScalarProperty Name="DerrickHeight" ColumnName="DerrickHeight" />
+                <ScalarProperty Name="WirelineMaxPower" ColumnName="WirelineMaxPower" />
+                <ScalarProperty Name="RotaryHookWorkload" ColumnName="RotaryHookWorkload" />
+                <ScalarProperty Name="RollerDiameter" ColumnName="RollerDiameter" />
+                <ScalarProperty Name="WirelineDiameter" ColumnName="WirelineDiameter" />
+                <ScalarProperty Name="RopeCount" ColumnName="RopeCount" />
+                <ScalarProperty Name="ConfigTime" ColumnName="ConfigTime" />
+                <ScalarProperty Name="CuttingCriticalValue" ColumnName="CuttingCriticalValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CuttingCriticalDictionary">
+            <EntityTypeMapping TypeName="SteelWireModel.CuttingCriticalDictionary">
+              <MappingFragment StoreEntitySet="CuttingCriticalDictionary">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ConfigUserID" ColumnName="ConfigUserID" />
+                <ScalarProperty Name="ConfigTime" ColumnName="ConfigTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DrillCollarConfig">
+            <EntityTypeMapping TypeName="SteelWireModel.DrillCollarConfig">
+              <MappingFragment StoreEntitySet="DrillCollarConfig">
+                <ScalarProperty Name="DrillCollarName" ColumnName="DrillCollarName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="WorkConfigID" ColumnName="WorkConfigID" />
+                <ScalarProperty Name="DrillCollarWeight" ColumnName="DrillCollarWeight" />
+                <ScalarProperty Name="DrillCollarLength" ColumnName="DrillCollarLength" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DrillingDifficulty">
+            <EntityTypeMapping TypeName="SteelWireModel.DrillingDifficulty">
+              <MappingFragment StoreEntitySet="DrillingDifficulty">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DictionaryID" ColumnName="DictionaryID" />
+                <ScalarProperty Name="DrillingDifficultyName" ColumnName="DrillingDifficultyName" />
+                <ScalarProperty Name="DrillingDifficultyValue" ColumnName="DrillingDifficultyValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DrillingType">
+            <EntityTypeMapping TypeName="SteelWireModel.DrillingType">
+              <MappingFragment StoreEntitySet="DrillingType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DictionaryID" ColumnName="DictionaryID" />
+                <ScalarProperty Name="DrillingTypeName" ColumnName="DrillingTypeName" />
+                <ScalarProperty Name="Coefficient" ColumnName="Coefficient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DrillPipeConfig">
+            <EntityTypeMapping TypeName="SteelWireModel.DrillPipeConfig">
+              <MappingFragment StoreEntitySet="DrillPipeConfig">
+                <ScalarProperty Name="DrillPipeName" ColumnName="DrillPipeName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="WorkConfigID" ColumnName="WorkConfigID" />
+                <ScalarProperty Name="DrillPipeWeight" ColumnName="DrillPipeWeight" />
+                <ScalarProperty Name="DrillPipeLength" ColumnName="DrillPipeLength" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Machine">
+            <EntityTypeMapping TypeName="SteelWireModel.Machine">
+              <MappingFragment StoreEntitySet="Machine">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RegisterUserID" ColumnName="RegisterUserID" />
+                <ScalarProperty Name="MachineCode" ColumnName="MachineCode" />
+                <ScalarProperty Name="RegistTime" ColumnName="RegistTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SecurityUser">
+            <EntityTypeMapping TypeName="SteelWireModel.SecurityUser">
+              <MappingFragment StoreEntitySet="SecurityUser">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Checked" ColumnName="Checked" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="RegistTime" ColumnName="RegistTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WireropeCutRole">
+            <EntityTypeMapping TypeName="SteelWireModel.WireropeCutRole">
+              <MappingFragment StoreEntitySet="WireropeCutRole">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DictionaryID" ColumnName="DictionaryID" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="MinDerrickHeight" ColumnName="MinDerrickHeight" />
+                <ScalarProperty Name="MaxDerrickHeight" ColumnName="MaxDerrickHeight" />
+                <ScalarProperty Name="MinCutLength" ColumnName="MinCutLength" />
+                <ScalarProperty Name="MaxCutLength" ColumnName="MaxCutLength" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WireropeEfficiency">
+            <EntityTypeMapping TypeName="SteelWireModel.WireropeEfficiency">
+              <MappingFragment StoreEntitySet="WireropeEfficiency">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DictionaryID" ColumnName="DictionaryID" />
+                <ScalarProperty Name="RopeCount" ColumnName="RopeCount" />
+                <ScalarProperty Name="SlidingValue" ColumnName="SlidingValue" />
+                <ScalarProperty Name="RollingValue" ColumnName="RollingValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WireropeWorkload">
+            <EntityTypeMapping TypeName="SteelWireModel.WireropeWorkload">
+              <MappingFragment StoreEntitySet="WireropeWorkload">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DictionaryID" ColumnName="DictionaryID" />
+                <ScalarProperty Name="Diameter" ColumnName="Diameter" />
+                <ScalarProperty Name="Workload" ColumnName="Workload" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkConfig">
+            <EntityTypeMapping TypeName="SteelWireModel.WorkConfig">
+              <MappingFragment StoreEntitySet="WorkConfig">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DictionaryID" ColumnName="DictionaryID" />
+                <ScalarProperty Name="ConfigUserID" ColumnName="ConfigUserID" />
+                <ScalarProperty Name="FluidDensity" ColumnName="FluidDensity" />
+                <ScalarProperty Name="ElevatorWeight" ColumnName="ElevatorWeight" />
+                <ScalarProperty Name="DrillingShallowHeight" ColumnName="DrillingShallowHeight" />
+                <ScalarProperty Name="DrillingDeepHeight" ColumnName="DrillingDeepHeight" />
+                <ScalarProperty Name="DrillingType" ColumnName="DrillingType" />
+                <ScalarProperty Name="DrillingDifficulty" ColumnName="DrillingDifficulty" />
+                <ScalarProperty Name="TripShallowHeight" ColumnName="TripShallowHeight" />
+                <ScalarProperty Name="TripDeepHeight" ColumnName="TripDeepHeight" />
+                <ScalarProperty Name="TripCount" ColumnName="TripCount" />
+                <ScalarProperty Name="BushingWeight" ColumnName="BushingWeight" />
+                <ScalarProperty Name="BushingLength" ColumnName="BushingLength" />
+                <ScalarProperty Name="BushingHeight" ColumnName="BushingHeight" />
+                <ScalarProperty Name="CoringShallowHeight" ColumnName="CoringShallowHeight" />
+                <ScalarProperty Name="CoringDeepHeight" ColumnName="CoringDeepHeight" />
+                <ScalarProperty Name="ConfigTime" ColumnName="ConfigTime" />
+                <ScalarProperty Name="WorkValue" ColumnName="WorkValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkDictionary">
+            <EntityTypeMapping TypeName="SteelWireModel.WorkDictionary">
+              <MappingFragment StoreEntitySet="WorkDictionary">
+                <ScalarProperty Name="ConfigTime" ColumnName="ConfigTime" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ConfigUserID" ColumnName="ConfigUserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

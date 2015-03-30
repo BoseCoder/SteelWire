@@ -1,0 +1,53 @@
+﻿<Window x:Class="SteelWire.Windows.SignWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:windowData="clr-namespace:SteelWire.WindowData"
+        xmlns:converter="clr-namespace:SteelWire.AppCode.Converter"
+        Title="SignWindow" Height="360" Width="600"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Closing="WindowClosing">
+    <Window.Resources>
+        <x:Static x:Key="WindowData" Member="windowData:Sign.Data"></x:Static>
+        <converter:ControlVisiableConverter x:Key="VisiableConverter" />
+    </Window.Resources>
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Grid>
+                <Label Content="Label" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" FontWeight="Bold"/>
+            </Grid>
+            <Grid Margin="0,20,0,0">
+                <Label Content="Label" HorizontalAlignment="Right" Margin="0,0,165,0"/>
+                <TextBox Name="TxtAccount" TextWrapping="Wrap" Text="TextBox" Width="160" Margin="0" HorizontalAlignment="Right"/>
+            </Grid>
+            <Grid Margin="0,20,0,0">
+                <Label Content="Label22222" HorizontalAlignment="Right" Margin="0,0,165,0"/>
+                <PasswordBox Name="PassBox" Width="160" HorizontalAlignment="Right"/>
+            </Grid>
+            <Grid Margin="0,20,0,0">
+                <Grid.Visibility>
+                    <Binding Path="IsRegist.ItemValue" Mode="OneWay" Source="{StaticResource WindowData}"
+                             Converter="{StaticResource VisiableConverter}"></Binding>
+                </Grid.Visibility>
+                <Label Content="Label22222" HorizontalAlignment="Right" Margin="0,0,165,0"/>
+                <TextBox Name="TxtName" TextWrapping="Wrap" Text="TextBox" Width="160" Margin="0" HorizontalAlignment="Right"/>
+            </Grid>
+            <Grid Margin="0,20,0,0">
+                <WrapPanel HorizontalAlignment="Center">
+                    <Button Content="Button" Margin="0" Width="80" Height="40" Click="ModeChange" HorizontalAlignment="Left">
+                        <Button.Visibility>
+                            <Binding Path="IsSign.ItemValue" Mode="OneWay" Source="{StaticResource WindowData}"
+                                 Converter="{StaticResource VisiableConverter}"></Binding>
+                        </Button.Visibility>
+                    </Button>
+                    <Button Content="Button" Margin="0" Width="80" Height="40" Click="Regist">
+                        <Button.Visibility>
+                            <Binding Path="IsRegist.ItemValue" Mode="OneWay" Source="{StaticResource WindowData}"
+                                 Converter="{StaticResource VisiableConverter}"></Binding>
+                        </Button.Visibility>
+                    </Button>
+                    <Button Content="Button" Margin="20,0" Width="80" Height="40" Click="SignIn" />
+                    <Button Content="Button" Margin="0" Width="80" Height="40" Click="Cancel"/>
+                </WrapPanel>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>
