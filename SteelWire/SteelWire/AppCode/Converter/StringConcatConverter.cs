@@ -9,7 +9,7 @@ namespace SteelWire.AppCode.Converter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            return string.Join(" ", values.Select(obj => obj is decimal ? string.Format("{0:F3}", obj) : obj));
+            return string.Join(" ", values.Select(obj => obj is decimal ? ((decimal)obj > 0 ? string.Format("{0:F3}", obj) : null) : obj));
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

@@ -5,7 +5,7 @@
         xmlns:converter="clr-namespace:SteelWire.AppCode.Converter"
         xmlns:validationRule="clr-namespace:SteelWire.AppCode.ValidationRule"
         xmlns:windowData="clr-namespace:SteelWire.WindowData"
-        MinHeight="600" Width="1240" Height="705" MinWidth="1260" WindowStartupLocation="CenterScreen"
+        MinHeight="600" Width="1240" Height="710" MinWidth="1260" WindowStartupLocation="CenterScreen"
         Icon="/SteelWire;component/Resources/Images/Icon.ico">
     <Window.Title>
         <MultiBinding Converter="{StaticResource WindowTitleConverter}">
