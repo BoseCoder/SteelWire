@@ -6,6 +6,16 @@ namespace SteelWire.Business.DbOperator
 {
     public static class UserOperator
     {
+        public static bool Exist(string account)
+        {
+            if (string.IsNullOrEmpty(account))
+            {
+                throw new ArgumentNullException("account");
+            }
+            SteelWireContext dbContext = new SteelWireContext();
+            return dbContext.SecurityUser.Any(u => u.Account == account);
+        }
+
         public static SecurityUser Regist(SecurityUser user)
         {
             if (user == null)

@@ -24,6 +24,7 @@ namespace SteelWire.Business.Database
         public int ID { get; set; }
         public int ConfigUserID { get; set; }
         public System.DateTime ConfigTime { get; set; }
+        public long ConfigTimeStamp { get; set; }
     
         public virtual ICollection<DrillingDifficulty> DrillingDifficulty { get; set; }
         public virtual ICollection<DrillingType> DrillingType { get; set; }

@@ -39,6 +39,7 @@ namespace SteelWire.Business.Database
         public decimal CoringDeepHeight { get; set; }
         public System.DateTime ConfigTime { get; set; }
         public decimal WorkValue { get; set; }
+        public long ConfigTimeStamp { get; set; }
     
         public virtual ICollection<DrillCollarConfig> DrillCollarConfig { get; set; }
         public virtual ICollection<DrillPipeConfig> DrillPipeConfig { get; set; }

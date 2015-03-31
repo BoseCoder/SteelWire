@@ -25,6 +25,7 @@ namespace SteelWire.Business.Database
         public int RopeCount { get; set; }
         public System.DateTime ConfigTime { get; set; }
         public decimal CuttingCriticalValue { get; set; }
+        public long ConfigTimeStamp { get; set; }
     
         public virtual CuttingCriticalDictionary CuttingCriticalDictionary { get; set; }
         public virtual SecurityUser SecurityUser { get; set; }

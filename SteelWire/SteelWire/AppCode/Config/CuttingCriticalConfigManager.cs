@@ -2,6 +2,7 @@
 using BaseConfig;
 using System.Collections.Generic;
 using System.Linq;
+using SteelWire.WindowData;
 
 namespace SteelWire.AppCode.Config
 {
@@ -10,7 +11,7 @@ namespace SteelWire.AppCode.Config
     /// </summary>
     public class CuttingCriticalConfigManager : BaseConfigManager
     {
-        public static readonly CuttingCriticalConfigManager OnceInstance;
+        public static CuttingCriticalConfigManager OnceInstance { get; private set; }
 
         /// <summary>
         /// 当前配置的各种参数集合
@@ -37,11 +38,19 @@ namespace SteelWire.AppCode.Config
 
         static CuttingCriticalConfigManager()
         {
-            OnceInstance = new CuttingCriticalConfigManager("CuttingCriticalConfig", "Config", "CuttingCriticalConfig.config");
+            InitializeConfig();
+        }
+
+        public static void InitializeConfig()
+        {
+            OnceInstance = new CuttingCriticalConfigManager("CuttingCriticalConfig",
+                string.Format("Config\\{0}", Sign.Data.Account), "CuttingCriticalConfig.config");
             OnceInstance.ReadConfig();
             CuttingCriticalDictionary dictionary = CuttingCriticalDictionaryManager.OnceInstance.DictionarySection;
             bool needWrite = false;
+
             #region ConfigSection
+
             CuttingCriticalConfig current = OnceInstance.ConfigSection;
             if (current == null)
             {
@@ -61,7 +70,9 @@ namespace SteelWire.AppCode.Config
                 needWrite = true;
                 current.RopeCount = wireropeEfficiencies.First().Count;
             }
+
             #endregion
+
             if (needWrite)
             {
                 OnceInstance.SaveConfig();

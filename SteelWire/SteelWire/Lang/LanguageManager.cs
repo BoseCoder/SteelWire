@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.Threading;
 using System.Windows;
 
 namespace SteelWire.Lang
@@ -7,7 +9,7 @@ namespace SteelWire.Lang
     {
         public static string GetLocalResourceStringLeft(string key, string name = null)
         {
-            if(string.IsNullOrEmpty(key))
+            if (string.IsNullOrEmpty(key))
             {
                 throw new ArgumentNullException("key");
             }
@@ -44,6 +46,39 @@ namespace SteelWire.Lang
             catch (Exception)
             {
                 return name;
+            }
+        }
+
+        public static void LoadLanguage(string langName = null)
+        {
+            ResourceDictionary langResource;
+            try
+            {
+                CultureInfo info;
+                if (!string.IsNullOrEmpty(langName))
+                {
+                    info = CultureInfo.GetCultureInfo("en-US");
+                    Thread.CurrentThread.CurrentUICulture = info;
+                    Thread.CurrentThread.CurrentCulture = info;
+                }
+                else
+                {
+                    info = Thread.CurrentThread.CurrentUICulture;
+                }
+                string langUrl = string.Format(@"Lang\{0}.xaml", info.Name);
+                langResource = Application.LoadComponent(new Uri(langUrl, UriKind.Relative)) as ResourceDictionary;
+            }
+            catch (Exception)
+            {
+                langResource = null;
+            }
+            if (langResource != null)
+            {
+                if (Application.Current.Resources.MergedDictionaries.Count > 0)
+                {
+                    Application.Current.Resources.MergedDictionaries.Clear();
+                }
+                Application.Current.Resources.MergedDictionaries.Add(langResource);
             }
         }
     }

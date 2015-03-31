@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using SteelWire.Lang;
 
 namespace SteelWire.AppCode.CustomException
 {
@@ -14,7 +15,8 @@ namespace SteelWire.AppCode.CustomException
 
         protected override void ShowMessageBox()
         {
-            MessageBox.Show(this.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(this.Message, LanguageManager.GetLocalResourceStringRight(ErrorCodeKey, ErrorCaptionKey),
+                MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }

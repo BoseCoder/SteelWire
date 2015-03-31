@@ -162,9 +162,6 @@
     <system:String x:Key="LblCurrentCumulation">
         Current Cumulation:
     </system:String>
-    <system:String x:Key="BtnLogin">
-        Sign In
-    </system:String>
     <system:String x:Key="BtnRefresh">
         Refresh
     </system:String>
@@ -175,15 +172,44 @@
         Reset
     </system:String>
 
-    <system:String x:Key="ErrorCriticalValueInvalid">ErrorCriticalValueInvalid</system:String>
-    <system:String x:Key="ErrorCriticalDictionaryFileNotFound">ErrorCriticalDictionaryFileNotFound</system:String>
-    <system:String x:Key="ErrorCriticalConfigFileNotFound">ErrorCriticalConfigFileNotFound</system:String>
-    <system:String x:Key="ErrorCumulationValueInvalid">ErrorCumulationValueInvalid</system:String>
-    <system:String x:Key="ErrorCumulationDictionaryFileNotFound">ErrorCumulationDictionaryFileNotFound</system:String>
-    <system:String x:Key="ErrorCumulationConfigFileNotFound">ErrorCumulationConfigFileNotFound</system:String>
-    <system:String x:Key="ErrorCumulationDataNotFound">ErrorCumulationDataNotFound</system:String>
-    <system:String x:Key="ErrorAccountEmpty">ErrorAccountEmpty</system:String>
-    <system:String x:Key="ErrorPasswordEmpty">ErrorPasswordEmpty</system:String>
-    <system:String x:Key="ErrorUserNotExist">ErrorUserNotExist</system:String>
-    <system:String x:Key="ErrorPasswordNotEqual">ErrorPasswordNotEqual</system:String>
+    <system:String x:Key="LblAccount">
+        Account:
+    </system:String>
+    <system:String x:Key="LblPassword">
+        Password:
+    </system:String>
+    <system:String x:Key="LblPasswordComfirm">
+        Password Comfirm:
+    </system:String>
+    <system:String x:Key="LblUserName">
+        User Name:
+    </system:String>
+    <system:String x:Key="BtnJoinUs">
+        Join Us
+    </system:String>
+    <system:String x:Key="BtnRegist">
+        Regist
+    </system:String>
+    <system:String x:Key="BtnSignIn">
+        Sign In
+    </system:String>
+    <system:String x:Key="BtnCancel">
+        Cancel
+    </system:String>
+
+    <system:String x:Key="ErrorCaption">Error</system:String>
+    <system:String x:Key="ErrorCriticalValueInvalid">Critical value is invalid.</system:String>
+    <system:String x:Key="ErrorCriticalDictionaryFileNotFound">Critical dictionary file not found.</system:String>
+    <system:String x:Key="ErrorCriticalConfigFileNotFound">Critical config file not found.</system:String>
+    <system:String x:Key="ErrorCumulationValueInvalid">Cumulation value is invalid.</system:String>
+    <system:String x:Key="ErrorCumulationDictionaryFileNotFound">Cumulation dictionary file not found.</system:String>
+    <system:String x:Key="ErrorCumulationConfigFileNotFound">Cumulation config file not found.</system:String>
+    <system:String x:Key="ErrorCumulationDataNotFound">Cumulation data not found.</system:String>
+    <system:String x:Key="ErrorAccountEmpty">Account could not be empty.</system:String>
+    <system:String x:Key="ErrorPasswordEmpty">Password could not be empty.</system:String>
+    <system:String x:Key="ErrorPasswordTooShort">Password is too short, unless length 6 or more.</system:String>
+    <system:String x:Key="ErrorConfirmPasswordNotEqual">Confirm password is not equal to password.</system:String>
+    <system:String x:Key="ErrorAccountNotUnique">This account has already be used, please use another one.</system:String>
+    <system:String x:Key="ErrorUserNotExist">User is not exist.</system:String>
+    <system:String x:Key="ErrorPasswordNotEqual">Password error.</system:String>
 </ResourceDictionary>

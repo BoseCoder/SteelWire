@@ -23,6 +23,22 @@ namespace SteelWire.Windows
         {
             InitializeComponent();
 
+            SignWindow signWindow = new SignWindow();
+            if (signWindow.ShowDialog() == true)
+            {
+                CuttingCriticalDictionaryManager.InitializeConfig();
+                CuttingCriticalConfigManager.InitializeConfig();
+                WorkDictionaryManager.InitializeConfig();
+                WorkConfigManager.InitializeConfig();
+                Main.Data.InitializeData();
+                Main.Data.RefreshData();
+            }
+            else
+            {
+                this.Close();
+                return;
+            }
+
             CuttingCriticalDictionary cuttingCriticalDic = CuttingCriticalDictionaryManager.OnceInstance.DictionarySection;
             this.CboWirelineDiameter.ItemsSource = cuttingCriticalDic.WireropeWorkloads.Cast<WireropeWorkload>().Select(l => l.Diameter);
             this.CboRopeCount.ItemsSource = cuttingCriticalDic.WireropeEfficiencies.Cast<WireropeEfficiency>().Select(e => e.Count);
@@ -37,19 +53,7 @@ namespace SteelWire.Windows
             DrillPipeConfig.StaticLengthTitle.ItemValue = LanguageManager.GetLocalResourceStringLeft("DrillPipeLength");
             DrillCollarConfig.StaticWeightTitle.ItemValue = LanguageManager.GetLocalResourceStringLeft("DrillCollarWeight");
             DrillCollarConfig.StaticLengthTitle.ItemValue = LanguageManager.GetLocalResourceStringLeft("DrillCollarLength");
-
-            SignWindow signWindow = new SignWindow();
-            if (signWindow.ShowDialog() == true)
-            {
-                Main.Data.RefreshData();
-            }
-            else
-            {
-                this.Close();
-            }
         }
-
-        
 
         #region Action
 
@@ -83,6 +87,7 @@ namespace SteelWire.Windows
             try
             {
                 Main.Data.Reset();
+                Main.Data.RefreshData();
             }
             catch (Exception ex)
             {
@@ -151,6 +156,11 @@ namespace SteelWire.Windows
             SignWindow signWindow = new SignWindow();
             if (signWindow.ShowDialog() == true)
             {
+                CuttingCriticalDictionaryManager.InitializeConfig();
+                CuttingCriticalConfigManager.InitializeConfig();
+                WorkDictionaryManager.InitializeConfig();
+                WorkConfigManager.InitializeConfig();
+                Main.Data.InitializeData();
                 Main.Data.RefreshData();
             }
         }
@@ -158,6 +168,18 @@ namespace SteelWire.Windows
         private void Exit(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void LanguageChange(object sender, RoutedEventArgs e)
+        {
+            if (Equals(sender, this.MenuItemEnglish))
+            {
+                LanguageManager.LoadLanguage("en-US");
+            }
+            else if (Equals(sender, this.MenuItemChinese))
+            {
+                LanguageManager.LoadLanguage("zh-CN");
+            }
         }
     }
 }

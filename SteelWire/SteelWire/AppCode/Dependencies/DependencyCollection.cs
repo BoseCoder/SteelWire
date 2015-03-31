@@ -29,7 +29,7 @@ namespace SteelWire.AppCode.Dependencies
         }
         public TC Items
         {
-            get { return (TC)this.GetValue(ItemsProperty); }
+            get { return (TC)this.ReadLocalValue(ItemsProperty); }
         }
         protected virtual void OnItemsChanged(EventArgs e)
         {
@@ -42,7 +42,7 @@ namespace SteelWire.AppCode.Dependencies
         public virtual TI New()
         {
             TI item = new TI();
-            this.Items.Add(item);
+            Add(item);
             return item;
         }
         public virtual void Add(TI item)
@@ -62,6 +62,19 @@ namespace SteelWire.AppCode.Dependencies
             {
                 this.Items.Remove(item);
             }
+        }
+        public virtual void Clear()
+        {
+            this.Items.Clear();
+        }
+        public void ResetLocalItems()
+        {
+            TC localValue = new TC();
+            foreach (TI element in this.Items)
+            {
+                localValue.Add(element);
+            }
+            this.SetValue(ItemsPropertyKey, localValue);
         }
     }
 }

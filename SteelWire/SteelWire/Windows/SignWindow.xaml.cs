@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Windows.Input;
 using SteelWire.AppCode.CustomException;
 using SteelWire.WindowData;
 using System;
@@ -14,6 +15,32 @@ namespace SteelWire.Windows
         public SignWindow()
         {
             InitializeComponent();
+        }
+
+        private void WindowLoaded(object sender, RoutedEventArgs e)
+        {
+            Keyboard.Focus(this.TxtAccount);
+        }
+
+        private void AccountPreviewKeyDownEvent(object sender, KeyEventArgs e)
+        {
+            if ((e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
+                || (e.Key >= Key.D0 && e.Key <= Key.D9)
+                || (e.Key >= Key.A && e.Key <= Key.Z)
+                || e.Key == Key.Back || e.Key == Key.Delete
+                || e.Key == Key.Home || e.Key == Key.End
+                || e.Key == Key.Left || e.Key == Key.Right
+                || e.Key == Key.Tab || e.Key == Key.Enter)
+            {
+                if (e.KeyboardDevice.Modifiers != ModifierKeys.None)
+                {
+                    e.Handled = true;
+                }
+            }
+            else
+            {
+                e.Handled = true;
+            }
         }
 
         private void ModeChange(object sender, RoutedEventArgs e)
@@ -38,7 +65,7 @@ namespace SteelWire.Windows
         {
             try
             {
-                Sign.Data.Regist(this.TxtAccount.Text.Trim(), this.PassBox.Password.Trim(), this.TxtName.Text.Trim());
+                Sign.Data.Regist(this.TxtAccount.Text.Trim(), this.PassBox.Password.Trim(), this.PassComfirmBox.Password.Trim(), this.TxtName.Text.Trim());
                 this.Close();
             }
             catch (Exception ex)
@@ -55,9 +82,37 @@ namespace SteelWire.Windows
 
         private void WindowClosing(object sender, CancelEventArgs e)
         {
+            Sign.Data.IsRegist.ItemValue = false;
             if (!this.DialogResult.HasValue)
             {
                 this.DialogResult = Sign.Data.IsSignIn();
+            }
+        }
+
+        private void WindowOnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
+        }
+
+        private void AccountKeyDown(object sender, KeyEventArgs e)
+        {
+            base.OnKeyDown(e);
+            if (e.Key == Key.Enter && !string.IsNullOrWhiteSpace(this.TxtAccount.Text))
+            {
+                this.PassBox.Focus();
+            }
+        }
+
+        private void PassOnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter && Sign.Data.IsSign.ItemValue
+                && !string.IsNullOrWhiteSpace(this.TxtAccount.Text)
+                && !string.IsNullOrWhiteSpace(this.PassBox.Password))
+            {
+                SignIn(sender, e);
             }
         }
     }

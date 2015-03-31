@@ -55,13 +55,13 @@ namespace SteelWire.Business.DbOperator
             return dbContext.WorkDictionary.OrderByDescending(d => d.ConfigTime).FirstOrDefault(d => d.ConfigUserID == updater);
         }
 
-        public static void UpdateWork(int updater, WorkConfig work)
+        public static void UpdateWork(int updater, WorkConfig work, decimal criticalValue)
         {
             SteelWireContext dbContext = new SteelWireContext();
-            UpdateWork(dbContext, updater, work);
+            UpdateWork(dbContext, updater, work, criticalValue);
         }
 
-        public static void UpdateWork(SteelWireContext dbContext, int updater, WorkConfig work)
+        public static void UpdateWork(SteelWireContext dbContext, int updater, WorkConfig work, decimal criticalValue)
         {
             if (dbContext == null)
             {
@@ -72,30 +72,46 @@ namespace SteelWire.Business.DbOperator
                 throw new ArgumentNullException("work");
             }
             CumulationReset data = ResetOperator.GetCurrentData(dbContext, updater);
+            if (data == null)
+            {
+                data = new CumulationReset
+                {
+                    CriticalValue = criticalValue,
+                    CumulationValue = work.WorkValue,
+                    RemainValue = 0,
+                    ResetValue = 0,
+                    UpdateTime = DateTime.Now,
+                    UpdateUserID = updater
+                };
+                dbContext.CumulationReset.Add(data);
+            }
+            else
+            {
+                data.CumulationValue += work.WorkValue;
+            }
             dbContext.WorkConfig.Add(work);
-            data.CumulationValue += work.WorkValue;
         }
 
-        public static bool IsNeedUpdateDictionary(int updater, DateTime dicTime, out bool refreshTime, out WorkDictionary dicData)
+        public static bool IsNeedUpdateDictionary(int updater, long timeStamp, out bool refreshTime, out WorkDictionary dicData)
         {
             SteelWireContext dbContext = new SteelWireContext();
-            return IsNeedUpdateDictionary(dbContext, updater, dicTime, out refreshTime, out dicData);
+            return IsNeedUpdateDictionary(dbContext, updater, timeStamp, out refreshTime, out dicData);
         }
 
-        public static bool IsNeedUpdateDictionary(SteelWireContext dbContext, int updater, DateTime dicTime, out bool refreshTime, out WorkDictionary dicData)
+        public static bool IsNeedUpdateDictionary(SteelWireContext dbContext, int updater, long timeStamp, out bool refreshTime, out WorkDictionary dicData)
         {
             if (dbContext == null)
             {
                 throw new ArgumentNullException("dbContext");
             }
-            if (dbContext.WorkDictionary.Any(d => d.ConfigUserID == updater && d.ConfigTime > dicTime))
+            if (dbContext.WorkDictionary.Any(d => d.ConfigUserID == updater && d.ConfigTimeStamp > timeStamp))
             {
                 refreshTime = true;
                 dicData = null;
                 return true;
             }
             refreshTime = false;
-            dicData = dbContext.WorkDictionary.FirstOrDefault(d => d.ConfigUserID == updater && d.ConfigTime == dicTime);
+            dicData = dbContext.WorkDictionary.FirstOrDefault(d => d.ConfigUserID == updater && d.ConfigTimeStamp == timeStamp);
             return dicData == null;
         }
 

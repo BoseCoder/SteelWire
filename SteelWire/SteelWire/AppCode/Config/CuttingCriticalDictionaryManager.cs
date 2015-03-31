@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using BaseConfig;
+using SteelWire.WindowData;
 
 namespace SteelWire.AppCode.Config
 {
@@ -8,7 +9,7 @@ namespace SteelWire.AppCode.Config
     /// </summary>
     public class CuttingCriticalDictionaryManager : BaseConfigManager
     {
-        public static readonly CuttingCriticalDictionaryManager OnceInstance;
+        public static CuttingCriticalDictionaryManager OnceInstance { get; private set; }
 
         /// <summary>
         /// 字典Section（钢丝绳每米工作量集合、钢丝绳切绳规则集合、缠绳效率集合）
@@ -35,10 +36,18 @@ namespace SteelWire.AppCode.Config
 
         static CuttingCriticalDictionaryManager()
         {
-            OnceInstance = new CuttingCriticalDictionaryManager("CuttingCriticalDictionary", "Config", "CuttingCriticalDictionary.config");
+            InitializeConfig();
+        }
+
+        public static void InitializeConfig()
+        {
+            OnceInstance = new CuttingCriticalDictionaryManager("CuttingCriticalDictionary",
+                string.Format("Config\\{0}", Sign.Data.Account), "CuttingCriticalDictionary.config");
             OnceInstance.ReadConfig();
             bool needWrite = false;
+
             #region DictionarySectionInstance
+
             CuttingCriticalDictionary dictionary = OnceInstance.DictionarySection;
             if (dictionary == null)
             {
@@ -59,9 +68,12 @@ namespace SteelWire.AppCode.Config
             if (dictionary.WireropeEfficiencies.Count < 1)
             {
                 needWrite = true;
-                ConstDictionary.InitializeConfigDictionary(dictionary.WireropeEfficiencies, ConstDictionary.ConstWireropeEfficiencies);
+                ConstDictionary.InitializeConfigDictionary(dictionary.WireropeEfficiencies,
+                    ConstDictionary.ConstWireropeEfficiencies);
             }
+
             #endregion
+
             if (needWrite)
             {
                 OnceInstance.SaveConfig();

@@ -107,6 +107,7 @@
           <Property Name="WirelineDiameter" Type="decimal" Nullable="false" Scale="8" />
           <Property Name="RopeCount" Type="int" Nullable="false" />
           <Property Name="ConfigTime" Type="datetime" Nullable="false" />
+          <Property Name="ConfigTimeStamp" Type="bigint" Nullable="false" />
           <Property Name="CuttingCriticalValue" Type="decimal" Nullable="false" Scale="8" />
         </EntityType>
         <EntityType Name="CuttingCriticalDictionary">
@@ -116,6 +117,7 @@
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ConfigUserID" Type="int" Nullable="false" />
           <Property Name="ConfigTime" Type="datetime" Nullable="false" />
+          <Property Name="ConfigTimeStamp" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="DrillCollarConfig">
           <Key>
@@ -230,6 +232,7 @@
           <Property Name="CoringShallowHeight" Type="decimal" Nullable="false" Scale="8" />
           <Property Name="CoringDeepHeight" Type="decimal" Nullable="false" Scale="8" />
           <Property Name="ConfigTime" Type="datetime" Nullable="false" />
+          <Property Name="ConfigTimeStamp" Type="bigint" Nullable="false" />
           <Property Name="WorkValue" Type="decimal" Nullable="false" Scale="8" />
         </EntityType>
         <EntityType Name="WorkDictionary">
@@ -239,6 +242,7 @@
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ConfigUserID" Type="int" Nullable="false" />
           <Property Name="ConfigTime" Type="datetime" Nullable="false" />
+          <Property Name="ConfigTimeStamp" Type="bigint" Nullable="false" />
         </EntityType>
         <Association Name="FK_CUMULATI_RELATIONS_USER">
           <End Role="SecurityUser" Type="SteelWireModel.Store.SecurityUser" Multiplicity="1" />
@@ -530,6 +534,7 @@
           <Property Name="CuttingCriticalValue" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
           <NavigationProperty Name="CuttingCriticalDictionary" Relationship="SteelWireModel.FK_CUTCONF_RELATIONS_CUTDIC" FromRole="CuttingCriticalConfig" ToRole="CuttingCriticalDictionary" />
           <NavigationProperty Name="SecurityUser" Relationship="SteelWireModel.FK_CUTCONF_RELATIONS_USER" FromRole="CuttingCriticalConfig" ToRole="SecurityUser" />
+          <Property Type="Int64" Name="ConfigTimeStamp" Nullable="false" />
         </EntityType>
         <EntityType Name="CuttingCriticalDictionary">
           <Key>
@@ -543,6 +548,7 @@
           <NavigationProperty Name="WireropeCutRole" Relationship="SteelWireModel.FK_CUTROLE_RELATIONS_CUTDIC" FromRole="CuttingCriticalDictionary" ToRole="WireropeCutRole" />
           <NavigationProperty Name="WireropeEfficiency" Relationship="SteelWireModel.FK_EFFIC_RELATIONS_CUTDIC" FromRole="CuttingCriticalDictionary" ToRole="WireropeEfficiency" />
           <NavigationProperty Name="WireropeWorkload" Relationship="SteelWireModel.FK_WORKLOAD_RELATIONS_CUTDIC" FromRole="CuttingCriticalDictionary" ToRole="WireropeWorkload" />
+          <Property Type="Int64" Name="ConfigTimeStamp" Nullable="false" />
         </EntityType>
         <EntityType Name="DrillCollarConfig">
           <Key>
@@ -676,6 +682,7 @@
           <NavigationProperty Name="DrillPipeConfig" Relationship="SteelWireModel.FK_DRILLPIP_RELATIONS_WORKCONF" FromRole="WorkConfig" ToRole="DrillPipeConfig" />
           <NavigationProperty Name="SecurityUser" Relationship="SteelWireModel.FK_WORKCONF_RELATIONS_USER" FromRole="WorkConfig" ToRole="SecurityUser" />
           <NavigationProperty Name="WorkDictionary" Relationship="SteelWireModel.FK_WORKCONF_RELATIONS_WORKDIC" FromRole="WorkConfig" ToRole="WorkDictionary" />
+          <Property Type="Int64" Name="ConfigTimeStamp" Nullable="false" />
         </EntityType>
         <EntityType Name="WorkDictionary">
           <Key>
@@ -688,6 +695,7 @@
           <NavigationProperty Name="DrillingType" Relationship="SteelWireModel.FK_DRILTYPE_RELATIONS_WORKDIC" FromRole="WorkDictionary" ToRole="DrillingType" />
           <NavigationProperty Name="SecurityUser" Relationship="SteelWireModel.FK_WORKDIC_RELATIONS_USER" FromRole="WorkDictionary" ToRole="SecurityUser" />
           <NavigationProperty Name="WorkConfig" Relationship="SteelWireModel.FK_WORKCONF_RELATIONS_WORKDIC" FromRole="WorkDictionary" ToRole="WorkConfig" />
+          <Property Type="Int64" Name="ConfigTimeStamp" Nullable="false" />
         </EntityType>
         <Association Name="FK_CUMULATI_RELATIONS_USER">
           <End Role="SecurityUser" Type="SteelWireModel.SecurityUser" Multiplicity="1" />
@@ -891,6 +899,7 @@
           <EntitySetMapping Name="CuttingCriticalConfig">
             <EntityTypeMapping TypeName="SteelWireModel.CuttingCriticalConfig">
               <MappingFragment StoreEntitySet="CuttingCriticalConfig">
+                <ScalarProperty Name="ConfigTimeStamp" ColumnName="ConfigTimeStamp" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="DictionaryID" ColumnName="DictionaryID" />
                 <ScalarProperty Name="ConfigUserID" ColumnName="ConfigUserID" />
@@ -908,6 +917,7 @@
           <EntitySetMapping Name="CuttingCriticalDictionary">
             <EntityTypeMapping TypeName="SteelWireModel.CuttingCriticalDictionary">
               <MappingFragment StoreEntitySet="CuttingCriticalDictionary">
+                <ScalarProperty Name="ConfigTimeStamp" ColumnName="ConfigTimeStamp" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ConfigUserID" ColumnName="ConfigUserID" />
                 <ScalarProperty Name="ConfigTime" ColumnName="ConfigTime" />
@@ -1017,6 +1027,7 @@
           <EntitySetMapping Name="WorkConfig">
             <EntityTypeMapping TypeName="SteelWireModel.WorkConfig">
               <MappingFragment StoreEntitySet="WorkConfig">
+                <ScalarProperty Name="ConfigTimeStamp" ColumnName="ConfigTimeStamp" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="DictionaryID" ColumnName="DictionaryID" />
                 <ScalarProperty Name="ConfigUserID" ColumnName="ConfigUserID" />
@@ -1042,6 +1053,7 @@
           <EntitySetMapping Name="WorkDictionary">
             <EntityTypeMapping TypeName="SteelWireModel.WorkDictionary">
               <MappingFragment StoreEntitySet="WorkDictionary">
+                <ScalarProperty Name="ConfigTimeStamp" ColumnName="ConfigTimeStamp" />
                 <ScalarProperty Name="ConfigTime" ColumnName="ConfigTime" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ConfigUserID" ColumnName="ConfigUserID" />

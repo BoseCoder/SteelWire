@@ -6,7 +6,8 @@ namespace SteelWire.AppCode.CustomException
 {
     public abstract class BaseException : Exception
     {
-        private const string ErrorCodeKey = "Error";
+        public const string ErrorCodeKey = "Error";
+        public const string ErrorCaptionKey = "Caption";
         private readonly bool _showBox;
         private readonly string _code;
 
@@ -33,7 +34,8 @@ namespace SteelWire.AppCode.CustomException
 
         public static void HandleUnknowException(Exception ex)
         {
-            MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(ex.Message, LanguageManager.GetLocalResourceStringRight(ErrorCodeKey, ErrorCaptionKey),
+                MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         public static void HandleException(Exception ex)

@@ -2,6 +2,7 @@
 using BaseConfig;
 using System.Collections.Generic;
 using System.Linq;
+using SteelWire.WindowData;
 
 namespace SteelWire.AppCode.Config
 {
@@ -10,7 +11,7 @@ namespace SteelWire.AppCode.Config
     /// </summary>
     public class WorkConfigManager : BaseConfigManager
     {
-        public static readonly WorkConfigManager OnceInstance;
+        public static WorkConfigManager OnceInstance { get; private set; }
 
         /// <summary>
         /// 当前配置的各种参数集合
@@ -37,11 +38,19 @@ namespace SteelWire.AppCode.Config
 
         static WorkConfigManager()
         {
-            OnceInstance = new WorkConfigManager("WorkConfig", "Config", "WorkConfig.config");
+            InitializeConfig();
+        }
+
+        public static void InitializeConfig()
+        {
+            OnceInstance = new WorkConfigManager("WorkConfig",
+                string.Format("Config\\{0}", Sign.Data.Account), "WorkConfig.config");
             OnceInstance.ReadConfig();
             WorkDictionary dictionary = WorkDictionaryManager.OnceInstance.DictionarySection;
             bool needWrite = false;
+
             #region ConfigSection
+
             WorkConfig current = OnceInstance.ConfigSection;
             if (current == null)
             {
@@ -85,7 +94,9 @@ namespace SteelWire.AppCode.Config
                 needWrite = true;
                 current.DrillingDifficulty = drillingDifficulties.First().Name;
             }
+
             #endregion
+
             if (needWrite)
             {
                 OnceInstance.SaveConfig();

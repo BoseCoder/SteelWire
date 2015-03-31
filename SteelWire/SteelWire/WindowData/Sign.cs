@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Security.Cryptography;
+using System.Text;
 using SteelWire.AppCode.CustomException;
 using SteelWire.AppCode.Dependencies;
 using SteelWire.Business.Database;
@@ -32,6 +34,14 @@ namespace SteelWire.WindowData
             this.IsRegist.ItemValueChangedHandler += ChangeRegistToSign;
         }
 
+        private string GetMd5(string pass)
+        {
+            byte[] result = Encoding.Default.GetBytes(pass);
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] output = md5.ComputeHash(result);
+            return Convert.ToBase64String(output);
+        }
+
         private void ChangeSignToRegist(object sender, EventArgs e)
         {
             this.IsRegist.ItemValue = !this.IsSign.ItemValue;
@@ -57,6 +67,7 @@ namespace SteelWire.WindowData
             {
                 throw new ErrorException("PasswordEmpty");
             }
+            password = GetMd5(password);
             SecurityUser user = UserOperator.SignIn(account, password);
             if (user == null)
             {
@@ -69,21 +80,33 @@ namespace SteelWire.WindowData
             SetUserInfo(user);
         }
 
-        public void Regist(string account, string password, string userName)
+        public void Regist(string account, string password1, string password2, string userName)
         {
             if (string.IsNullOrWhiteSpace(account))
             {
                 throw new ErrorException("AccountEmpty");
             }
-            if (string.IsNullOrWhiteSpace(password))
+            if (string.IsNullOrWhiteSpace(password1))
             {
                 throw new ErrorException("PasswordEmpty");
+            }
+            if (!Equals(password1, password2))
+            {
+                throw new ErrorException("ConfirmPasswordNotEqual");
+            }
+            if (password1.Length < 6)
+            {
+                throw new ErrorException("PasswordTooShort");
+            }
+            if (UserOperator.Exist(account))
+            {
+                throw new ErrorException("AccountNotUnique");
             }
             DateTime now = DateTime.Now;
             SecurityUser user = new SecurityUser
             {
                 Account = account,
-                Password = password,
+                Password = GetMd5(password1),
                 Name = userName ?? account,
                 Checked = true,
                 Enabled = true,

@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using BaseConfig;
+using SteelWire.WindowData;
 
 namespace SteelWire.AppCode.Config
 {
@@ -8,7 +9,7 @@ namespace SteelWire.AppCode.Config
     /// </summary>
     public class WorkDictionaryManager : BaseConfigManager
     {
-        public static readonly WorkDictionaryManager OnceInstance;
+        public static WorkDictionaryManager OnceInstance { get; private set; }
 
         /// <summary>
         /// 字典Section（钢丝绳每米工作量集合、钢丝绳切绳规则集合、缠绳效率集合）
@@ -35,10 +36,18 @@ namespace SteelWire.AppCode.Config
 
         static WorkDictionaryManager()
         {
-            OnceInstance = new WorkDictionaryManager("WorkDictionary", "Config", "WorkDictionary.config");
+            InitializeConfig();
+        }
+
+        public static void InitializeConfig()
+        {
+            OnceInstance = new WorkDictionaryManager("WorkDictionary",
+                string.Format("Config\\{0}", Sign.Data.Account), "WorkDictionary.config");
             OnceInstance.ReadConfig();
             bool needWrite = false;
+
             #region DictionarySection
+
             WorkDictionary dictionary = OnceInstance.DictionarySection;
             if (dictionary == null)
             {
@@ -52,9 +61,12 @@ namespace SteelWire.AppCode.Config
             }
             if (dictionary.DrillingDifficulties.Count < 1)
             {
-                ConstDictionary.InitializeConfigDictionary(dictionary.DrillingDifficulties, ConstDictionary.ConstDrillingDifficulties);
+                ConstDictionary.InitializeConfigDictionary(dictionary.DrillingDifficulties,
+                    ConstDictionary.ConstDrillingDifficulties);
             }
+
             #endregion
+
             if (needWrite)
             {
                 OnceInstance.SaveConfig();

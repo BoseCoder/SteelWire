@@ -60,11 +60,15 @@ namespace SteelWire.Business.DbOperator
         {
             SteelWireContext dbContext = new SteelWireContext();
             Reset(dbContext, updater);
+            dbContext.SaveChanges();
         }
 
-        public static void Reset(SteelWireContext dbContext, int updater)
+        public static void Reset(SteelWireContext dbContext, int updater, CumulationReset data = null)
         {
-            CumulationReset data = GetCurrentData(dbContext, updater);
+            if (data == null)
+            {
+                data = GetCurrentData(dbContext, updater);
+            }
             data.ResetValue = data.CumulationValue;
             data.RemainValue = 0;
             data.UpdateTime = DateTime.Now;
