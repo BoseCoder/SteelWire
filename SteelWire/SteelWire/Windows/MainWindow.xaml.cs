@@ -1,6 +1,8 @@
-﻿using SteelWire.AppCode;
+﻿using System.ComponentModel;
+using SteelWire.AppCode;
 using SteelWire.AppCode.Config;
 using SteelWire.AppCode.CustomException;
+using SteelWire.AppCode.CustomMessage;
 using SteelWire.AppCode.Dependencies;
 using SteelWire.Lang;
 using SteelWire.WindowData;
@@ -23,17 +25,7 @@ namespace SteelWire.Windows
         {
             InitializeComponent();
 
-            SignWindow signWindow = new SignWindow();
-            if (signWindow.ShowDialog() == true)
-            {
-                CuttingCriticalDictionaryManager.InitializeConfig();
-                CuttingCriticalConfigManager.InitializeConfig();
-                WorkDictionaryManager.InitializeConfig();
-                WorkConfigManager.InitializeConfig();
-                Main.Data.InitializeData();
-                Main.Data.RefreshData();
-            }
-            else
+            if (!Main.Data.ShowSignWindow())
             {
                 this.Close();
                 return;
@@ -57,6 +49,36 @@ namespace SteelWire.Windows
 
         #region Action
 
+        private void WindowRendered(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Main.Data.CheckNeedReset())
+                {
+                    Main.Data.Reset(true);
+                }
+            }
+            catch (Exception ex)
+            {
+                BaseException.HandleException(ex);
+            }
+        }
+
+        private void WindowOnClosing(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                if (Main.Data.CanCancelExit && !MessageManager.Question("ExitConfirm"))
+                {
+                    e.Cancel = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                BaseException.HandleException(ex);
+            }
+        }
+
         private void Refresh(object sender, RoutedEventArgs e)
         {
             try
@@ -74,7 +96,14 @@ namespace SteelWire.Windows
         {
             try
             {
-                Main.Data.Cumulate();
+                if (Main.Data.Cumulate())
+                {
+                    Main.Data.RefreshData();
+                    if (Main.Data.CheckNeedReset())
+                    {
+                        Main.Data.Reset(true);
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -86,8 +115,10 @@ namespace SteelWire.Windows
         {
             try
             {
-                Main.Data.Reset();
-                Main.Data.RefreshData();
+                if (Main.Data.Reset(false))
+                {
+                    Main.Data.RefreshData();
+                }
             }
             catch (Exception ex)
             {
@@ -153,20 +184,16 @@ namespace SteelWire.Windows
 
         private void SignOut(object sender, RoutedEventArgs e)
         {
-            SignWindow signWindow = new SignWindow();
-            if (signWindow.ShowDialog() == true)
+            Main.Data.ShowSignWindow();
+            if (Main.Data.CheckNeedReset())
             {
-                CuttingCriticalDictionaryManager.InitializeConfig();
-                CuttingCriticalConfigManager.InitializeConfig();
-                WorkDictionaryManager.InitializeConfig();
-                WorkConfigManager.InitializeConfig();
-                Main.Data.InitializeData();
-                Main.Data.RefreshData();
+                Main.Data.Reset(true);
             }
         }
 
         private void Exit(object sender, RoutedEventArgs e)
         {
+            Main.Data.CanCancelExit = true;
             this.Close();
         }
 

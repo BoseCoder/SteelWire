@@ -97,6 +97,8 @@
     <Compile Include="AppCode\Converter\CumulationItemForeColorConverter.cs" />
     <Compile Include="AppCode\CustomException\BaseException.cs" />
     <Compile Include="AppCode\CustomException\ErrorException.cs" />
+    <Compile Include="AppCode\CustomException\InfoException.cs" />
+    <Compile Include="AppCode\CustomMessage\MessageManager.cs" />
     <Compile Include="Lang\LanguageManager.cs" />
     <Compile Include="Windows\SignWindow.xaml.cs">
       <DependentUpon>SignWindow.xaml</DependentUpon>

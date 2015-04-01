@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Transactions;
+using System.Windows;
 using BaseConfig;
 using SteelWire.AppCode.Config;
 using SteelWire.AppCode.CustomException;
+using SteelWire.AppCode.CustomMessage;
 using SteelWire.AppCode.Dependencies;
 using SteelWire.Business.CalculateCommander;
 using SteelWire.Business.Database;
 using SteelWire.Business.DbOperator;
+using SteelWire.Windows;
 using WireropeWorkload = SteelWire.AppCode.Config.WireropeWorkload;
 using WireropeCutRole = SteelWire.AppCode.Config.WireropeCutRole;
 using WireropeEfficiency = SteelWire.AppCode.Config.WireropeEfficiency;
@@ -92,6 +95,7 @@ namespace SteelWire.WindowData
         }
 
         private bool _isInitializeData;
+        public bool CanCancelExit { get; set; }
 
         public DependencyItem<decimal> DerrickHeight { get; private set; }
         public DependencyItem<decimal> WirelineMaxPower { get; private set; }
@@ -460,8 +464,25 @@ namespace SteelWire.WindowData
                 + Data.CoringWorkValue.ItemValue;
         }
 
+        public bool ShowSignWindow()
+        {
+            SignWindow signWindow = new SignWindow();
+            if (signWindow.ShowDialog() == true)
+            {
+                CuttingCriticalDictionaryManager.InitializeConfig();
+                CuttingCriticalConfigManager.InitializeConfig();
+                WorkDictionaryManager.InitializeConfig();
+                WorkConfigManager.InitializeConfig();
+                this.InitializeData();
+                this.RefreshData();
+                return true;
+            }
+            return false;
+        }
+
         public void RefreshData()
         {
+            Main.Data.CanCancelExit = true;
             CumulationReset data = ResetOperator.GetCurrentData(Sign.Data.UserID);
             if (data != null)
             {
@@ -490,22 +511,62 @@ namespace SteelWire.WindowData
             // 数据库下载配置信息功能未实现
         }
 
-        public void Cumulate()
+        public bool Cumulate()
         {
+            bool done = false;
             DateTime now = DateTime.Now;
             using (SteelWireContext dbContext = new SteelWireContext())
             {
                 using (TransactionScope t = new TransactionScope())
                 {
-                    this.UpdateCritical(dbContext, now);
-                    dbContext.SaveChanges();
-                    this.UpdateWork(dbContext, now);
-                    dbContext.SaveChanges();
-                    this.RefreshData(dbContext);
+                    if (WorkOperator.ExistWork(dbContext, Sign.Data.UserID, DateTime.Now))
+                    {
+                        throw new InfoException("HaveCumulatedToday");
+                    }
+                    CumulationReset data = ResetOperator.GetCurrentData(dbContext, Sign.Data.UserID);
+                    if (data == null)
+                    {
+                        if (MessageManager.Question("SaveCriticalCumulateCompulsivelyConfirm"))
+                        {
+                            Cumulate(dbContext, now, true);
+                            done = true;
+                        }
+                    }
+                    else
+                    {
+                        bool? result = MessageManager.Choose("SaveCriticalCumulateConfirm");
+                        if (result.HasValue)
+                        {
+                            if (result.Value)
+                            {
+                                Cumulate(dbContext, now, true);
+                                done = true;
+                            }
+                            else
+                            {
+                                Cumulate(dbContext, now);
+                                done = true;
+                            }
+                        }
+                    }
                     t.Complete();
                 }
             }
+            return done;
         }
+
+        private void Cumulate(SteelWireContext dbContext, DateTime now, bool reset = false)
+        {
+            if (reset)
+            {
+                this.UpdateCritical(dbContext, now);
+                dbContext.SaveChanges();
+            }
+            this.UpdateWork(dbContext, now);
+            dbContext.SaveChanges();
+            this.RefreshData(dbContext);
+        }
+
 
         private bool ChangeToCriticalConfig()
         {
@@ -878,14 +939,53 @@ namespace SteelWire.WindowData
             WorkOperator.UpdateWork(dbContext, Sign.Data.UserID, workData, Math.Round(this.WirelineCuttingCriticalValue.ItemValue, 8));
         }
 
-        public void Reset()
+        public bool CheckNeedReset()
+        {
+            return this.CriticalValue.ItemValue > 0 && this.CumulationValue.ItemValue >= this.CriticalValue.ItemValue;
+        }
+
+        public bool Reset(bool warningMode)
         {
             SteelWireContext dbContext = new SteelWireContext();
+            if (ResetOperator.ExistReset(dbContext, Sign.Data.UserID, DateTime.Now))
+            {
+                throw new InfoException("HaveResetToday");
+            }
             CumulationReset data = ResetOperator.GetCurrentData(dbContext, Sign.Data.UserID);
             if (data == null)
             {
                 throw new ErrorException("CumulationDataNotFound");
             }
+            if (warningMode)
+            {
+                bool? choose = MessageManager.WarningChoose("ResetCompulsivelyConfirm");
+                if (choose == null)
+                {
+                    this.CanCancelExit = false;
+                    Application.Current.Shutdown();
+                    return false;
+                }
+                if (choose.Value)
+                {
+                    Reset(dbContext, data);
+                    return true;
+                }
+                ShowSignWindow();
+                if (CheckNeedReset())
+                {
+                    Reset(true);
+                }
+            }
+            else if (MessageManager.Question("ResetConfirm"))
+            {
+                Reset(dbContext, data);
+                return true;
+            }
+            return false;
+        }
+
+        private static void Reset(SteelWireContext dbContext, CumulationReset data)
+        {
             ResetOperator.Reset(dbContext, Sign.Data.UserID, data);
             dbContext.SaveChanges();
         }

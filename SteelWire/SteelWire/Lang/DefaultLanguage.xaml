@@ -196,6 +196,15 @@
     <system:String x:Key="BtnCancel">
         Cancel
     </system:String>
+    <system:String x:Key="MenuItemUser">
+        _User Menu
+    </system:String>
+    <system:String x:Key="MenuItemSignOut">
+        _Switch Account
+    </system:String>
+    <system:String x:Key="MenuItemExit">
+        _Exit
+    </system:String>
 
     <system:String x:Key="ErrorCaption">Error</system:String>
     <system:String x:Key="ErrorCriticalValueInvalid">Critical value is invalid.</system:String>
@@ -204,7 +213,9 @@
     <system:String x:Key="ErrorCumulationValueInvalid">Cumulation value is invalid.</system:String>
     <system:String x:Key="ErrorCumulationDictionaryFileNotFound">Cumulation dictionary file not found.</system:String>
     <system:String x:Key="ErrorCumulationConfigFileNotFound">Cumulation config file not found.</system:String>
-    <system:String x:Key="ErrorCumulationDataNotFound">Cumulation data not found.</system:String>
+    <system:String x:Key="ErrorHaveCumulatedToday">You have saved cumulate value today.</system:String>
+    <system:String x:Key="ErrorHaveResetToday">You have reset today.</system:String>
+    <system:String x:Key="ErrorCumulationDataNotFound">Cumulation data not found. Try cumulate first.</system:String>
     <system:String x:Key="ErrorAccountEmpty">Account could not be empty.</system:String>
     <system:String x:Key="ErrorPasswordEmpty">Password could not be empty.</system:String>
     <system:String x:Key="ErrorPasswordTooShort">Password is too short, unless length 6 or more.</system:String>
@@ -212,4 +223,11 @@
     <system:String x:Key="ErrorAccountNotUnique">This account has already be used, please use another one.</system:String>
     <system:String x:Key="ErrorUserNotExist">User is not exist.</system:String>
     <system:String x:Key="ErrorPasswordNotEqual">Password error.</system:String>
+
+    <system:String x:Key="MessageCaption">Message</system:String>
+    <system:String x:Key="MessageExitConfirm" xml:space="preserve">Are you sure to exit ?</system:String>
+    <system:String x:Key="MessageSaveCriticalCumulateCompulsivelyConfirm" xml:space="preserve">System will save new critical value absolutely with cumulate value.Are you sure to save cumulate value ?Click "Yes" to save both, or click "No" not to save either.</system:String>
+    <system:String x:Key="MessageSaveCriticalCumulateConfirm" xml:space="preserve">Are you sure to save new critical value and cumulate value ?Click "Yes" to save both, Click "No" to save cumulate value only.Or click "Cancel" not to save either.</system:String>
+    <system:String x:Key="MessageResetCompulsivelyConfirm" xml:space="preserve">The cumulate value has reached or exceeded the critical value, it is time to cut down now, do it ?Click "Yes" to cut it down, click "No" to sign out.Or click "Cancel" to exit application.</system:String>
+    <system:String x:Key="MessageResetConfirm" xml:space="preserve">Are you sure to cut the cumulate value down ?Click "OK" to cut it down, or click "Cancel" to return.</system:String>
 </ResourceDictionary>

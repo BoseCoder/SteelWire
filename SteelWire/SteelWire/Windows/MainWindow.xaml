@@ -6,7 +6,7 @@
         xmlns:validationRule="clr-namespace:SteelWire.AppCode.ValidationRule"
         xmlns:windowData="clr-namespace:SteelWire.WindowData"
         MinHeight="600" Width="1240" Height="710" MinWidth="1260" WindowStartupLocation="CenterScreen"
-        Icon="/SteelWire;component/Resources/Images/Icon.ico">
+        Icon="/SteelWire;component/Resources/Images/Icon.ico" ContentRendered="WindowRendered" Closing="WindowOnClosing">
     <Window.Title>
         <MultiBinding Converter="{StaticResource WindowTitleConverter}">
             <Binding Source="{StaticResource AppTitle}"/>
@@ -115,9 +115,9 @@
         <DockPanel Margin="5">
             <Grid DockPanel.Dock="Top" Height="24">
                 <Menu Background="{x:Null}" BorderBrush="Black" BorderThickness="0,0,0,1">
-                    <MenuItem Header="_User" Height="24">
-                        <MenuItem Header="_Sign Out" Click="SignOut"/>
-                        <MenuItem Header="_Exit" Click="Exit"/>
+                    <MenuItem Name="MenuItemUser" Header="{StaticResource MenuItemUser}" Height="24">
+                        <MenuItem Name="MenuItemSignOut" Header="{StaticResource MenuItemSignOut}" Click="SignOut"/>
+                        <MenuItem Name="MenuItemExit" Header="{StaticResource MenuItemExit}" Click="Exit"/>
                     </MenuItem>
                     <MenuItem Header="_System" Height="24" Visibility="Collapsed">
                         <MenuItem Name="MenuItemLang" Header="_Language">

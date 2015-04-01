@@ -25,7 +25,7 @@ namespace SteelWire.Business.DbOperator
             }
             CumulationReset data = dbContext.CumulationReset
                 .OrderByDescending(d => d.UpdateTime).FirstOrDefault(d => d.UpdateUserID == updater);
-            if (data != null && data.ResetValue != 0)
+            if (data != null && data.ResetValue > 0)
             {
                 data = null;
             }
@@ -54,6 +54,23 @@ namespace SteelWire.Business.DbOperator
             }
             return dbContext.CumulationReset.Where(d => d.UpdateUserID == updater && d.ResetValue > 0)
                 .Take(count).OrderBy(d => d.UpdateTime).ToList();
+        }
+
+        public static bool ExistReset(int updater, DateTime date)
+        {
+            SteelWireContext dbContext = new SteelWireContext();
+            return ExistReset(dbContext, updater, date);
+        }
+
+        public static bool ExistReset(SteelWireContext dbContext, int updater, DateTime date)
+        {
+            if (dbContext == null)
+            {
+                throw new ArgumentNullException("dbContext");
+            }
+            DateTime startTime = date.Date;
+            DateTime endTime = startTime.AddDays(1);
+            return dbContext.CumulationReset.Any(d => d.UpdateUserID == updater && d.UpdateTime >= startTime && d.UpdateTime < endTime && d.ResetValue > 0);
         }
 
         public static void Reset(int updater)

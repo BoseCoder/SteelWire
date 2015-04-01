@@ -6,8 +6,8 @@ namespace SteelWire.AppCode.CustomException
 {
     public abstract class BaseException : Exception
     {
-        public const string ErrorCodeKey = "Error";
         public const string ErrorCaptionKey = "Caption";
+        public const string ErrorCodeKey = "Error";
         private readonly bool _showBox;
         private readonly string _code;
 

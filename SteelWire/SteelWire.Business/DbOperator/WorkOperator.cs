@@ -55,6 +55,23 @@ namespace SteelWire.Business.DbOperator
             return dbContext.WorkDictionary.OrderByDescending(d => d.ConfigTime).FirstOrDefault(d => d.ConfigUserID == updater);
         }
 
+        public static  bool ExistWork(int updater,DateTime date)
+        {
+            SteelWireContext dbContext = new SteelWireContext();
+            return ExistWork(dbContext, updater, date);
+        }
+
+        public static bool ExistWork(SteelWireContext dbContext, int updater, DateTime date)
+        {
+            if (dbContext == null)
+            {
+                throw new ArgumentNullException("dbContext");
+            }
+            DateTime startTime = date.Date;
+            DateTime endTime = startTime.AddDays(1);
+            return dbContext.WorkConfig.Any(d => d.ConfigUserID == updater && d.ConfigTime >= startTime && d.ConfigTime < endTime);
+        }
+
         public static void UpdateWork(int updater, WorkConfig work, decimal criticalValue)
         {
             SteelWireContext dbContext = new SteelWireContext();
