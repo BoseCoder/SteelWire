@@ -5,41 +5,28 @@ using System.Windows.Data;
 namespace SteelWire.AppCode.Converter
 {
     /// <summary>
-    /// 只读文本转换器
+    /// 计时器文本转换器
     /// </summary>
-    public class ReadOnlyResultTextConverter : IValueConverter
+    public class TimeMeterTextConverter : IValueConverter
     {
         public object Convert(object value, Type typeTarget, object param, CultureInfo culture)
         {
-            if (value is int)
-            {
-                if ((int)value < 0)
-                {
-                    return "Error";
-                }
-            }
-            if (value is decimal)
-            {
-                if ((decimal)value < 0)
-                {
-                    return "Error";
-                }
-            }
             string format = param as string;
             if (!string.IsNullOrWhiteSpace(format))
             {
                 return string.Format(format, value);
             }
-            if (value is decimal)
+            if (!(value is DateTime))
             {
-                return string.Format("{0:F3}", value);
+                return string.Format("{0}", value);
             }
-            return string.Format("{0}", value);
+            DateTime now = (DateTime)value;
+            return now.GetDateTimeFormats('D')[1];
         }
 
         public object ConvertBack(object value, Type typeTarget, object param, CultureInfo culture)
         {
-            return new object();
+            return DateTime.Now;
         }
     }
 }

@@ -155,6 +155,8 @@
           <Property Name="WorkConfigID" Type="int" Nullable="false" />
           <Property Name="DrillPipeName" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="DrillPipeWeight" Type="decimal" Nullable="false" Scale="8" />
+          <Property Name="DrillPipeStandLength" Type="decimal" Nullable="false" Scale="8" />
+          <Property Name="DrillPipeType" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="DrillPipeLength" Type="decimal" Nullable="false" Scale="8" />
         </EntityType>
         <EntityType Name="Machine">
@@ -225,7 +227,7 @@
           <Property Name="DrillingDifficulty" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="TripShallowHeight" Type="decimal" Nullable="false" Scale="8" />
           <Property Name="TripDeepHeight" Type="decimal" Nullable="false" Scale="8" />
-          <Property Name="TripCount" Type="int" Nullable="false" />
+          <Property Name="TripCount" Type="decimal" Nullable="false" Scale="8" />
           <Property Name="BushingWeight" Type="decimal" Nullable="false" Scale="8" />
           <Property Name="BushingLength" Type="decimal" Nullable="false" Scale="8" />
           <Property Name="BushingHeight" Type="decimal" Nullable="false" Scale="8" />
@@ -591,6 +593,8 @@
           <Property Name="DrillPipeLength" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
           <NavigationProperty Name="WorkConfig" Relationship="SteelWireModel.FK_DRILLPIP_RELATIONS_WORKCONF" FromRole="DrillPipeConfig" ToRole="WorkConfig" />
           <Property Type="String" Name="DrillPipeName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="DrillPipeStandLength" Nullable="false" Precision="18" Scale="8" />
+          <Property Type="String" Name="DrillPipeType" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Machine">
           <Key>
@@ -670,7 +674,7 @@
           <Property Name="DrillingDifficulty" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="TripShallowHeight" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
           <Property Name="TripDeepHeight" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
-          <Property Name="TripCount" Type="Int32" Nullable="false" />
+          <Property Name="TripCount" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
           <Property Name="BushingWeight" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
           <Property Name="BushingLength" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
           <Property Name="BushingHeight" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
@@ -958,6 +962,8 @@
           <EntitySetMapping Name="DrillPipeConfig">
             <EntityTypeMapping TypeName="SteelWireModel.DrillPipeConfig">
               <MappingFragment StoreEntitySet="DrillPipeConfig">
+                <ScalarProperty Name="DrillPipeType" ColumnName="DrillPipeType" />
+                <ScalarProperty Name="DrillPipeStandLength" ColumnName="DrillPipeStandLength" />
                 <ScalarProperty Name="DrillPipeName" ColumnName="DrillPipeName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="WorkConfigID" ColumnName="WorkConfigID" />

@@ -7,6 +7,12 @@
     <system:String x:Key="Welcome">
         欢迎，
     </system:String>
+    <system:String x:Key="CompanyNameCn">
+        中国石油宝鸡石油机械有限责任公司
+    </system:String>
+    <system:String x:Key="CompanyNameEn">
+        CNPC BAOJI OILFIELD MACHINERY CO.,LTD
+    </system:String>
 
     <system:String x:Key="DrillingTypeTopDrive">
         顶驱动
@@ -37,11 +43,42 @@
         非常难
     </system:String>
 
+    <system:String x:Key="LblUnitMillimetre">
+        (毫米)
+    </system:String>
+    <system:String x:Key="LblUnitMetre">
+        (米)
+    </system:String>
+    <system:String x:Key="LblUnitKilogram">
+        (千克)
+    </system:String>
+    <system:String x:Key="LblUnitKilogramPerMetre">
+        (千克/米)
+    </system:String>
+    <system:String x:Key="LblUnitKilogramPerCubicMeter">
+        (千克/立方米)
+    </system:String>
+    <system:String x:Key="LblUnitKilonewton">
+        (千牛)
+    </system:String>
+    <system:String x:Key="LblUnitTon">
+        (吨)
+    </system:String>
+    <system:String x:Key="LblUnitTonKilometre">
+        (吨•公里)
+    </system:String>
+
     <system:String x:Key="GroupWirelineCuttingCriticalValueTitle">
         计算切绳临界值
     </system:String>
     <system:String x:Key="LblDerrickHeight">
         井架高度：
+    </system:String>
+    <system:String x:Key="LblRollerDiameter">
+        滚筒直径：
+    </system:String>
+    <system:String x:Key="LblWirelineCutLength">
+        切绳长度：
     </system:String>
     <system:String x:Key="LblWirelineMaxPower">
         破断拉力：
@@ -49,14 +86,17 @@
     <system:String x:Key="LblRotaryHookWorkload">
         大钩载荷：
     </system:String>
-    <system:String x:Key="LblRollerDiameter">
-        滚筒直径：
-    </system:String>
     <system:String x:Key="LblWirelineDiameter">
         钢丝绳直径：
     </system:String>
     <system:String x:Key="LblRopeCount">
         承载绳根数：
+    </system:String>
+    <system:String x:Key="LblSecurityCoefficient">
+        安全系数修正系数：
+    </system:String>
+    <system:String x:Key="LblPulleyCoefficient">
+        滑轮比例修正系数：
     </system:String>
     <system:String x:Key="LblWirelineCuttingTitle">
         切绳临界值：
@@ -74,13 +114,16 @@
     <system:String x:Key="DrillPipeNameDrillPipe1">
         钻杆
     </system:String>
-    <system:String x:Key="DrillPipeNameDrillPipe2">
+    <system:String x:Key="HeavierDrillPipeNameHeavierDrillPipe1">
         加重钻杆
     </system:String>
     <system:String x:Key="DrillPipeWeight">
         公称质量：
     </system:String>
     <system:String x:Key="DrillPipeLength">
+        长度：
+    </system:String>
+    <system:String x:Key="DrillPipeStandLength">
         立根长度：
     </system:String>
     <system:String x:Key="DrillCollarNameDrillCollar1">
@@ -104,9 +147,6 @@
     </system:String>
     <system:String x:Key="LblValueTitle">
         计算：
-    </system:String>
-    <system:String x:Key="LblUnitTitle">
-        (吨•公里)
     </system:String>
 
     <system:String x:Key="GroupDrillingWorkTitle">
@@ -205,6 +245,11 @@
     <system:String x:Key="MenuItemExit">
         退出
     </system:String>
+
+    <system:String x:Key="ValidationIntEmpty">输入不能为空，请先输入整数！</system:String>
+    <system:String x:Key="ValidationIntError">请输入整数！</system:String>
+    <system:String x:Key="ValidationDecimalEmpty">输入不能为空，请先输入数字！</system:String>
+    <system:String x:Key="ValidationDecimalError">请输入数字！</system:String>
 
     <system:String x:Key="ErrorCaption">错误</system:String>
     <system:String x:Key="ErrorCriticalValueInvalid">临界值无效！</system:String>

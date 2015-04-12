@@ -19,6 +19,8 @@ namespace SteelWire.Business.Database
         public decimal DrillPipeWeight { get; set; }
         public decimal DrillPipeLength { get; set; }
         public string DrillPipeName { get; set; }
+        public decimal DrillPipeStandLength { get; set; }
+        public string DrillPipeType { get; set; }
     
         public virtual WorkConfig WorkConfig { get; set; }
     }

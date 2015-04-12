@@ -31,7 +31,7 @@ namespace SteelWire.Business.Database
         public string DrillingDifficulty { get; set; }
         public decimal TripShallowHeight { get; set; }
         public decimal TripDeepHeight { get; set; }
-        public int TripCount { get; set; }
+        public decimal TripCount { get; set; }
         public decimal BushingWeight { get; set; }
         public decimal BushingLength { get; set; }
         public decimal BushingHeight { get; set; }

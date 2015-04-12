@@ -40,11 +40,6 @@ namespace SteelWire.Windows
                 .Select(t => new KeyValuePair<string, string>(t.Name, LanguageManager.GetLocalResourceStringLeft("DrillingType", t.Name)));
             this.CboDrillingDifficulty.ItemsSource = workDic.DrillingDifficulties.Cast<DrillingDifficulty>()
                 .Select(d => new KeyValuePair<string, string>(d.Name, LanguageManager.GetLocalResourceStringLeft("DrillingDifficulty", d.Name)));
-
-            DrillPipeConfig.StaticWeightTitle.ItemValue = LanguageManager.GetLocalResourceStringLeft("DrillPipeWeight");
-            DrillPipeConfig.StaticLengthTitle.ItemValue = LanguageManager.GetLocalResourceStringLeft("DrillPipeLength");
-            DrillCollarConfig.StaticWeightTitle.ItemValue = LanguageManager.GetLocalResourceStringLeft("DrillCollarWeight");
-            DrillCollarConfig.StaticLengthTitle.ItemValue = LanguageManager.GetLocalResourceStringLeft("DrillCollarLength");
         }
 
         #region Action
@@ -98,7 +93,6 @@ namespace SteelWire.Windows
             {
                 if (Main.Data.Cumulate())
                 {
-                    Main.Data.RefreshData();
                     if (Main.Data.CheckNeedReset())
                     {
                         Main.Data.Reset(true);
@@ -115,10 +109,7 @@ namespace SteelWire.Windows
         {
             try
             {
-                if (Main.Data.Reset(false))
-                {
-                    Main.Data.RefreshData();
-                }
+                Main.Data.Reset(false);
             }
             catch (Exception ex)
             {
@@ -130,28 +121,12 @@ namespace SteelWire.Windows
 
         #region Input Limit
 
-        private void IntBoxPreviewKeyDownEvent(object sender, KeyEventArgs e)
-        {
-            if ((e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
-                || (e.Key >= Key.D0 && e.Key <= Key.D9)
-                || e.Key == Key.Back || e.Key == Key.Delete
-                || e.Key == Key.Home || e.Key == Key.End
-                || e.Key == Key.Left || e.Key == Key.Right
-                || e.Key == Key.Tab)
-            {
-                if (e.KeyboardDevice.Modifiers != ModifierKeys.None)
-                {
-                    e.Handled = true;
-                }
-            }
-            else
-            {
-                e.Handled = true;
-            }
-        }
-
         private void DecimalBoxPreviewKeyDownEvent(object sender, KeyEventArgs e)
         {
+            if (e.KeyboardDevice.Modifiers == ModifierKeys.Control)
+            {
+                return;
+            }
             if ((e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
                 || (e.Key >= Key.D0 && e.Key <= Key.D9)
                 || e.Key == Key.Decimal

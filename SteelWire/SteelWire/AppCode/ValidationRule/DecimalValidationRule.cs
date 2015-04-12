@@ -1,21 +1,25 @@
 using System.Globalization;
 using System.Windows.Controls;
+using SteelWire.Lang;
 
 namespace SteelWire.AppCode.ValidationRule
 {
-    public class DecimalValidationRule : System.Windows.Controls.ValidationRule
+    /// <summary>
+    /// 小数输入验证
+    /// </summary>
+    public class DecimalValidationRule : BaseValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             string input = string.Format("{0}", value);
             if (string.IsNullOrWhiteSpace(input))
             {
-                return new ValidationResult(false, "输入不能为空，请先输入数字！");
+                return new ValidationResult(false, LanguageManager.GetLocalResourceStringRight(ValidationCodeKey, "DecimalEmpty"));
             }
             decimal result;
             if (!decimal.TryParse(input, out result))
             {
-                return new ValidationResult(false, "请输入数字！");
+                return new ValidationResult(false, LanguageManager.GetLocalResourceStringRight(ValidationCodeKey, "DecimalError"));
             }
             return ValidationResult.ValidResult;
         }

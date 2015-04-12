@@ -3,6 +3,9 @@ using SteelWire.Lang;
 
 namespace SteelWire.AppCode.CustomException
 {
+    /// <summary>
+    /// 错误异常
+    /// </summary>
     public class ErrorException : BaseException
     {
         public ErrorException(string errorCode)

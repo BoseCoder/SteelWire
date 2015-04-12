@@ -9,15 +9,39 @@ using SteelWire.Business.DbOperator;
 
 namespace SteelWire.WindowData
 {
+    /// <summary>
+    /// SignWindow的绑定数据
+    /// </summary>
     public class Sign
     {
+        /// <summary>
+        /// 单例
+        /// </summary>
         public static readonly Sign Data;
 
+        /// <summary>
+        /// 当前登陆用户ID
+        /// </summary>
         public int UserID { get; private set; }
+        /// <summary>
+        /// 当前登陆用户账户
+        /// </summary>
         public string Account { get; private set; }
+        /// <summary>
+        /// 当前登陆用户姓名
+        /// </summary>
         public string UserName { get; private set; }
+        /// <summary>
+        /// 当前登陆用户显示名
+        /// </summary>
         public DependencyItem<string> UserDisplay { get; private set; }
+        /// <summary>
+        /// 窗口模式（登陆）
+        /// </summary>
         public DependencyItem<bool> IsSign { get; private set; }
+        /// <summary>
+        /// 窗口模式（注册）
+        /// </summary>
         public DependencyItem<bool> IsRegist { get; private set; }
 
         static Sign()
@@ -34,6 +58,11 @@ namespace SteelWire.WindowData
             this.IsRegist.ItemValueChangedHandler += ChangeRegistToSign;
         }
 
+        /// <summary>
+        /// 密码加密
+        /// </summary>
+        /// <param name="pass"></param>
+        /// <returns></returns>
         private string GetMd5(string pass)
         {
             byte[] result = Encoding.Default.GetBytes(pass);
@@ -52,11 +81,20 @@ namespace SteelWire.WindowData
             this.IsSign.ItemValue = !this.IsRegist.ItemValue;
         }
 
+        /// <summary>
+        /// 判断是否已经登陆
+        /// </summary>
+        /// <returns></returns>
         public bool IsSignIn()
         {
             return !string.IsNullOrEmpty(this.Account);
         }
 
+        /// <summary>
+        /// 执行登陆
+        /// </summary>
+        /// <param name="account"></param>
+        /// <param name="password"></param>
         public void SignIn(string account, string password)
         {
             if (string.IsNullOrWhiteSpace(account))
@@ -80,6 +118,13 @@ namespace SteelWire.WindowData
             SetUserInfo(user);
         }
 
+        /// <summary>
+        /// 执行注册
+        /// </summary>
+        /// <param name="account"></param>
+        /// <param name="password1"></param>
+        /// <param name="password2"></param>
+        /// <param name="userName"></param>
         public void Regist(string account, string password1, string password2, string userName)
         {
             if (string.IsNullOrWhiteSpace(account))
@@ -125,6 +170,10 @@ namespace SteelWire.WindowData
             SetUserInfo(user);
         }
 
+        /// <summary>
+        /// 设置当前用户信息
+        /// </summary>
+        /// <param name="user"></param>
         private void SetUserInfo(SecurityUser user)
         {
             this.UserID = user.ID;

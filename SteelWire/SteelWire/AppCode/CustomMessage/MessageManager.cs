@@ -3,9 +3,18 @@ using System.Windows;
 
 namespace SteelWire.AppCode.CustomMessage
 {
+    /// <summary>
+    /// 对语言消息管理
+    /// </summary>
     public class MessageManager
     {
+        /// <summary>
+        /// 多语言消息提示标题Key
+        /// </summary>
         private const string MessageCaptionKey = "Caption";
+        /// <summary>
+        /// 多语言消息内容前缀Key
+        /// </summary>
         private const string MessageCodeKey = "Message";
 
         private static bool? CaseChoose(MessageBoxResult result)

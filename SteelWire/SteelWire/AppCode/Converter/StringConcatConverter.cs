@@ -5,6 +5,9 @@ using System.Windows.Data;
 
 namespace SteelWire.AppCode.Converter
 {
+    /// <summary>
+    /// 连接文本转换器
+    /// </summary>
     public class StringConcatConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)

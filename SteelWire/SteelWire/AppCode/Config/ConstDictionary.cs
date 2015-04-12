@@ -4,12 +4,30 @@ using BaseConfig;
 
 namespace SteelWire.AppCode.Config
 {
+    /// <summary>
+    /// 初始字典
+    /// </summary>
     public static class ConstDictionary
     {
+        /// <summary>
+        /// 钢丝绳每米工作量
+        /// </summary>
         public static readonly List<WireropeWorkload> ConstWireropeWorkloads;
+        /// <summary>
+        /// 切绳长度
+        /// </summary>
         public static readonly List<WireropeCutRole> ConstWireropeCutRoles;
+        /// <summary>
+        /// 缠绳效率
+        /// </summary>
         public static readonly List<WireropeEfficiency> ConstWireropeEfficiencies;
+        /// <summary>
+        /// 钻井方式
+        /// </summary>
         public static readonly List<DrillingType> ConstDrillingTypes;
+        /// <summary>
+        /// 钻井难易程度
+        /// </summary>
         public static readonly List<DrillingDifficulty> ConstDrillingDifficulties;
 
         static ConstDictionary()

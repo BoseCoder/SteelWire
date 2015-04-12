@@ -4,7 +4,12 @@ using System.Windows;
 
 namespace SteelWire.AppCode.Dependencies
 {
-    public abstract class DependencyCollection<TC, TI> : DependencyObject
+    /// <summary>
+    /// 自定义集合依赖项
+    /// </summary>
+    /// <typeparam name="TC"></typeparam>
+    /// <typeparam name="TI"></typeparam>
+    public class DependencyCollection<TC, TI> : DependencyObject
         where TC : ICollection<TI>, new()
         where TI : new()
     {

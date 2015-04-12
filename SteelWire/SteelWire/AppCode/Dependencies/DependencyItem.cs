@@ -3,6 +3,10 @@ using System.Windows;
 
 namespace SteelWire.AppCode.Dependencies
 {
+    /// <summary>
+    /// 自定义依赖性
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class DependencyItem<T> : DependencyObject
     {
         public event EventHandler ItemValueChangedHandler;

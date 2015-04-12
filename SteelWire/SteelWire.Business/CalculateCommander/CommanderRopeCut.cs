@@ -12,6 +12,14 @@ namespace SteelWire.Business.CalculateCommander
         /// </summary>
         public decimal WirelineWorkloadPerMetre { get; set; }
         /// <summary>
+        /// 切绳长度最小值
+        /// </summary>
+        public decimal WirelineCutMinLength { get; set; }
+        /// <summary>
+        /// 切绳长度最大值
+        /// </summary>
+        public decimal WirelineCutMaxLength { get; set; }
+        /// <summary>
         /// 切绳长度
         /// </summary>
         public decimal WirelineCutLength { get; private set; }
@@ -65,7 +73,7 @@ namespace SteelWire.Business.CalculateCommander
         protected override void CheckInput()
         {
             CheckInputForCalculateWirelineCutLength();
-            CheckInputForCalculateSecurityCoefficient();
+            CheckInputForCalculateFastLinePower();
             CheckInputForCalculatePulleyCoefficient();
         }
 
@@ -76,10 +84,13 @@ namespace SteelWire.Business.CalculateCommander
         protected override decimal Calculate()
         {
             this.WirelineCutLength = CalculateWirelineCutLength();
+            this.FastLinePower = CalculateFastLinePower();
             this.SecurityCoefficient = CalculateSecurityCoefficient();
             this.PulleyCoefficient = CalculatePulleyCoefficient();
             return this.WirelineWorkloadPerMetre * this.WirelineCutLength * this.SecurityCoefficient * this.PulleyCoefficient;
         }
+
+        #region WirelineCutLength
 
         /// <summary>
         /// 计算切绳长度前检查输入
@@ -94,8 +105,7 @@ namespace SteelWire.Business.CalculateCommander
         /// </summary>
         private decimal CalculateWirelineCutLength()
         {
-            decimal c = (decimal)(Math.PI * (double)this.RollerDiameter);
-            return c * (Math.Floor(c) + 0.5M);
+            return (this.WirelineCutMinLength + this.WirelineCutMaxLength) / 2;
         }
 
         /// <summary>
@@ -107,6 +117,10 @@ namespace SteelWire.Business.CalculateCommander
             CheckInputForCalculateWirelineCutLength();
             return CalculateWirelineCutLength();
         }
+
+        #endregion
+
+        #region FastLinePower
 
         /// <summary>
         /// 计算快绳拉力前检查输入
@@ -144,23 +158,28 @@ namespace SteelWire.Business.CalculateCommander
             return CalculateFastLinePower();
         }
 
+        #endregion
+
+        #region SecurityCoefficient
+
         /// <summary>
         /// 计算安全系数修正系数前检查输入
         /// </summary>
         private void CheckInputForCalculateSecurityCoefficient()
         {
-            CheckInputForCalculateFastLinePower();
+            if (this.FastLinePower == 0)
+            {
+                throw new DivideByZeroException("FastLinePower is invalid.");
+            }
         }
 
         /// <summary>
         /// 计算安全系数修正系数
         /// </summary>
         /// <returns></returns>
-        public decimal CalculateSecurityCoefficient()
+        private decimal CalculateSecurityCoefficient()
         {
-            // this.WirelineMaxPower / (this.RotaryHookWorkload / (this.RopeEfficiency * this.RopeCount))
-            // 等价于this.WirelineMaxPower*this.RopeEfficiency * this.RopeCount / this.RotaryHookWorkload
-            decimal coefficient = (this.WirelineMaxPower * this.RopeEfficiency * this.RopeCount / this.RotaryHookWorkload);
+            decimal coefficient = (this.WirelineMaxPower / this.FastLinePower);
             decimal pow = (decimal)Math.Pow((double)coefficient, 2);
             return -0.016M * pow + 0.344M * coefficient - 0.326M;
         }
@@ -171,9 +190,15 @@ namespace SteelWire.Business.CalculateCommander
         /// <returns></returns>
         public decimal GetSecurityCoefficient()
         {
+            CheckInputForCalculateFastLinePower();
+            this.FastLinePower = CalculateFastLinePower();
             CheckInputForCalculateSecurityCoefficient();
             return CalculateSecurityCoefficient();
         }
+
+        #endregion
+
+        #region PulleyCoefficient
 
         /// <summary>
         /// 计算滑轮D:d比率修正系数前检查输入
@@ -190,7 +215,7 @@ namespace SteelWire.Business.CalculateCommander
         /// 计算滑轮D:d比率修正系数
         /// </summary>
         /// <returns></returns>
-        public decimal CalculatePulleyCoefficient()
+        private decimal CalculatePulleyCoefficient()
         {
             decimal coefficient = this.RollerDiameter / this.WirelineDiameter;
             decimal pow = (decimal)Math.Pow((double)coefficient, 2);
@@ -206,5 +231,7 @@ namespace SteelWire.Business.CalculateCommander
             CheckInputForCalculatePulleyCoefficient();
             return CalculatePulleyCoefficient();
         }
+
+        #endregion
     }
 }

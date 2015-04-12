@@ -4,6 +4,9 @@ using System.Windows.Data;
 
 namespace SteelWire.AppCode.Converter
 {
+    /// <summary>
+    /// ¿Ø¼þÏÔÊ¾×ª»»Æ÷
+    /// </summary>
     public class ControlVisiableConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

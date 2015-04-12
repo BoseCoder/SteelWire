@@ -61,13 +61,17 @@ namespace SteelWire.AppCode.Config
             if (current.DrillPipes.Count < 1)
             {
                 needWrite = true;
-                current.DrillPipes.Add(new Drill
+                current.DrillPipes.Add(new DrillPipe
                 {
                     Name = "DrillPipe1"
                 });
-                current.DrillPipes.Add(new Drill
+            }
+            if (current.HeavierDrillPipes.Count < 1)
+            {
+                needWrite = true;
+                current.HeavierDrillPipes.Add(new Drill
                 {
-                    Name = "DrillPipe2"
+                    Name = "HeavierDrillPipe1"
                 });
             }
             if (current.DrillCollars.Count < 1)
