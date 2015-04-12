@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      Microsoft SQL Server 2008                    */
-/* Created on:     2015/3/31 星期二 4:04:04                        */
+/* Created on:     2015/4/14 星期二 3:05:41                        */
 /*==============================================================*/
 
 
@@ -247,15 +247,6 @@ if exists (select 1
 go
 
 if exists (select 1
-            from  sysindexes
-           where  id    = object_id('SecurityUser')
-            and   name  = 'AccountIndex'
-            and   indid > 0
-            and   indid < 255)
-   drop index SecurityUser.AccountIndex
-go
-
-if exists (select 1
             from  sysobjects
            where  id = object_id('SecurityUser')
             and   type = 'U')
@@ -444,7 +435,6 @@ create table CuttingCriticalConfig (
    WirelineDiameter     decimal(18,8)        not null,
    RopeCount            int                  not null,
    ConfigTime           datetime             not null,
-   ConfigTimeStamp      bigint               not null,
    CuttingCriticalValue decimal(18,8)        not null,
    constraint PK_CUTTINGCRITICALCONFIG primary key nonclustered (ID)
 )
@@ -530,13 +520,6 @@ go
 declare @CurrentUser sysname
 select @CurrentUser = user_name()
 execute sp_addextendedproperty 'MS_Description', 
-   '配置时间戳',
-   'user', @CurrentUser, 'table', 'CuttingCriticalConfig', 'column', 'ConfigTimeStamp'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
    '临界值',
    'user', @CurrentUser, 'table', 'CuttingCriticalConfig', 'column', 'CuttingCriticalValue'
 go
@@ -564,7 +547,6 @@ create table CuttingCriticalDictionary (
    ID                   int                  identity,
    ConfigUserID         int                  not null,
    ConfigTime           datetime             not null,
-   ConfigTimeStamp      bigint               not null,
    constraint PK_CUTTINGCRITICALDICTIONARY primary key nonclustered (ID)
 )
 go
@@ -595,13 +577,6 @@ select @CurrentUser = user_name()
 execute sp_addextendedproperty 'MS_Description', 
    '配置时间',
    'user', @CurrentUser, 'table', 'CuttingCriticalDictionary', 'column', 'ConfigTime'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   '配置时间戳',
-   'user', @CurrentUser, 'table', 'CuttingCriticalDictionary', 'column', 'ConfigTimeStamp'
 go
 
 /*==============================================================*/
@@ -683,6 +658,8 @@ create table DrillPipeConfig (
    WorkConfigID         int                  not null,
    DrillPipeName        varchar(50)          not null,
    DrillPipeWeight      decimal(18,8)        not null,
+   DrillPipeStandLength decimal(18,8)        not null,
+   DrillPipeType        varchar(50)          not null,
    DrillPipeLength      decimal(18,8)        not null,
    constraint PK_DRILLPIPECONFIG primary key nonclustered (ID)
 )
@@ -727,6 +704,20 @@ declare @CurrentUser sysname
 select @CurrentUser = user_name()
 execute sp_addextendedproperty 'MS_Description', 
    '钻杆立根长度',
+   'user', @CurrentUser, 'table', 'DrillPipeConfig', 'column', 'DrillPipeStandLength'
+go
+
+declare @CurrentUser sysname
+select @CurrentUser = user_name()
+execute sp_addextendedproperty 'MS_Description', 
+   '钻杆类型',
+   'user', @CurrentUser, 'table', 'DrillPipeConfig', 'column', 'DrillPipeType'
+go
+
+declare @CurrentUser sysname
+select @CurrentUser = user_name()
+execute sp_addextendedproperty 'MS_Description', 
+   '钻杆长度',
    'user', @CurrentUser, 'table', 'DrillPipeConfig', 'column', 'DrillPipeLength'
 go
 
@@ -915,8 +906,7 @@ create table SecurityUser (
    Enabled              bit                  not null,
    RegistTime           datetime             not null,
    UpdateTime           datetime             not null,
-   constraint PK_SECURITYUSER primary key nonclustered (ID),
-   constraint AK_ACCOUNTUNIQUE_SECURITY unique (Account)
+   constraint PK_SECURITYUSER primary key nonclustered (ID)
 )
 go
 
@@ -981,14 +971,6 @@ select @CurrentUser = user_name()
 execute sp_addextendedproperty 'MS_Description', 
    '更新时间',
    'user', @CurrentUser, 'table', 'SecurityUser', 'column', 'UpdateTime'
-go
-
-/*==============================================================*/
-/* Index: AccountIndex                                          */
-/*==============================================================*/
-create unique index AccountIndex on SecurityUser (
-Account ASC
-)
 go
 
 /*==============================================================*/
@@ -1203,14 +1185,13 @@ create table WorkConfig (
    DrillingDifficulty   varchar(50)          not null,
    TripShallowHeight    decimal(18,8)        not null,
    TripDeepHeight       decimal(18,8)        not null,
-   TripCount            int                  not null,
+   TripCount            decimal(18,8)        not null,
    BushingWeight        decimal(18,8)        not null,
    BushingLength        decimal(18,8)        not null,
    BushingHeight        decimal(18,8)        not null,
    CoringShallowHeight  decimal(18,8)        not null,
    CoringDeepHeight     decimal(18,8)        not null,
    ConfigTime           datetime             not null,
-   ConfigTimeStamp      bigint               not null,
    WorkValue            decimal(18,8)        not null,
    constraint PK_WORKCONFIG primary key nonclustered (ID)
 )
@@ -1352,13 +1333,6 @@ go
 declare @CurrentUser sysname
 select @CurrentUser = user_name()
 execute sp_addextendedproperty 'MS_Description', 
-   '配置时间戳',
-   'user', @CurrentUser, 'table', 'WorkConfig', 'column', 'ConfigTimeStamp'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
    '累积值',
    'user', @CurrentUser, 'table', 'WorkConfig', 'column', 'WorkValue'
 go
@@ -1386,7 +1360,6 @@ create table WorkDictionary (
    ID                   int                  identity,
    ConfigUserID         int                  not null,
    ConfigTime           datetime             not null,
-   ConfigTimeStamp      bigint               not null,
    constraint PK_WORKDICTIONARY primary key nonclustered (ID)
 )
 go
@@ -1417,13 +1390,6 @@ select @CurrentUser = user_name()
 execute sp_addextendedproperty 'MS_Description', 
    '配置时间',
    'user', @CurrentUser, 'table', 'WorkDictionary', 'column', 'ConfigTime'
-go
-
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   '配置时间戳',
-   'user', @CurrentUser, 'table', 'WorkDictionary', 'column', 'ConfigTimeStamp'
 go
 
 /*==============================================================*/
