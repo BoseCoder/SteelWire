@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      Microsoft SQL Server 2008                    */
-/* Created on:     2015/4/14 星期二 3:05:41                        */
+/* Created on:     2015/4/16 星期四 21:42:52                       */
 /*==============================================================*/
 
 
@@ -435,6 +435,7 @@ create table CuttingCriticalConfig (
    WirelineDiameter     decimal(18,8)        not null,
    RopeCount            int                  not null,
    ConfigTime           datetime             not null,
+   ConfigTimeStamp      bigint               not null,
    CuttingCriticalValue decimal(18,8)        not null,
    constraint PK_CUTTINGCRITICALCONFIG primary key nonclustered (ID)
 )
@@ -520,6 +521,13 @@ go
 declare @CurrentUser sysname
 select @CurrentUser = user_name()
 execute sp_addextendedproperty 'MS_Description', 
+   '配置时间戳',
+   'user', @CurrentUser, 'table', 'CuttingCriticalConfig', 'column', 'ConfigTimeStamp'
+go
+
+declare @CurrentUser sysname
+select @CurrentUser = user_name()
+execute sp_addextendedproperty 'MS_Description', 
    '临界值',
    'user', @CurrentUser, 'table', 'CuttingCriticalConfig', 'column', 'CuttingCriticalValue'
 go
@@ -546,6 +554,7 @@ go
 create table CuttingCriticalDictionary (
    ID                   int                  identity,
    ConfigUserID         int                  not null,
+   ConfigTimeStamp      bigint               not null,
    ConfigTime           datetime             not null,
    constraint PK_CUTTINGCRITICALDICTIONARY primary key nonclustered (ID)
 )
@@ -570,6 +579,13 @@ select @CurrentUser = user_name()
 execute sp_addextendedproperty 'MS_Description', 
    'ConfigUserID',
    'user', @CurrentUser, 'table', 'CuttingCriticalDictionary', 'column', 'ConfigUserID'
+go
+
+declare @CurrentUser sysname
+select @CurrentUser = user_name()
+execute sp_addextendedproperty 'MS_Description', 
+   '配置时间戳',
+   'user', @CurrentUser, 'table', 'CuttingCriticalDictionary', 'column', 'ConfigTimeStamp'
 go
 
 declare @CurrentUser sysname
@@ -1192,6 +1208,7 @@ create table WorkConfig (
    CoringShallowHeight  decimal(18,8)        not null,
    CoringDeepHeight     decimal(18,8)        not null,
    ConfigTime           datetime             not null,
+   ConfigTimeStamp      bigint               not null,
    WorkValue            decimal(18,8)        not null,
    constraint PK_WORKCONFIG primary key nonclustered (ID)
 )
@@ -1333,6 +1350,13 @@ go
 declare @CurrentUser sysname
 select @CurrentUser = user_name()
 execute sp_addextendedproperty 'MS_Description', 
+   '配置时间戳',
+   'user', @CurrentUser, 'table', 'WorkConfig', 'column', 'ConfigTimeStamp'
+go
+
+declare @CurrentUser sysname
+select @CurrentUser = user_name()
+execute sp_addextendedproperty 'MS_Description', 
    '累积值',
    'user', @CurrentUser, 'table', 'WorkConfig', 'column', 'WorkValue'
 go
@@ -1359,6 +1383,7 @@ go
 create table WorkDictionary (
    ID                   int                  identity,
    ConfigUserID         int                  not null,
+   ConfigTimeStamp      bigint               not null,
    ConfigTime           datetime             not null,
    constraint PK_WORKDICTIONARY primary key nonclustered (ID)
 )
@@ -1383,6 +1408,13 @@ select @CurrentUser = user_name()
 execute sp_addextendedproperty 'MS_Description', 
    'ConfigUserID',
    'user', @CurrentUser, 'table', 'WorkDictionary', 'column', 'ConfigUserID'
+go
+
+declare @CurrentUser sysname
+select @CurrentUser = user_name()
+execute sp_addextendedproperty 'MS_Description', 
+   '配置时间戳',
+   'user', @CurrentUser, 'table', 'WorkDictionary', 'column', 'ConfigTimeStamp'
 go
 
 declare @CurrentUser sysname

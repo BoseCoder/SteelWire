@@ -116,8 +116,8 @@
           </Key>
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ConfigUserID" Type="int" Nullable="false" />
-          <Property Name="ConfigTime" Type="datetime" Nullable="false" />
           <Property Name="ConfigTimeStamp" Type="bigint" Nullable="false" />
+          <Property Name="ConfigTime" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="DrillCollarConfig">
           <Key>
@@ -243,8 +243,8 @@
           </Key>
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ConfigUserID" Type="int" Nullable="false" />
-          <Property Name="ConfigTime" Type="datetime" Nullable="false" />
           <Property Name="ConfigTimeStamp" Type="bigint" Nullable="false" />
+          <Property Name="ConfigTime" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="FK_CUMULATI_RELATIONS_USER">
           <End Role="SecurityUser" Type="SteelWireModel.Store.SecurityUser" Multiplicity="1" />

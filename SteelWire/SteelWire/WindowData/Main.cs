@@ -768,10 +768,10 @@ namespace SteelWire.WindowData
             {
                 using (TransactionScope t = new TransactionScope())
                 {
-                    if (WorkOperator.ExistWork(dbContext, Sign.Data.UserID, DateTime.Now))
-                    {
-                        throw new InfoException("HaveCumulatedToday");
-                    }
+                    //if (WorkOperator.ExistWork(dbContext, Sign.Data.UserID, DateTime.Now))
+                    //{
+                    //    throw new InfoException("HaveCumulatedToday");
+                    //}
                     CumulationReset data = ResetOperator.GetCurrentData(dbContext, Sign.Data.UserID);
                     if (data == null)
                     {
@@ -1312,10 +1312,10 @@ namespace SteelWire.WindowData
         public void Reset(bool warningMode)
         {
             SteelWireContext dbContext = new SteelWireContext();
-            if (ResetOperator.ExistReset(dbContext, Sign.Data.UserID, DateTime.Now))
-            {
-                throw new InfoException("HaveResetToday");
-            }
+            //if (ResetOperator.ExistReset(dbContext, Sign.Data.UserID, DateTime.Now))
+            //{
+            //    throw new InfoException("HaveResetToday");
+            //}
             CumulationReset data = ResetOperator.GetCurrentData(dbContext, Sign.Data.UserID);
             if (data == null)
             {
