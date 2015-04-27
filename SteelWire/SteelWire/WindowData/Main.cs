@@ -5,6 +5,7 @@ using System.Linq;
 using System.Transactions;
 using System.Windows;
 using BaseConfig;
+using IntelliLock.Licensing;
 using SteelWire.AppCode.Config;
 using SteelWire.AppCode.CustomException;
 using SteelWire.AppCode.CustomMessage;
@@ -12,6 +13,7 @@ using SteelWire.AppCode.Dependencies;
 using SteelWire.Business.CalculateCommander;
 using SteelWire.Business.Database;
 using SteelWire.Business.DbOperator;
+using SteelWire.Lang;
 using SteelWire.Windows;
 using WireropeWorkload = SteelWire.AppCode.Config.WireropeWorkload;
 using WireropeCutRole = SteelWire.AppCode.Config.WireropeCutRole;
@@ -93,6 +95,7 @@ namespace SteelWire.WindowData
 
                 TotalWorkValue = new DependencyItem<decimal>(),
 
+                AppLicenceStatus = new DependencyItem<string>(),
                 UserDisplay = Sign.Data.UserDisplay,
                 CriticalValue = new DependencyItem<decimal>(),
                 CumulationValue = new DependencyItem<decimal>(),
@@ -144,6 +147,7 @@ namespace SteelWire.WindowData
 
         public DependencyItem<decimal> TotalWorkValue { get; private set; }
 
+        public DependencyItem<string> AppLicenceStatus { get; private set; }
         public DependencyItem<string> UserDisplay { get; private set; }
         public DependencyItem<decimal> CriticalValue { get; private set; }
         public DependencyItem<decimal> CumulationValue { get; private set; }
@@ -194,6 +198,23 @@ namespace SteelWire.WindowData
         public void InitializeData()
         {
             this._isInitializeData = true;
+
+            if(CurrentLicense.License.LicenseStatus != LicenseStatus.Licensed)
+            {
+                if (CurrentLicense.License.ExpirationDays_Enabled)
+                {
+                    this.AppLicenceStatus.ItemValue = string.Format("  [{0} {1}{2}]",
+                        LanguageManager.GetLocalResourceStringRight("License", "Trial"),
+                        CurrentLicense.License.ExpirationDays,
+                        LanguageManager.GetLocalResourceStringRight("License", "TrialRemoveDay"));
+                }
+                else
+                {
+                    this.AppLicenceStatus.ItemValue = string.Format("  [{0}]",
+                        LanguageManager.GetLocalResourceStringRight("License", "Trial"));
+                }
+            }
+
             CuttingCriticalConfig criticalConf = CuttingCriticalConfigManager.OnceInstance.ConfigSection;
             WorkConfig workConf = WorkConfigManager.OnceInstance.ConfigSection;
 
@@ -1296,12 +1317,13 @@ namespace SteelWire.WindowData
         }
 
         /// <summary>
-        /// 判断是否需要切绳
+        /// 判断是否需要切绳（精确到小数3位）
         /// </summary>
         /// <returns></returns>
         public bool CheckNeedReset()
         {
-            return this.CriticalValue.ItemValue > 0 && this.CumulationValue.ItemValue >= this.CriticalValue.ItemValue;
+            return this.CriticalValue.ItemValue > 0
+                && Math.Round(this.CumulationValue.ItemValue, 3) >= Math.Round(this.CriticalValue.ItemValue, 3);
         }
 
         /// <summary>

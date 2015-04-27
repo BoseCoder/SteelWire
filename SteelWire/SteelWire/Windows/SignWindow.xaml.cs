@@ -22,6 +22,12 @@ namespace SteelWire.Windows
             Keyboard.Focus(this.TxtAccount);
         }
 
+        private void OpenOption(object sender, MouseButtonEventArgs e)
+        {
+            OptionWindow option = new OptionWindow();
+            option.ShowDialog();
+        }
+
         private void AccountPreviewKeyDownEvent(object sender, KeyEventArgs e)
         {
             if ((e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)

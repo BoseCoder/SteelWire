@@ -1,0 +1,44 @@
+﻿<Window x:Class="SteelWire.Windows.OptionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="{StaticResource OptionTitle}" Height="400" Width="480"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Loaded="WindowLoaded">
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Grid HorizontalAlignment="Right">
+                <WrapPanel>
+                    <Label Content="{StaticResource LblSerialNumber}" />
+                    <TextBox Name="TxtSerialNumber" IsReadOnly="True" Padding="10,5,10,0" BorderThickness="0,0,0,1" Foreground="#FF666666">
+                        <TextBox.BorderBrush>
+                            <LinearGradientBrush>
+                                <GradientStop Color="Black"/>
+                            </LinearGradientBrush>
+                        </TextBox.BorderBrush>
+                    </TextBox>
+                </WrapPanel>
+            </Grid>
+            <Grid Margin="0,20,0,0">
+                <Label Content="{StaticResource LblServer}" HorizontalAlignment="Right" Margin="0,0,205,0"/>
+                <TextBox Name="TxtServer" TextWrapping="Wrap" Width="200" HorizontalAlignment="Right"/>
+            </Grid>
+            <Grid Margin="0,20,0,0">
+                <Label Content="{StaticResource LblDatabase}" HorizontalAlignment="Right" Margin="0,0,205,0"/>
+                <TextBox Name="TxtDatabase" TextWrapping="Wrap" Width="200" HorizontalAlignment="Right"/>
+            </Grid>
+            <Grid Margin="0,20,0,0">
+                <Label Content="{StaticResource LblDbUser}" HorizontalAlignment="Right" Margin="0,0,205,0"/>
+                <TextBox Name="TxtDbUser" TextWrapping="Wrap" Width="200" Margin="0" HorizontalAlignment="Right"/>
+            </Grid>
+            <Grid Margin="0,20,0,0">
+                <Label Content="{StaticResource LblDbPassword}" HorizontalAlignment="Right" Margin="0,0,205,0"/>
+                <PasswordBox Name="PassBoxDbUser" Width="200" HorizontalAlignment="Right"/>
+            </Grid>
+            <Grid Margin="0,20,0,0">
+                <WrapPanel HorizontalAlignment="Center">
+                    <Button Content="{StaticResource BtnOk}" Margin="20,0" Width="80" Height="40" Click="OptionOk" Cursor="Hand"/>
+                    <Button Content="{StaticResource BtnCancel}" Margin="0" Width="80" Height="40" Click="OptionCancel" Cursor="Hand"/>
+                </WrapPanel>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>

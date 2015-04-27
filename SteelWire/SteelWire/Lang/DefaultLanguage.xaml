@@ -13,6 +13,12 @@
     <system:String x:Key="CompanyNameEn">
         CNPC BAOJI OILFIELD MACHINERY CO.,LTD
     </system:String>
+    <system:String x:Key="LicenseTrial">
+        Trial
+    </system:String>
+    <system:String x:Key="LicenseTrialRemoveDay">
+        Days
+    </system:String>
 
     <system:String x:Key="DrillingTypeTopDrive">
         TopDrive
@@ -212,6 +218,9 @@
         Reset
     </system:String>
 
+    <system:String x:Key="SignInTitle">
+        Sign In
+    </system:String>
     <system:String x:Key="LblAccount">
         Account:
     </system:String>
@@ -233,6 +242,29 @@
     <system:String x:Key="BtnSignIn">
         Sign In
     </system:String>
+
+    <system:String x:Key="OptionTitle">
+        System Option
+    </system:String>
+    <system:String x:Key="LblSerialNumber">
+        SN
+    </system:String>
+    <system:String x:Key="LblServer">
+        Server
+    </system:String>
+    <system:String x:Key="LblDatabase">
+        Database
+    </system:String>
+    <system:String x:Key="LblDbUser">
+        Database User
+    </system:String>
+    <system:String x:Key="LblDbPassword">
+        Database Password
+    </system:String>
+    
+    <system:String x:Key="BtnOk">
+        Ok
+    </system:String>
     <system:String x:Key="BtnCancel">
         Cancel
     </system:String>
@@ -244,6 +276,12 @@
     </system:String>
     <system:String x:Key="MenuItemExit">
         _Exit
+    </system:String>
+    <system:String x:Key="MenuItemSystem">
+        _System
+    </system:String>
+    <system:String x:Key="MenuItemOption">
+        _Option
     </system:String>
 
     <system:String x:Key="ValidationIntEmpty">The input could not be empty, please input decimal value at first.</system:String>
@@ -268,6 +306,11 @@
     <system:String x:Key="ErrorAccountNotUnique">This account has already be used, please use another one.</system:String>
     <system:String x:Key="ErrorUserNotExist">User is not exist.</system:String>
     <system:String x:Key="ErrorPasswordNotEqual">Password error.</system:String>
+    <system:String x:Key="ErrorOptionServerEmpty">Database server could not be empty, please input again.</system:String>
+    <system:String x:Key="ErrorOptionDatabaseEmpty">Database could not be empty, please input again.</system:String>
+    <system:String x:Key="ErrorOptionDbUserEmpty">Database user could not be empty, please input again.</system:String>
+    <system:String x:Key="ErrorOptionDbPassEmpty">Database password could not be empty, please input again.</system:String>
+    <system:String x:Key="ErrorOptionDatabaseInvalid">Connect to the database failed.</system:String>
 
     <system:String x:Key="MessageCaption">Message</system:String>
     <system:String x:Key="MessageExitConfirm" xml:space="preserve">Are you sure to exit ?</system:String>
@@ -275,4 +318,6 @@
     <system:String x:Key="MessageSaveCriticalCumulateConfirm" xml:space="preserve">Are you sure to save new critical value and cumulate value ?Click "Yes" to save both, Click "No" to save cumulate value only.Or click "Cancel" not to save either.</system:String>
     <system:String x:Key="MessageResetCompulsivelyConfirm" xml:space="preserve">The cumulate value has reached or exceeded the critical value, it is time to cut down now, do it ?Click "Yes" to cut it down, click "No" to sign out.Or click "Cancel" to exit application.</system:String>
     <system:String x:Key="MessageResetConfirm" xml:space="preserve">Are you sure to cut the cumulate value down ?Click "OK" to cut it down, or click "Cancel" to return.</system:String>
+
+    <system:String x:Key="MessageOptionSave">Option save successfully, please reboot the application.</system:String>
 </ResourceDictionary>

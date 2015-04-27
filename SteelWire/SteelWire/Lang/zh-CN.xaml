@@ -13,6 +13,12 @@
     <system:String x:Key="CompanyNameEn">
         CNPC BAOJI OILFIELD MACHINERY CO.,LTD
     </system:String>
+    <system:String x:Key="LicenseTrial">
+        试用版
+    </system:String>
+    <system:String x:Key="LicenseTrialRemoveDay">
+        天
+    </system:String>
 
     <system:String x:Key="DrillingTypeTopDrive">
         顶驱动
@@ -212,6 +218,9 @@
         切绳
     </system:String>
 
+    <system:String x:Key="SignInTitle">
+        登录
+    </system:String>
     <system:String x:Key="LblAccount">
         账户：
     </system:String>
@@ -233,6 +242,29 @@
     <system:String x:Key="BtnSignIn">
         登录
     </system:String>
+
+    <system:String x:Key="OptionTitle">
+        系统选项
+    </system:String>
+    <system:String x:Key="LblSerialNumber">
+        序列号
+    </system:String>
+    <system:String x:Key="LblServer">
+        服务器
+    </system:String>
+    <system:String x:Key="LblDatabase">
+        数据库名称
+    </system:String>
+    <system:String x:Key="LblDbUser">
+        数据库用户
+    </system:String>
+    <system:String x:Key="LblDbPassword">
+        数据库密码
+    </system:String>
+
+    <system:String x:Key="BtnOk">
+        确定
+    </system:String>
     <system:String x:Key="BtnCancel">
         取消
     </system:String>
@@ -244,6 +276,12 @@
     </system:String>
     <system:String x:Key="MenuItemExit">
         退出
+    </system:String>
+    <system:String x:Key="MenuItemSystem">
+        系统菜单
+    </system:String>
+    <system:String x:Key="MenuItemOption">
+        选项
     </system:String>
 
     <system:String x:Key="ValidationIntEmpty">输入不能为空，请先输入整数！</system:String>
@@ -268,6 +306,11 @@
     <system:String x:Key="ErrorAccountNotUnique">该账户已经被注册了，请重新输入！</system:String>
     <system:String x:Key="ErrorUserNotExist">账户不存在，请检查输入是否正确！</system:String>
     <system:String x:Key="ErrorPasswordNotEqual">密码错误！</system:String>
+    <system:String x:Key="ErrorOptionServerEmpty">数据库服务器不能为空，请重新输入！</system:String>
+    <system:String x:Key="ErrorOptionDatabaseEmpty">数据库名称不能为空，请重新输入！</system:String>
+    <system:String x:Key="ErrorOptionDbUserEmpty">数据库用户名不能为空，请重新输入！</system:String>
+    <system:String x:Key="ErrorOptionDbPassEmpty">数据库密码不能为空，请重新输入！</system:String>
+    <system:String x:Key="ErrorOptionDatabaseInvalid">数据库无法连接，请重新尝试！</system:String>
 
     <system:String x:Key="MessageCaption">消息</system:String>
     <system:String x:Key="MessageExitConfirm" xml:space="preserve">确定退出程序？</system:String>
@@ -275,4 +318,6 @@
     <system:String x:Key="MessageSaveCriticalCumulateConfirm" xml:space="preserve">是否保存临界值和累计值？点击“是”都保存，点击“否”仅保存累计值，点击“取消”都不保存。</system:String>
     <system:String x:Key="MessageResetCompulsivelyConfirm" xml:space="preserve">当前累计值已经达到或者超过当前临界值，是否切绳？点击“是”进行切绳操作，点击“否”切换账户，点击“取消”退出程序。</system:String>
     <system:String x:Key="MessageResetConfirm" xml:space="preserve">是否确定切绳？点击“确定”进行切绳操作，点击“取消”返回。</system:String>
+
+    <system:String x:Key="MessageOptionSave">保存成功，请重新运行程序！</system:String>
 </ResourceDictionary>

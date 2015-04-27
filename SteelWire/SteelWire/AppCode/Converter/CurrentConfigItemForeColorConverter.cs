@@ -26,7 +26,7 @@ namespace SteelWire.AppCode.Converter
                     return new SolidColorBrush(Color.FromRgb(255, 0, 0));
                 }
             }
-            return new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            return new SolidColorBrush(Color.FromRgb(0x99, 0x99, 0x99));
         }
 
         public object ConvertBack(object value, Type typeTarget, object param, CultureInfo culture)

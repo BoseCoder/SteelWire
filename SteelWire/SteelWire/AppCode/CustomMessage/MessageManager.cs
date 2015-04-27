@@ -30,6 +30,13 @@ namespace SteelWire.AppCode.CustomMessage
             }
         }
 
+        public static void Information(string messageCode)
+        {
+            MessageBox.Show(LanguageManager.GetLocalResourceStringRight(MessageCodeKey, messageCode),
+                LanguageManager.GetLocalResourceStringRight(MessageCodeKey, MessageCaptionKey),
+                MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
         public static bool? Choose(string messageCode)
         {
             MessageBoxResult result = MessageBox.Show(LanguageManager.GetLocalResourceStringRight(MessageCodeKey, messageCode),

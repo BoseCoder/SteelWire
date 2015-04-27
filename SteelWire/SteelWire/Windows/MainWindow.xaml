@@ -10,9 +10,10 @@
     <Window.Title>
         <MultiBinding Converter="{StaticResource WindowTitleConverter}">
             <Binding Source="{StaticResource AppTitle}"/>
-            <Binding Source="  1.1  "/>
+            <Binding Source="  1.3  "/>
             <Binding Source="{StaticResource Welcome}"/>
             <Binding Path="UserDisplay.ItemValue" Source="{x:Static windowData:Main.Data}"/>
+            <Binding Path="AppLicenceStatus.ItemValue" Source="{x:Static windowData:Main.Data}"/>
         </MultiBinding>
     </Window.Title>
     <Window.Resources>
@@ -198,13 +199,14 @@
                         <MenuItem Name="MenuItemSignOut" Header="{StaticResource MenuItemSignOut}" Click="SignOut"/>
                         <MenuItem Name="MenuItemExit" Header="{StaticResource MenuItemExit}" Click="Exit"/>
                     </MenuItem>
-                    <MenuItem Header="_System" Height="24" Visibility="Collapsed">
-                        <MenuItem Name="MenuItemLang" Header="_Language">
+                    <MenuItem Header="{StaticResource MenuItemSystem}" Height="24">
+                        <MenuItem Header="{StaticResource MenuItemOption}" Click="OpenOption"/>
+                        <MenuItem Name="MenuItemLang" Header="_Language" Visibility="Collapsed">
                             <MenuItem Name="MenuItemEnglish" Header="English" Click="LanguageChange"/>
                             <MenuItem Name="MenuItemChinese" Header="中文（简体）" Click="LanguageChange"/>
                         </MenuItem>
-                        <MenuItem Header="_Help"/>
-                        <MenuItem Header="_About"/>
+                        <MenuItem Header="_Help" Visibility="Collapsed"/>
+                        <MenuItem Header="_About" Visibility="Collapsed"/>
                     </MenuItem>
                 </Menu>
             </Grid>
@@ -263,7 +265,7 @@
                                 <Grid Width="125" Margin="0,0,5,0">
                                     <Label x:Name="LblWirelineCutLength" HorizontalAlignment="Right" Content="{StaticResource LblWirelineCutLength}"/>
                                 </Grid>
-                                <TextBox x:Name="TxtWirelineCutLengthValue" IsReadOnly="True" Padding="10,5,10,1" BorderThickness="0,0,0,1"
+                                <TextBox x:Name="TxtWirelineCutLengthValue" IsReadOnly="True" Padding="10,5,10,0" BorderThickness="0,0,0,1"
                 						FontSize="14" FontWeight="Bold">
                                     <TextBox.Foreground>
                                         <Binding Path="WirelineCutLengthValue.ItemValue"
@@ -338,7 +340,7 @@
                                 <Grid Width="125" Margin="0,0,5,0">
                                     <Label x:Name="LblSecurityCoefficient" HorizontalAlignment="Right" Content="{StaticResource LblSecurityCoefficient}"/>
                                 </Grid>
-                                <TextBox x:Name="TxtSecurityCoefficientValue" IsReadOnly="True" Padding="10,5,10,1" BorderThickness="0,0,0,1"
+                                <TextBox x:Name="TxtSecurityCoefficientValue" IsReadOnly="True" Padding="10,5,10,0" BorderThickness="0,0,0,1"
                 						FontSize="14" FontWeight="Bold">
                                     <TextBox.Foreground>
                                         <Binding Path="SecurityCoefficientValue.ItemValue"
@@ -396,7 +398,7 @@
                                 <Grid Width="125" Margin="0,0,5,0">
                                     <Label x:Name="LblPulleyCoefficient" HorizontalAlignment="Right" Content="{StaticResource LblPulleyCoefficient}"/>
                                 </Grid>
-                                <TextBox x:Name="TxtPulleyCoefficientValue" IsReadOnly="True" Padding="10,5,10,1" BorderThickness="0,0,0,1"
+                                <TextBox x:Name="TxtPulleyCoefficientValue" IsReadOnly="True" Padding="10,5,10,0" BorderThickness="0,0,0,1"
                 						FontSize="14" FontWeight="Bold">
                                     <TextBox.Foreground>
                                         <Binding Path="PulleyCoefficientValue.ItemValue"
@@ -419,7 +421,7 @@
                         <DockPanel Margin="0,10">
                             <WrapPanel HorizontalAlignment="Center">
                                 <Label x:Name="LblWirelineCuttingTitle" Content="{StaticResource LblWirelineCuttingTitle}" FontSize="14" />
-                                <TextBox x:Name="TxtWirelineCuttingValue" IsReadOnly="True" Padding="10,5,10,1" BorderThickness="0,0,0,1"
+                                <TextBox x:Name="TxtWirelineCuttingValue" IsReadOnly="True" Padding="10,5,10,0" BorderThickness="0,0,0,1"
                 						FontSize="14" FontWeight="Bold">
                                     <TextBox.Foreground>
                                         <Binding Path="WirelineCuttingCriticalValue.ItemValue"
@@ -536,7 +538,7 @@
                         <Grid DockPanel.Dock="Bottom" Margin="0,20,0,10">
                             <WrapPanel HorizontalAlignment="Center" Margin="0">
                                 <Label x:Name="LblDrillingTitle" Content="{StaticResource LblValueTitle}" FontSize="14" />
-                                <TextBox x:Name="TxtDrillingValue" IsReadOnly="True" Padding="10,5,10,1" BorderThickness="0,0,0,1" FontSize="14" FontWeight="Bold">
+                                <TextBox x:Name="TxtDrillingValue" IsReadOnly="True" Padding="10,5,10,0" BorderThickness="0,0,0,1" FontSize="14" FontWeight="Bold">
                                     <TextBox.BorderBrush>
                                         <LinearGradientBrush>
                                             <GradientStop Color="Black"/>
@@ -619,7 +621,7 @@
                         <Grid DockPanel.Dock="Bottom" Margin="0,20,0,10">
                             <WrapPanel HorizontalAlignment="Center" Margin="0">
                                 <Label x:Name="LblTripTitle" Content="{StaticResource LblValueTitle}" FontSize="14" />
-                                <TextBox x:Name="TxtTripValue" IsReadOnly="True" Padding="10,5,10,1" BorderThickness="0,0,0,1" FontSize="14" FontWeight="Bold">
+                                <TextBox x:Name="TxtTripValue" IsReadOnly="True" Padding="10,5,10,0" BorderThickness="0,0,0,1" FontSize="14" FontWeight="Bold">
                                     <TextBox.BorderBrush>
                                         <LinearGradientBrush>
                                             <GradientStop Color="Black"/>
@@ -696,7 +698,7 @@
                         <Grid DockPanel.Dock="Bottom" Margin="0,20,0,10">
                             <WrapPanel HorizontalAlignment="Center" Margin="0">
                                 <Label x:Name="LblBushingTitle" Content="{StaticResource LblValueTitle}" FontSize="14" />
-                                <TextBox x:Name="TxtBushingValue" IsReadOnly="True" Padding="10,5,10,1" BorderThickness="0,0,0,1" FontSize="14" FontWeight="Bold">
+                                <TextBox x:Name="TxtBushingValue" IsReadOnly="True" Padding="10,5,10,0" BorderThickness="0,0,0,1" FontSize="14" FontWeight="Bold">
                                     <TextBox.Foreground>
                                         <Binding Path="BushingWorkValue.ItemValue" Converter="{StaticResource CurrentConfigForeColorConverter}"
                                              Mode="OneWay" Source="{StaticResource WindowData}" />
@@ -774,7 +776,7 @@
                         <Grid DockPanel.Dock="Bottom" Margin="0,20,0,10">
                             <WrapPanel HorizontalAlignment="Center" Margin="0">
                                 <Label x:Name="LblCoringTitle" Content="{StaticResource LblValueTitle}" FontSize="14" />
-                                <TextBox x:Name="TxtCoringValue" IsReadOnly="True" Padding="10,5,10,1" BorderThickness="0,0,0,1" FontSize="14" FontWeight="Bold">
+                                <TextBox x:Name="TxtCoringValue" IsReadOnly="True" Padding="10,5,10,0" BorderThickness="0,0,0,1" FontSize="14" FontWeight="Bold">
                                     <TextBox.Foreground>
                                         <Binding Path="CoringWorkValue.ItemValue" Converter="{StaticResource CurrentConfigForeColorConverter}"
                                              Mode="OneWay" Source="{StaticResource WindowData}" />
@@ -834,7 +836,7 @@
             <GroupBox Header="{StaticResource GroupTotalWorkTitle}" DockPanel.Dock="Top">
                 <WrapPanel HorizontalAlignment="Center">
                     <Label x:Name="LblTotalTitle" Content="{StaticResource LblTotalValueTitle}" FontSize="14" />
-                    <TextBox x:Name="TxtTotalValue" IsReadOnly="True" Padding="10,5,10,1" BorderThickness="0,0,0,1" FontSize="14" FontWeight="Bold">
+                    <TextBox x:Name="TxtTotalValue" IsReadOnly="True" Padding="10,5,10,0" BorderThickness="0,0,0,1" FontSize="14" FontWeight="Bold">
                         <TextBox.BorderBrush>
                             <LinearGradientBrush>
                                 <GradientStop Color="Black"/>
@@ -870,7 +872,7 @@
                             <Grid Width="160" Margin="0,0,5,0">
                                 <Label x:Name="LblCurrentCritical" Content="{StaticResource LblCurrentCritical}" FontSize="14" HorizontalAlignment="Right"/>
                             </Grid>
-                            <TextBox x:Name="TxtCurrentCritical" IsReadOnly="True" Padding="10,5,10,1" BorderThickness="0,0,0,1" FontSize="14" FontWeight="Bold" Margin="0">
+                            <TextBox x:Name="TxtCurrentCritical" IsReadOnly="True" Padding="10,5,10,0" BorderThickness="0,0,0,1" FontSize="14" FontWeight="Bold" Margin="0" Foreground="#FF999999">
                                 <TextBox.Text>
                                     <Binding Path="CriticalValue.ItemValue" Converter="{StaticResource ReadOnlyResultValueConverter}" Mode="OneWay"
                                          Source="{StaticResource WindowData}" />
@@ -887,7 +889,7 @@
                             <Grid Width="160" Margin="0,0,5,0">
                                 <Label x:Name="LblCurrentCumulation" Content="{StaticResource LblCurrentCumulation}" FontSize="14" HorizontalAlignment="Right"/>
                             </Grid>
-                            <TextBox x:Name="TxtCurrentCumulation" IsReadOnly="True" Padding="10,5,10,1" BorderThickness="0,0,0,1" FontSize="14" FontWeight="Bold">
+                            <TextBox x:Name="TxtCurrentCumulation" IsReadOnly="True" Padding="10,5,10,0" BorderThickness="0,0,0,1" FontSize="14" FontWeight="Bold">
                                 <TextBox.Text>
                                     <Binding Path="CumulationValue.ItemValue" Converter="{StaticResource ReadOnlyResultValueConverter}"
                                          Mode="OneWay" Source="{StaticResource WindowData}" />

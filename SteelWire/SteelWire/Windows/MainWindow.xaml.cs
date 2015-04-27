@@ -172,6 +172,12 @@ namespace SteelWire.Windows
             this.Close();
         }
 
+        private void OpenOption(object sender, RoutedEventArgs e)
+        {
+            OptionWindow option = new OptionWindow();
+            option.ShowDialog();
+        }
+
         private void LanguageChange(object sender, RoutedEventArgs e)
         {
             if (Equals(sender, this.MenuItemEnglish))
