@@ -9,10 +9,12 @@ namespace SteelWire.Business.DbOperator
         public static CuttingCriticalConfig GetLastConfig(int updater)
         {
             SteelWireContext dbContext = new SteelWireContext();
-            return dbContext.CuttingCriticalConfig.OrderByDescending(d => d.ConfigTime).FirstOrDefault(d => d.ConfigUserID == updater);
+            return dbContext.CuttingCriticalConfig.OrderByDescending(d => d.ConfigTime)
+                .FirstOrDefault(d => d.ConfigUserID == updater);
         }
 
-        public static bool IsNeedUpdateCritical(SteelWireContext dbContext, int updater, long timeStamp, decimal criticalValue, out bool overWrite)
+        public static bool IsNeedUpdateCritical(SteelWireContext dbContext, int updater, string wireNo,
+            long timeStamp, decimal criticalValue, out bool overWrite)
         {
             if (dbContext == null)
             {
@@ -28,11 +30,12 @@ namespace SteelWire.Business.DbOperator
                 return true;
             }
             overWrite = false;
-            CuttingCriticalConfig config = dbContext.CuttingCriticalConfig
-                .FirstOrDefault(d => d.ConfigUserID == updater && d.ConfigTimeStamp == timeStamp && d.CuttingCriticalValue == criticalValue);
+            CuttingCriticalConfig config = dbContext.CuttingCriticalConfig.FirstOrDefault(d =>
+                d.ConfigUserID == updater && d.ConfigTimeStamp == timeStamp &&
+                d.CuttingCriticalValue == criticalValue);
             if (config != null)
             {
-                CumulationReset resetData = ResetOperator.GetCurrentData(dbContext, updater);
+                CumulationReset resetData = ResetOperator.GetCurrentData(dbContext, updater, wireNo);
                 if (resetData == null || resetData.CriticalValue == criticalValue)
                 {
                     return false;
@@ -41,13 +44,14 @@ namespace SteelWire.Business.DbOperator
             return true;
         }
 
-        public static CumulationReset UpdateCriticalValue(int updater, CuttingCriticalConfig data)
+        public static CumulationReset UpdateCriticalValue(int updater, string wireNo, CuttingCriticalConfig data)
         {
             SteelWireContext dbContext = new SteelWireContext();
-            return UpdateCriticalValue(dbContext, updater, data);
+            return UpdateCriticalValue(dbContext, updater, wireNo, data);
         }
 
-        public static CumulationReset UpdateCriticalValue(SteelWireContext dbContext, int updater, CuttingCriticalConfig data)
+        public static CumulationReset UpdateCriticalValue(SteelWireContext dbContext, int updater, string wireNo,
+            CuttingCriticalConfig data)
         {
             if (dbContext == null)
             {
@@ -58,7 +62,7 @@ namespace SteelWire.Business.DbOperator
                 throw new ArgumentException("updater is invalid.", "updater");
             }
             dbContext.CuttingCriticalConfig.Add(data);
-            CumulationReset resetData = ResetOperator.GetCurrentData(dbContext, updater);
+            CumulationReset resetData = ResetOperator.GetCurrentData(dbContext, updater, wireNo);
             if (resetData == null)
             {
                 resetData = new CumulationReset
@@ -68,7 +72,8 @@ namespace SteelWire.Business.DbOperator
                     ResetValue = 0,
                     RemainValue = data.CuttingCriticalValue,
                     UpdateUserID = updater,
-                    UpdateTime = data.ConfigTime
+                    UpdateTime = data.ConfigTime,
+                    SteelWireNo = wireNo
                 };
                 dbContext.CumulationReset.Add(resetData);
             }
@@ -82,16 +87,19 @@ namespace SteelWire.Business.DbOperator
         public static CuttingCriticalDictionary GetCurrentDictionary(int updater)
         {
             SteelWireContext dbContext = new SteelWireContext();
-            return dbContext.CuttingCriticalDictionary.OrderByDescending(d => d.ConfigTime).FirstOrDefault(d => d.ConfigUserID == updater);
+            return dbContext.CuttingCriticalDictionary.OrderByDescending(d => d.ConfigTime)
+                .FirstOrDefault(d => d.ConfigUserID == updater);
         }
 
-        public static bool IsNeedUpdateDictionary(int updater, long timeStamp, out bool overWrite, out CuttingCriticalDictionary dicData)
+        public static bool IsNeedUpdateDictionary(int updater, long timeStamp, out bool overWrite,
+            out CuttingCriticalDictionary dicData)
         {
             SteelWireContext dbContext = new SteelWireContext();
             return IsNeedUpdateDictionary(dbContext, updater, timeStamp, out overWrite, out dicData);
         }
 
-        public static bool IsNeedUpdateDictionary(SteelWireContext dbContext, int updater, long timeStamp, out bool overWrite, out CuttingCriticalDictionary dicData)
+        public static bool IsNeedUpdateDictionary(SteelWireContext dbContext, int updater, long timeStamp,
+            out bool overWrite, out CuttingCriticalDictionary dicData)
         {
             if (dbContext == null)
             {
@@ -108,7 +116,8 @@ namespace SteelWire.Business.DbOperator
                 return true;
             }
             overWrite = false;
-            dicData = dbContext.CuttingCriticalDictionary.FirstOrDefault(d => d.ConfigUserID == updater && d.ConfigTimeStamp == timeStamp);
+            dicData = dbContext.CuttingCriticalDictionary.FirstOrDefault(d =>
+                d.ConfigUserID == updater && d.ConfigTimeStamp == timeStamp);
             return dicData == null;
         }
 
@@ -118,7 +127,8 @@ namespace SteelWire.Business.DbOperator
             UpdateDictionary(dbContext, cuttingCriticalDictionary);
         }
 
-        public static void UpdateDictionary(SteelWireContext dbContext, CuttingCriticalDictionary cuttingCriticalDictionary)
+        public static void UpdateDictionary(SteelWireContext dbContext,
+            CuttingCriticalDictionary cuttingCriticalDictionary)
         {
             if (dbContext == null)
             {

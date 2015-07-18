@@ -21,6 +21,7 @@ namespace SteelWire.Business.Database
         public decimal ResetValue { get; set; }
         public decimal RemainValue { get; set; }
         public System.DateTime UpdateTime { get; set; }
+        public string SteelWireNo { get; set; }
     
         public virtual SecurityUser SecurityUser { get; set; }
     }

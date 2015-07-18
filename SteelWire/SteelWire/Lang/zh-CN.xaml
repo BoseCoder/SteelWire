@@ -4,6 +4,9 @@
     <system:String x:Key="AppTitle">
         钢丝绳钻井吨公里计算工具
     </system:String>
+    <system:String x:Key="AppVersion">
+        1.4
+    </system:String>
     <system:String x:Key="Welcome">
         欢迎，
     </system:String>
@@ -202,6 +205,9 @@
     <system:String x:Key="LblCurrentDateTitle">
         当前日期：
     </system:String>
+    <system:String x:Key="LblCurrentWireNoTitle">
+        当前绳编号：
+    </system:String>
     <system:String x:Key="LblCurrentCritical">
         当前临界：
     </system:String>
@@ -216,6 +222,9 @@
     </system:String>
     <system:String x:Key="BtnReset">
         切绳
+    </system:String>
+    <system:String x:Key="BtnSwitchWire">
+        换绳
     </system:String>
 
     <system:String x:Key="SignInTitle">
@@ -268,6 +277,10 @@
     <system:String x:Key="BtnCancel">
         取消
     </system:String>
+    <system:String x:Key="BtnReportSearch">
+        查询
+    </system:String>
+    
     <system:String x:Key="MenuItemUser">
         用户菜单
     </system:String>
@@ -277,6 +290,12 @@
     <system:String x:Key="MenuItemExit">
         退出
     </system:String>
+    <system:String x:Key="MenuItemReport">
+        报表
+    </system:String>
+    <system:String x:Key="MenuItemReportCut">
+        切绳报表
+    </system:String>
     <system:String x:Key="MenuItemSystem">
         系统菜单
     </system:String>
@@ -284,12 +303,14 @@
         选项
     </system:String>
 
+    <system:String x:Key="ValidationStringEmpty">输入不能为空，请先输入字符串！</system:String>
     <system:String x:Key="ValidationIntEmpty">输入不能为空，请先输入整数！</system:String>
     <system:String x:Key="ValidationIntError">请输入整数！</system:String>
     <system:String x:Key="ValidationDecimalEmpty">输入不能为空，请先输入数字！</system:String>
     <system:String x:Key="ValidationDecimalError">请输入数字！</system:String>
 
     <system:String x:Key="ErrorCaption">错误</system:String>
+    <system:String x:Key="ErrorCurrentWireNoEmpty">当前绳编号不能为空，请重新输入！</system:String>
     <system:String x:Key="ErrorCriticalValueInvalid">临界值无效！</system:String>
     <system:String x:Key="ErrorCriticalDictionaryFileNotFound">用于计算临界值的字典文件丢失。</system:String>
     <system:String x:Key="ErrorCriticalConfigFileNotFound">用于计算临界值的配置文件丢失。</system:String>
@@ -316,7 +337,7 @@
     <system:String x:Key="MessageExitConfirm" xml:space="preserve">确定退出程序？</system:String>
     <system:String x:Key="MessageSaveCriticalCumulateCompulsivelyConfirm" xml:space="preserve">系统将跟随累计值同时保存临界值。是否需要保存累计值？点击“是”都保存，点击“否”都不保存。</system:String>
     <system:String x:Key="MessageSaveCriticalCumulateConfirm" xml:space="preserve">是否保存临界值和累计值？点击“是”都保存，点击“否”仅保存累计值，点击“取消”都不保存。</system:String>
-    <system:String x:Key="MessageResetCompulsivelyConfirm" xml:space="preserve">当前累计值已经达到或者超过当前临界值，是否切绳？点击“是”进行切绳操作，点击“否”切换账户，点击“取消”退出程序。</system:String>
+    <system:String x:Key="MessageResetCompulsivelyConfirm" xml:space="preserve">当前累计值已经达到或者超过当前临界值，是否切绳？点击“是”进行切绳操作，点击“否”不进行任何操作。</system:String>
     <system:String x:Key="MessageResetConfirm" xml:space="preserve">是否确定切绳？点击“确定”进行切绳操作，点击“取消”返回。</system:String>
 
     <system:String x:Key="MessageOptionSave">保存成功，请重新运行程序！</system:String>

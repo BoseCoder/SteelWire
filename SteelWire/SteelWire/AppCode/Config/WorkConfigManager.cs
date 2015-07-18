@@ -19,6 +19,9 @@ namespace SteelWire.AppCode.Config
         [BaseConfigSection]
         public WorkConfig ConfigSection { get; set; }
 
+        [BaseConfigKey]
+        public string CurrentWireNo { get; set; }
+
         private WorkConfigManager(string key, string subFolder, string fileName)
             : base(key, subFolder, fileName)
         { }

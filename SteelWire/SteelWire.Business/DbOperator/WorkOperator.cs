@@ -19,14 +19,16 @@ namespace SteelWire.Business.DbOperator
             {
                 throw new ArgumentNullException("dbContext");
             }
-            return dbContext.WorkConfig.Where(d => d.ConfigUserID == updater && d.ConfigTime >= starTime && d.ConfigTime <= endTime)
+            return dbContext.WorkConfig.Where(d =>
+                d.ConfigUserID == updater && d.ConfigTime >= starTime && d.ConfigTime <= endTime)
                 .Sum(d => d.WorkValue);
         }
 
         public static WorkConfig GetLastConfig(int updater)
         {
             SteelWireContext dbContext = new SteelWireContext();
-            return dbContext.WorkConfig.OrderByDescending(d => d.ConfigTime).FirstOrDefault(d => d.ConfigUserID == updater);
+            return dbContext.WorkConfig.OrderByDescending(d => d.ConfigTime)
+                .FirstOrDefault(d => d.ConfigUserID == updater);
         }
 
         public static List<WorkConfig> GetWorkHistory(int updater, DateTime startTime, int count)
@@ -35,13 +37,15 @@ namespace SteelWire.Business.DbOperator
             return GetWorkHistory(dbContext, updater, startTime, count);
         }
 
-        public static List<WorkConfig> GetWorkHistory(SteelWireContext dbContext, int updater, DateTime startTime, int count)
+        public static List<WorkConfig> GetWorkHistory(SteelWireContext dbContext, int updater, DateTime startTime,
+            int count)
         {
             if (dbContext == null)
             {
                 throw new ArgumentNullException("dbContext");
             }
-            IQueryable<WorkConfig> data = dbContext.WorkConfig.Where(d => d.ConfigUserID == updater && d.ConfigTime >= startTime);
+            IQueryable<WorkConfig> data = dbContext.WorkConfig.Where(d =>
+                d.ConfigUserID == updater && d.ConfigTime >= startTime);
             if (count > 0)
             {
                 data = data.Take(count);
@@ -52,10 +56,11 @@ namespace SteelWire.Business.DbOperator
         public static WorkDictionary GetCurrentDictionary(int updater)
         {
             SteelWireContext dbContext = new SteelWireContext();
-            return dbContext.WorkDictionary.OrderByDescending(d => d.ConfigTime).FirstOrDefault(d => d.ConfigUserID == updater);
+            return dbContext.WorkDictionary.OrderByDescending(d => d.ConfigTime)
+                .FirstOrDefault(d => d.ConfigUserID == updater);
         }
 
-        public static  bool ExistWork(int updater,DateTime date)
+        public static bool ExistWork(int updater, DateTime date)
         {
             SteelWireContext dbContext = new SteelWireContext();
             return ExistWork(dbContext, updater, date);
@@ -69,16 +74,18 @@ namespace SteelWire.Business.DbOperator
             }
             DateTime startTime = date.Date;
             DateTime endTime = startTime.AddDays(1);
-            return dbContext.WorkConfig.Any(d => d.ConfigUserID == updater && d.ConfigTime >= startTime && d.ConfigTime < endTime);
+            return dbContext.WorkConfig.Any(d =>
+                d.ConfigUserID == updater && d.ConfigTime >= startTime && d.ConfigTime < endTime);
         }
 
-        public static void UpdateWork(int updater, WorkConfig work, decimal criticalValue)
+        public static void UpdateWork(int updater, string wireNo, WorkConfig work, decimal criticalValue)
         {
             SteelWireContext dbContext = new SteelWireContext();
-            UpdateWork(dbContext, updater, work, criticalValue);
+            UpdateWork(dbContext, updater, wireNo, work, criticalValue);
         }
 
-        public static void UpdateWork(SteelWireContext dbContext, int updater, WorkConfig work, decimal criticalValue)
+        public static void UpdateWork(SteelWireContext dbContext, int updater, string wireNo, WorkConfig work,
+            decimal criticalValue)
         {
             if (dbContext == null)
             {
@@ -88,7 +95,7 @@ namespace SteelWire.Business.DbOperator
             {
                 throw new ArgumentNullException("work");
             }
-            CumulationReset data = ResetOperator.GetCurrentData(dbContext, updater);
+            CumulationReset data = ResetOperator.GetCurrentData(dbContext, updater, wireNo);
             if (data == null)
             {
                 data = new CumulationReset
@@ -98,7 +105,8 @@ namespace SteelWire.Business.DbOperator
                     RemainValue = 0,
                     ResetValue = 0,
                     UpdateTime = DateTime.Now,
-                    UpdateUserID = updater
+                    UpdateUserID = updater,
+                    SteelWireNo = wireNo
                 };
                 dbContext.CumulationReset.Add(data);
             }
@@ -109,13 +117,15 @@ namespace SteelWire.Business.DbOperator
             dbContext.WorkConfig.Add(work);
         }
 
-        public static bool IsNeedUpdateDictionary(int updater, long timeStamp, out bool refreshTime, out WorkDictionary dicData)
+        public static bool IsNeedUpdateDictionary(int updater, long timeStamp, out bool refreshTime,
+            out WorkDictionary dicData)
         {
             SteelWireContext dbContext = new SteelWireContext();
             return IsNeedUpdateDictionary(dbContext, updater, timeStamp, out refreshTime, out dicData);
         }
 
-        public static bool IsNeedUpdateDictionary(SteelWireContext dbContext, int updater, long timeStamp, out bool refreshTime, out WorkDictionary dicData)
+        public static bool IsNeedUpdateDictionary(SteelWireContext dbContext, int updater, long timeStamp,
+            out bool refreshTime, out WorkDictionary dicData)
         {
             if (dbContext == null)
             {
@@ -128,7 +138,8 @@ namespace SteelWire.Business.DbOperator
                 return true;
             }
             refreshTime = false;
-            dicData = dbContext.WorkDictionary.FirstOrDefault(d => d.ConfigUserID == updater && d.ConfigTimeStamp == timeStamp);
+            dicData = dbContext.WorkDictionary.FirstOrDefault(d =>
+                d.ConfigUserID == updater && d.ConfigTimeStamp == timeStamp);
             return dicData == null;
         }
 

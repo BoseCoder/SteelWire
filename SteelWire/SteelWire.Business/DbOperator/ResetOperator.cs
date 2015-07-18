@@ -7,13 +7,13 @@ namespace SteelWire.Business.DbOperator
 {
     public static class ResetOperator
     {
-        public static CumulationReset GetCurrentData(int updater)
+        public static CumulationReset GetCurrentData(int updater, string wireNo)
         {
             SteelWireContext dbContext = new SteelWireContext();
-            return GetCurrentData(dbContext, updater);
+            return GetCurrentData(dbContext, updater, wireNo);
         }
 
-        public static CumulationReset GetCurrentData(SteelWireContext dbContext, int updater)
+        public static CumulationReset GetCurrentData(SteelWireContext dbContext, int updater, string wireNo)
         {
             if (dbContext == null)
             {
@@ -23,8 +23,12 @@ namespace SteelWire.Business.DbOperator
             {
                 throw new ArgumentException("updater is invalid.", "updater");
             }
-            CumulationReset data = dbContext.CumulationReset
-                .OrderByDescending(d => d.UpdateTime).FirstOrDefault(d => d.UpdateUserID == updater);
+            if (string.IsNullOrWhiteSpace(wireNo))
+            {
+                throw new ArgumentNullException("wireNo");
+            }
+            CumulationReset data = dbContext.CumulationReset.OrderByDescending(d => d.UpdateTime)
+                .FirstOrDefault(d => d.UpdateUserID == updater && d.SteelWireNo == wireNo);
             if (data != null && data.ResetValue > 0)
             {
                 data = null;
@@ -56,35 +60,80 @@ namespace SteelWire.Business.DbOperator
                 .Take(count).OrderBy(d => d.UpdateTime).ToList();
         }
 
-        public static bool ExistReset(int updater, DateTime date)
+        public static List<CumulationReset> GetResetHistoryForCut(string wireNo)
         {
             SteelWireContext dbContext = new SteelWireContext();
-            return ExistReset(dbContext, updater, date);
+            return GetResetHistoryForCut(dbContext, wireNo);
         }
 
-        public static bool ExistReset(SteelWireContext dbContext, int updater, DateTime date)
+        public static List<CumulationReset> GetResetHistoryForCut(SteelWireContext dbContext, string wireNo)
         {
             if (dbContext == null)
             {
                 throw new ArgumentNullException("dbContext");
             }
-            DateTime startTime = date.Date;
-            DateTime endTime = startTime.AddDays(1);
-            return dbContext.CumulationReset.Any(d => d.UpdateUserID == updater && d.UpdateTime >= startTime && d.UpdateTime < endTime && d.ResetValue > 0);
+            if (string.IsNullOrWhiteSpace(wireNo))
+            {
+                throw new ArgumentNullException("wireNo");
+            }
+            return dbContext.CumulationReset.Where(d => d.SteelWireNo == wireNo && d.ResetValue > 0)
+                .OrderBy(d => d.UpdateTime).ToList();
         }
 
-        public static void Reset(int updater)
+        public static bool ExistReset(int updater, string wireNo, DateTime date)
         {
             SteelWireContext dbContext = new SteelWireContext();
-            Reset(dbContext, updater);
+            return ExistReset(dbContext, updater, wireNo, date);
+        }
+
+        public static bool ExistReset(SteelWireContext dbContext, int updater, string wireNo, DateTime date)
+        {
+            if (dbContext == null)
+            {
+                throw new ArgumentNullException("dbContext");
+            }
+            if (updater < 1)
+            {
+                throw new ArgumentException("updater is invalid.", "updater");
+            }
+            if (string.IsNullOrWhiteSpace(wireNo))
+            {
+                throw new ArgumentNullException("wireNo");
+            }
+            DateTime startTime = date.Date;
+            DateTime endTime = startTime.AddDays(1);
+            return dbContext.CumulationReset.Any(d =>
+                d.UpdateUserID == updater
+                && d.SteelWireNo == wireNo
+                && d.UpdateTime >= startTime
+                && d.UpdateTime < endTime
+                && d.ResetValue > 0);
+        }
+
+        public static void Reset(int updater, string wireNo)
+        {
+            SteelWireContext dbContext = new SteelWireContext();
+            Reset(dbContext, updater, wireNo);
             dbContext.SaveChanges();
         }
 
-        public static void Reset(SteelWireContext dbContext, int updater, CumulationReset data = null)
+        public static void Reset(SteelWireContext dbContext, int updater, string wireNo, CumulationReset data = null)
         {
+            if (dbContext == null)
+            {
+                throw new ArgumentNullException("dbContext");
+            }
+            if (updater < 1)
+            {
+                throw new ArgumentException("updater is invalid.", "updater");
+            }
+            if (string.IsNullOrWhiteSpace(wireNo))
+            {
+                throw new ArgumentNullException("wireNo");
+            }
             if (data == null)
             {
-                data = GetCurrentData(dbContext, updater);
+                data = GetCurrentData(dbContext, updater, wireNo);
             }
             data.ResetValue = data.CumulationValue;
             data.RemainValue = 0;

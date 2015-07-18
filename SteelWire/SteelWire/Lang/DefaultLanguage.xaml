@@ -4,6 +4,9 @@
     <system:String x:Key="AppTitle">
         Wireline Of Well Drilling Calculate Tool
     </system:String>
+    <system:String x:Key="AppVersion">
+        1.4
+    </system:String>
     <system:String x:Key="Welcome">
         Welcome,
     </system:String>
@@ -202,6 +205,9 @@
     <system:String x:Key="LblCurrentDateTitle">
         Current Date:
     </system:String>
+    <system:String x:Key="LblCurrentWireNoTitle">
+        Current Wire No:
+    </system:String>
     <system:String x:Key="LblCurrentCritical">
         Current Critical:
     </system:String>
@@ -216,6 +222,9 @@
     </system:String>
     <system:String x:Key="BtnReset">
         Reset
+    </system:String>
+    <system:String x:Key="BtnSwitchWire">
+        Switch Wire
     </system:String>
 
     <system:String x:Key="SignInTitle">
@@ -268,6 +277,10 @@
     <system:String x:Key="BtnCancel">
         Cancel
     </system:String>
+    <system:String x:Key="BtnReportSearch">
+        Search
+    </system:String>
+    
     <system:String x:Key="MenuItemUser">
         _User Menu
     </system:String>
@@ -277,6 +290,12 @@
     <system:String x:Key="MenuItemExit">
         _Exit
     </system:String>
+    <system:String x:Key="MenuItemReport">
+        _Report
+    </system:String>
+    <system:String x:Key="MenuItemReportCut">
+        Cut Report
+    </system:String>
     <system:String x:Key="MenuItemSystem">
         _System
     </system:String>
@@ -284,12 +303,14 @@
         _Option
     </system:String>
 
+    <system:String x:Key="ValidationStringEmpty">The input could not be empty, please input string value at first.</system:String>
     <system:String x:Key="ValidationIntEmpty">The input could not be empty, please input decimal value at first.</system:String>
     <system:String x:Key="ValidationIntError">The input is not valid decimal value, please try again.</system:String>
     <system:String x:Key="ValidationDecimalEmpty">The input could not be empty, please input integer value at first.</system:String>
     <system:String x:Key="ValidationDecimalError">The input is not valid integer value, please try again.</system:String>
 
     <system:String x:Key="ErrorCaption">Error</system:String>
+    <system:String x:Key="ErrorCurrentWireNoEmpty">Current wire number could not be empty, please input again.</system:String>
     <system:String x:Key="ErrorCriticalValueInvalid">Critical value is invalid.</system:String>
     <system:String x:Key="ErrorCriticalDictionaryFileNotFound">Critical dictionary file not found.</system:String>
     <system:String x:Key="ErrorCriticalConfigFileNotFound">Critical config file not found.</system:String>
@@ -316,7 +337,7 @@
     <system:String x:Key="MessageExitConfirm" xml:space="preserve">Are you sure to exit ?</system:String>
     <system:String x:Key="MessageSaveCriticalCumulateCompulsivelyConfirm" xml:space="preserve">System will save new critical value absolutely with cumulate value.Are you sure to save cumulate value ?Click "Yes" to save both, or click "No" not to save either.</system:String>
     <system:String x:Key="MessageSaveCriticalCumulateConfirm" xml:space="preserve">Are you sure to save new critical value and cumulate value ?Click "Yes" to save both, Click "No" to save cumulate value only.Or click "Cancel" not to save either.</system:String>
-    <system:String x:Key="MessageResetCompulsivelyConfirm" xml:space="preserve">The cumulate value has reached or exceeded the critical value, it is time to cut down now, do it ?Click "Yes" to cut it down, click "No" to sign out.Or click "Cancel" to exit application.</system:String>
+    <system:String x:Key="MessageResetCompulsivelyConfirm" xml:space="preserve">The cumulate value has reached or exceeded the critical value, it is time to cut down now, do it ?Click "Yes" to cut it down, click "No" to do nothing.</system:String>
     <system:String x:Key="MessageResetConfirm" xml:space="preserve">Are you sure to cut the cumulate value down ?Click "OK" to cut it down, or click "Cancel" to return.</system:String>
 
     <system:String x:Key="MessageOptionSave">Option save successfully, please reboot the application.</system:String>

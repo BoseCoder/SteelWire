@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Transactions;
-using System.Windows;
-using BaseConfig;
-using IntelliLock.Licensing;
+﻿using BaseConfig;
 using SteelWire.AppCode.Config;
 using SteelWire.AppCode.CustomException;
 using SteelWire.AppCode.CustomMessage;
@@ -13,8 +6,13 @@ using SteelWire.AppCode.Dependencies;
 using SteelWire.Business.CalculateCommander;
 using SteelWire.Business.Database;
 using SteelWire.Business.DbOperator;
-using SteelWire.Lang;
 using SteelWire.Windows;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Transactions;
+
 using WireropeWorkload = SteelWire.AppCode.Config.WireropeWorkload;
 using WireropeCutRole = SteelWire.AppCode.Config.WireropeCutRole;
 using WireropeEfficiency = SteelWire.AppCode.Config.WireropeEfficiency;
@@ -95,8 +93,7 @@ namespace SteelWire.WindowData
 
                 TotalWorkValue = new DependencyItem<decimal>(),
 
-                AppLicenceStatus = new DependencyItem<string>(),
-                UserDisplay = Sign.Data.UserDisplay,
+                CurrentWireNo = new DependencyItem<string>(),
                 CriticalValue = new DependencyItem<decimal>(),
                 CumulationValue = new DependencyItem<decimal>(),
                 Log = new DependencyItem<string>()
@@ -147,8 +144,7 @@ namespace SteelWire.WindowData
 
         public DependencyItem<decimal> TotalWorkValue { get; private set; }
 
-        public DependencyItem<string> AppLicenceStatus { get; private set; }
-        public DependencyItem<string> UserDisplay { get; private set; }
+        public DependencyItem<string> CurrentWireNo { get; private set; }
         public DependencyItem<decimal> CriticalValue { get; private set; }
         public DependencyItem<decimal> CumulationValue { get; private set; }
         public DependencyItem<string> Log { get; private set; }
@@ -198,22 +194,6 @@ namespace SteelWire.WindowData
         public void InitializeData()
         {
             this._isInitializeData = true;
-
-            if(CurrentLicense.License.LicenseStatus != LicenseStatus.Licensed)
-            {
-                if (CurrentLicense.License.ExpirationDays_Enabled)
-                {
-                    this.AppLicenceStatus.ItemValue = string.Format("  [{0} {1}{2}]",
-                        LanguageManager.GetLocalResourceStringRight("License", "Trial"),
-                        CurrentLicense.License.ExpirationDays,
-                        LanguageManager.GetLocalResourceStringRight("License", "TrialRemoveDay"));
-                }
-                else
-                {
-                    this.AppLicenceStatus.ItemValue = string.Format("  [{0}]",
-                        LanguageManager.GetLocalResourceStringRight("License", "Trial"));
-                }
-            }
 
             CuttingCriticalConfig criticalConf = CuttingCriticalConfigManager.OnceInstance.ConfigSection;
             WorkConfig workConf = WorkConfigManager.OnceInstance.ConfigSection;
@@ -301,8 +281,7 @@ namespace SteelWire.WindowData
 
             this.CoringShallowHeight.ItemValue = workConf.CoringShallowHeight;
             this.CoringDeepHeight.ItemValue = workConf.CoringDeepHeight;
-
-            this.UserDisplay = Sign.Data.UserDisplay;
+            this.CurrentWireNo.ItemValue = WorkConfigManager.OnceInstance.CurrentWireNo;
 
             CalculateWirelineCutLength();
             CalculateSecurityCoefficient();
@@ -734,20 +713,18 @@ namespace SteelWire.WindowData
         /// <summary>
         /// 刷新数据
         /// </summary>
-        public void RefreshData()
-        {
-            this.CanCancelExit = true;
-            CumulationReset data = ResetOperator.GetCurrentData(Sign.Data.UserID);
-            RefreshSetData(data);
-        }
-
-        /// <summary>
-        /// 刷新数据
-        /// </summary>
         /// <param name="dbContext"></param>
-        public void RefreshData(SteelWireContext dbContext)
+        public void RefreshData(SteelWireContext dbContext = null)
         {
-            CumulationReset data = ResetOperator.GetCurrentData(dbContext, Sign.Data.UserID);
+            CumulationReset data = null;
+            if (!string.IsNullOrWhiteSpace(this.CurrentWireNo.ItemValue))
+            {
+                if (dbContext == null)
+                {
+                    dbContext = new SteelWireContext();
+                }
+                data = ResetOperator.GetCurrentData(dbContext, Sign.Data.UserID, this.CurrentWireNo.ItemValue);
+            }
             RefreshSetData(data);
         }
 
@@ -783,6 +760,10 @@ namespace SteelWire.WindowData
         /// <returns></returns>
         public bool Cumulate()
         {
+            if (string.IsNullOrWhiteSpace(this.CurrentWireNo.ItemValue))
+            {
+                throw new ErrorException("CurrentWireNoEmpty");
+            }
             bool done = false;
             DateTime now = DateTime.Now;
             using (SteelWireContext dbContext = new SteelWireContext())
@@ -793,7 +774,7 @@ namespace SteelWire.WindowData
                     //{
                     //    throw new InfoException("HaveCumulatedToday");
                     //}
-                    CumulationReset data = ResetOperator.GetCurrentData(dbContext, Sign.Data.UserID);
+                    CumulationReset data = ResetOperator.GetCurrentData(dbContext, Sign.Data.UserID, this.CurrentWireNo.ItemValue);
                     if (data == null)
                     {
                         if (MessageManager.Question("SaveCriticalCumulateCompulsivelyConfirm"))
@@ -956,7 +937,7 @@ namespace SteelWire.WindowData
             if (!configChanged)
             {
                 configChanged = CriticalOperator.IsNeedUpdateCritical(dbContext, Sign.Data.UserID,
-                    configInfo.LastWriteTime.Ticks, criticalValue, out overWrite);
+                    this.CurrentWireNo.ItemValue, configInfo.LastWriteTime.Ticks, criticalValue, out overWrite);
             }
             if (dicUpdate || configChanged)
             {
@@ -975,7 +956,7 @@ namespace SteelWire.WindowData
                     RopeCount = this.RopeCount.ItemValue,
                     CuttingCriticalValue = criticalValue
                 };
-                CriticalOperator.UpdateCriticalValue(dbContext, Sign.Data.UserID, configData);
+                CriticalOperator.UpdateCriticalValue(dbContext, Sign.Data.UserID, this.CurrentWireNo.ItemValue, configData);
             }
         }
 
@@ -1097,68 +1078,75 @@ namespace SteelWire.WindowData
             WorkConfig workConf = WorkConfigManager.OnceInstance.ConfigSection;
             bool changed = false;
 
+            if (WorkConfigManager.OnceInstance.CurrentWireNo != this.CurrentWireNo.ItemValue)
+            {
+                WorkConfigManager.OnceInstance.CurrentWireNo = this.CurrentWireNo.ItemValue;
+                changed = true;
+            }
+
             #region Common
-            if (workConf.FluidDensity != FluidDensity.ItemValue)
+
+            if (workConf.FluidDensity != this.FluidDensity.ItemValue)
             {
-                workConf.FluidDensity = FluidDensity.ItemValue;
+                workConf.FluidDensity = this.FluidDensity.ItemValue;
                 changed = true;
             }
-            if (workConf.ElevatorWeight != ElevatorWeight.ItemValue)
+            if (workConf.ElevatorWeight != this.ElevatorWeight.ItemValue)
             {
-                workConf.ElevatorWeight = ElevatorWeight.ItemValue;
+                workConf.ElevatorWeight = this.ElevatorWeight.ItemValue;
                 changed = true;
             }
-            if (ChangeDrillList(workConf.DrillPipes, DrillPipes.DrillPipes.Items))
-            {
-                changed = true;
-            }
-            if (ChangeDrillList(workConf.HeavierDrillPipes, DrillPipes.HeavierDrillPipes.Items))
+            if (ChangeDrillList(workConf.DrillPipes, this.DrillPipes.DrillPipes.Items))
             {
                 changed = true;
             }
-            if (ChangeDrillList(workConf.DrillCollars, DrillCollars.Items))
+            if (ChangeDrillList(workConf.HeavierDrillPipes, this.DrillPipes.HeavierDrillPipes.Items))
+            {
+                changed = true;
+            }
+            if (ChangeDrillList(workConf.DrillCollars, this.DrillCollars.Items))
             {
                 changed = true;
             }
             #endregion
 
             #region Drilling
-            if (workConf.DrillingShallowHeight != DrillingShallowHeight.ItemValue)
+            if (workConf.DrillingShallowHeight != this.DrillingShallowHeight.ItemValue)
             {
-                workConf.DrillingShallowHeight = DrillingShallowHeight.ItemValue;
+                workConf.DrillingShallowHeight = this.DrillingShallowHeight.ItemValue;
                 changed = true;
             }
-            if (workConf.DrillingDeepHeight != DrillingDeepHeight.ItemValue)
+            if (workConf.DrillingDeepHeight != this.DrillingDeepHeight.ItemValue)
             {
-                workConf.DrillingDeepHeight = DrillingDeepHeight.ItemValue;
+                workConf.DrillingDeepHeight = this.DrillingDeepHeight.ItemValue;
                 changed = true;
             }
-            if (workConf.DrillingType != DrillingType.ItemValue)
+            if (workConf.DrillingType != this.DrillingType.ItemValue)
             {
-                workConf.DrillingType = DrillingType.ItemValue;
+                workConf.DrillingType = this.DrillingType.ItemValue;
                 changed = true;
             }
-            if (workConf.DrillingDifficulty != DrillingDifficulty.ItemValue)
+            if (workConf.DrillingDifficulty != this.DrillingDifficulty.ItemValue)
             {
-                workConf.DrillingDifficulty = DrillingDifficulty.ItemValue;
+                workConf.DrillingDifficulty = this.DrillingDifficulty.ItemValue;
                 changed = true;
             }
             #endregion
 
             #region Trip
-            if (workConf.TripShallowHeight != TripShallowHeight.ItemValue)
+            if (workConf.TripShallowHeight != this.TripShallowHeight.ItemValue)
             {
-                workConf.TripShallowHeight = TripShallowHeight.ItemValue;
+                workConf.TripShallowHeight = this.TripShallowHeight.ItemValue;
                 changed = true;
             }
-            if (workConf.TripDeepHeight != TripDeepHeight.ItemValue)
+            if (workConf.TripDeepHeight != this.TripDeepHeight.ItemValue)
             {
-                workConf.TripDeepHeight = TripDeepHeight.ItemValue;
+                workConf.TripDeepHeight = this.TripDeepHeight.ItemValue;
                 changed = true;
             }
-            if (workConf.TripCount != TripCount.ItemValue)
+            if (workConf.TripCount != this.TripCount.ItemValue)
             {
-                workConf.TripCount = TripCount.ItemValue;
+                workConf.TripCount = this.TripCount.ItemValue;
                 changed = true;
             }
             #endregion
@@ -1313,7 +1301,8 @@ namespace SteelWire.WindowData
             {
                 workData.DrillPipeConfig.Add(heavierDrillPipe);
             }
-            WorkOperator.UpdateWork(dbContext, Sign.Data.UserID, workData, Math.Round(this.WirelineCuttingCriticalValue.ItemValue, 8));
+            WorkOperator.UpdateWork(dbContext, Sign.Data.UserID, this.CurrentWireNo.ItemValue,
+                workData, Math.Round(this.WirelineCuttingCriticalValue.ItemValue, 8));
         }
 
         /// <summary>
@@ -1333,37 +1322,30 @@ namespace SteelWire.WindowData
         /// <returns></returns>
         public void Reset(bool warningMode)
         {
+            if (string.IsNullOrWhiteSpace(this.CurrentWireNo.ItemValue))
+            {
+                throw new ErrorException("CurrentWireNoEmpty");
+            }
             SteelWireContext dbContext = new SteelWireContext();
             //if (ResetOperator.ExistReset(dbContext, Sign.Data.UserID, DateTime.Now))
             //{
             //    throw new InfoException("HaveResetToday");
             //}
-            CumulationReset data = ResetOperator.GetCurrentData(dbContext, Sign.Data.UserID);
+            CumulationReset data = ResetOperator.GetCurrentData(dbContext, Sign.Data.UserID, this.CurrentWireNo.ItemValue);
             if (data == null)
             {
                 throw new ErrorException("CumulationDataNotFound");
             }
             if (warningMode)
             {
-                bool? choose = MessageManager.WarningChoose("ResetCompulsivelyConfirm");
-                if (choose == null)
-                {
-                    this.CanCancelExit = false;
-                    Application.Current.Shutdown();
-                    return;
-                }
-                if (choose.Value)
+                if (MessageManager.Question("ResetCompulsivelyConfirm"))
                 {
                     Reset(dbContext, data);
                     return;
                 }
-                ShowSignWindow();
-                if (CheckNeedReset())
-                {
-                    Reset(true);
-                }
+                return;
             }
-            else if (MessageManager.Question("ResetConfirm"))
+            if (MessageManager.Question("ResetConfirm"))
             {
                 Reset(dbContext, data);
             }
@@ -1376,7 +1358,7 @@ namespace SteelWire.WindowData
         /// <param name="data"></param>
         private void Reset(SteelWireContext dbContext, CumulationReset data)
         {
-            ResetOperator.Reset(dbContext, Sign.Data.UserID, data);
+            ResetOperator.Reset(dbContext, Sign.Data.UserID, this.CurrentWireNo.ItemValue, data);
             dbContext.SaveChanges();
             RefreshData(dbContext);
         }

@@ -68,7 +68,6 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Accessibility" />
     <Reference Include="BaseConfig, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Components\BaseConfig.dll</HintPath>
@@ -79,27 +78,23 @@
     <Reference Include="IntelliLock.Licensing">
       <HintPath>..\..\Components\IntelliLock.Licensing.dll</HintPath>
     </Reference>
-    <Reference Include="PresentationUI, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="ReachFramework" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
-    <Reference Include="System.Printing" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="UIAutomationProvider" />
-    <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -113,10 +108,15 @@
     <Compile Include="AppCode\CustomException\InfoException.cs" />
     <Compile Include="AppCode\CustomMessage\MessageManager.cs" />
     <Compile Include="AppCode\Converter\TimeMeterTextConverter.cs" />
+    <Compile Include="AppCode\Data\GlobalData.cs" />
     <Compile Include="AppCode\ValidationRule\BaseValidationRule.cs" />
+    <Compile Include="AppCode\ValidationRule\StringValidationRule.cs" />
     <Compile Include="Lang\LanguageManager.cs" />
     <Compile Include="Windows\OptionWindow.xaml.cs">
       <DependentUpon>OptionWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ReportCutWindow.xaml.cs">
+      <DependentUpon>ReportCutWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\SignWindow.xaml.cs">
       <DependentUpon>SignWindow.xaml</DependentUpon>
@@ -180,6 +180,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\ReportCutWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\SignWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -203,8 +207,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Rdlc\ReportCut.rdlc" />
     <None Include="App.Config" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\SteelWire.Business.Database.CumulationReset.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

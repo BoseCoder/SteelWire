@@ -3,7 +3,6 @@ using SteelWire.AppCode;
 using SteelWire.AppCode.Config;
 using SteelWire.AppCode.CustomException;
 using SteelWire.AppCode.CustomMessage;
-using SteelWire.AppCode.Dependencies;
 using SteelWire.Lang;
 using SteelWire.WindowData;
 using System;
@@ -52,6 +51,7 @@ namespace SteelWire.Windows
                 {
                     Main.Data.Reset(true);
                 }
+                Main.Data.CanCancelExit = true;
             }
             catch (Exception ex)
             {
@@ -67,6 +67,10 @@ namespace SteelWire.Windows
                 {
                     e.Cancel = true;
                 }
+                else if (ReportCutWindow.CurrentWindow != null)
+                {
+                    ReportCutWindow.CurrentWindow.Close();
+                }
             }
             catch (Exception ex)
             {
@@ -80,6 +84,10 @@ namespace SteelWire.Windows
             {
                 TimeMeter.OnceInstance.CurrentTime = DateTime.Now;
                 Main.Data.RefreshData();
+                if (Main.Data.CheckNeedReset())
+                {
+                    Main.Data.Reset(true);
+                }
             }
             catch (Exception ex)
             {
@@ -115,6 +123,12 @@ namespace SteelWire.Windows
             {
                 BaseException.HandleException(ex);
             }
+        }
+
+        private void SwitchWire(object sender, RoutedEventArgs e)
+        {
+            Main.Data.CurrentWireNo.ItemValue = string.Empty;
+            Main.Data.RefreshData();
         }
 
         #endregion
@@ -168,7 +182,6 @@ namespace SteelWire.Windows
 
         private void Exit(object sender, RoutedEventArgs e)
         {
-            Main.Data.CanCancelExit = true;
             this.Close();
         }
 
@@ -176,6 +189,19 @@ namespace SteelWire.Windows
         {
             OptionWindow option = new OptionWindow();
             option.ShowDialog();
+        }
+
+        private void OpenReportCut(object sender, RoutedEventArgs e)
+        {
+            if (ReportCutWindow.CurrentWindow == null)
+            {
+                ReportCutWindow reportCutWindow = new ReportCutWindow();
+                reportCutWindow.Show();
+            }
+            else if (!ReportCutWindow.CurrentWindow.IsActive)
+            {
+                ReportCutWindow.CurrentWindow.Activate();
+            }
         }
 
         private void LanguageChange(object sender, RoutedEventArgs e)

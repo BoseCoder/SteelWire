@@ -5,15 +5,18 @@
         xmlns:converter="clr-namespace:SteelWire.AppCode.Converter"
         xmlns:validationRule="clr-namespace:SteelWire.AppCode.ValidationRule"
         xmlns:windowData="clr-namespace:SteelWire.WindowData"
-        MinWidth="800" MinHeight="600" Width="1350" Height="720" WindowStartupLocation="CenterScreen"
+        xmlns:data="clr-namespace:SteelWire.AppCode.Data"
+        MinWidth="800" MinHeight="600" Width="1350" Height="770" WindowStartupLocation="CenterScreen"
         Icon="/SteelWire;component/Resources/Images/Icon.ico" ContentRendered="WindowRendered" Closing="WindowOnClosing">
     <Window.Title>
         <MultiBinding Converter="{StaticResource WindowTitleConverter}">
             <Binding Source="{StaticResource AppTitle}"/>
-            <Binding Source="  1.3  "/>
+            <Binding Source="  "/>
+            <Binding Source="{StaticResource AppVersion}"/>
+            <Binding Source="  "/>
             <Binding Source="{StaticResource Welcome}"/>
-            <Binding Path="UserDisplay.ItemValue" Source="{x:Static windowData:Main.Data}"/>
-            <Binding Path="AppLicenceStatus.ItemValue" Source="{x:Static windowData:Main.Data}"/>
+            <Binding Path="UserDisplay.ItemValue" Source="{x:Static data:GlobalData.Data}"/>
+            <Binding Path="AppLicenceStatus.ItemValue" Source="{x:Static data:GlobalData.Data}"/>
         </MultiBinding>
     </Window.Title>
     <Window.Resources>
@@ -199,6 +202,9 @@
                         <MenuItem Name="MenuItemSignOut" Header="{StaticResource MenuItemSignOut}" Click="SignOut"/>
                         <MenuItem Name="MenuItemExit" Header="{StaticResource MenuItemExit}" Click="Exit"/>
                     </MenuItem>
+                    <MenuItem Name="MenuItemReport" Header="{StaticResource MenuItemReport}" Height="24">
+                        <MenuItem Name="MenuItemReportCut" Header="{StaticResource MenuItemReportCut}" Click="OpenReportCut"/>
+                    </MenuItem>
                     <MenuItem Header="{StaticResource MenuItemSystem}" Height="24">
                         <MenuItem Header="{StaticResource MenuItemOption}" Click="OpenOption"/>
                         <MenuItem Name="MenuItemLang" Header="_Language" Visibility="Collapsed">
@@ -223,7 +229,7 @@
                     <Label.Content>
                         <MultiBinding Converter="{StaticResource WindowTitleConverter}">
                             <Binding Source="{StaticResource Welcome}"/>
-                            <Binding Path="UserDisplay.ItemValue" Source="{x:Static windowData:Main.Data}"/>
+                            <Binding Path="UserDisplay.ItemValue" Source="{x:Static data:GlobalData.Data}"/>
                         </MultiBinding>
                     </Label.Content>
                 </Label>
@@ -870,6 +876,21 @@
                         </WrapPanel>
                         <WrapPanel Margin="0,23,0,0">
                             <Grid Width="160" Margin="0,0,5,0">
+                                <Label x:Name="LblCurrentWireNoTitle" Content="{StaticResource LblCurrentWireNoTitle}" FontSize="14" HorizontalAlignment="Right"/>
+                            </Grid>
+                            <TextBox x:Name="TxtCurrentWireNo" Width="140" >
+                                <TextBox.Text>
+                                    <Binding Path="CurrentWireNo.ItemValue"  Mode="TwoWay"
+                                         Source="{StaticResource WindowData}" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <validationRule:StringValidationRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                        </WrapPanel>
+                        <WrapPanel Margin="0,23,0,0">
+                            <Grid Width="160" Margin="0,0,5,0">
                                 <Label x:Name="LblCurrentCritical" Content="{StaticResource LblCurrentCritical}" FontSize="14" HorizontalAlignment="Right"/>
                             </Grid>
                             <TextBox x:Name="TxtCurrentCritical" IsReadOnly="True" Padding="10,5,10,0" BorderThickness="0,0,0,1" FontSize="14" FontWeight="Bold" Margin="0" Foreground="#FF999999">
@@ -919,6 +940,9 @@
                         <Button x:Name="BtnReset" Cursor="Hand" Click="Reset"
                                 Content="{StaticResource BtnReset}"
                                 ToolTip="{StaticResource BtnReset}" Margin="0,13,0,0" Height="38"/>
+                        <Button x:Name="BtnSwitchWire" Cursor="Hand" Click="SwitchWire"
+                                Content="{StaticResource BtnSwitchWire}"
+                                ToolTip="{StaticResource BtnSwitchWire}" Margin="0,13,0,0" Height="38"/>
                     </StackPanel>
                     <ListView Margin="0,10" BorderThickness="1,0,0,0"></ListView>
                 </DockPanel>

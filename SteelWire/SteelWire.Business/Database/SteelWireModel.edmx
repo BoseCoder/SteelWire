@@ -92,6 +92,7 @@
           <Property Name="ResetValue" Type="decimal" Nullable="false" Scale="8" />
           <Property Name="RemainValue" Type="decimal" Nullable="false" Scale="8" />
           <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+          <Property Name="SteelWireNo" Type="varchar" Nullable="false" MaxLength="100" />
         </EntityType>
         <EntityType Name="CuttingCriticalConfig">
           <Key>
@@ -518,6 +519,7 @@
           <Property Name="RemainValue" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
           <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="SecurityUser" Relationship="SteelWireModel.FK_CUMULATI_RELATIONS_USER" FromRole="CumulationReset" ToRole="SecurityUser" />
+          <Property Type="String" Name="SteelWireNo" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="CuttingCriticalConfig">
           <Key>
@@ -890,6 +892,7 @@
           <EntitySetMapping Name="CumulationReset">
             <EntityTypeMapping TypeName="SteelWireModel.CumulationReset">
               <MappingFragment StoreEntitySet="CumulationReset">
+                <ScalarProperty Name="SteelWireNo" ColumnName="SteelWireNo" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
                 <ScalarProperty Name="CriticalValue" ColumnName="CriticalValue" />
