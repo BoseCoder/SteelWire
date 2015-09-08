@@ -17,13 +17,20 @@ namespace SteelWire.Windows
 
         private void WindowLoaded(object sender, RoutedEventArgs e)
         {
-            this.TxtSerialNumber.Text = IntelliLock.Licensing.HardwareID.GetHardwareID(true, true, true, true, true, false);
-            ConnectionStringSettings connSettings = ConfigurationManager.ConnectionStrings["SteelWireContext"];
-            if (connSettings != null && !string.IsNullOrWhiteSpace(connSettings.ConnectionString))
+            try
             {
-                SteelWireContext dbContext = new SteelWireContext();
-                this.TxtServer.Text = dbContext.Database.Connection.DataSource;
-                this.TxtDatabase.Text = dbContext.Database.Connection.Database;
+                this.TxtSerialNumber.Text = IntelliLock.Licensing.HardwareID.GetHardwareID(true, true, true, true, true, false);
+                ConnectionStringSettings connSettings = ConfigurationManager.ConnectionStrings["SteelWireContext"];
+                if (connSettings != null && !string.IsNullOrWhiteSpace(connSettings.ConnectionString))
+                {
+                    SteelWireContext dbContext = new SteelWireContext();
+                    this.TxtServer.Text = dbContext.Database.Connection.DataSource;
+                    this.TxtDatabase.Text = dbContext.Database.Connection.Database;
+                }
+            }
+            catch (Exception ex)
+            {
+                BaseException.HandleException(ex);
             }
         }
 

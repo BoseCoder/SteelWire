@@ -24,8 +24,15 @@ namespace SteelWire.Windows
 
         private void OpenOption(object sender, MouseButtonEventArgs e)
         {
-            OptionWindow option = new OptionWindow();
-            option.ShowDialog();
+            try
+            {
+                OptionWindow option = new OptionWindow();
+                option.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                BaseException.HandleException(ex);
+            }
         }
 
         private void AccountPreviewKeyDownEvent(object sender, KeyEventArgs e)
@@ -88,10 +95,17 @@ namespace SteelWire.Windows
 
         private void WindowClosing(object sender, CancelEventArgs e)
         {
-            Sign.Data.IsRegist.ItemValue = false;
-            if (!this.DialogResult.HasValue)
+            try
             {
-                this.DialogResult = Sign.Data.IsSignIn();
+                Sign.Data.IsRegist.ItemValue = false;
+                if (!this.DialogResult.HasValue)
+                {
+                    this.DialogResult = Sign.Data.IsSignIn();
+                }
+            }
+            catch (Exception ex)
+            {
+                BaseException.HandleException(ex);
             }
         }
 

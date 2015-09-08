@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      Microsoft SQL Server 2008                    */
-/* Created on:     2015/4/16 ÐÇÆÚËÄ 21:42:52                       */
+/* Created on:     2015/9/9 ÐÇÆÚÈý 0:44:12                         */
 /*==============================================================*/
 
 
@@ -348,6 +348,7 @@ go
 create table CumulationReset (
    ID                   int                  identity,
    UpdateUserID         int                  not null,
+   SteelWireNo          varchar(100)         not null,
    CriticalValue        decimal(18,8)        not null,
    CumulationValue      decimal(18,8)        not null,
    ResetValue           decimal(18,8)        not null,
@@ -376,6 +377,13 @@ select @CurrentUser = user_name()
 execute sp_addextendedproperty 'MS_Description', 
    'UpdateUserID',
    'user', @CurrentUser, 'table', 'CumulationReset', 'column', 'UpdateUserID'
+go
+
+declare @CurrentUser sysname
+select @CurrentUser = user_name()
+execute sp_addextendedproperty 'MS_Description', 
+   '¸ÖË¿Éþ±àºÅ',
+   'user', @CurrentUser, 'table', 'CumulationReset', 'column', 'SteelWireNo'
 go
 
 declare @CurrentUser sysname

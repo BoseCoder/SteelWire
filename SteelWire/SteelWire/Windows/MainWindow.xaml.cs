@@ -127,8 +127,15 @@ namespace SteelWire.Windows
 
         private void SwitchWire(object sender, RoutedEventArgs e)
         {
-            Main.Data.CurrentWireNo.ItemValue = string.Empty;
-            Main.Data.RefreshData();
+            try
+            {
+                Main.Data.CurrentWireNo.ItemValue = string.Empty;
+                Main.Data.RefreshData();
+            }
+            catch (Exception ex)
+            {
+                BaseException.HandleException(ex);
+            }
         }
 
         #endregion
@@ -173,46 +180,81 @@ namespace SteelWire.Windows
 
         private void SignOut(object sender, RoutedEventArgs e)
         {
-            Main.Data.ShowSignWindow();
-            if (Main.Data.CheckNeedReset())
+            try
             {
-                Main.Data.Reset(true);
+                Main.Data.ShowSignWindow();
+                if (Main.Data.CheckNeedReset())
+                {
+                    Main.Data.Reset(true);
+                }
+            }
+            catch (Exception ex)
+            {
+                BaseException.HandleException(ex);
             }
         }
 
         private void Exit(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            try
+            {
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                BaseException.HandleException(ex);
+            }
         }
 
         private void OpenOption(object sender, RoutedEventArgs e)
         {
-            OptionWindow option = new OptionWindow();
-            option.ShowDialog();
+            try
+            {
+                OptionWindow option = new OptionWindow();
+                option.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                BaseException.HandleException(ex);
+            }
         }
 
         private void OpenReportCut(object sender, RoutedEventArgs e)
         {
-            if (ReportCutWindow.CurrentWindow == null)
+            try
             {
-                ReportCutWindow reportCutWindow = new ReportCutWindow();
-                reportCutWindow.Show();
+                if (ReportCutWindow.CurrentWindow == null)
+                {
+                    ReportCutWindow reportCutWindow = new ReportCutWindow();
+                    reportCutWindow.Show();
+                }
+                else if (!ReportCutWindow.CurrentWindow.IsActive)
+                {
+                    ReportCutWindow.CurrentWindow.Activate();
+                }
             }
-            else if (!ReportCutWindow.CurrentWindow.IsActive)
+            catch (Exception ex)
             {
-                ReportCutWindow.CurrentWindow.Activate();
+                BaseException.HandleException(ex);
             }
         }
 
         private void LanguageChange(object sender, RoutedEventArgs e)
         {
-            if (Equals(sender, this.MenuItemEnglish))
+            try
             {
-                LanguageManager.LoadLanguage("en-US");
+                if (Equals(sender, this.MenuItemEnglish))
+                {
+                    LanguageManager.LoadLanguage("en-US");
+                }
+                else if (Equals(sender, this.MenuItemChinese))
+                {
+                    LanguageManager.LoadLanguage("zh-CN");
+                }
             }
-            else if (Equals(sender, this.MenuItemChinese))
+            catch (Exception ex)
             {
-                LanguageManager.LoadLanguage("zh-CN");
+                BaseException.HandleException(ex);
             }
         }
     }

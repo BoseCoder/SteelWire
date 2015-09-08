@@ -1,6 +1,7 @@
-﻿using System;
-using System.Windows;
+﻿using log4net;
 using SteelWire.Lang;
+using System;
+using System.Windows;
 
 namespace SteelWire.AppCode.CustomException
 {
@@ -19,6 +20,8 @@ namespace SteelWire.AppCode.CustomException
         public const string ErrorCodeKey = "Error";
         private readonly bool _showBox;
         private readonly string _code;
+
+        private static readonly ILog ExceptionLogger = LogManager.GetLogger("ExceptionLogger");
 
         public override string Message
         {
@@ -50,6 +53,7 @@ namespace SteelWire.AppCode.CustomException
         /// <param name="ex">未知异常</param>
         public static void HandleUnknowException(Exception ex)
         {
+            ExceptionLogger.Error(ex.Message, ex);
             MessageBox.Show(ex.Message, LanguageManager.GetLocalResourceStringRight(ErrorCodeKey, ErrorCaptionKey),
                 MessageBoxButton.OK, MessageBoxImage.Error);
         }
