@@ -19,18 +19,17 @@ namespace SteelWire.AppCode.CustomException
         /// </summary>
         public const string ErrorCodeKey = "Error";
         private readonly bool _showBox;
-        private readonly string _code;
 
         private static readonly ILog ExceptionLogger = LogManager.GetLogger("ExceptionLogger");
 
         public override string Message
         {
-            get { return LanguageManager.GetLocalResourceStringRight(ErrorCodeKey, this._code); }
+            get { return LanguageManager.GetLocalResourceStringRight(ErrorCodeKey, base.InnerException.Message); }
         }
 
-        protected BaseException(string errorCode, bool showBox)
+        protected BaseException(string errorCode, bool showBox, Exception ex)
+            : base(errorCode, ex)
         {
-            this._code = errorCode;
             this._showBox = showBox;
         }
 
@@ -53,7 +52,6 @@ namespace SteelWire.AppCode.CustomException
         /// <param name="ex">未知异常</param>
         public static void HandleUnknowException(Exception ex)
         {
-            ExceptionLogger.Error(ex.Message, ex);
             MessageBox.Show(ex.Message, LanguageManager.GetLocalResourceStringRight(ErrorCodeKey, ErrorCaptionKey),
                 MessageBoxButton.OK, MessageBoxImage.Error);
         }
@@ -64,6 +62,7 @@ namespace SteelWire.AppCode.CustomException
         /// <param name="ex">异常</param>
         public static void HandleException(Exception ex)
         {
+            ExceptionLogger.Error(ex.Message, ex);
             BaseException knowException = ex as BaseException;
             if (knowException != null)
             {

@@ -82,7 +82,7 @@ namespace SteelWire.Windows
             {
                 throw new ErrorException("OptionDbPassEmpty");
             }
-            connString = string.Format("Data Source={0};Initial Catalog={1};Integrated Security=True;User ID={2};Password={3};",
+            connString = string.Format("Data Source={0};Initial Catalog={1};Integrated Security=False;User ID={2};Password={3};",
                 this.TxtServer.Text.Trim(), this.TxtDatabase.Text.Trim(), this.TxtDbUser.Text.Trim(), this.PassBoxDbUser.Password.Trim());
             DbContext dbContext = null;
             try
@@ -93,9 +93,9 @@ namespace SteelWire.Windows
                     this.TxtServer.Text.Trim(), this.TxtDatabase.Text.Trim(), this.TxtDbUser.Text.Trim(), this.PassBoxDbUser.Password.Trim());
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ErrorException("OptionDatabaseInvalid");
+                throw new ErrorException("OptionDatabaseInvalid", ex);
             }
             finally
             {
