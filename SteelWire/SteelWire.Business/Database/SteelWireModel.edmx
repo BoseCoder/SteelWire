@@ -1,25 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SteelWireModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="SteelWireModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="SteelWireModelStoreContainer">
-          <EntitySet Name="CumulationReset" EntityType="SteelWireModel.Store.CumulationReset" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="CuttingCriticalConfig" EntityType="SteelWireModel.Store.CuttingCriticalConfig" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="CuttingCriticalDictionary" EntityType="SteelWireModel.Store.CuttingCriticalDictionary" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="DrillCollarConfig" EntityType="SteelWireModel.Store.DrillCollarConfig" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="DrillingDifficulty" EntityType="SteelWireModel.Store.DrillingDifficulty" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="DrillingType" EntityType="SteelWireModel.Store.DrillingType" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="DrillPipeConfig" EntityType="SteelWireModel.Store.DrillPipeConfig" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Machine" EntityType="SteelWireModel.Store.Machine" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="SecurityUser" EntityType="SteelWireModel.Store.SecurityUser" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="WireropeCutRole" EntityType="SteelWireModel.Store.WireropeCutRole" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="WireropeEfficiency" EntityType="SteelWireModel.Store.WireropeEfficiency" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="WireropeWorkload" EntityType="SteelWireModel.Store.WireropeWorkload" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="WorkConfig" EntityType="SteelWireModel.Store.WorkConfig" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="WorkDictionary" EntityType="SteelWireModel.Store.WorkDictionary" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CumulationReset" EntityType="SteelWireModel.Store.CumulationReset" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="CuttingCriticalConfig" EntityType="SteelWireModel.Store.CuttingCriticalConfig" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="CuttingCriticalDictionary" EntityType="SteelWireModel.Store.CuttingCriticalDictionary" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="DrillCollarConfig" EntityType="SteelWireModel.Store.DrillCollarConfig" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="DrillingDifficulty" EntityType="SteelWireModel.Store.DrillingDifficulty" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="DrillingType" EntityType="SteelWireModel.Store.DrillingType" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="DrillPipeConfig" EntityType="SteelWireModel.Store.DrillPipeConfig" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Machine" EntityType="SteelWireModel.Store.Machine" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="SecurityUser" EntityType="SteelWireModel.Store.SecurityUser" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="WireropeCutRole" EntityType="SteelWireModel.Store.WireropeCutRole" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="WireropeEfficiency" EntityType="SteelWireModel.Store.WireropeEfficiency" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="WireropeWorkload" EntityType="SteelWireModel.Store.WireropeWorkload" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="WorkConfig" EntityType="SteelWireModel.Store.WorkConfig" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="WorkDictionary" EntityType="SteelWireModel.Store.WorkDictionary" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
           <AssociationSet Name="FK_CUMULATI_RELATIONS_USER" Association="SteelWireModel.Store.FK_CUMULATI_RELATIONS_USER">
             <End Role="SecurityUser" EntitySet="SecurityUser" />
             <End Role="CumulationReset" EntitySet="CumulationReset" />
@@ -430,8 +430,8 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="SteelWireModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-        <EntityContainer Name="SteelWireContext" annotation:LazyLoadingEnabled="true">
+      <Schema Namespace="SteelWireModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="SteelWireContext" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
           <EntitySet Name="CumulationReset" EntityType="SteelWireModel.CumulationReset" />
           <EntitySet Name="CuttingCriticalConfig" EntityType="SteelWireModel.CuttingCriticalConfig" />
           <EntitySet Name="CuttingCriticalDictionary" EntityType="SteelWireModel.CuttingCriticalDictionary" />
@@ -887,7 +887,7 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SteelWireModelStoreContainer" CdmEntityContainer="SteelWireContext">
           <EntitySetMapping Name="CumulationReset">
             <EntityTypeMapping TypeName="SteelWireModel.CumulationReset">
@@ -1074,7 +1074,7 @@
     </edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
-  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <Connection>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
@@ -1089,6 +1089,6 @@
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
-    <Diagrams></Diagrams>
+    <Diagrams />
   </Designer>
 </edmx:Edmx>
