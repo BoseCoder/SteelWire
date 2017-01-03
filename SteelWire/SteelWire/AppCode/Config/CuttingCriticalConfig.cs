@@ -44,21 +44,12 @@ namespace SteelWire.AppCode.Config
             set { this["rollerDiameter"] = value; }
         }
         /// <summary>
-        /// ¸ÖË¿ÉþÖ±¾¶
-        /// </summary>
-        [ConfigurationProperty("wirelineDiameter", IsRequired = true)]
-        public decimal WirelineDiameter
-        {
-            get { return (decimal)this["wirelineDiameter"]; }
-            set { this["wirelineDiameter"] = value; }
-        }
-        /// <summary>
         /// ³ÐÔØÉþ¸ùÊý
         /// </summary>
         [ConfigurationProperty("ropeCount", IsRequired = true)]
-        public int RopeCount
+        public long RopeCount
         {
-            get { return (int)this["ropeCount"]; }
+            get { return (long)this["ropeCount"]; }
             set { this["ropeCount"] = value; }
         }
     }

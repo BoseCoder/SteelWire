@@ -4,9 +4,6 @@
     <system:String x:Key="AppTitle">
         钢丝绳钻井吨公里计算工具
     </system:String>
-    <system:String x:Key="AppVersion">
-        1.4
-    </system:String>
     <system:String x:Key="Welcome">
         欢迎，
     </system:String>
@@ -23,62 +20,122 @@
         天
     </system:String>
 
-    <system:String x:Key="DrillingTypeTopDrive">
-        顶驱动
+    <system:String x:Key="LanguageEnumDefault">
+        默认
     </system:String>
-    <system:String x:Key="DrillingTypeReamerAndTopDrive">
-        铰刀和顶驱连接
+    <system:String x:Key="LanguageEnumEnglish">
+        English
     </system:String>
-    <system:String x:Key="DrillingTypeNoRedressing">
-        无划眼
-    </system:String>
-    <system:String x:Key="DrillingTypeRedressingOnce">
-        划眼一遍
-    </system:String>
-    <system:String x:Key="DrillingTypeRedressingTwice">
-        划眼两遍
+    <system:String x:Key="LanguageEnumChinese">
+        中文（简体）
     </system:String>
 
-    <system:String x:Key="DrillingDifficultyEasy">
+    <system:String x:Key="UnitSystemEnumInternationalSystem">
+        国际单位体系
+    </system:String>
+    <system:String x:Key="UnitSystemEnumImperialSystem">
+        英制单位体系
+    </system:String>
+
+    <system:String x:Key="DrillingTypeEnumTopDrive">
+        顶驱动
+    </system:String>
+    <system:String x:Key="DrillingTypeEnumNotTopDrive">
+        非顶驱动
+    </system:String>
+
+    <system:String x:Key="HistoryEnumCumulate">
+        累积
+    </system:String>
+    <system:String x:Key="HistoryEnumCut">
+        切绳
+    </system:String>
+    <system:String x:Key="HistoryDataLineNumber">
+        绳编号：
+    </system:String>
+
+    <system:String x:Key="DrillingDifficultyEnumEasy">
         容易
     </system:String>
-    <system:String x:Key="DrillingDifficultyNormal">
+    <system:String x:Key="DrillingDifficultyEnumNormal">
         中等
     </system:String>
-    <system:String x:Key="DrillingDifficultyHard">
+    <system:String x:Key="DrillingDifficultyEnumHard">
         难
     </system:String>
-    <system:String x:Key="DrillingDifficultyDifficult">
+    <system:String x:Key="DrillingDifficultyEnumDifficult">
         非常难
     </system:String>
 
-    <system:String x:Key="LblUnitMillimetre">
+    <system:String x:Key="InternationalSystemMillimetre">
         (毫米)
     </system:String>
-    <system:String x:Key="LblUnitMetre">
+    <system:String x:Key="InternationalSystemMetre">
         (米)
     </system:String>
-    <system:String x:Key="LblUnitKilogram">
+    <system:String x:Key="InternationalSystemKilogram">
         (千克)
     </system:String>
-    <system:String x:Key="LblUnitKilogramPerMetre">
+    <system:String x:Key="InternationalSystemKilogramPerMetre">
         (千克/米)
     </system:String>
-    <system:String x:Key="LblUnitKilogramPerCubicMeter">
+    <system:String x:Key="InternationalSystemGramPerCubicCentimetre">
+        (克/立方厘米)
+    </system:String>
+    <system:String x:Key="InternationalSystemKilogramPerCubicMeter">
         (千克/立方米)
     </system:String>
-    <system:String x:Key="LblUnitKilonewton">
+    <system:String x:Key="InternationalSystemKilonewton">
         (千牛)
     </system:String>
-    <system:String x:Key="LblUnitTon">
+    <system:String x:Key="InternationalSystemTon">
         (吨)
     </system:String>
-    <system:String x:Key="LblUnitTonKilometre">
+    <system:String x:Key="InternationalSystemTonKilometre">
         (吨•公里)
+    </system:String>
+    <system:String x:Key="ImperialSystemMillimetre">
+        (英寸)
+    </system:String>
+    <system:String x:Key="ImperialSystemMetre">
+        (英尺)
+    </system:String>
+    <system:String x:Key="ImperialSystemKilogram">
+        (磅)
+    </system:String>
+    <system:String x:Key="ImperialSystemKilogramPerMetre">
+        (磅/英尺)
+    </system:String>
+    <system:String x:Key="ImperialSystemGramPerCubicCentimetre">
+        (磅/加仑)
+    </system:String>
+    <system:String x:Key="ImperialSystemKilogramPerCubicMeter">
+        (千克/立方米)
+    </system:String>
+    <system:String x:Key="ImperialSystemKilonewton">
+        (磅)
+    </system:String>
+    <system:String x:Key="ImperialSystemTon">
+        (吨)
+    </system:String>
+    <system:String x:Key="ImperialSystemTonKilometre">
+        (吨·英里)
     </system:String>
 
     <system:String x:Key="GroupWirelineCuttingCriticalValueTitle">
-        计算切绳临界值
+        钻机及钢丝绳参数
+    </system:String>
+    <system:String x:Key="LblWireLineStruct">
+        钢绳结构：
+    </system:String>
+    <system:String x:Key="LblWireLineStrongLevel">
+        钢绳强度级别：
+    </system:String>
+    <system:String x:Key="LblWireLineTwistDirection">
+        钢绳捻向：
+    </system:String>
+    <system:String x:Key="LblWireLineOrderLength">
+        钢绳订货长度：
     </system:String>
     <system:String x:Key="LblDerrickHeight">
         井架高度：
@@ -94,6 +151,9 @@
     </system:String>
     <system:String x:Key="LblRotaryHookWorkload">
         大钩载荷：
+    </system:String>
+    <system:String x:Key="LblRealRotaryHookWorkload">
+        当班大钩显示悬重：
     </system:String>
     <system:String x:Key="LblWirelineDiameter">
         钢丝绳直径：
@@ -120,32 +180,44 @@
     <system:String x:Key="LblElevatorWeight">
         游车-吊卡总质量：
     </system:String>
-    <system:String x:Key="DrillPipeNameDrillPipe1">
-        钻杆
-    </system:String>
-    <system:String x:Key="HeavierDrillPipeNameHeavierDrillPipe1">
-        加重钻杆
-    </system:String>
-    <system:String x:Key="DrillPipeWeight">
+    <system:String x:Key="DrillDeviceTypeEnumDrillPipeWeight">
         公称质量：
     </system:String>
-    <system:String x:Key="DrillPipeLength">
-        长度：
-    </system:String>
-    <system:String x:Key="DrillPipeStandLength">
+    <system:String x:Key="DrillDeviceTypeEnumDrillPipeLength">
         立根长度：
     </system:String>
-    <system:String x:Key="DrillCollarNameDrillCollar1">
-        钻铤1
+    <system:String x:Key="DrillDeviceTypeEnumDrillPipeDrillPipe1">
+        钻杆
     </system:String>
-    <system:String x:Key="DrillCollarNameDrillCollar2">
-        钻铤2
-    </system:String>
-    <system:String x:Key="DrillCollarWeight">
+    <system:String x:Key="DrillDeviceTypeEnumHeavierDrillPipeWeight">
         公称质量：
     </system:String>
-    <system:String x:Key="DrillCollarLength">
+    <system:String x:Key="DrillDeviceTypeEnumHeavierDrillPipeLength">
         长度：
+    </system:String>
+    <system:String x:Key="DrillDeviceTypeEnumHeavierDrillPipeHeavierDrillPipe1">
+        加重钻杆
+    </system:String>
+    <system:String x:Key="DrillDeviceTypeEnumDrillCollarWeight">
+        公称质量：
+    </system:String>
+    <system:String x:Key="DrillDeviceTypeEnumDrillCollarLength">
+        长度：
+    </system:String>
+    <system:String x:Key="DrillDeviceTypeEnumDrillCollarDrillCollar1">
+        钻铤1
+    </system:String>
+    <system:String x:Key="DrillDeviceTypeEnumDrillCollarDrillCollar2">
+        钻铤2
+    </system:String>
+    <system:String x:Key="DrillDeviceTypeEnumBushingWeight">
+        套管公称质量：
+    </system:String>
+    <system:String x:Key="DrillDeviceTypeEnumBushingLength">
+        套管单根长度：
+    </system:String>
+    <system:String x:Key="DrillDeviceTypeEnumBushingBushing1">
+        套管
     </system:String>
 
     <system:String x:Key="LblShallowHeight">
@@ -158,11 +230,17 @@
         计算：
     </system:String>
 
+    <system:String x:Key="LblOperationProcessCalculation">
+        作业过程计算
+    </system:String>
     <system:String x:Key="GroupDrillingWorkTitle">
         计算钻井作业钢丝绳吨公里
     </system:String>
     <system:String x:Key="LblDrillingType">
-        类型：
+        钻机驱动方式：
+    </system:String>
+    <system:String x:Key="LblRedressingCount">
+        划眼次数：
     </system:String>
     <system:String x:Key="LblDrillingDifficulty">
         难度：
@@ -177,12 +255,6 @@
 
     <system:String x:Key="GroupBushingWorkTitle">
         计算下套管作业钢丝绳吨公里
-    </system:String>
-    <system:String x:Key="LblBushingWeight">
-        套管公称质量：
-    </system:String>
-    <system:String x:Key="LblBushingLength">
-        套管单根长度：
     </system:String>
     <system:String x:Key="LblBushingHeight">
         下套管深度：
@@ -212,7 +284,13 @@
         当前临界：
     </system:String>
     <system:String x:Key="LblCurrentCumulation">
-        当前累计：
+        本次切绳累计吨公里：
+    </system:String>
+    <system:String x:Key="LblRealWirelineCutLength">
+        本次切绳实际长度：
+    </system:String>
+    <system:String x:Key="LblTotalCutted">
+        钢丝绳总吨公里：
     </system:String>
     <system:String x:Key="BtnRefresh">
         刷新
@@ -253,7 +331,19 @@
     </system:String>
 
     <system:String x:Key="OptionTitle">
+        选项
+    </system:String>
+    <system:String x:Key="OptionTabSystem">
         系统选项
+    </system:String>
+    <system:String x:Key="OptionTabSqlServer">
+        SQL Server数据库选项
+    </system:String>
+    <system:String x:Key="LblOptionLanguage">
+        语言
+    </system:String>
+    <system:String x:Key="LblOptionUnit">
+        单位体系
     </system:String>
     <system:String x:Key="LblSerialNumber">
         序列号
@@ -280,9 +370,9 @@
     <system:String x:Key="BtnReportSearch">
         查询
     </system:String>
-    
+
     <system:String x:Key="MenuItemUser">
-        用户菜单
+        用户
     </system:String>
     <system:String x:Key="MenuItemSignOut">
         切换账户
@@ -297,10 +387,26 @@
         切绳报表
     </system:String>
     <system:String x:Key="MenuItemSystem">
-        系统菜单
+        系统
     </system:String>
     <system:String x:Key="MenuItemOption">
         选项
+    </system:String>
+
+    <system:String x:Key="ReportHeaderCutSequence">
+        切绳次数
+    </system:String>
+    <system:String x:Key="ReportHeaderCutTime">
+        切绳时间
+    </system:String>
+    <system:String x:Key="ReportHeaderCutValue">
+        切绳吨公里
+    </system:String>
+    <system:String x:Key="ReportHeaderCutLength">
+        切绳实际长度
+    </system:String>
+    <system:String x:Key="ReportFooterSummary">
+        合计：
     </system:String>
 
     <system:String x:Key="ValidationStringEmpty">输入不能为空，请先输入字符串！</system:String>
@@ -311,6 +417,13 @@
 
     <system:String x:Key="ErrorCaption">错误</system:String>
     <system:String x:Key="ErrorCurrentWireNoEmpty">当前绳编号不能为空，请重新输入！</system:String>
+    <system:String x:Key="ErrorCurrentWireNoInvalid">输入的绳编号与当前绳编号不匹配，请点击“刷新”按钮加载该绳的最新数据！</system:String>
+    <system:String x:Key="ErrorCurrentWireLineStructEmpty">当前绳的钢绳结构不能为空，请重新输入！</system:String>
+    <system:String x:Key="ErrorCurrentWireLineStrongLevelEmpty">当前绳的钢绳强度级别不能为空，请重新输入！</system:String>
+    <system:String x:Key="ErrorCurrentWireLineTwistDirectionEmpty">当前绳的钢绳捻向不能为空，请重新输入！</system:String>
+    <system:String x:Key="ErrorCurrentWireLineOrderLengthZero">当前绳的钢绳订货长度不能为0，请重新输入！</system:String>
+    <system:String x:Key="ErrorCurrentCumulationValueZero">当前累积值为0，请至少先累积一次后再切绳！</system:String>
+    <system:String x:Key="ErrorCutLengthZero">当前累计值已经达到或者超过当前临界值，建议输入切绳实际长度后进行切绳操作！</system:String>
     <system:String x:Key="ErrorCriticalValueInvalid">临界值无效！</system:String>
     <system:String x:Key="ErrorCriticalDictionaryFileNotFound">用于计算临界值的字典文件丢失。</system:String>
     <system:String x:Key="ErrorCriticalConfigFileNotFound">用于计算临界值的配置文件丢失。</system:String>
@@ -336,7 +449,7 @@
     <system:String x:Key="MessageCaption">消息</system:String>
     <system:String x:Key="MessageExitConfirm" xml:space="preserve">确定退出程序？</system:String>
     <system:String x:Key="MessageSaveCriticalCumulateCompulsivelyConfirm" xml:space="preserve">系统将跟随累计值同时保存临界值。是否需要保存累计值？点击“是”都保存，点击“否”都不保存。</system:String>
-    <system:String x:Key="MessageSaveCriticalCumulateConfirm" xml:space="preserve">是否保存临界值和累计值？点击“是”都保存，点击“否”仅保存累计值，点击“取消”都不保存。</system:String>
+    <system:String x:Key="MessageSaveCriticalCumulateConfirm" xml:space="preserve">是否保存临界值和累计值？点击“是”保存，点击“否”不保存。</system:String>
     <system:String x:Key="MessageResetCompulsivelyConfirm" xml:space="preserve">当前累计值已经达到或者超过当前临界值，是否切绳？点击“是”进行切绳操作，点击“否”不进行任何操作。</system:String>
     <system:String x:Key="MessageResetConfirm" xml:space="preserve">是否确定切绳？点击“确定”进行切绳操作，点击“取消”返回。</system:String>
 

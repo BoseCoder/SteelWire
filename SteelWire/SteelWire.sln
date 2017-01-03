@@ -1,51 +1,34 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteelWire", "SteelWire\SteelWire.csproj", "{7019101C-158D-4BEA-BAE0-04A15664B364}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteelWire.Business", "SteelWire.Business\SteelWire.Business.csproj", "{E874A38B-9C97-4F67-83B6-F3F95AC78208}"
 EndProject
-Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "SteelWire.Setup", "SteelWire.Setup\SteelWire.Setup.isproj", "{49B3D275-1E44-4004-BA53-7BE7542FC4B3}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{7CA01E4A-36E9-4E09-BAE8-5294D3E84089}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseConfig", "..\..\..\..\BaseLibrary\trunk\BaseConfig\BaseConfig.csproj", "{49DA36EF-DA08-4E3D-88BE-D63454994D23}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		CD_ROM|Any CPU = CD_ROM|Any CPU
 		Debug|Any CPU = Debug|Any CPU
-		DVD-5|Any CPU = DVD-5|Any CPU
 		Release|Any CPU = Release|Any CPU
-		SingleImage|Any CPU = SingleImage|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7019101C-158D-4BEA-BAE0-04A15664B364}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
-		{7019101C-158D-4BEA-BAE0-04A15664B364}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
 		{7019101C-158D-4BEA-BAE0-04A15664B364}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7019101C-158D-4BEA-BAE0-04A15664B364}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7019101C-158D-4BEA-BAE0-04A15664B364}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
-		{7019101C-158D-4BEA-BAE0-04A15664B364}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
 		{7019101C-158D-4BEA-BAE0-04A15664B364}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7019101C-158D-4BEA-BAE0-04A15664B364}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7019101C-158D-4BEA-BAE0-04A15664B364}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
-		{7019101C-158D-4BEA-BAE0-04A15664B364}.SingleImage|Any CPU.Build.0 = Release|Any CPU
-		{E874A38B-9C97-4F67-83B6-F3F95AC78208}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
-		{E874A38B-9C97-4F67-83B6-F3F95AC78208}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
 		{E874A38B-9C97-4F67-83B6-F3F95AC78208}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E874A38B-9C97-4F67-83B6-F3F95AC78208}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E874A38B-9C97-4F67-83B6-F3F95AC78208}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
-		{E874A38B-9C97-4F67-83B6-F3F95AC78208}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
 		{E874A38B-9C97-4F67-83B6-F3F95AC78208}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E874A38B-9C97-4F67-83B6-F3F95AC78208}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E874A38B-9C97-4F67-83B6-F3F95AC78208}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
-		{E874A38B-9C97-4F67-83B6-F3F95AC78208}.SingleImage|Any CPU.Build.0 = Release|Any CPU
-		{49B3D275-1E44-4004-BA53-7BE7542FC4B3}.CD_ROM|Any CPU.ActiveCfg = CD_ROM
-		{49B3D275-1E44-4004-BA53-7BE7542FC4B3}.CD_ROM|Any CPU.Build.0 = CD_ROM
-		{49B3D275-1E44-4004-BA53-7BE7542FC4B3}.Debug|Any CPU.ActiveCfg = DVD-5
-		{49B3D275-1E44-4004-BA53-7BE7542FC4B3}.Debug|Any CPU.Build.0 = DVD-5
-		{49B3D275-1E44-4004-BA53-7BE7542FC4B3}.DVD-5|Any CPU.ActiveCfg = DVD-5
-		{49B3D275-1E44-4004-BA53-7BE7542FC4B3}.DVD-5|Any CPU.Build.0 = DVD-5
-		{49B3D275-1E44-4004-BA53-7BE7542FC4B3}.Release|Any CPU.ActiveCfg = SingleImage
-		{49B3D275-1E44-4004-BA53-7BE7542FC4B3}.Release|Any CPU.Build.0 = SingleImage
-		{49B3D275-1E44-4004-BA53-7BE7542FC4B3}.SingleImage|Any CPU.ActiveCfg = SingleImage
-		{49B3D275-1E44-4004-BA53-7BE7542FC4B3}.SingleImage|Any CPU.Build.0 = SingleImage
+		{49DA36EF-DA08-4E3D-88BE-D63454994D23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49DA36EF-DA08-4E3D-88BE-D63454994D23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49DA36EF-DA08-4E3D-88BE-D63454994D23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49DA36EF-DA08-4E3D-88BE-D63454994D23}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

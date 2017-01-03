@@ -2,23 +2,15 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:reportViewer="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"
+        Title="{DynamicResource MenuItemReportCut}"
         Height="600" Width="1000"
-        WindowStartupLocation="CenterScreen" WindowState="Maximized" Closing="WindowOnClosing"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized" Closing="WindowOnClosing" ContentRendered="WindowRendered"
         Icon="/SteelWire;component/Resources/Images/Icon.ico">
-    <Window.Title>
-        <MultiBinding Converter="{StaticResource WindowTitleConverter}">
-            <Binding Source="{StaticResource AppTitle}"/>
-            <Binding Source="  "/>
-            <Binding Source="{StaticResource AppVersion}"/>
-            <Binding Source="  "/>
-            <Binding Source="{StaticResource MenuItemReportCut}"/>
-        </MultiBinding>
-    </Window.Title>
     <DockPanel>
         <WrapPanel DockPanel.Dock="Top" Margin="0,10">
-            <Label x:Name="LblCurrentWireNoTitle" Content="{StaticResource LblCurrentWireNoTitle}" />
+            <Label x:Name="LblCurrentWireNoTitle" Content="{DynamicResource LblCurrentWireNoTitle}" />
             <TextBox x:Name="TxtCurrentWireNo" Width="200" Margin="5,0,0,0" />
-            <Button x:Name="BtnReportSearch" Content="{StaticResource BtnReportSearch}"
+            <Button x:Name="BtnReportSearch" Content="{DynamicResource BtnReportSearch}"
                     Margin="5,0,0,0" Padding="10,0,10,0" Click="ReportSearch" />
         </WrapPanel>
         <WindowsFormsHost Name="ReportFormsHost" Background="White">

@@ -12,7 +12,7 @@ namespace SteelWire.Environment
         {
             ManagementObject disk = new ManagementObject("win32_logicaldisk.deviceid=\"c:\"");
             disk.Get();
-            return string.Format("{0}", disk.GetPropertyValue("VolumeSerialNumber"));
+            return $"{disk.GetPropertyValue("VolumeSerialNumber")}";
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace SteelWire.Environment
             ManagementObjectCollection.ManagementObjectEnumerator enumerator = myCpuConnection.GetEnumerator();
             while (enumerator.MoveNext())
             {
-                return string.Format("{0}", enumerator.Current.Properties["Processorid"].Value);
+                return $"{enumerator.Current.Properties["Processorid"].Value}";
             }
             return null;
         }
@@ -37,7 +37,7 @@ namespace SteelWire.Environment
         /// <returns></returns>
         public static string GetMachineNumber()
         {
-            string number = string.Format("{0}{1}", GetDiskVolumeSerialNumber(), GetCpuSerialNumber());
+            string number = $"{GetDiskVolumeSerialNumber()}{GetCpuSerialNumber()}";
             if (number.Length > 24)
             {
                 number = number.Substring(0, 24);

@@ -6,135 +6,211 @@ namespace SteelWire.Business.DbOperator
 {
     public static class CriticalOperator
     {
-        public static CuttingCriticalConfig GetLastConfig(int updater)
+        #region Critical Dictionary
+
+        public static CriticalDictionary GetLastDictionary(long searchUserId)
         {
-            SteelWireContext dbContext = new SteelWireContext();
-            return dbContext.CuttingCriticalConfig.OrderByDescending(d => d.ConfigTime)
-                .FirstOrDefault(d => d.ConfigUserID == updater);
+            using (SteelWireBaseContext dbContext = DbContextFactory.GenerateDbContext())
+            {
+                return GetLastDictionary(dbContext, searchUserId);
+            }
         }
 
-        public static bool IsNeedUpdateCritical(SteelWireContext dbContext, int updater, string wireNo,
-            long timeStamp, decimal criticalValue, out bool overWrite)
+        public static CriticalDictionary GetLastDictionary(SteelWireBaseContext dbContext, long searchUserId)
         {
             if (dbContext == null)
             {
-                throw new ArgumentNullException("dbContext");
+                throw new ArgumentNullException(nameof(dbContext));
             }
-            if (updater < 1)
+            IQueryable<CriticalDictionary> query = dbContext.CriticalDictionary;
+            if (searchUserId > 0)
             {
-                throw new ArgumentException("updater is invalid.", "updater");
+                query = query.Where(d => d.ConfigUserID == searchUserId);
             }
-            if (dbContext.CuttingCriticalConfig.Any(d => d.ConfigUserID == updater && d.ConfigTimeStamp > timeStamp))
-            {
-                overWrite = true;
-                return true;
-            }
-            overWrite = false;
-            CuttingCriticalConfig config = dbContext.CuttingCriticalConfig.FirstOrDefault(d =>
-                d.ConfigUserID == updater && d.ConfigTimeStamp == timeStamp &&
-                d.CuttingCriticalValue == criticalValue);
-            if (config != null)
-            {
-                CumulationReset resetData = ResetOperator.GetCurrentData(dbContext, updater, wireNo);
-                if (resetData == null || resetData.CriticalValue == criticalValue)
-                {
-                    return false;
-                }
-            }
-            return true;
+            return query.OrderByDescending(d => d.ConfigTime).FirstOrDefault();
         }
 
-        public static CumulationReset UpdateCriticalValue(int updater, string wireNo, CuttingCriticalConfig data)
-        {
-            SteelWireContext dbContext = new SteelWireContext();
-            return UpdateCriticalValue(dbContext, updater, wireNo, data);
-        }
-
-        public static CumulationReset UpdateCriticalValue(SteelWireContext dbContext, int updater, string wireNo,
-            CuttingCriticalConfig data)
+        public static bool IsNeedUpdateCriticalDictionary(SteelWireBaseContext dbContext, long searchUserId,
+            long timeStamp, out CriticalDictionary dicData)
         {
             if (dbContext == null)
             {
-                throw new ArgumentNullException("dbContext");
+                throw new ArgumentNullException(nameof(dbContext));
             }
-            if (updater < 1)
+            IQueryable<CriticalDictionary> quary = dbContext.CriticalDictionary;
+            if (searchUserId > 0)
             {
-                throw new ArgumentException("updater is invalid.", "updater");
+                quary = quary.Where(d => d.ConfigUserID == searchUserId);
             }
-            dbContext.CuttingCriticalConfig.Add(data);
-            CumulationReset resetData = ResetOperator.GetCurrentData(dbContext, updater, wireNo);
-            if (resetData == null)
-            {
-                resetData = new CumulationReset
-                {
-                    CriticalValue = data.CuttingCriticalValue,
-                    CumulationValue = 0,
-                    ResetValue = 0,
-                    RemainValue = data.CuttingCriticalValue,
-                    UpdateUserID = updater,
-                    UpdateTime = data.ConfigTime,
-                    SteelWireNo = wireNo
-                };
-                dbContext.CumulationReset.Add(resetData);
-            }
-            else
-            {
-                resetData.CriticalValue = data.CuttingCriticalValue;
-            }
-            return resetData;
-        }
-
-        public static CuttingCriticalDictionary GetCurrentDictionary(int updater)
-        {
-            SteelWireContext dbContext = new SteelWireContext();
-            return dbContext.CuttingCriticalDictionary.OrderByDescending(d => d.ConfigTime)
-                .FirstOrDefault(d => d.ConfigUserID == updater);
-        }
-
-        public static bool IsNeedUpdateDictionary(int updater, long timeStamp, out bool overWrite,
-            out CuttingCriticalDictionary dicData)
-        {
-            SteelWireContext dbContext = new SteelWireContext();
-            return IsNeedUpdateDictionary(dbContext, updater, timeStamp, out overWrite, out dicData);
-        }
-
-        public static bool IsNeedUpdateDictionary(SteelWireContext dbContext, int updater, long timeStamp,
-            out bool overWrite, out CuttingCriticalDictionary dicData)
-        {
-            if (dbContext == null)
-            {
-                throw new ArgumentNullException("dbContext");
-            }
-            if (updater < 1)
-            {
-                throw new ArgumentException("updater is invalid.", "updater");
-            }
-            if (dbContext.CuttingCriticalDictionary.Any(d => d.ConfigUserID == updater && d.ConfigTimeStamp > timeStamp))
-            {
-                overWrite = true;
-                dicData = null;
-                return true;
-            }
-            overWrite = false;
-            dicData = dbContext.CuttingCriticalDictionary.FirstOrDefault(d =>
-                d.ConfigUserID == updater && d.ConfigTimeStamp == timeStamp);
+            dicData = quary.FirstOrDefault(d => d.ConfigTimeStamp == timeStamp);
             return dicData == null;
         }
 
-        public static void UpdateDictionary(CuttingCriticalDictionary cuttingCriticalDictionary)
-        {
-            SteelWireContext dbContext = new SteelWireContext();
-            UpdateDictionary(dbContext, cuttingCriticalDictionary);
-        }
-
-        public static void UpdateDictionary(SteelWireContext dbContext,
-            CuttingCriticalDictionary cuttingCriticalDictionary)
+        public static void UpdateCriticalDictionary(SteelWireBaseContext dbContext,
+            CriticalDictionary criticalDictionary)
         {
             if (dbContext == null)
             {
-                throw new ArgumentNullException("dbContext");
+                throw new ArgumentNullException(nameof(dbContext));
             }
-            dbContext.CuttingCriticalDictionary.Add(cuttingCriticalDictionary);
+            if (criticalDictionary == null)
+            {
+                throw new ArgumentNullException(nameof(criticalDictionary));
+            }
+            dbContext.CriticalDictionary.Add(criticalDictionary);
+            dbContext.SaveChanges();
+        }
+
+        #endregion
+
+        #region Critical Config
+
+        public static CriticalConfig GetLastConfig(long searchUserId)
+        {
+            using (SteelWireBaseContext dbContext = DbContextFactory.GenerateDbContext())
+            {
+                return GetLastConfig(dbContext, searchUserId);
+            }
+        }
+
+        public static CriticalConfig GetLastConfig(SteelWireBaseContext dbContext, long searchUserId)
+        {
+            if (dbContext == null)
+            {
+                throw new ArgumentNullException(nameof(dbContext));
+            }
+            IQueryable<CriticalConfig> query = dbContext.CriticalConfig;
+            if (searchUserId > 0)
+            {
+                query = query.Where(d => d.ConfigUserID == searchUserId);
+            }
+            return query.OrderByDescending(d => d.ConfigTime).FirstOrDefault();
+        }
+
+        public static bool IsNeedUpdateCriticalConfig(SteelWireBaseContext dbContext, long searchUserId, long timeStamp,
+            out CriticalConfig configData)
+        {
+            if (dbContext == null)
+            {
+                throw new ArgumentNullException(nameof(dbContext));
+            }
+            IQueryable<CriticalConfig> quary = dbContext.CriticalConfig;
+            if (searchUserId > 0)
+            {
+                quary = quary.Where(d => d.ConfigUserID == searchUserId);
+            }
+            configData = quary.FirstOrDefault(d => d.ConfigTimeStamp == timeStamp);
+            return configData == null;
+        }
+
+        public static void UpdateCriticalConfig(SteelWireBaseContext dbContext, CriticalConfig criticalConfig)
+        {
+            if (dbContext == null)
+            {
+                throw new ArgumentNullException(nameof(dbContext));
+            }
+            if (criticalConfig == null)
+            {
+                throw new ArgumentNullException(nameof(criticalConfig));
+            }
+            dbContext.CriticalConfig.Add(criticalConfig);
+            dbContext.SaveChanges();
+        }
+
+        #endregion
+
+        #region Critical Record
+
+        public static CriticalRecord GetLastRecord(long searchUserId, long lineId)
+        {
+            if (lineId < 1)
+            {
+                throw new ArgumentException("lineId is invalid.", nameof(lineId));
+            }
+            using (SteelWireBaseContext dbContext = DbContextFactory.GenerateDbContext())
+            {
+                return GetLastRecord(dbContext, searchUserId, lineId);
+            }
+        }
+
+        public static CriticalRecord GetLastRecord(SteelWireBaseContext dbContext, long searchUserId, long lineId)
+        {
+            if (dbContext == null)
+            {
+                throw new ArgumentNullException(nameof(dbContext));
+            }
+            if (lineId < 1)
+            {
+                throw new ArgumentException("lineId is invalid.", nameof(lineId));
+            }
+            IQueryable<CriticalRecord> query = dbContext.CriticalRecord.Where(d => d.WirelineID == lineId);
+            if (searchUserId > 0)
+            {
+                query = query.Where(d => d.CalculateUserID == searchUserId);
+            }
+            return query.OrderByDescending(d => d.CalculateTime).FirstOrDefault();
+        }
+
+        public static bool IsNeedUpdateCriticalRecord(SteelWireBaseContext dbContext, long searchUserId, long lineId,
+            decimal criticalValue)
+        {
+            if (lineId < 1)
+            {
+                throw new ArgumentException("lineId is invalid.", nameof(lineId));
+            }
+            CriticalRecord lastRecord = GetLastRecord(dbContext, searchUserId, lineId);
+            return lastRecord == null || lastRecord.CriticalValue != criticalValue;
+        }
+
+        public static void UpdateCriticalRecord(SteelWireBaseContext dbContext, CriticalRecord criticalRecord)
+        {
+            if (dbContext == null)
+            {
+                throw new ArgumentNullException(nameof(dbContext));
+            }
+            if (criticalRecord == null)
+            {
+                throw new ArgumentNullException(nameof(criticalRecord));
+            }
+            dbContext.CriticalRecord.Add(criticalRecord);
+            dbContext.SaveChanges();
+        }
+
+        #endregion
+
+        public static WireropeWorkload GetLastWireropeWorkloadConfig(long searchUserId, WirelineInfo lineInfo)
+        {
+            if (lineInfo == null)
+            {
+                throw new ArgumentNullException(nameof(lineInfo));
+            }
+            if (lineInfo.ID < 1)
+            {
+                throw new ArgumentException("ID property of lineInfo is invalid.", nameof(lineInfo));
+            }
+            using (SteelWireBaseContext dbContext = DbContextFactory.GenerateDbContext())
+            {
+                return GetLastWireropeWorkloadConfig(dbContext, searchUserId, lineInfo);
+            }
+        }
+
+        public static WireropeWorkload GetLastWireropeWorkloadConfig(SteelWireBaseContext dbContext, long searchUserId, WirelineInfo lineInfo)
+        {
+            if (dbContext == null)
+            {
+                throw new ArgumentNullException(nameof(dbContext));
+            }
+            if (lineInfo == null)
+            {
+                throw new ArgumentNullException(nameof(lineInfo));
+            }
+            if (lineInfo.ID < 1)
+            {
+                throw new ArgumentException("ID property of lineInfo is invalid.", nameof(lineInfo));
+            }
+            CriticalRecord criticalRecord = GetLastRecord(dbContext, searchUserId, lineInfo.ID);
+            return criticalRecord?.CriticalConfig?.CriticalDictionary?.WireropeWorkload
+                .FirstOrDefault(d => d.Name == lineInfo.Diameter && d.UnitSystem == lineInfo.UnitSystem);
         }
     }
 }

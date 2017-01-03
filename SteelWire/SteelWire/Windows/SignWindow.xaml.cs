@@ -12,9 +12,13 @@ namespace SteelWire.Windows
     /// </summary>
     public partial class SignWindow
     {
+        public Sign WindowData { get; }
+
         public SignWindow()
         {
             InitializeComponent();
+
+            this.WindowData = this.DataContext as Sign;
         }
 
         private void WindowLoaded(object sender, RoutedEventArgs e)
@@ -58,14 +62,14 @@ namespace SteelWire.Windows
 
         private void ModeChange(object sender, RoutedEventArgs e)
         {
-            Sign.Data.IsRegist.ItemValue = true;
+            this.WindowData.IsRegist.Value = true;
         }
 
         private void SignIn(object sender, RoutedEventArgs e)
         {
             try
             {
-                Sign.Data.SignIn(this.TxtAccount.Text.Trim(), this.PassBox.Password.Trim());
+                this.WindowData.SignIn(this.TxtAccount.Text.Trim(), this.PassBox.Password.Trim());
                 this.Close();
             }
             catch (Exception ex)
@@ -78,7 +82,7 @@ namespace SteelWire.Windows
         {
             try
             {
-                Sign.Data.Regist(this.TxtAccount.Text.Trim(), this.PassBox.Password.Trim(), this.PassComfirmBox.Password.Trim(), this.TxtName.Text.Trim());
+                this.WindowData.Regist(this.TxtAccount.Text.Trim(), this.PassBox.Password.Trim(), this.PassComfirmBox.Password.Trim(), this.TxtName.Text.Trim());
                 this.Close();
             }
             catch (Exception ex)
@@ -97,10 +101,9 @@ namespace SteelWire.Windows
         {
             try
             {
-                Sign.Data.IsRegist.ItemValue = false;
                 if (!this.DialogResult.HasValue)
                 {
-                    this.DialogResult = Sign.Data.IsSignIn();
+                    this.DialogResult = this.WindowData.IsSignIn();
                 }
             }
             catch (Exception ex)
@@ -128,7 +131,7 @@ namespace SteelWire.Windows
 
         private void PassOnKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter && Sign.Data.IsSign.ItemValue
+            if (e.Key == Key.Enter && this.WindowData.IsSign.Value
                 && !string.IsNullOrWhiteSpace(this.TxtAccount.Text)
                 && !string.IsNullOrWhiteSpace(this.PassBox.Password))
             {

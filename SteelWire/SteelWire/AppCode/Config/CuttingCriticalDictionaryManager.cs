@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using BaseConfig;
-using SteelWire.WindowData;
+using SteelWire.AppCode.Data;
 
 namespace SteelWire.AppCode.Config
 {
@@ -42,7 +42,7 @@ namespace SteelWire.AppCode.Config
         public static void InitializeConfig()
         {
             OnceInstance = new CuttingCriticalDictionaryManager("CuttingCriticalDictionary",
-                string.Format("Config\\{0}", Sign.Data.Account), "CuttingCriticalDictionary.config");
+                $"Config\\{GlobalData.Account}", "CuttingCriticalDictionary.config");
             OnceInstance.ReadConfig();
             bool needWrite = false;
 
@@ -58,7 +58,7 @@ namespace SteelWire.AppCode.Config
             if (dictionary.WireropeWorkloads.Count < 1)
             {
                 needWrite = true;
-                ConstDictionary.InitializeConfigDictionary(dictionary.WireropeWorkloads, ConstDictionary.ConstWireropeWorkloads);
+                ConstDictionary.InitializeConfigDictionary(dictionary.WireropeWorkloads, ConstDictionary.WireropeWorkloads);
             }
             if (dictionary.WireropeCutRoles.Count < 1)
             {

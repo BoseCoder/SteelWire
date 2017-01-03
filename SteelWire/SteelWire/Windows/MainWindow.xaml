@@ -1,39 +1,20 @@
 ﻿<Window x:Name="WindowMain" x:Class="SteelWire.Windows.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:appCode="clr-namespace:SteelWire.AppCode"
+        xmlns:data="clr-namespace:SteelWire.AppCode.Data"
         xmlns:converter="clr-namespace:SteelWire.AppCode.Converter"
         xmlns:validationRule="clr-namespace:SteelWire.AppCode.ValidationRule"
         xmlns:windowData="clr-namespace:SteelWire.WindowData"
-        xmlns:data="clr-namespace:SteelWire.AppCode.Data"
-        MinWidth="800" MinHeight="600" Width="1350" Height="770" WindowStartupLocation="CenterScreen"
+        DataContext="{DynamicResource WindowDataKey}"
+        MinWidth="800" MinHeight="600" Width="1670" Height="840" WindowStartupLocation="CenterScreen"
         Icon="/SteelWire;component/Resources/Images/Icon.ico" ContentRendered="WindowRendered" Closing="WindowOnClosing">
-    <Window.Title>
-        <MultiBinding Converter="{StaticResource WindowTitleConverter}">
-            <Binding Source="{StaticResource AppTitle}"/>
-            <Binding Source="  "/>
-            <Binding Source="{StaticResource AppVersion}"/>
-            <Binding Source="  "/>
-            <Binding Source="{StaticResource Welcome}"/>
-            <Binding Path="UserDisplay.ItemValue" Source="{x:Static data:GlobalData.Data}"/>
-            <Binding Path="AppLicenceStatus.ItemValue" Source="{x:Static data:GlobalData.Data}"/>
-        </MultiBinding>
-    </Window.Title>
     <Window.Resources>
-        <x:Static x:Key="WindowData" Member="windowData:Main.Data"></x:Static>
+        <windowData:Main x:Key="WindowDataKey"></windowData:Main>
         <converter:TimeMeterTextConverter x:Key="TimeMeterConverter" />
         <converter:CurrentConfigItemTextConverter x:Key="CurrentConfigValueConverter" />
         <converter:ReadOnlyResultTextConverter x:Key="ReadOnlyResultValueConverter" />
         <converter:CurrentConfigItemForeColorConverter x:Key="CurrentConfigForeColorConverter" />
         <converter:CumulationItemForeColorConverter x:Key="CumulationForeColorConverter" />
-        <!--<Style TargetType="{x:Type MenuItem}">
-            <Setter Property="Background" Value="White"></Setter>
-            <Style.Triggers>
-                <Trigger Property="MenuItem.IsSubmenuOpen" Value="true">
-                    <Setter Property="Background" Value="Red"></Setter>
-                </Trigger>
-            </Style.Triggers>
-        </Style>-->
         <Style TargetType="TextBox">
             <Style.Triggers>
                 <Trigger Property="Validation.HasError" Value="True">
@@ -52,7 +33,7 @@
                             <ContentPresenter />
                         </Border>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="IsSelected" Value="true">
+                            <Trigger Property="IsSelected" Value="True">
                                 <Setter Property="Background" Value="White"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -66,7 +47,7 @@
             </WrapPanel>
         </ControlTemplate>
         <DataTemplate x:Key="ListViewItemTemplate">
-            <DockPanel Width="280" Margin="40,0,0,0">
+            <DockPanel Width="280" Margin="20,0,20,0">
                 <Grid DockPanel.Dock="Left" Width="10">
                     <Image Source="..\Resources\Images\DrillLeft.png" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
                 </Grid>
@@ -77,140 +58,82 @@
                     <Grid>
                         <Label x:Name="LblName" HorizontalAlignment="Center" FontWeight="Bold">
                             <Label.Content>
-                                <Binding Path="LocalName.ItemValue" Mode="OneWay" />
+                                <Binding Path="Value.LocalName.Value" Mode="OneWay" />
                             </Label.Content>
                         </Label>
                     </Grid>
                     <WrapPanel Margin="0,10,0,0">
-                        <Grid Width="75" Margin="0,0,5,0">
+                        <Grid Width="95" Margin="0,0,5,0">
                             <Label x:Name="LblWeight" HorizontalAlignment="Right">
                                 <Label.Content>
-                                    <Binding Path="WeightTitle" Mode="OneWay" />
+                                    <Binding Path="Value.WeightTitle.Value" Mode="OneWay" />
                                 </Label.Content>
                             </Label>
                         </Grid>
-                        <TextBox x:Name="TxtWeight" Width="120" MaxLength="10"
+                        <TextBox x:Name="TxtWeight" Width="100" MaxLength="10"
                              InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
                             <TextBox.Text>
-                                <Binding Path="Weight.ItemValue" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"
+                                <Binding Path="Value.Weight.Value" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"
                                          Converter="{StaticResource CurrentConfigValueConverter}">
                                 </Binding>
                             </TextBox.Text>
                         </TextBox>
-                        <Label Content="{StaticResource LblUnitKilogramPerMetre}" />
+                        <Label>
+                            <Binding Path="Value" Source="{x:Static data:UnitData.KilogramPerMetre}"></Binding>
+                        </Label>
                     </WrapPanel>
                     <WrapPanel Margin="0,10,0,0">
-                        <Grid Width="75" Margin="0,0,5,0">
+                        <Grid Width="95" Margin="0,0,5,0">
                             <Label x:Name="LblLength" HorizontalAlignment="Right">
                                 <Label.Content>
-                                    <Binding Path="LengthTitle" Mode="OneWay" />
+                                    <Binding Path="Value.LengthTitle.Value" Mode="OneWay" />
                                 </Label.Content>
                             </Label>
                         </Grid>
-                        <TextBox x:Name="Txtength" Width="120" MaxLength="10"
+                        <TextBox x:Name="Txtength" Width="100" MaxLength="10"
                              InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
                             <TextBox.Text>
-                                <Binding Path="Length.ItemValue" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"
+                                <Binding Path="Value.Length.Value" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"
                                          Converter="{StaticResource CurrentConfigValueConverter}">
                                 </Binding>
                             </TextBox.Text>
                         </TextBox>
-                        <Label Content="{StaticResource LblUnitMetre}" />
+                        <Label>
+                            <Binding Path="Value" Source="{x:Static data:UnitData.Metre}"></Binding>
+                        </Label>
                     </WrapPanel>
                 </StackPanel>
             </DockPanel>
         </DataTemplate>
-        <DataTemplate x:Key="ListViewItemTemplate2">
-            <DockPanel Width="280" Margin="40,0,0,0">
-                <Grid DockPanel.Dock="Left" Width="10">
-                    <Image Source="..\Resources\Images\DrillLeft2.png" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
-                </Grid>
-                <Grid DockPanel.Dock="Right" Width="10">
-                    <Image Source="..\Resources\Images\DrillRight2.png" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
-                </Grid>
-                <StackPanel>
-                    <Grid>
-                        <Label x:Name="LblName" HorizontalAlignment="Center" FontWeight="Bold">
-                            <Label.Content>
-                                <Binding Path="LocalName.ItemValue" Mode="OneWay" />
-                            </Label.Content>
-                        </Label>
-                    </Grid>
-                    <WrapPanel Margin="0,10,0,0">
-                        <Grid Width="75" Margin="0,0,5,0">
-                            <Label x:Name="LblWeight" HorizontalAlignment="Right">
-                                <Label.Content>
-                                    <Binding Path="WeightTitle" Mode="OneWay" />
-                                </Label.Content>
-                            </Label>
-                        </Grid>
-                        <TextBox x:Name="TxtWeight" Width="120" MaxLength="10"
-                             InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
-                            <TextBox.Text>
-                                <Binding Path="Weight.ItemValue" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"
-                                         Converter="{StaticResource CurrentConfigValueConverter}">
-                                </Binding>
-                            </TextBox.Text>
-                        </TextBox>
-                        <Label Content="{StaticResource LblUnitKilogramPerMetre}" />
-                    </WrapPanel>
-                    <WrapPanel Margin="0,10,0,0">
-                        <Grid Width="75" Margin="0,0,5,0">
-                            <Label x:Name="LblLength" HorizontalAlignment="Right">
-                                <Label.Content>
-                                    <Binding Path="LengthTitle" Mode="OneWay" />
-                                </Label.Content>
-                            </Label>
-                        </Grid>
-                        <TextBox x:Name="TxtLength" Width="120" MaxLength="10"
-                             InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
-                            <TextBox.Text>
-                                <Binding Path="Length.ItemValue" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"
-                                         Converter="{StaticResource CurrentConfigValueConverter}">
-                                </Binding>
-                            </TextBox.Text>
-                        </TextBox>
-                        <Label Content="{StaticResource LblUnitMetre}" />
-                    </WrapPanel>
-                    <WrapPanel Margin="0,10,0,0">
-                        <Grid Width="75" Margin="0,0,5,0">
-                            <Label x:Name="LblStandLength" HorizontalAlignment="Right">
-                                <Label.Content>
-                                    <Binding Path="StandLengthTitle" Mode="OneWay" />
-                                </Label.Content>
-                            </Label>
-                        </Grid>
-                        <TextBox x:Name="TxtStandLength" Width="120" MaxLength="10"
-                             InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
-                            <TextBox.Text>
-                                <Binding Path="StandLength.ItemValue" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"
-                                         Converter="{StaticResource CurrentConfigValueConverter}">
-                                </Binding>
-                            </TextBox.Text>
-                        </TextBox>
-                        <Label Content="{StaticResource LblUnitMetre}" />
-                    </WrapPanel>
-                </StackPanel>
-            </DockPanel>
+        <ControlTemplate x:Key="HistoryViewTemplate" TargetType="{x:Type ListView}">
+            <StackPanel>
+                <ItemsPresenter />
+            </StackPanel>
+        </ControlTemplate>
+        <DataTemplate x:Key="HistoryViewItemTemplate">
+            <Label HorizontalAlignment="Left">
+                <Label.Content>
+                    <Binding Path="Value.Text.Value" Mode="OneWay" />
+                </Label.Content>
+            </Label>
         </DataTemplate>
     </Window.Resources>
+    <Window.Title>
+        <Binding Path="WindowTitle.Value" Source="{StaticResource WindowDataKey}"></Binding>
+    </Window.Title>
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
         <DockPanel Margin="5">
             <Grid DockPanel.Dock="Top" Height="24">
                 <Menu Background="{x:Null}" BorderBrush="Black" BorderThickness="0,0,0,1">
-                    <MenuItem Name="MenuItemUser" Header="{StaticResource MenuItemUser}" Height="24">
-                        <MenuItem Name="MenuItemSignOut" Header="{StaticResource MenuItemSignOut}" Click="SignOut"/>
-                        <MenuItem Name="MenuItemExit" Header="{StaticResource MenuItemExit}" Click="Exit"/>
+                    <MenuItem Name="MenuItemUser" Header="{DynamicResource MenuItemUser}" Height="24">
+                        <MenuItem Name="MenuItemSignOut" Header="{DynamicResource MenuItemSignOut}" Click="SignOut"/>
+                        <MenuItem Name="MenuItemExit" Header="{DynamicResource MenuItemExit}" Click="Exit"/>
                     </MenuItem>
-                    <MenuItem Name="MenuItemReport" Header="{StaticResource MenuItemReport}" Height="24">
-                        <MenuItem Name="MenuItemReportCut" Header="{StaticResource MenuItemReportCut}" Click="OpenReportCut"/>
+                    <MenuItem Name="MenuItemReport" Header="{DynamicResource MenuItemReport}" Height="24">
+                        <MenuItem Name="MenuItemReportCut" Header="{DynamicResource MenuItemReportCut}" Click="OpenReportCut"/>
                     </MenuItem>
-                    <MenuItem Header="{StaticResource MenuItemSystem}" Height="24">
-                        <MenuItem Header="{StaticResource MenuItemOption}" Click="OpenOption"/>
-                        <MenuItem Name="MenuItemLang" Header="_Language" Visibility="Collapsed">
-                            <MenuItem Name="MenuItemEnglish" Header="English" Click="LanguageChange"/>
-                            <MenuItem Name="MenuItemChinese" Header="中文（简体）" Click="LanguageChange"/>
-                        </MenuItem>
+                    <MenuItem Name="MenuItemSystem" Header="{DynamicResource MenuItemSystem}" Height="24">
+                        <MenuItem Header="{DynamicResource MenuItemOption}" Click="OpenOption"/>
                         <MenuItem Header="_Help" Visibility="Collapsed"/>
                         <MenuItem Header="_About" Visibility="Collapsed"/>
                     </MenuItem>
@@ -220,120 +143,135 @@
                 <WrapPanel HorizontalAlignment="Left">
                     <Image Source="/SteelWire;component/Resources/Images/Icon.png" Width="60" Height="60" Margin="0,10"/>
                     <StackPanel Margin="0,14">
-                        <Label Content="{StaticResource CompanyNameCn}" FontSize="12" HorizontalAlignment="Left" />
-                        <Label Content="{StaticResource CompanyNameEn}" FontSize="12" HorizontalAlignment="Left" />
+                        <Label Content="{DynamicResource CompanyNameCn}" FontSize="12" HorizontalAlignment="Left" />
+                        <Label Content="{DynamicResource CompanyNameEn}" FontSize="12" HorizontalAlignment="Left" />
                     </StackPanel>
-                    <Label Content="{StaticResource AppTitle}" FontSize="24" FontWeight="Bold" Margin="10,19,0,19" />
+                    <Label Content="{DynamicResource AppTitle}" FontSize="24" FontWeight="Bold" Margin="10,19,0,19" />
                 </WrapPanel>
                 <Label FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0">
                     <Label.Content>
-                        <MultiBinding Converter="{StaticResource WindowTitleConverter}">
-                            <Binding Source="{StaticResource Welcome}"/>
-                            <Binding Path="UserDisplay.ItemValue" Source="{x:Static data:GlobalData.Data}"/>
-                        </MultiBinding>
+                        <Binding Path="WelcomeText.Value" Source="{StaticResource WindowDataKey}"></Binding>
                     </Label.Content>
                 </Label>
             </Grid>
-            <Expander DockPanel.Dock="Top" BorderBrush="#FFD5DFE5" Background="#FF3598DC" Foreground="White" BorderThickness="0,1,0,0">
-                <Expander.Header>
-                    <MultiBinding Converter="{StaticResource WindowTitleConverter}" Mode="OneWay">
-                        <Binding Source="{StaticResource GroupWirelineCuttingCriticalValueTitle}"/>
-                        <Binding Source=" -- "/>
-                        <Binding Source="{StaticResource LblWirelineCutLength}"/>
-                        <Binding Source="{StaticResource LblUnitMetre}"/>
-                        <Binding Path="WirelineCutLengthValue.ItemValue" Source="{StaticResource WindowData}"/>
-                        <Binding Source=" -- "/>
-                        <Binding Source="{StaticResource LblWirelineCuttingTitle}"/>
-                        <Binding Path="WirelineCuttingCriticalValue.ItemValue" Source="{StaticResource WindowData}"/>
-                        <Binding Source="{StaticResource LblUnitTonKilometre}"/>
-                    </MultiBinding>
-                </Expander.Header>
+            <Expander Header="{DynamicResource GroupWirelineCuttingCriticalValueTitle}" DockPanel.Dock="Top" BorderBrush="#FFD5DFE5" Background="#FF3598DC" Foreground="White" BorderThickness="0,1,0,0">
                 <Border Margin="0" Background="White" BorderThickness="1,0,1,1" BorderBrush="#FFD5DFE5">
-                    <DockPanel Margin="0,0,10,0">
+                    <DockPanel Margin="0,10,10,10">
                         <WrapPanel DockPanel.Dock="Top">
-                            <WrapPanel Margin="10,20,0,0" Width="320">
+                            <WrapPanel Margin="10,0,0,0" Width="320">
                                 <Grid Width="125" Margin="0,0,5,0">
-                                    <Label x:Name="LblDerrickHeight" Content="{StaticResource LblDerrickHeight}" HorizontalAlignment="Right"/>
+                                    <Label x:Name="LblDerrickHeight" Content="{DynamicResource LblDerrickHeight}" HorizontalAlignment="Right"/>
                                 </Grid>
                                 <TextBox x:Name="TxtDerrickHeight" Width="120" MaxLength="10"
                 						InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
-                                    <Binding Path="DerrickHeight.ItemValue" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"
-                							Source="{StaticResource WindowData}"
+                                    <Binding Path="DerrickHeight.Value" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"
+                							Source="{StaticResource WindowDataKey}"
                 							Converter="{StaticResource CurrentConfigValueConverter}">
                                         <Binding.ValidationRules>
                                             <validationRule:DecimalValidationRule />
                                         </Binding.ValidationRules>
                                     </Binding>
                                 </TextBox>
-                                <Label Content="{StaticResource LblUnitMetre}" />
+                                <Label>
+                                    <Binding Path="Value" Source="{x:Static data:UnitData.Metre}"></Binding>
+                                </Label>
                             </WrapPanel>
-                            <WrapPanel Margin="0,20,0,0">
+                            <WrapPanel Margin="0,0,0,0" Width="320">
                                 <Grid Width="125" Margin="0,0,5,0">
-                                    <Label x:Name="LblWirelineCutLength" HorizontalAlignment="Right" Content="{StaticResource LblWirelineCutLength}"/>
+                                    <Label x:Name="LblDrillingType" Content="{DynamicResource LblDrillingType}" HorizontalAlignment="Right"/>
                                 </Grid>
-                                <TextBox x:Name="TxtWirelineCutLengthValue" IsReadOnly="True" Padding="10,5,10,0" BorderThickness="0,0,0,1"
-                						FontSize="14" FontWeight="Bold">
-                                    <TextBox.Foreground>
-                                        <Binding Path="WirelineCutLengthValue.ItemValue"
-                                                 Converter="{StaticResource CurrentConfigForeColorConverter}" Mode="OneWay"
-                                                 Source="{StaticResource WindowData}" />
-                                    </TextBox.Foreground>
+                                <ComboBox x:Name="CboDrillingType" Width="120" SelectedValuePath="Key" DisplayMemberPath="Value.Value">
+                                    <ComboBox.SelectedValue>
+                                        <Binding Path="DrillingType.Value" Mode="TwoWay" Source="{StaticResource WindowDataKey}"
+                                             UpdateSourceTrigger="PropertyChanged" />
+                                    </ComboBox.SelectedValue>
+                                </ComboBox>
+                            </WrapPanel>
+                            <WrapPanel Margin="0,0,0,0" Width="320">
+                                <Grid Width="125" Margin="0,0,5,0">
+                                    <Label x:Name="LblElevatorWeight" Content="{DynamicResource LblElevatorWeight}" HorizontalAlignment="Right"/>
+                                </Grid>
+                                <TextBox x:Name="TxtElevatorWeight" Width="120" MaxLength="10"
+            						InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
                                     <TextBox.Text>
-                                        <Binding Path="WirelineCutLengthValue.ItemValue"
-                                                 Converter="{StaticResource ReadOnlyResultValueConverter}" Mode="OneWay"
-                                                 Source="{StaticResource WindowData}" />
+                                        <Binding Path="ElevatorWeight.Value" Converter="{StaticResource CurrentConfigValueConverter}" Mode="TwoWay"
+                                                 Source="{StaticResource WindowDataKey}" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <validationRule:DecimalValidationRule />
+                                            </Binding.ValidationRules>
+                                        </Binding>
                                     </TextBox.Text>
-                                    <TextBox.BorderBrush>
-                                        <LinearGradientBrush>
-                                            <GradientStop Color="Black"/>
-                                        </LinearGradientBrush>
-                                    </TextBox.BorderBrush>
                                 </TextBox>
-                                <Label Content="{StaticResource LblUnitMetre}" FontSize="14" />
+                                <Label>
+                                    <Binding Path="Value" Source="{x:Static data:UnitData.Kilogram}"></Binding>
+                                </Label>
+                            </WrapPanel>
+                            <WrapPanel Margin="0,0,0,0" Width="320">
+                                <Grid Width="125" Margin="0,0,5,0">
+                                    <Label x:Name="LblRollerDiameter" Content="{DynamicResource LblRollerDiameter}" HorizontalAlignment="Right"/>
+                                </Grid>
+                                <TextBox x:Name="TxtRollerDiameter" Width="120" MaxLength="10"
+                						InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
+                                    <TextBox.Text>
+                                        <Binding Path="RollerDiameter.Value" Converter="{StaticResource CurrentConfigValueConverter}" Mode="TwoWay"
+                                                 Source="{StaticResource WindowDataKey}" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <validationRule:DecimalValidationRule />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                <Label>
+                                    <Binding Path="Value" Source="{x:Static data:UnitData.Millimetre}"></Binding>
+                                </Label>
                             </WrapPanel>
                         </WrapPanel>
-                        <WrapPanel DockPanel.Dock="Top">
-                            <WrapPanel Margin="5,20,0,0" Width="325">
+                        <WrapPanel DockPanel.Dock="Top" Margin="0,10,0,0">
+                            <WrapPanel Margin="5,0,0,0" Width="325">
                                 <Grid Width="130" Margin="0,0,5,0">
-                                    <Label x:Name="LblWirelineMaxPower" Content="{StaticResource LblWirelineMaxPower}" HorizontalAlignment="Right"/>
+                                    <Label x:Name="LblWirelineMaxPower" Content="{DynamicResource LblWirelineMaxPower}" HorizontalAlignment="Right"/>
                                 </Grid>
                                 <TextBox x:Name="TxtWirelineMaxPower" Width="120" MaxLength="10"
                 						InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
                                     <TextBox.Text>
-                                        <Binding Path="WirelineMaxPower.ItemValue" Converter="{StaticResource CurrentConfigValueConverter}"
-                                                 Mode="TwoWay" Source="{StaticResource WindowData}" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding Path="WirelineMaxPower.Value" Converter="{StaticResource CurrentConfigValueConverter}"
+                                                 Mode="TwoWay" Source="{StaticResource WindowDataKey}" UpdateSourceTrigger="PropertyChanged">
                                             <Binding.ValidationRules>
                                                 <validationRule:DecimalValidationRule />
                                             </Binding.ValidationRules>
                                         </Binding>
                                     </TextBox.Text>
                                 </TextBox>
-                                <Label Content="{StaticResource LblUnitKilonewton}" />
+                                <Label>
+                                    <Binding Path="Value" Source="{x:Static data:UnitData.Kilonewton}"></Binding>
+                                </Label>
                             </WrapPanel>
-                            <WrapPanel Margin="0,20,0,0" Width="320">
+                            <WrapPanel Margin="0,0,0,0" Width="320">
                                 <Grid Width="125" Margin="0,0,5,0">
-                                    <Label x:Name="LblRotaryHookWorkload" Content="{StaticResource LblRotaryHookWorkload}" HorizontalAlignment="Right"/>
+                                    <Label x:Name="LblRotaryHookWorkload" Content="{DynamicResource LblRotaryHookWorkload}" HorizontalAlignment="Right"/>
                                 </Grid>
                                 <TextBox x:Name="TxtRotaryHookWorkload" Width="120" MaxLength="10"
                 						InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
                                     <TextBox.Text>
-                                        <Binding Path="RotaryHookWorkload.ItemValue" Converter="{StaticResource CurrentConfigValueConverter}"
-                                                 Mode="TwoWay" Source="{StaticResource WindowData}" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding Path="RotaryHookWorkload.Value" Converter="{StaticResource CurrentConfigValueConverter}"
+                                                 Mode="TwoWay" Source="{StaticResource WindowDataKey}" UpdateSourceTrigger="PropertyChanged">
                                             <Binding.ValidationRules>
                                                 <validationRule:DecimalValidationRule />
                                             </Binding.ValidationRules>
                                         </Binding>
                                     </TextBox.Text>
                                 </TextBox>
-                                <Label Content="{StaticResource LblUnitTon}" />
+                                <Label>
+                                    <Binding Path="Value" Source="{x:Static data:UnitData.Kilonewton}"></Binding>
+                                </Label>
                             </WrapPanel>
-                            <WrapPanel Margin="0,20,0,0" Width="320">
+                            <WrapPanel Margin="0,0,0,0" Width="320">
                                 <Grid Width="125" Margin="0,0,5,0">
-                                    <Label x:Name="LblRopeCount" Content="{StaticResource LblRopeCount}" HorizontalAlignment="Right"/>
+                                    <Label x:Name="LblRopeCount" Content="{DynamicResource LblRopeCount}" HorizontalAlignment="Right"/>
                                 </Grid>
                                 <ComboBox x:Name="CboRopeCount" Width="120">
                                     <ComboBox.SelectedValue>
-                                        <Binding Path="RopeCount.ItemValue" Mode="TwoWay" Source="{StaticResource WindowData}"
+                                        <Binding Path="RopeCount.Value" Mode="TwoWay" Source="{StaticResource WindowDataKey}"
                                                  UpdateSourceTrigger="PropertyChanged">
                                             <Binding.ValidationRules>
                                                 <validationRule:IntValidationRule />
@@ -342,55 +280,13 @@
                                     </ComboBox.SelectedValue>
                                 </ComboBox>
                             </WrapPanel>
-                            <WrapPanel Margin="0,20,0,0">
+                            <WrapPanel Margin="0,0,0,0" Width="320">
                                 <Grid Width="125" Margin="0,0,5,0">
-                                    <Label x:Name="LblSecurityCoefficient" HorizontalAlignment="Right" Content="{StaticResource LblSecurityCoefficient}"/>
-                                </Grid>
-                                <TextBox x:Name="TxtSecurityCoefficientValue" IsReadOnly="True" Padding="10,5,10,0" BorderThickness="0,0,0,1"
-                						FontSize="14" FontWeight="Bold">
-                                    <TextBox.Foreground>
-                                        <Binding Path="SecurityCoefficientValue.ItemValue"
-                                                 Converter="{StaticResource CurrentConfigForeColorConverter}" Mode="OneWay"
-                                                 Source="{StaticResource WindowData}" />
-                                    </TextBox.Foreground>
-                                    <TextBox.Text>
-                                        <Binding Path="SecurityCoefficientValue.ItemValue"
-                                                 Converter="{StaticResource ReadOnlyResultValueConverter}" Mode="OneWay"
-                                                 Source="{StaticResource WindowData}" />
-                                    </TextBox.Text>
-                                    <TextBox.BorderBrush>
-                                        <LinearGradientBrush>
-                                            <GradientStop Color="Black"/>
-                                        </LinearGradientBrush>
-                                    </TextBox.BorderBrush>
-                                </TextBox>
-                            </WrapPanel>
-                        </WrapPanel>
-                        <WrapPanel DockPanel.Dock="Top">
-                            <WrapPanel Margin="10,20,0,0" Width="320">
-                                <Grid Width="125" Margin="0,0,5,0">
-                                    <Label x:Name="LblRollerDiameter" Content="{StaticResource LblRollerDiameter}" HorizontalAlignment="Right"/>
-                                </Grid>
-                                <TextBox x:Name="TxtRollerDiameter" Width="120" MaxLength="10"
-                						InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
-                                    <TextBox.Text>
-                                        <Binding Path="RollerDiameter.ItemValue" Converter="{StaticResource CurrentConfigValueConverter}" Mode="TwoWay"
-                                                 Source="{StaticResource WindowData}" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <validationRule:DecimalValidationRule />
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
-                                </TextBox>
-                                <Label Content="{StaticResource LblUnitMillimetre}" />
-                            </WrapPanel>
-                            <WrapPanel Margin="0,20,0,0" Width="320">
-                                <Grid Width="125" Margin="0,0,5,0">
-                                    <Label x:Name="LblWirelineDiameter" Content="{StaticResource LblWirelineDiameter}" HorizontalAlignment="Right"/>
+                                    <Label x:Name="LblWirelineDiameter" Content="{DynamicResource LblWirelineDiameter}" HorizontalAlignment="Right"/>
                                 </Grid>
                                 <ComboBox x:Name="CboWirelineDiameter" Width="120">
                                     <ComboBox.SelectedValue>
-                                        <Binding Path="WirelineDiameter.ItemValue" Mode="TwoWay" Source="{StaticResource WindowData}"
+                                        <Binding Path="Diameter.Value" Mode="TwoWay" Source="{x:Static data:GlobalData.Wireline}"
                                                  UpdateSourceTrigger="PropertyChanged">
                                             <Binding.ValidationRules>
                                                 <validationRule:DecimalValidationRule />
@@ -398,106 +294,79 @@
                                         </Binding>
                                     </ComboBox.SelectedValue>
                                 </ComboBox>
-                                <Label Content="{StaticResource LblUnitMillimetre}" />
+                                <Label>
+                                    <Binding Path="Value" Source="{x:Static data:UnitData.Millimetre}"></Binding>
+                                </Label>
                             </WrapPanel>
-                            <WrapPanel Margin="0,20,0,0">
+                        </WrapPanel>
+                        <WrapPanel DockPanel.Dock="Top" Margin="0,10,0,0">
+                            <WrapPanel Margin="10,0,0,0" Width="320">
                                 <Grid Width="125" Margin="0,0,5,0">
-                                    <Label x:Name="LblPulleyCoefficient" HorizontalAlignment="Right" Content="{StaticResource LblPulleyCoefficient}"/>
+                                    <Label x:Name="LblWireLineStruct" Content="{DynamicResource LblWireLineStruct}" HorizontalAlignment="Right"/>
                                 </Grid>
-                                <TextBox x:Name="TxtPulleyCoefficientValue" IsReadOnly="True" Padding="10,5,10,0" BorderThickness="0,0,0,1"
-                						FontSize="14" FontWeight="Bold">
-                                    <TextBox.Foreground>
-                                        <Binding Path="PulleyCoefficientValue.ItemValue"
-                                                 Converter="{StaticResource CurrentConfigForeColorConverter}" Mode="OneWay"
-                                                 Source="{StaticResource WindowData}" />
-                                    </TextBox.Foreground>
+                                <TextBox x:Name="TxtWireLineStruct" Width="120">
                                     <TextBox.Text>
-                                        <Binding Path="PulleyCoefficientValue.ItemValue"
-                                                 Converter="{StaticResource ReadOnlyResultValueConverter}" Mode="OneWay"
-                                                 Source="{StaticResource WindowData}" />
+                                        <Binding Path="Struct.Value" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"
+                							Source="{x:Static data:GlobalData.Wireline}">
+                                        </Binding>
                                     </TextBox.Text>
-                                    <TextBox.BorderBrush>
-                                        <LinearGradientBrush>
-                                            <GradientStop Color="Black"/>
-                                        </LinearGradientBrush>
-                                    </TextBox.BorderBrush>
+                                </TextBox>
+                            </WrapPanel>
+                            <WrapPanel Margin="0,0,0,0" Width="320">
+                                <Grid Width="125" Margin="0,0,5,0">
+                                    <Label x:Name="LblWireLineStrongLevel" Content="{DynamicResource LblWireLineStrongLevel}" HorizontalAlignment="Right"/>
+                                </Grid>
+                                <TextBox x:Name="TxtWireLineStrongLevel" Width="120">
+                                    <TextBox.Text>
+                                        <Binding Path="StrongLevel.Value" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"
+                							Source="{x:Static data:GlobalData.Wireline}">
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                            </WrapPanel>
+                            <WrapPanel Margin="0,0,0,0" Width="320">
+                                <Grid Width="125" Margin="0,0,5,0">
+                                    <Label x:Name="LblWireLineTwistDirection" Content="{DynamicResource LblWireLineTwistDirection}" HorizontalAlignment="Right"/>
+                                </Grid>
+                                <TextBox x:Name="TxtWireLineTwistDirection" Width="120">
+                                    <TextBox.Text>
+                                        <Binding Path="TwistDirection.Value" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"
+                							Source="{x:Static data:GlobalData.Wireline}">
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                            </WrapPanel>
+                            <WrapPanel Margin="0,0,0,0" Width="320">
+                                <Grid Width="125" Margin="0,0,5,0">
+                                    <Label x:Name="LblWireLineOrderLength" Content="{DynamicResource LblWireLineOrderLength}" HorizontalAlignment="Right"/>
+                                </Grid>
+                                <TextBox x:Name="TxtWireLineOrderLength" Width="120" MaxLength="10"
+                                         InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
+                                    <TextBox.Text>
+                                        <Binding Path="OrderLength.Value" Converter="{StaticResource CurrentConfigValueConverter}"
+                                                 Mode="TwoWay" Source="{x:Static data:GlobalData.Wireline}" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <validationRule:DecimalValidationRule />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
                                 </TextBox>
                             </WrapPanel>
                         </WrapPanel>
-                        <DockPanel Margin="0,10">
-                            <WrapPanel HorizontalAlignment="Center">
-                                <Label x:Name="LblWirelineCuttingTitle" Content="{StaticResource LblWirelineCuttingTitle}" FontSize="14" />
-                                <TextBox x:Name="TxtWirelineCuttingValue" IsReadOnly="True" Padding="10,5,10,0" BorderThickness="0,0,0,1"
-                						FontSize="14" FontWeight="Bold">
-                                    <TextBox.Foreground>
-                                        <Binding Path="WirelineCuttingCriticalValue.ItemValue"
-                                                 Converter="{StaticResource CurrentConfigForeColorConverter}" Mode="OneWay"
-                                                 Source="{StaticResource WindowData}" />
-                                    </TextBox.Foreground>
-                                    <TextBox.Text>
-                                        <Binding Path="WirelineCuttingCriticalValue.ItemValue"
-                                                 Converter="{StaticResource ReadOnlyResultValueConverter}" Mode="OneWay"
-                                                 Source="{StaticResource WindowData}" />
-                                    </TextBox.Text>
-                                    <TextBox.BorderBrush>
-                                        <LinearGradientBrush>
-                                            <GradientStop Color="Black"/>
-                                        </LinearGradientBrush>
-                                    </TextBox.BorderBrush>
-                                </TextBox>
-                                <Label Content="{StaticResource LblUnitTonKilometre}" FontSize="14" />
-                            </WrapPanel>
-                        </DockPanel>
                     </DockPanel>
                 </Border>
             </Expander>
-            <Expander Header="{StaticResource GroupCommonCoefficientTitle}" DockPanel.Dock="Top"
+            <Expander Header="{DynamicResource GroupCommonCoefficientTitle}" DockPanel.Dock="Top"
                       BorderBrush="#FFD5DFE5" Background="#FF3598DC" Foreground="White" Margin="0,2,0,0" BorderThickness="0,1,0,0">
                 <Border Margin="0" Background="White" BorderThickness="1,0,1,1" BorderBrush="#FFD5DFE5">
                     <DockPanel Margin="10,0,10,0">
-                        <WrapPanel DockPanel.Dock="Top">
-                            <WrapPanel Margin="0,20,0,0" Width="335">
-                                <Grid Width="125" Margin="0,0,5,0">
-                                    <Label x:Name="LblFluidDensity" Content="{StaticResource LblFluidDensity}" HorizontalAlignment="Right"/>
-                                </Grid>
-                                <TextBox x:Name="TxtFluidDensity" Width="120" MaxLength="10"
-            						InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
-                                    <TextBox.Text>
-                                        <Binding Path="FluidDensity.ItemValue" Converter="{StaticResource CurrentConfigValueConverter}" Mode="TwoWay"
-                                                 Source="{StaticResource WindowData}" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <validationRule:DecimalValidationRule />
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
-                                </TextBox>
-                                <Label Content="{StaticResource LblUnitKilogramPerCubicMeter}" />
-                            </WrapPanel>
-                            <WrapPanel Margin="0,20,0,0" Width="305">
-                                <Grid Width="110" Margin="0,0,5,0">
-                                    <Label x:Name="LblElevatorWeight" Content="{StaticResource LblElevatorWeight}" HorizontalAlignment="Right"/>
-                                </Grid>
-                                <TextBox x:Name="TxtElevatorWeight" Width="120" MaxLength="10"
-            						InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
-                                    <TextBox.Text>
-                                        <Binding Path="ElevatorWeight.ItemValue" Converter="{StaticResource CurrentConfigValueConverter}" Mode="TwoWay"
-                                                 Source="{StaticResource WindowData}" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <validationRule:DecimalValidationRule />
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
-                                </TextBox>
-                                <Label Content="{StaticResource LblUnitKilogram}" />
-                            </WrapPanel>
-                        </WrapPanel>
                         <WrapPanel Margin="0,0,0,10">
                             <ListView x:Name="ListViewDrillPipes"
-            					Template="{StaticResource ListViewTemplate}"
-            					ItemTemplate="{StaticResource ListViewItemTemplate2}"
-            					ItemContainerStyle="{StaticResource ListViewItemContainerStyle}" Margin="0,10,0,0">
+            					Template="{DynamicResource ListViewTemplate}"
+            					ItemTemplate="{DynamicResource ListViewItemTemplate}"
+            					ItemContainerStyle="{DynamicResource ListViewItemContainerStyle}" Margin="0,10,0,0">
                                 <ListView.ItemsSource>
-                                    <Binding Path="DrillPipes.DrillPipes.Items" Mode="OneWay" Source="{StaticResource WindowData}"
+                                    <Binding Path="DrillPipes.Items" Mode="OneWay" Source="{StaticResource WindowDataKey}"
                                              UpdateSourceTrigger="PropertyChanged" />
                                 </ListView.ItemsSource>
                                 <ListView.ItemsPanel>
@@ -507,11 +376,11 @@
                                 </ListView.ItemsPanel>
                             </ListView>
                             <ListView x:Name="ListViewHeavierDrillPipes"
-            					Template="{StaticResource ListViewTemplate}"
-            					ItemTemplate="{StaticResource ListViewItemTemplate}"
-            					ItemContainerStyle="{StaticResource ListViewItemContainerStyle}" Margin="0,10,0,0">
+            					Template="{DynamicResource ListViewTemplate}"
+            					ItemTemplate="{DynamicResource ListViewItemTemplate}"
+            					ItemContainerStyle="{DynamicResource ListViewItemContainerStyle}" Margin="0,10,0,0">
                                 <ListView.ItemsSource>
-                                    <Binding Path="DrillPipes.HeavierDrillPipes.Items" Mode="OneWay" Source="{StaticResource WindowData}"
+                                    <Binding Path="HeavierDrillPipes.Items" Mode="OneWay" Source="{StaticResource WindowDataKey}"
                                              UpdateSourceTrigger="PropertyChanged" />
                                 </ListView.ItemsSource>
                                 <ListView.ItemsPanel>
@@ -521,11 +390,25 @@
                                 </ListView.ItemsPanel>
                             </ListView>
                             <ListView x:Name="ListViewDrillCollars"
-            					Template="{StaticResource ListViewTemplate}"
-            					ItemTemplate="{StaticResource ListViewItemTemplate}"
-            					ItemContainerStyle="{StaticResource ListViewItemContainerStyle}" Margin="0,10,0,0">
+            					Template="{DynamicResource ListViewTemplate}"
+            					ItemTemplate="{DynamicResource ListViewItemTemplate}"
+            					ItemContainerStyle="{DynamicResource ListViewItemContainerStyle}" Margin="0,10,0,0">
                                 <ListView.ItemsSource>
-                                    <Binding Path="DrillCollars.Items" Mode="OneWay" Source="{StaticResource WindowData}"
+                                    <Binding Path="DrillCollars.Items" Mode="OneWay" Source="{StaticResource WindowDataKey}"
+                                             UpdateSourceTrigger="PropertyChanged" />
+                                </ListView.ItemsSource>
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel/>
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+                            </ListView>
+                            <ListView x:Name="ListViewBushing"
+            					Template="{DynamicResource ListViewTemplate}"
+            					ItemTemplate="{DynamicResource ListViewItemTemplate}"
+            					ItemContainerStyle="{DynamicResource ListViewItemContainerStyle}" Margin="0,10,0,0">
+                                <ListView.ItemsSource>
+                                    <Binding Path="Bushings.Items" Mode="OneWay" Source="{StaticResource WindowDataKey}"
                                              UpdateSourceTrigger="PropertyChanged" />
                                 </ListView.ItemsSource>
                                 <ListView.ItemsPanel>
@@ -538,415 +421,509 @@
                     </DockPanel>
                 </Border>
             </Expander>
-            <UniformGrid DockPanel.Dock="Top" VerticalAlignment="Top" Rows="1" Columns="4" Margin="0,5,0,0">
-                <GroupBox Header="{StaticResource GroupDrillingWorkTitle}">
-                    <DockPanel>
-                        <Grid DockPanel.Dock="Bottom" Margin="0,20,0,10">
-                            <WrapPanel HorizontalAlignment="Center" Margin="0">
-                                <Label x:Name="LblDrillingTitle" Content="{StaticResource LblValueTitle}" FontSize="14" />
-                                <TextBox x:Name="TxtDrillingValue" IsReadOnly="True" Padding="10,5,10,0" BorderThickness="0,0,0,1" FontSize="14" FontWeight="Bold">
+            <Grid DockPanel.Dock="Top" Margin="0,5,0,0">
+                <Border Margin="0" Background="White" BorderThickness="1,1,1,1" BorderBrush="#FFD5DFE5">
+                    <StackPanel Margin="0,0,0,0">
+                        <Label DockPanel.Dock="Top" Content="{DynamicResource LblOperationProcessCalculation}" Background="#FF3598DC" Foreground="White">
+                        </Label>
+                        <WrapPanel DockPanel.Dock="Top" Margin="0,10,0,10">
+                            <WrapPanel Margin="49,0,0,0">
+                                <Grid Width="125" Margin="0,0,5,0">
+                                    <Label x:Name="LblFluidDensity" Content="{DynamicResource LblFluidDensity}" HorizontalAlignment="Right"/>
+                                </Grid>
+                                <TextBox x:Name="TxtFluidDensity" Width="120" MaxLength="10"
+            						InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
+                                    <TextBox.Text>
+                                        <Binding Path="FluidDensity.Value" Converter="{StaticResource CurrentConfigValueConverter}" Mode="TwoWay"
+                                                 Source="{StaticResource WindowDataKey}" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <validationRule:DecimalValidationRule />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                <Label>
+                                    <Binding Path="Value" Source="{x:Static data:UnitData.GramPerCubicCentimetre}"></Binding>
+                                </Label>
+                            </WrapPanel>
+                            <WrapPanel Margin="40,0,0,0">
+                                <Grid Margin="0,0,5,0">
+                                    <Label x:Name="LblRealRotaryHookWorkload" Content="{DynamicResource LblRealRotaryHookWorkload}" HorizontalAlignment="Right"/>
+                                </Grid>
+                                <TextBox x:Name="TxtRealRotaryHookWorkload" Width="120" MaxLength="10"
+                						InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
+                                    <TextBox.Text>
+                                        <Binding Path="RealRotaryHookWorkload.Value" Converter="{StaticResource CurrentConfigValueConverter}"
+                                                 Mode="TwoWay" Source="{StaticResource WindowDataKey}" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <validationRule:DecimalValidationRule />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                <Label>
+                                    <Binding Path="Value" Source="{x:Static data:UnitData.Kilonewton}"></Binding>
+                                </Label>
+                            </WrapPanel>
+                        </WrapPanel>
+                        <UniformGrid DockPanel.Dock="Top" VerticalAlignment="Top" Rows="1" Columns="4" Margin="0,5,0,0">
+                            <GroupBox Header="{DynamicResource GroupDrillingWorkTitle}">
+                                <DockPanel Margin="0,10,0,10">
+                                    <Grid DockPanel.Dock="Bottom" Margin="0,10,0,0">
+                                        <WrapPanel HorizontalAlignment="Center" Margin="0">
+                                            <Label x:Name="LblDrillingTitle" Content="{DynamicResource LblValueTitle}" FontSize="14" />
+                                            <TextBox x:Name="TxtDrillingValue" IsReadOnly="True" Padding="10,5,10,0" BorderThickness="0,0,0,1" FontSize="14" FontWeight="Bold">
+                                                <TextBox.BorderBrush>
+                                                    <LinearGradientBrush>
+                                                        <GradientStop Color="Black"/>
+                                                    </LinearGradientBrush>
+                                                </TextBox.BorderBrush>
+                                                <TextBox.Text>
+                                                    <Binding Path="DrillingWorkValue.Value" Converter="{StaticResource ReadOnlyResultValueConverter}"
+                                             Mode="OneWay" Source="{StaticResource WindowDataKey}" />
+                                                </TextBox.Text>
+                                                <TextBox.Foreground>
+                                                    <Binding Path="DrillingWorkValue.Value" Converter="{StaticResource CurrentConfigForeColorConverter}"
+                                             Mode="OneWay" Source="{StaticResource WindowDataKey}" />
+                                                </TextBox.Foreground>
+                                            </TextBox>
+                                            <Label>
+                                                <Binding Path="Value" Source="{x:Static data:UnitData.TonKilometre}"></Binding>
+                                            </Label>
+                                        </WrapPanel>
+                                    </Grid>
+                                    <StackPanel>
+                                        <WrapPanel Margin="0,0,0,0" Width="300" HorizontalAlignment="Center">
+                                            <Grid Width="120" Margin="0,0,5,0">
+                                                <Label x:Name="LblDrillingShallowHeight" Content="{DynamicResource LblShallowHeight}" HorizontalAlignment="Right"/>
+                                            </Grid>
+                                            <TextBox x:Name="TxtDrillingShallowHeight" Width="120" MaxLength="10" 
+                                         InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
+                                                <TextBox.Text>
+                                                    <Binding Path="DrillingShallowHeight.Value" Converter="{StaticResource CurrentConfigValueConverter}"
+                                             Mode="TwoWay" Source="{StaticResource WindowDataKey}" UpdateSourceTrigger="PropertyChanged">
+                                                        <Binding.ValidationRules>
+                                                            <validationRule:DecimalValidationRule />
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                                </TextBox.Text>
+                                            </TextBox>
+                                            <Label>
+                                                <Binding Path="Value" Source="{x:Static data:UnitData.Metre}"></Binding>
+                                            </Label>
+                                        </WrapPanel>
+                                        <WrapPanel Margin="0,10,0,0" Width="300" HorizontalAlignment="Center">
+                                            <Grid Width="120" Margin="0,0,5,0">
+                                                <Label x:Name="LblDrillingDeepHeight" Content="{DynamicResource LblDeepHeight}" HorizontalAlignment="Right"/>
+                                            </Grid>
+                                            <TextBox x:Name="TxtDrillingDeepHeight" Width="120" MaxLength="10"
+                                         InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
+                                                <TextBox.Text>
+                                                    <Binding Path="DrillingDeepHeight.Value" Converter="{StaticResource CurrentConfigValueConverter}"
+                                             Mode="TwoWay" Source="{StaticResource WindowDataKey}" UpdateSourceTrigger="PropertyChanged">
+                                                        <Binding.ValidationRules>
+                                                            <validationRule:DecimalValidationRule />
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                                </TextBox.Text>
+                                            </TextBox>
+                                            <Label>
+                                                <Binding Path="Value" Source="{x:Static data:UnitData.Metre}"></Binding>
+                                            </Label>
+                                        </WrapPanel>
+                                        <WrapPanel Margin="0,10,0,0" Width="300" HorizontalAlignment="Center">
+                                            <Grid Width="120" Margin="0,0,5,0">
+                                                <Label x:Name="LblRedressingCount" Content="{DynamicResource LblRedressingCount}" HorizontalAlignment="Right"/>
+                                            </Grid>
+                                            <TextBox x:Name="TxtRedressingCount" Width="120" MaxLength="10"
+                                         InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="IntBoxPreviewKeyDownEvent">
+                                                <TextBox.Text>
+                                                    <Binding Path="RedressingCount.Value" Converter="{StaticResource CurrentConfigValueConverter}"
+                                             Mode="TwoWay" Source="{StaticResource WindowDataKey}" UpdateSourceTrigger="PropertyChanged">
+                                                        <Binding.ValidationRules>
+                                                            <validationRule:DecimalValidationRule />
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                                </TextBox.Text>
+                                            </TextBox>
+                                        </WrapPanel>
+                                    </StackPanel>
+                                </DockPanel>
+                            </GroupBox>
+                            <GroupBox Header="{DynamicResource GroupTripWorkTitle}">
+                                <DockPanel Margin="0,10,0,10">
+                                    <Grid DockPanel.Dock="Bottom" Margin="0,10,0,0">
+                                        <WrapPanel HorizontalAlignment="Center" Margin="0">
+                                            <Label x:Name="LblTripTitle" Content="{DynamicResource LblValueTitle}" FontSize="14" />
+                                            <TextBox x:Name="TxtTripValue" IsReadOnly="True" Padding="10,5,10,0" BorderThickness="0,0,0,1" FontSize="14" FontWeight="Bold">
+                                                <TextBox.BorderBrush>
+                                                    <LinearGradientBrush>
+                                                        <GradientStop Color="Black"/>
+                                                    </LinearGradientBrush>
+                                                </TextBox.BorderBrush>
+                                                <TextBox.Text>
+                                                    <Binding Path="TripWorkValue.Value" Converter="{StaticResource ReadOnlyResultValueConverter}" Mode="OneWay"
+                                             Source="{StaticResource WindowDataKey}" />
+                                                </TextBox.Text>
+                                                <TextBox.Foreground>
+                                                    <Binding Path="TripWorkValue.Value" Converter="{StaticResource CurrentConfigForeColorConverter}"
+                                             Mode="OneWay" Source="{StaticResource WindowDataKey}" />
+                                                </TextBox.Foreground>
+                                            </TextBox>
+                                            <Label>
+                                                <Binding Path="Value" Source="{x:Static data:UnitData.TonKilometre}"></Binding>
+                                            </Label>
+                                        </WrapPanel>
+                                    </Grid>
+                                    <StackPanel>
+                                        <WrapPanel Margin="0,0,0,0" Width="300" HorizontalAlignment="Center">
+                                            <Grid Width="120" Margin="0,0,5,0">
+                                                <Label x:Name="LblTripShallowHeight" Content="{DynamicResource LblShallowHeight}" HorizontalAlignment="Right"/>
+                                            </Grid>
+                                            <TextBox x:Name="TxtTripShallowHeight" Width="120" MaxLength="10"
+                                         InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
+                                                <TextBox.Text>
+                                                    <Binding Path="TripShallowHeight.Value" Converter="{StaticResource CurrentConfigValueConverter}"
+                                             Mode="TwoWay" Source="{StaticResource WindowDataKey}" UpdateSourceTrigger="PropertyChanged">
+                                                        <Binding.ValidationRules>
+                                                            <validationRule:DecimalValidationRule />
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                                </TextBox.Text>
+                                            </TextBox>
+                                            <Label>
+                                                <Binding Path="Value" Source="{x:Static data:UnitData.Metre}"></Binding>
+                                            </Label>
+                                        </WrapPanel>
+                                        <WrapPanel Margin="0,10,0,0" Width="300" HorizontalAlignment="Center">
+                                            <Grid Width="120" Margin="0,0,5,0">
+                                                <Label x:Name="LblTripDeepHeight" Content="{DynamicResource LblDeepHeight}" HorizontalAlignment="Right"/>
+                                            </Grid>
+                                            <TextBox x:Name="TxtTripDeepHeight" Width="120" MaxLength="10"
+                                         InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
+                                                <TextBox.Text>
+                                                    <Binding Path="TripDeepHeight.Value" Converter="{StaticResource CurrentConfigValueConverter}" Mode="TwoWay"
+                                             Source="{StaticResource WindowDataKey}" UpdateSourceTrigger="PropertyChanged">
+                                                        <Binding.ValidationRules>
+                                                            <validationRule:DecimalValidationRule />
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                                </TextBox.Text>
+                                            </TextBox>
+                                            <Label>
+                                                <Binding Path="Value" Source="{x:Static data:UnitData.Metre}"></Binding>
+                                            </Label>
+                                        </WrapPanel>
+                                        <WrapPanel Margin="0,10,0,0" Width="300" HorizontalAlignment="Center">
+                                            <Grid Width="120" Margin="0,0,5,0">
+                                                <Label x:Name="LblTripCount" Content="{DynamicResource LblTripCount}" HorizontalAlignment="Right"/>
+                                            </Grid>
+                                            <TextBox x:Name="TxtTripCount" Width="120" MaxLength="10"
+                                         InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="IntBoxPreviewKeyDownEvent">
+                                                <TextBox.Text>
+                                                    <Binding Path="TripCount.Value" Converter="{StaticResource CurrentConfigValueConverter}" Mode="TwoWay"
+                                             Source="{StaticResource WindowDataKey}" UpdateSourceTrigger="PropertyChanged">
+                                                        <Binding.ValidationRules>
+                                                            <validationRule:DecimalValidationRule />
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                                </TextBox.Text>
+                                            </TextBox>
+                                        </WrapPanel>
+                                    </StackPanel>
+                                </DockPanel>
+                            </GroupBox>
+                            <GroupBox Header="{DynamicResource GroupBushingWorkTitle}">
+                                <DockPanel Margin="0,10,0,10">
+                                    <Grid DockPanel.Dock="Bottom" Margin="0,10,0,0">
+                                        <WrapPanel HorizontalAlignment="Center" Margin="0">
+                                            <Label x:Name="LblBushingTitle" Content="{DynamicResource LblValueTitle}" FontSize="14" />
+                                            <TextBox x:Name="TxtBushingValue" IsReadOnly="True" Padding="10,5,10,0" BorderThickness="0,0,0,1" FontSize="14" FontWeight="Bold">
+                                                <TextBox.Foreground>
+                                                    <Binding Path="BushingWorkValue.Value" Converter="{StaticResource CurrentConfigForeColorConverter}"
+                                             Mode="OneWay" Source="{StaticResource WindowDataKey}" />
+                                                </TextBox.Foreground>
+                                                <TextBox.Text>
+                                                    <Binding Path="BushingWorkValue.Value" Converter="{StaticResource ReadOnlyResultValueConverter}"
+                                             Mode="OneWay" Source="{StaticResource WindowDataKey}" />
+                                                </TextBox.Text>
+                                                <TextBox.BorderBrush>
+                                                    <LinearGradientBrush>
+                                                        <GradientStop Color="Black"/>
+                                                    </LinearGradientBrush>
+                                                </TextBox.BorderBrush>
+                                            </TextBox>
+                                            <Label>
+                                                <Binding Path="Value" Source="{x:Static data:UnitData.TonKilometre}"></Binding>
+                                            </Label>
+                                        </WrapPanel>
+                                    </Grid>
+                                    <StackPanel>
+                                        <WrapPanel Margin="0,0,0,0" Width="310" HorizontalAlignment="Center">
+                                            <Grid Width="120" Margin="0,0,5,0">
+                                                <Label x:Name="LblBushingHeight" Content="{DynamicResource LblBushingHeight}" HorizontalAlignment="Right"/>
+                                            </Grid>
+                                            <TextBox x:Name="TxtBushingHeight" Width="120" MaxLength="10"
+                                         InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
+                                                <TextBox.Text>
+                                                    <Binding Path="BushingHeight.Value" Converter="{StaticResource CurrentConfigValueConverter}" Mode="TwoWay"
+                                             Source="{StaticResource WindowDataKey}" UpdateSourceTrigger="PropertyChanged">
+                                                        <Binding.ValidationRules>
+                                                            <validationRule:DecimalValidationRule />
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                                </TextBox.Text>
+                                            </TextBox>
+                                            <Label>
+                                                <Binding Path="Value" Source="{x:Static data:UnitData.Metre}"></Binding>
+                                            </Label>
+                                        </WrapPanel>
+                                    </StackPanel>
+                                </DockPanel>
+                            </GroupBox>
+                            <GroupBox Header="{DynamicResource GroupCoringWorkTitle}">
+                                <DockPanel Margin="0,10,0,10">
+                                    <Grid DockPanel.Dock="Bottom" Margin="0,10,0,0">
+                                        <WrapPanel HorizontalAlignment="Center" Margin="0">
+                                            <Label x:Name="LblCoringTitle" Content="{DynamicResource LblValueTitle}" FontSize="14" />
+                                            <TextBox x:Name="TxtCoringValue" IsReadOnly="True" Padding="10,5,10,0" BorderThickness="0,0,0,1" FontSize="14" FontWeight="Bold">
+                                                <TextBox.Foreground>
+                                                    <Binding Path="CoringWorkValue.Value" Converter="{StaticResource CurrentConfigForeColorConverter}"
+                                             Mode="OneWay" Source="{StaticResource WindowDataKey}" />
+                                                </TextBox.Foreground>
+                                                <TextBox.Text>
+                                                    <Binding Path="CoringWorkValue.Value" Converter="{StaticResource ReadOnlyResultValueConverter}"
+                                             Mode="OneWay" Source="{StaticResource WindowDataKey}" />
+                                                </TextBox.Text>
+                                                <TextBox.BorderBrush>
+                                                    <LinearGradientBrush>
+                                                        <GradientStop Color="Black"/>
+                                                    </LinearGradientBrush>
+                                                </TextBox.BorderBrush>
+                                            </TextBox>
+                                            <Label>
+                                                <Binding Path="Value" Source="{x:Static data:UnitData.TonKilometre}"></Binding>
+                                            </Label>
+                                        </WrapPanel>
+                                    </Grid>
+                                    <StackPanel>
+                                        <WrapPanel Margin="0,0,0,0" Width="300" HorizontalAlignment="Center">
+                                            <Grid Width="120" Margin="0,0,5,0">
+                                                <Label x:Name="LblCoringShallowHeight" Content="{DynamicResource LblShallowHeight}" HorizontalAlignment="Right"/>
+                                            </Grid>
+                                            <TextBox x:Name="TxtShallowHeight" Width="120" MaxLength="10"
+                                         InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
+                                                <TextBox.Text>
+                                                    <Binding Path="CoringShallowHeight.Value" Converter="{StaticResource CurrentConfigValueConverter}"
+                                             Mode="TwoWay" Source="{StaticResource WindowDataKey}" UpdateSourceTrigger="PropertyChanged">
+                                                        <Binding.ValidationRules>
+                                                            <validationRule:DecimalValidationRule />
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                                </TextBox.Text>
+                                            </TextBox>
+                                            <Label>
+                                                <Binding Path="Value" Source="{x:Static data:UnitData.Metre}"></Binding>
+                                            </Label>
+                                        </WrapPanel>
+                                        <WrapPanel Margin="0,10,0,0" Width="300" HorizontalAlignment="Center">
+                                            <Grid Width="120" Margin="0,0,5,0">
+                                                <Label x:Name="LblCoringDeepHeight" Content="{DynamicResource LblDeepHeight}" HorizontalAlignment="Right"/>
+                                            </Grid>
+                                            <TextBox x:Name="TxtCoringDeepHeight" Width="120" MaxLength="10"
+                                         InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
+                                                <TextBox.Text>
+                                                    <Binding Path="CoringDeepHeight.Value" Converter="{StaticResource CurrentConfigValueConverter}"
+                                             Mode="TwoWay" Source="{StaticResource WindowDataKey}" UpdateSourceTrigger="PropertyChanged">
+                                                        <Binding.ValidationRules>
+                                                            <validationRule:DecimalValidationRule />
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                                </TextBox.Text>
+                                            </TextBox>
+                                            <Label>
+                                                <Binding Path="Value" Source="{x:Static data:UnitData.Metre}"></Binding>
+                                            </Label>
+                                        </WrapPanel>
+                                    </StackPanel>
+                                </DockPanel>
+                            </GroupBox>
+                        </UniformGrid>
+                        <GroupBox Header="{DynamicResource GroupTotalWorkTitle}" DockPanel.Dock="Top">
+                            <WrapPanel HorizontalAlignment="Center">
+                                <Label x:Name="LblTotalTitle" Content="{DynamicResource LblTotalValueTitle}" FontSize="14" />
+                                <TextBox x:Name="TxtTotalValue" IsReadOnly="True" Padding="10,5,10,0" BorderThickness="0,0,0,1" FontSize="14" FontWeight="Bold">
                                     <TextBox.BorderBrush>
                                         <LinearGradientBrush>
                                             <GradientStop Color="Black"/>
                                         </LinearGradientBrush>
                                     </TextBox.BorderBrush>
                                     <TextBox.Text>
-                                        <Binding Path="DrillingWorkValue.ItemValue" Converter="{StaticResource ReadOnlyResultValueConverter}"
-                                             Mode="OneWay" Source="{StaticResource WindowData}" />
+                                        <Binding Path="CumulationValue.Value" Converter="{StaticResource ReadOnlyResultValueConverter}"
+                                 Mode="OneWay" Source="{StaticResource WindowDataKey}" />
                                     </TextBox.Text>
                                     <TextBox.Foreground>
-                                        <Binding Path="DrillingWorkValue.ItemValue" Converter="{StaticResource CurrentConfigForeColorConverter}"
-                                             Mode="OneWay" Source="{StaticResource WindowData}" />
+                                        <Binding Path="CumulationValue.Value" Converter="{StaticResource CurrentConfigForeColorConverter}"
+                                 Mode="OneWay" Source="{StaticResource WindowDataKey}" />
                                     </TextBox.Foreground>
                                 </TextBox>
-                                <Label Content="{StaticResource LblUnitTonKilometre}" FontSize="14" />
+                                <Label>
+                                    <Binding Path="Value" Source="{x:Static data:UnitData.TonKilometre}"></Binding>
+                                </Label>
                             </WrapPanel>
-                        </Grid>
-                        <StackPanel>
-                            <WrapPanel Margin="0,20,0,0" Width="300" HorizontalAlignment="Center">
-                                <Grid Width="110" Margin="0,0,5,0">
-                                    <Label x:Name="LblDrillingShallowHeight" Content="{StaticResource LblShallowHeight}" HorizontalAlignment="Right"/>
-                                </Grid>
-                                <TextBox x:Name="TxtDrillingShallowHeight" Width="120" MaxLength="10" 
-                                         InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
-                                    <TextBox.Text>
-                                        <Binding Path="DrillingShallowHeight.ItemValue" Converter="{StaticResource CurrentConfigValueConverter}"
-                                             Mode="TwoWay" Source="{StaticResource WindowData}" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <validationRule:DecimalValidationRule />
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
-                                </TextBox>
-                                <Label Content="{StaticResource LblUnitMetre}" />
-                            </WrapPanel>
-                            <WrapPanel Margin="0,20,0,0" Width="300" HorizontalAlignment="Center">
-                                <Grid Width="110" Margin="0,0,5,0">
-                                    <Label x:Name="LblDrillingDeepHeight" Content="{StaticResource LblDeepHeight}" HorizontalAlignment="Right"/>
-                                </Grid>
-                                <TextBox x:Name="TxtDrillingDeepHeight" Width="120" MaxLength="10"
-                                         InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
-                                    <TextBox.Text>
-                                        <Binding Path="DrillingDeepHeight.ItemValue" Converter="{StaticResource CurrentConfigValueConverter}"
-                                             Mode="TwoWay" Source="{StaticResource WindowData}" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <validationRule:DecimalValidationRule />
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
-                                </TextBox>
-                                <Label Content="{StaticResource LblUnitMetre}" />
-                            </WrapPanel>
-                            <WrapPanel Margin="0,20,0,0" Width="300" HorizontalAlignment="Center">
-                                <Grid Width="110" Margin="0,0,5,0">
-                                    <Label x:Name="LblDrillingType" Content="{StaticResource LblDrillingType}" HorizontalAlignment="Right"/>
-                                </Grid>
-                                <ComboBox x:Name="CboDrillingType" Width="160" SelectedValuePath="Key" DisplayMemberPath="Value">
-                                    <ComboBox.SelectedValue>
-                                        <Binding Path="DrillingType.ItemValue" Mode="TwoWay" Source="{StaticResource WindowData}"
-                                             UpdateSourceTrigger="PropertyChanged" />
-                                    </ComboBox.SelectedValue>
-                                </ComboBox>
-                            </WrapPanel>
-                            <WrapPanel Margin="0,20,0,0" Width="300" HorizontalAlignment="Center">
-                                <Grid Width="110" Margin="0,0,5,0">
-                                    <Label x:Name="LblDrillingDifficulty" Content="{StaticResource LblDrillingDifficulty}" HorizontalAlignment="Right"/>
-                                </Grid>
-                                <ComboBox x:Name="CboDrillingDifficulty" Width="120" SelectedValuePath="Key" DisplayMemberPath="Value">
-                                    <ComboBox.SelectedValue>
-                                        <Binding Path="DrillingDifficulty.ItemValue" Mode="TwoWay" Source="{StaticResource WindowData}"
-                                             UpdateSourceTrigger="PropertyChanged" />
-                                    </ComboBox.SelectedValue>
-                                </ComboBox>
-                            </WrapPanel>
-                        </StackPanel>
-                    </DockPanel>
-                </GroupBox>
-                <GroupBox Header="{StaticResource GroupTripWorkTitle}">
-                    <DockPanel>
-                        <Grid DockPanel.Dock="Bottom" Margin="0,20,0,10">
-                            <WrapPanel HorizontalAlignment="Center" Margin="0">
-                                <Label x:Name="LblTripTitle" Content="{StaticResource LblValueTitle}" FontSize="14" />
-                                <TextBox x:Name="TxtTripValue" IsReadOnly="True" Padding="10,5,10,0" BorderThickness="0,0,0,1" FontSize="14" FontWeight="Bold">
-                                    <TextBox.BorderBrush>
-                                        <LinearGradientBrush>
-                                            <GradientStop Color="Black"/>
-                                        </LinearGradientBrush>
-                                    </TextBox.BorderBrush>
-                                    <TextBox.Text>
-                                        <Binding Path="TripWorkValue.ItemValue" Converter="{StaticResource ReadOnlyResultValueConverter}" Mode="OneWay"
-                                             Source="{StaticResource WindowData}" />
-                                    </TextBox.Text>
-                                    <TextBox.Foreground>
-                                        <Binding Path="TripWorkValue.ItemValue" Converter="{StaticResource CurrentConfigForeColorConverter}"
-                                             Mode="OneWay" Source="{StaticResource WindowData}" />
-                                    </TextBox.Foreground>
-                                </TextBox>
-                                <Label Content="{StaticResource LblUnitTonKilometre}" FontSize="14" />
-                            </WrapPanel>
-                        </Grid>
-                        <StackPanel>
-                            <WrapPanel Margin="0,20,0,0" Width="300" HorizontalAlignment="Center">
-                                <Grid Width="110" Margin="0,0,5,0">
-                                    <Label x:Name="LblTripShallowHeight" Content="{StaticResource LblShallowHeight}" HorizontalAlignment="Right"/>
-                                </Grid>
-                                <TextBox x:Name="TxtTripShallowHeight" Width="120" MaxLength="10"
-                                         InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
-                                    <TextBox.Text>
-                                        <Binding Path="TripShallowHeight.ItemValue" Converter="{StaticResource CurrentConfigValueConverter}"
-                                             Mode="TwoWay" Source="{StaticResource WindowData}" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <validationRule:DecimalValidationRule />
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
-                                </TextBox>
-                                <Label Content="{StaticResource LblUnitMetre}" />
-                            </WrapPanel>
-                            <WrapPanel Margin="0,20,0,0" Width="300" HorizontalAlignment="Center">
-                                <Grid Width="110" Margin="0,0,5,0">
-                                    <Label x:Name="LblTripDeepHeight" Content="{StaticResource LblDeepHeight}" HorizontalAlignment="Right"/>
-                                </Grid>
-                                <TextBox x:Name="TxtTripDeepHeight" Width="120" MaxLength="10"
-                                         InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
-                                    <TextBox.Text>
-                                        <Binding Path="TripDeepHeight.ItemValue" Converter="{StaticResource CurrentConfigValueConverter}" Mode="TwoWay"
-                                             Source="{StaticResource WindowData}" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <validationRule:DecimalValidationRule />
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
-                                </TextBox>
-                                <Label Content="{StaticResource LblUnitMetre}" />
-                            </WrapPanel>
-                            <WrapPanel Margin="0,20,0,0" Width="300" HorizontalAlignment="Center">
-                                <Grid Width="110" Margin="0,0,5,0">
-                                    <Label x:Name="LblTripCount" Content="{StaticResource LblTripCount}" HorizontalAlignment="Right"/>
-                                </Grid>
-                                <TextBox x:Name="TxtTripCount" Width="120" MaxLength="10"
-                                         InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
-                                    <TextBox.Text>
-                                        <Binding Path="TripCount.ItemValue" Converter="{StaticResource CurrentConfigValueConverter}" Mode="TwoWay"
-                                             Source="{StaticResource WindowData}" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <validationRule:DecimalValidationRule />
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
-                                </TextBox>
-                            </WrapPanel>
-                        </StackPanel>
-                    </DockPanel>
-                </GroupBox>
-                <GroupBox Header="{StaticResource GroupBushingWorkTitle}">
-                    <DockPanel>
-                        <Grid DockPanel.Dock="Bottom" Margin="0,20,0,10">
-                            <WrapPanel HorizontalAlignment="Center" Margin="0">
-                                <Label x:Name="LblBushingTitle" Content="{StaticResource LblValueTitle}" FontSize="14" />
-                                <TextBox x:Name="TxtBushingValue" IsReadOnly="True" Padding="10,5,10,0" BorderThickness="0,0,0,1" FontSize="14" FontWeight="Bold">
-                                    <TextBox.Foreground>
-                                        <Binding Path="BushingWorkValue.ItemValue" Converter="{StaticResource CurrentConfigForeColorConverter}"
-                                             Mode="OneWay" Source="{StaticResource WindowData}" />
-                                    </TextBox.Foreground>
-                                    <TextBox.Text>
-                                        <Binding Path="BushingWorkValue.ItemValue" Converter="{StaticResource ReadOnlyResultValueConverter}"
-                                             Mode="OneWay" Source="{StaticResource WindowData}" />
-                                    </TextBox.Text>
-                                    <TextBox.BorderBrush>
-                                        <LinearGradientBrush>
-                                            <GradientStop Color="Black"/>
-                                        </LinearGradientBrush>
-                                    </TextBox.BorderBrush>
-                                </TextBox>
-                                <Label Content="{StaticResource LblUnitTonKilometre}" FontSize="14" />
-                            </WrapPanel>
-                        </Grid>
-                        <StackPanel>
-                            <WrapPanel Margin="0,20,0,0" Width="310" HorizontalAlignment="Center">
-                                <Grid Width="110" Margin="0,0,5,0">
-                                    <Label x:Name="LblBushingWeight" Content="{StaticResource LblBushingWeight}" HorizontalAlignment="Right"/>
-                                </Grid>
-                                <TextBox x:Name="TxtBushingWeight" Width="120" MaxLength="10"
-                                         InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
-                                    <TextBox.Text>
-                                        <Binding Path="BushingWeight.ItemValue" Converter="{StaticResource CurrentConfigValueConverter}" Mode="TwoWay"
-                                             Source="{StaticResource WindowData}" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <validationRule:DecimalValidationRule />
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
-                                </TextBox>
-                                <Label Content="{StaticResource LblUnitKilogramPerMetre}" />
-                            </WrapPanel>
-                            <WrapPanel Margin="0,20,0,0" Width="310" HorizontalAlignment="Center">
-                                <Grid Width="110" Margin="0,0,5,0">
-                                    <Label x:Name="LblBushingLength" Content="{StaticResource LblBushingLength}" HorizontalAlignment="Right"/>
-                                </Grid>
-                                <TextBox x:Name="TxtBushingLength" Width="120" MaxLength="10"
-                                         InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
-                                    <TextBox.Text>
-                                        <Binding Path="BushingLength.ItemValue" Converter="{StaticResource CurrentConfigValueConverter}" Mode="TwoWay"
-                                             Source="{StaticResource WindowData}" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <validationRule:DecimalValidationRule />
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
-                                </TextBox>
-                                <Label Content="{StaticResource LblUnitMetre}" />
-                            </WrapPanel>
-                            <WrapPanel Margin="0,20,0,0" Width="310" HorizontalAlignment="Center">
-                                <Grid Width="110" Margin="0,0,5,0">
-                                    <Label x:Name="LblBushingHeight" Content="{StaticResource LblBushingHeight}" HorizontalAlignment="Right"/>
-                                </Grid>
-                                <TextBox x:Name="TxtBushingHeight" Width="120" MaxLength="10"
-                                         InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
-                                    <TextBox.Text>
-                                        <Binding Path="BushingHeight.ItemValue" Converter="{StaticResource CurrentConfigValueConverter}" Mode="TwoWay"
-                                             Source="{StaticResource WindowData}" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <validationRule:DecimalValidationRule />
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
-                                </TextBox>
-                                <Label Content="{StaticResource LblUnitMetre}" />
-                            </WrapPanel>
-                        </StackPanel>
-                    </DockPanel>
-                </GroupBox>
-                <GroupBox Header="{StaticResource GroupCoringWorkTitle}">
-                    <DockPanel>
-                        <Grid DockPanel.Dock="Bottom" Margin="0,20,0,10">
-                            <WrapPanel HorizontalAlignment="Center" Margin="0">
-                                <Label x:Name="LblCoringTitle" Content="{StaticResource LblValueTitle}" FontSize="14" />
-                                <TextBox x:Name="TxtCoringValue" IsReadOnly="True" Padding="10,5,10,0" BorderThickness="0,0,0,1" FontSize="14" FontWeight="Bold">
-                                    <TextBox.Foreground>
-                                        <Binding Path="CoringWorkValue.ItemValue" Converter="{StaticResource CurrentConfigForeColorConverter}"
-                                             Mode="OneWay" Source="{StaticResource WindowData}" />
-                                    </TextBox.Foreground>
-                                    <TextBox.Text>
-                                        <Binding Path="CoringWorkValue.ItemValue" Converter="{StaticResource ReadOnlyResultValueConverter}"
-                                             Mode="OneWay" Source="{StaticResource WindowData}" />
-                                    </TextBox.Text>
-                                    <TextBox.BorderBrush>
-                                        <LinearGradientBrush>
-                                            <GradientStop Color="Black"/>
-                                        </LinearGradientBrush>
-                                    </TextBox.BorderBrush>
-                                </TextBox>
-                                <Label Content="{StaticResource LblUnitTonKilometre}" FontSize="14" />
-                            </WrapPanel>
-                        </Grid>
-                        <StackPanel>
-                            <WrapPanel Margin="0,20,0,0" Width="300" HorizontalAlignment="Center">
-                                <Grid Width="110" Margin="0,0,5,0">
-                                    <Label x:Name="LblCoringShallowHeight" Content="{StaticResource LblShallowHeight}" HorizontalAlignment="Right"/>
-                                </Grid>
-                                <TextBox x:Name="TxtShallowHeight" Width="120" MaxLength="10"
-                                         InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
-                                    <TextBox.Text>
-                                        <Binding Path="CoringShallowHeight.ItemValue" Converter="{StaticResource CurrentConfigValueConverter}"
-                                             Mode="TwoWay" Source="{StaticResource WindowData}" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <validationRule:DecimalValidationRule />
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
-                                </TextBox>
-                                <Label Content="{StaticResource LblUnitMetre}" />
-                            </WrapPanel>
-                            <WrapPanel Margin="0,20,0,0" Width="300" HorizontalAlignment="Center">
-                                <Grid Width="110" Margin="0,0,5,0">
-                                    <Label x:Name="LblCoringDeepHeight" Content="{StaticResource LblDeepHeight}" HorizontalAlignment="Right"/>
-                                </Grid>
-                                <TextBox x:Name="TxtCoringDeepHeight" Width="120" MaxLength="10"
-                                         InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
-                                    <TextBox.Text>
-                                        <Binding Path="CoringDeepHeight.ItemValue" Converter="{StaticResource CurrentConfigValueConverter}"
-                                             Mode="TwoWay" Source="{StaticResource WindowData}" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <validationRule:DecimalValidationRule />
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
-                                </TextBox>
-                                <Label Content="{StaticResource LblUnitMetre}" />
-                            </WrapPanel>
-                        </StackPanel>
-                    </DockPanel>
-                </GroupBox>
-            </UniformGrid>
-            <GroupBox Header="{StaticResource GroupTotalWorkTitle}" DockPanel.Dock="Top">
-                <WrapPanel HorizontalAlignment="Center">
-                    <Label x:Name="LblTotalTitle" Content="{StaticResource LblTotalValueTitle}" FontSize="14" />
-                    <TextBox x:Name="TxtTotalValue" IsReadOnly="True" Padding="10,5,10,0" BorderThickness="0,0,0,1" FontSize="14" FontWeight="Bold">
-                        <TextBox.BorderBrush>
-                            <LinearGradientBrush>
-                                <GradientStop Color="Black"/>
-                            </LinearGradientBrush>
-                        </TextBox.BorderBrush>
-                        <TextBox.Text>
-                            <Binding Path="TotalWorkValue.ItemValue" Converter="{StaticResource ReadOnlyResultValueConverter}"
-                                 Mode="OneWay" Source="{StaticResource WindowData}" />
-                        </TextBox.Text>
-                        <TextBox.Foreground>
-                            <Binding Path="TotalWorkValue.ItemValue" Converter="{StaticResource CurrentConfigForeColorConverter}"
-                                 Mode="OneWay" Source="{StaticResource WindowData}" />
-                        </TextBox.Foreground>
-                    </TextBox>
-                    <Label Content="{StaticResource LblUnitTonKilometre}" FontSize="14" />
-                </WrapPanel>
-            </GroupBox>
-            <GroupBox Header="{StaticResource GroupCumulationAndResetTitle}">
-                <DockPanel>
-                    <StackPanel DockPanel.Dock="Left" Width="340">
-                        <WrapPanel Margin="0,20,0,0">
-                            <Grid Width="160" Margin="0,0,5,0">
-                                <Label x:Name="LblCurrentTimeTitle" Content="{StaticResource LblCurrentDateTitle}" FontSize="14" HorizontalAlignment="Right"/>
-                            </Grid>
-                            <Label x:Name="LblCurrentTimeValue" FontSize="14" FontFamily="Consolas">
-                                <Label.Content>
-                                    <Binding Path="CurrentTime" Converter="{StaticResource TimeMeterConverter}" Mode="OneWay"
-                                         Source="{x:Static appCode:TimeMeter.OnceInstance}" />
-                                </Label.Content>
-                            </Label>
-                        </WrapPanel>
-                        <WrapPanel Margin="0,23,0,0">
-                            <Grid Width="160" Margin="0,0,5,0">
-                                <Label x:Name="LblCurrentWireNoTitle" Content="{StaticResource LblCurrentWireNoTitle}" FontSize="14" HorizontalAlignment="Right"/>
-                            </Grid>
-                            <TextBox x:Name="TxtCurrentWireNo" Width="140" >
-                                <TextBox.Text>
-                                    <Binding Path="CurrentWireNo.ItemValue"  Mode="TwoWay"
-                                         Source="{StaticResource WindowData}" UpdateSourceTrigger="PropertyChanged">
-                                        <Binding.ValidationRules>
-                                            <validationRule:StringValidationRule />
-                                        </Binding.ValidationRules>
-                                    </Binding>
-                                </TextBox.Text>
-                            </TextBox>
-                        </WrapPanel>
-                        <WrapPanel Margin="0,23,0,0">
-                            <Grid Width="160" Margin="0,0,5,0">
-                                <Label x:Name="LblCurrentCritical" Content="{StaticResource LblCurrentCritical}" FontSize="14" HorizontalAlignment="Right"/>
-                            </Grid>
-                            <TextBox x:Name="TxtCurrentCritical" IsReadOnly="True" Padding="10,5,10,0" BorderThickness="0,0,0,1" FontSize="14" FontWeight="Bold" Margin="0" Foreground="#FF999999">
-                                <TextBox.Text>
-                                    <Binding Path="CriticalValue.ItemValue" Converter="{StaticResource ReadOnlyResultValueConverter}" Mode="OneWay"
-                                         Source="{StaticResource WindowData}" />
-                                </TextBox.Text>
-                                <TextBox.BorderBrush>
-                                    <LinearGradientBrush>
-                                        <GradientStop Color="Black"/>
-                                    </LinearGradientBrush>
-                                </TextBox.BorderBrush>
-                            </TextBox>
-                            <Label Content="{StaticResource LblUnitTonKilometre}" FontSize="14"/>
-                        </WrapPanel>
-                        <WrapPanel Margin="0,23,0,20">
-                            <Grid Width="160" Margin="0,0,5,0">
-                                <Label x:Name="LblCurrentCumulation" Content="{StaticResource LblCurrentCumulation}" FontSize="14" HorizontalAlignment="Right"/>
-                            </Grid>
-                            <TextBox x:Name="TxtCurrentCumulation" IsReadOnly="True" Padding="10,5,10,0" BorderThickness="0,0,0,1" FontSize="14" FontWeight="Bold">
-                                <TextBox.Text>
-                                    <Binding Path="CumulationValue.ItemValue" Converter="{StaticResource ReadOnlyResultValueConverter}"
-                                         Mode="OneWay" Source="{StaticResource WindowData}" />
-                                </TextBox.Text>
-                                <TextBox.BorderBrush>
-                                    <LinearGradientBrush>
-                                        <GradientStop Color="Black"/>
-                                    </LinearGradientBrush>
-                                </TextBox.BorderBrush>
-                                <TextBox.Foreground>
-                                    <MultiBinding Converter="{StaticResource CumulationForeColorConverter}">
-                                        <Binding Path="CriticalValue.ItemValue" Mode="OneWay" Source="{StaticResource WindowData}"/>
-                                        <Binding Path="CumulationValue.ItemValue" Mode="OneWay" Source="{StaticResource WindowData}"/>
-                                    </MultiBinding>
-                                </TextBox.Foreground>
-                            </TextBox>
-                            <Label Content="{StaticResource LblUnitTonKilometre}" FontSize="14" />
-                        </WrapPanel>
+                        </GroupBox>
                     </StackPanel>
-                    <StackPanel DockPanel.Dock="Left" Margin="20,0" Width="120">
-                        <Button x:Name="BtnRefresh" Cursor="Hand" Click="Refresh"
-                                Content="{StaticResource BtnRefresh}"
-                                ToolTip="{StaticResource BtnRefresh}" Margin="0,13,0,0" Height="40"/>
-                        <Button x:Name="BtnCumulate" Cursor="Hand" Click="Cumulate"
-                                Content="{StaticResource BtnCumulate}"
-                                ToolTip="{StaticResource BtnCumulate}" Margin="0,13,0,0" Height="38"/>
-                        <Button x:Name="BtnReset" Cursor="Hand" Click="Reset"
-                                Content="{StaticResource BtnReset}"
-                                ToolTip="{StaticResource BtnReset}" Margin="0,13,0,0" Height="38"/>
-                        <Button x:Name="BtnSwitchWire" Cursor="Hand" Click="SwitchWire"
-                                Content="{StaticResource BtnSwitchWire}"
-                                ToolTip="{StaticResource BtnSwitchWire}" Margin="0,13,0,0" Height="38"/>
+                </Border>
+            </Grid>
+            <Grid DockPanel.Dock="Top" Margin="0,5,0,0">
+                <Border Margin="0" Background="White" BorderThickness="1,1,1,1" BorderBrush="#FFD5DFE5">
+                    <StackPanel Margin="0,0,0,0">
+                        <Label DockPanel.Dock="Top" Background="#FF3598DC" Foreground="White">
+                            <Binding Path="SummaryText.Value" Source="{StaticResource WindowDataKey}"></Binding>
+                        </Label>
+                        <DockPanel>
+                            <StackPanel DockPanel.Dock="Left" Width="340" Margin="0,20">
+                                <WrapPanel Margin="0,0,0,0" Visibility="Collapsed">
+                                    <Grid Width="160" Margin="0,0,5,0">
+                                        <Label x:Name="LblCurrentTimeTitle" Content="{DynamicResource LblCurrentDateTitle}" FontSize="14" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                    <Label x:Name="LblCurrentTimeValue" FontSize="14" FontFamily="Consolas">
+                                        <Label.Content>
+                                            <Binding Path="CurrentTime" Converter="{StaticResource TimeMeterConverter}" Mode="OneWay"
+                                         Source="{x:Static data:TimeMeter.OnceInstance}" />
+                                        </Label.Content>
+                                    </Label>
+                                </WrapPanel>
+                                <WrapPanel Margin="0,0,0,0">
+                                    <Grid Width="160" Margin="0,0,5,0">
+                                        <Label x:Name="LblCurrentWireNoTitle" Content="{DynamicResource LblCurrentWireNoTitle}" FontSize="14" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                    <TextBox x:Name="TxtCurrentWireNo" Width="140" >
+                                        <TextBox.Text>
+                                            <Binding Path="WirelineNumber.Value"  Mode="TwoWay"
+                                         Source="{StaticResource WindowDataKey}" UpdateSourceTrigger="PropertyChanged">
+                                                <Binding.ValidationRules>
+                                                    <validationRule:StringValidationRule />
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
+                                </WrapPanel>
+                                <WrapPanel Margin="0,20,0,0" Visibility="Collapsed">
+                                    <Grid Width="160" Margin="0,0,5,0">
+                                        <Label x:Name="LblCurrentCritical" Content="{DynamicResource LblCurrentCritical}" FontSize="14" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                    <TextBox x:Name="TxtCurrentCritical" IsReadOnly="True" Padding="10,5,10,0" BorderThickness="0,0,0,1" FontSize="14" FontWeight="Bold" Margin="0" Foreground="#FF999999">
+                                        <TextBox.Text>
+                                            <Binding Path="CriticalValue.Value" Converter="{StaticResource ReadOnlyResultValueConverter}" Mode="OneWay"
+                                         Source="{x:Static data:GlobalData.Wireline}" />
+                                        </TextBox.Text>
+                                        <TextBox.BorderBrush>
+                                            <LinearGradientBrush>
+                                                <GradientStop Color="Black"/>
+                                            </LinearGradientBrush>
+                                        </TextBox.BorderBrush>
+                                    </TextBox>
+                                    <Label>
+                                        <Binding Path="Value" Source="{x:Static data:UnitData.TonKilometre}"></Binding>
+                                    </Label>
+                                </WrapPanel>
+                                <WrapPanel Margin="0,20,0,0">
+                                    <Grid Width="160" Margin="0,0,5,0">
+                                        <Label x:Name="LblCurrentCumulation" Content="{DynamicResource LblCurrentCumulation}" FontSize="14" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                    <TextBox x:Name="TxtCurrentCumulation" IsReadOnly="True" Padding="10,5,10,0" BorderThickness="0,0,0,1" FontSize="14" FontWeight="Bold">
+                                        <TextBox.Text>
+                                            <Binding Path="CumulationValue.Value" Converter="{StaticResource ReadOnlyResultValueConverter}"
+                                         Mode="OneWay" Source="{x:Static data:GlobalData.Wireline}" />
+                                        </TextBox.Text>
+                                        <TextBox.BorderBrush>
+                                            <LinearGradientBrush>
+                                                <GradientStop Color="Black"/>
+                                            </LinearGradientBrush>
+                                        </TextBox.BorderBrush>
+                                        <TextBox.Foreground>
+                                            <MultiBinding Converter="{StaticResource CumulationForeColorConverter}">
+                                                <Binding Path="CriticalValue.Value" Mode="OneWay" Source="{x:Static data:GlobalData.Wireline}"/>
+                                                <Binding Path="CumulationValue.Value" Mode="OneWay" Source="{x:Static data:GlobalData.Wireline}"/>
+                                            </MultiBinding>
+                                        </TextBox.Foreground>
+                                    </TextBox>
+                                    <Label>
+                                        <Binding Path="Value" Source="{x:Static data:UnitData.TonKilometre}"></Binding>
+                                    </Label>
+                                </WrapPanel>
+                                <WrapPanel Margin="0,20,0,0">
+                                    <Grid Width="160" Margin="0,0,5,0">
+                                        <Label x:Name="LblRealWirelineCutLength" Content="{DynamicResource LblRealWirelineCutLength}" FontSize="14" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                    <TextBox x:Name="TxtRealWirelineCutLengthValue" Width="100" MaxLength="10"
+                                             InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent">
+                                        <TextBox.Text>
+                                            <Binding Path="CutLengthValue.Value" Converter="{StaticResource CurrentConfigValueConverter}"
+                                                     Mode="TwoWay" Source="{StaticResource WindowDataKey}" UpdateSourceTrigger="PropertyChanged">
+                                                <Binding.ValidationRules>
+                                                    <validationRule:DecimalValidationRule />
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
+                                    <Label>
+                                        <Binding Path="Value" Source="{x:Static data:UnitData.Metre}"></Binding>
+                                    </Label>
+                                </WrapPanel>
+                                <WrapPanel Margin="0,20,0,0">
+                                    <Grid Width="160" Margin="0,0,5,0">
+                                        <Label x:Name="LblTotalCutted" Content="{DynamicResource LblTotalCutted}" FontSize="14" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                    <TextBox x:Name="TxtTotalCuttedValue" IsReadOnly="True" Padding="10,5,10,0" BorderThickness="0,0,0,1" FontSize="14" FontWeight="Bold" Foreground="#999999">
+                                        <TextBox.Text>
+                                            <Binding Path="TotalCuttedValue.Value" Converter="{StaticResource ReadOnlyResultValueConverter}"
+                                         Mode="OneWay" Source="{x:Static data:GlobalData.Wireline}" />
+                                        </TextBox.Text>
+                                        <TextBox.BorderBrush>
+                                            <LinearGradientBrush>
+                                                <GradientStop Color="Black"/>
+                                            </LinearGradientBrush>
+                                        </TextBox.BorderBrush>
+                                    </TextBox>
+                                    <Label>
+                                        <Binding Path="Value" Source="{x:Static data:UnitData.TonKilometre}"></Binding>
+                                    </Label>
+                                </WrapPanel>
+                            </StackPanel>
+                            <StackPanel DockPanel.Dock="Left" Margin="10,0" Width="120">
+                                <Button x:Name="BtnRefresh" Cursor="Hand" Click="Refresh"
+                                Content="{DynamicResource BtnRefresh}"
+                                ToolTip="{DynamicResource BtnRefresh}" Margin="0,13,0,0" Height="40"/>
+                                <Button x:Name="BtnCumulate" Cursor="Hand" Click="Cumulate"
+                                Content="{DynamicResource BtnCumulate}"
+                                ToolTip="{DynamicResource BtnCumulate}" Margin="0,13,0,0" Height="38"/>
+                                <Button x:Name="BtnReset" Cursor="Hand" Click="Reset"
+                                Content="{DynamicResource BtnReset}"
+                                ToolTip="{DynamicResource BtnReset}" Margin="0,13,0,0" Height="38"/>
+                                <Button x:Name="BtnSwitchWire" Cursor="Hand" Click="SwitchWire"
+                                Content="{DynamicResource BtnSwitchWire}"
+                                ToolTip="{DynamicResource BtnSwitchWire}" Margin="0,13,0,0" Height="38"/>
+                            </StackPanel>
+                            <Grid Margin="0,10">
+                                <Border BorderThickness="1,0,0,0" BorderBrush="#FFD5DFE5">
+                                    <ScrollViewer Height="230" VerticalScrollBarVisibility="Auto">
+                                        <ListView Margin="10,0" Template="{DynamicResource HistoryViewTemplate}"
+                                                  ItemTemplate="{DynamicResource HistoryViewItemTemplate}"
+                                                  ItemContainerStyle="{DynamicResource ListViewItemContainerStyle}">
+                                            <ListView.ItemsSource>
+                                                <Binding Path="History.Items" Mode="OneWay" Source="{StaticResource WindowDataKey}"
+                                             UpdateSourceTrigger="PropertyChanged" />
+                                            </ListView.ItemsSource>
+                                        </ListView>
+                                    </ScrollViewer>
+                                </Border>
+                            </Grid>
+                        </DockPanel>
                     </StackPanel>
-                    <ListView Margin="0,10" BorderThickness="1,0,0,0"></ListView>
-                </DockPanel>
-            </GroupBox>
+                </Border>
+            </Grid>
         </DockPanel>
     </ScrollViewer>
 </Window>

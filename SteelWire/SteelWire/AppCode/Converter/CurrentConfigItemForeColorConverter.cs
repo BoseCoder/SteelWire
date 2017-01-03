@@ -12,14 +12,19 @@ namespace SteelWire.AppCode.Converter
     {
         public object Convert(object value, Type typeTarget, object param, CultureInfo culture)
         {
-            if (value is int)
+            if (value == null)
+            {
+                return new SolidColorBrush(Color.FromRgb(0x99, 0x99, 0x99));
+            }
+            Type dataType = value.GetType();
+            if (dataType == typeof(int))
             {
                 if ((int)value <= 0)
                 {
                     return new SolidColorBrush(Color.FromRgb(255, 0, 0));
                 }
             }
-            else if (value is decimal)
+            else if (dataType == typeof(decimal))
             {
                 if ((decimal)value <= 0)
                 {

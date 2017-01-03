@@ -1,67 +1,91 @@
 ﻿namespace SteelWire.AppCode.Config
 {
     /// <summary>
-    /// 钻杆类型
+    /// 语言
     /// </summary>
-    public enum DrillPipeTypeEnum
+    public enum LanguageEnum
     {
         /// <summary>
-        /// 钻杆
+        /// 默认
         /// </summary>
-        DrillPipe,
+        Default,
         /// <summary>
-        /// 加重钻杆
+        /// 英文
         /// </summary>
-        HeavierDrillPipe
+        English,
+        /// <summary>
+        /// 中文
+        /// </summary>
+        Chinese
+    }
+
+    public enum UnitEnum
+    {
+        /// <summary>
+        /// 毫米
+        /// </summary>
+        Millimetre,
+        /// <summary>
+        /// 米
+        /// </summary>
+        Metre,
+        /// <summary>
+        /// 千克
+        /// </summary>
+        Kilogram,
+        /// <summary>
+        /// 千克/米
+        /// </summary>
+        KilogramPerMetre,
+        /// <summary>
+        /// 克/立方厘米
+        /// </summary>
+        GramPerCubicCentimetre,
+        /// <summary>
+        /// 千克/立方米
+        /// </summary>
+        KilogramPerCubicMeter,
+        /// <summary>
+        /// 千牛
+        /// </summary>
+        Kilonewton,
+        /// <summary>
+        /// 吨
+        /// </summary>
+        Ton,
+        /// <summary>
+        /// 吨*公里
+        /// </summary>
+        TonKilometre
     }
 
     /// <summary>
-    /// 钻井方式
+    /// 钻机驱动方式
     /// </summary>
     public enum DrillingTypeEnum
     {
         /// <summary>
-        /// 使用顶驱动
+        /// 顶驱动
         /// </summary>
         TopDrive,
         /// <summary>
-        /// 使用铰刀和顶驱连接
+        /// 非顶驱动
         /// </summary>
-        ReamerAndTopDrive,
-        /// <summary>
-        /// 无划眼
-        /// </summary>
-        NoRedressing,
-        /// <summary>
-        /// 划眼一遍
-        /// </summary>
-        RedressingOnce,
-        /// <summary>
-        /// 划眼两遍
-        /// </summary>
-        RedressingTwice
+        NotTopDrive
     }
 
     /// <summary>
-    /// 钻井难度
+    /// 历史动作
     /// </summary>
-    public enum DrillingDifficultyEnum
+    public enum HistoryEnum
     {
         /// <summary>
-        /// 容易
+        /// 累积
         /// </summary>
-        Easy,
+        Cumulate,
         /// <summary>
-        /// 中等
+        /// 切绳
         /// </summary>
-        Normal,
-        /// <summary>
-        /// 难
-        /// </summary>
-        Hard,
-        /// <summary>
-        /// 非常难
-        /// </summary>
-        Difficult
+        Cut
     }
 }

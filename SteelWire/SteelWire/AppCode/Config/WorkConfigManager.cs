@@ -2,7 +2,7 @@
 using BaseConfig;
 using System.Collections.Generic;
 using System.Linq;
-using SteelWire.WindowData;
+using SteelWire.AppCode.Data;
 
 namespace SteelWire.AppCode.Config
 {
@@ -18,9 +18,6 @@ namespace SteelWire.AppCode.Config
         /// </summary>
         [BaseConfigSection]
         public WorkConfig ConfigSection { get; set; }
-
-        [BaseConfigKey]
-        public string CurrentWireNo { get; set; }
 
         private WorkConfigManager(string key, string subFolder, string fileName)
             : base(key, subFolder, fileName)
@@ -46,8 +43,7 @@ namespace SteelWire.AppCode.Config
 
         public static void InitializeConfig()
         {
-            OnceInstance = new WorkConfigManager("WorkConfig",
-                string.Format("Config\\{0}", Sign.Data.Account), "WorkConfig.config");
+            OnceInstance = new WorkConfigManager("WorkConfig", $"Config\\{GlobalData.Account}", "WorkConfig.config");
             OnceInstance.ReadConfig();
             WorkDictionary dictionary = WorkDictionaryManager.OnceInstance.DictionarySection;
             bool needWrite = false;
@@ -64,7 +60,7 @@ namespace SteelWire.AppCode.Config
             if (current.DrillPipes.Count < 1)
             {
                 needWrite = true;
-                current.DrillPipes.Add(new DrillPipe
+                current.DrillPipes.Add(new Drill
                 {
                     Name = "DrillPipe1"
                 });
@@ -89,17 +85,19 @@ namespace SteelWire.AppCode.Config
                     Name = "DrillCollar2"
                 });
             }
-            IEnumerable<DrillingType> drillingTypes = dictionary.DrillingTypes.Cast<DrillingType>();
+            if (current.Bushings.Count < 1)
+            {
+                needWrite = true;
+                current.Bushings.Add(new Drill
+                {
+                    Name = "Bushing1"
+                });
+            }
+            List<DrillingType> drillingTypes = dictionary.DrillingTypes.Cast<DrillingType>().ToList();
             if (drillingTypes.All(d => !Equals(d.Name, current.DrillingType)))
             {
                 needWrite = true;
                 current.DrillingType = drillingTypes.First().Name;
-            }
-            IEnumerable<DrillingDifficulty> drillingDifficulties = dictionary.DrillingDifficulties.Cast<DrillingDifficulty>();
-            if (drillingDifficulties.All(d => !Equals(d.Name, current.DrillingDifficulty)))
-            {
-                needWrite = true;
-                current.DrillingDifficulty = drillingDifficulties.First().Name;
             }
 
             #endregion

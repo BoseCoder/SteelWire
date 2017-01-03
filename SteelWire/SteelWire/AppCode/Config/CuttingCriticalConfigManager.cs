@@ -2,7 +2,7 @@
 using BaseConfig;
 using System.Collections.Generic;
 using System.Linq;
-using SteelWire.WindowData;
+using SteelWire.AppCode.Data;
 
 namespace SteelWire.AppCode.Config
 {
@@ -43,8 +43,7 @@ namespace SteelWire.AppCode.Config
 
         public static void InitializeConfig()
         {
-            OnceInstance = new CuttingCriticalConfigManager("CuttingCriticalConfig",
-                string.Format("Config\\{0}", Sign.Data.Account), "CuttingCriticalConfig.config");
+            OnceInstance = new CuttingCriticalConfigManager("CuttingCriticalConfig", $"Config\\{GlobalData.Account}", "CuttingCriticalConfig.config");
             OnceInstance.ReadConfig();
             CuttingCriticalDictionary dictionary = CuttingCriticalDictionaryManager.OnceInstance.DictionarySection;
             bool needWrite = false;
@@ -58,13 +57,7 @@ namespace SteelWire.AppCode.Config
                 current = new CuttingCriticalConfig();
                 OnceInstance.ConfigSection = current;
             }
-            IEnumerable<WireropeWorkload> wireropeWorkloads = dictionary.WireropeWorkloads.Cast<WireropeWorkload>();
-            if (wireropeWorkloads.All(w => w.Diameter != current.WirelineDiameter))
-            {
-                needWrite = true;
-                current.WirelineDiameter = wireropeWorkloads.First().Diameter;
-            }
-            IEnumerable<WireropeEfficiency> wireropeEfficiencies = dictionary.WireropeEfficiencies.Cast<WireropeEfficiency>();
+            List<WireropeEfficiency> wireropeEfficiencies = dictionary.WireropeEfficiencies.Cast<WireropeEfficiency>().ToList();
             if (wireropeEfficiencies.All(w => w.Count != current.RopeCount))
             {
                 needWrite = true;

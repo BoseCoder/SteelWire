@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows;
-using SteelWire.Lang;
+using SteelWire.Language;
 
 namespace SteelWire.AppCode.CustomException
 {

@@ -42,7 +42,7 @@ namespace SteelWire.Business.CalculateCommander
         /// <summary>
         /// 承载绳根数
         /// </summary>
-        public int RopeCount { get; set; }
+        public long RopeCount { get; set; }
         /// <summary>
         /// 安全系数修正系数
         /// </summary>
@@ -59,13 +59,6 @@ namespace SteelWire.Business.CalculateCommander
         /// 滑轮D:d比率修正系数
         /// </summary>
         public decimal PulleyCoefficient { get; private set; }
-
-        /// <summary>
-        /// 构造函数
-        /// </summary>
-        public CommanderRopeCut()
-            : base(0)
-        { }
 
         /// <summary>
         /// 检查输入

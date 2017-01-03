@@ -4,9 +4,6 @@
     <system:String x:Key="AppTitle">
         Wireline Of Well Drilling Calculate Tool
     </system:String>
-    <system:String x:Key="AppVersion">
-        1.4
-    </system:String>
     <system:String x:Key="Welcome">
         Welcome,
     </system:String>
@@ -23,62 +20,122 @@
         Days
     </system:String>
 
-    <system:String x:Key="DrillingTypeTopDrive">
-        TopDrive
+    <system:String x:Key="LanguageEnumDefault">
+        Default
     </system:String>
-    <system:String x:Key="DrillingTypeReamerAndTopDrive">
-        ReamerAndTopDrive
+    <system:String x:Key="LanguageEnumEnglish">
+        English
     </system:String>
-    <system:String x:Key="DrillingTypeNoRedressing">
-        NoRedressing
-    </system:String>
-    <system:String x:Key="DrillingTypeRedressingOnce">
-        RedressingOnce
-    </system:String>
-    <system:String x:Key="DrillingTypeRedressingTwice">
-        RedressingTwice
+    <system:String x:Key="LanguageEnumChinese">
+        中文（简体）
     </system:String>
 
-    <system:String x:Key="DrillingDifficultyEasy">
+    <system:String x:Key="UnitSystemEnumInternationalSystem">
+        International System
+    </system:String>
+    <system:String x:Key="UnitSystemEnumImperialSystem">
+        Imperial System
+    </system:String>
+
+    <system:String x:Key="DrillingTypeEnumTopDrive">
+        Top Drive
+    </system:String>
+    <system:String x:Key="DrillingTypeEnumNotTopDrive">
+        Not Top Drive
+    </system:String>
+
+    <system:String x:Key="HistoryEnumCumulate">
+        &#160;cumulate&#160;
+    </system:String>
+    <system:String x:Key="HistoryEnumCut">
+        &#160;cut&#160;
+    </system:String>
+    <system:String x:Key="HistoryDataLineNumber">
+        Line Number:
+    </system:String>
+
+    <system:String x:Key="DrillingDifficultyEnumEasy">
         Easy
     </system:String>
-    <system:String x:Key="DrillingDifficultyNormal">
+    <system:String x:Key="DrillingDifficultyEnumNormal">
         Normal
     </system:String>
-    <system:String x:Key="DrillingDifficultyHard">
+    <system:String x:Key="DrillingDifficultyEnumHard">
         Hard
     </system:String>
-    <system:String x:Key="DrillingDifficultyDifficult">
+    <system:String x:Key="DrillingDifficultyEnumDifficult">
         Difficult
     </system:String>
 
-    <system:String x:Key="LblUnitMillimetre">
+    <system:String x:Key="InternationalSystemMillimetre">
         (mm)
     </system:String>
-    <system:String x:Key="LblUnitMetre">
+    <system:String x:Key="InternationalSystemMetre">
         (m)
     </system:String>
-    <system:String x:Key="LblUnitKilogram">
+    <system:String x:Key="InternationalSystemKilogram">
         (kg)
     </system:String>
-    <system:String x:Key="LblUnitKilogramPerMetre">
+    <system:String x:Key="InternationalSystemKilogramPerMetre">
         (kg/m)
     </system:String>
-    <system:String x:Key="LblUnitKilogramPerCubicMeter">
+    <system:String x:Key="InternationalSystemGramPerCubicCentimetre">
+        (g/cm^3)
+    </system:String>
+    <system:String x:Key="InternationalSystemKilogramPerCubicMeter">
         (kg/m^3)
     </system:String>
-    <system:String x:Key="LblUnitKilonewton">
+    <system:String x:Key="InternationalSystemKilonewton">
         (kn)
     </system:String>
-    <system:String x:Key="LblUnitTon">
+    <system:String x:Key="InternationalSystemTon">
         (t)
     </system:String>
-    <system:String x:Key="LblUnitTonKilometre">
+    <system:String x:Key="InternationalSystemTonKilometre">
         (t·km)
+    </system:String>
+    <system:String x:Key="ImperialSystemMillimetre">
+        (in)
+    </system:String>
+    <system:String x:Key="ImperialSystemMetre">
+        (ft)
+    </system:String>
+    <system:String x:Key="ImperialSystemKilogram">
+        (lb)
+    </system:String>
+    <system:String x:Key="ImperialSystemKilogramPerMetre">
+        (lb/ft)
+    </system:String>
+    <system:String x:Key="ImperialSystemGramPerCubicCentimetre">
+        (lb/gal)
+    </system:String>
+    <system:String x:Key="ImperialSystemKilogramPerCubicMeter">
+        (kg/m^3)
+    </system:String>
+    <system:String x:Key="ImperialSystemKilonewton">
+        (lb)
+    </system:String>
+    <system:String x:Key="ImperialSystemTon">
+        (t)
+    </system:String>
+    <system:String x:Key="ImperialSystemTonKilometre">
+        (ton·miles)
     </system:String>
 
     <system:String x:Key="GroupWirelineCuttingCriticalValueTitle">
-        Calculate Critical Value Of Wireline Cutting
+        Drill Device &amp; Wireline Paramers
+    </system:String>
+    <system:String x:Key="LblWireLineStruct">
+        WireLine Struct:
+    </system:String>
+    <system:String x:Key="LblWireLineStrongLevel">
+        Strong Level:
+    </system:String>
+    <system:String x:Key="LblWireLineTwistDirection">
+        Twist Direction:
+    </system:String>
+    <system:String x:Key="LblWireLineOrderLength">
+        Order Length:
     </system:String>
     <system:String x:Key="LblDerrickHeight">
         Derrick Height:
@@ -94,6 +151,9 @@
     </system:String>
     <system:String x:Key="LblRotaryHookWorkload">
         Hook Workload:
+    </system:String>
+    <system:String x:Key="LblRealRotaryHookWorkload">
+        Real Hook Workload:
     </system:String>
     <system:String x:Key="LblWirelineDiameter">
         Wireline Diameter:
@@ -120,34 +180,49 @@
     <system:String x:Key="LblElevatorWeight">
         Elevator Weight:
     </system:String>
-    <system:String x:Key="DrillPipeNameDrillPipe1">
-        Drill Pipe
-    </system:String>
-    <system:String x:Key="HeavierDrillPipeNameHeavierDrillPipe1">
-        Heavier Drill Pipe
-    </system:String>
-    <system:String x:Key="DrillPipeWeight">
+    <system:String x:Key="DrillDeviceTypeEnumDrillPipeWeight">
         Weight:
     </system:String>
-    <system:String x:Key="DrillPipeLength">
-        Length:
-    </system:String>
-    <system:String x:Key="DrillPipeStandLength">
+    <system:String x:Key="DrillDeviceTypeEnumDrillPipeLength">
         Stand Len:
     </system:String>
-    <system:String x:Key="DrillCollarNameDrillCollar1">
-        Drill Collar 1
+    <system:String x:Key="DrillDeviceTypeEnumDrillPipeDrillPipe1">
+        Drill Pipe
     </system:String>
-    <system:String x:Key="DrillCollarNameDrillCollar2">
-        Drill Collar 2
-    </system:String>
-    <system:String x:Key="DrillCollarWeight">
+    <system:String x:Key="DrillDeviceTypeEnumHeavierDrillPipeWeight">
         Weight:
     </system:String>
-    <system:String x:Key="DrillCollarLength">
+    <system:String x:Key="DrillDeviceTypeEnumHeavierDrillPipeLength">
         Length:
     </system:String>
+    <system:String x:Key="DrillDeviceTypeEnumHeavierDrillPipeHeavierDrillPipe1">
+        Heavier Drill Pipe
+    </system:String>
+    <system:String x:Key="DrillDeviceTypeEnumDrillCollarWeight">
+        Weight:
+    </system:String>
+    <system:String x:Key="DrillDeviceTypeEnumDrillCollarLength">
+        Length:
+    </system:String>
+    <system:String x:Key="DrillDeviceTypeEnumDrillCollarNameDrillCollar1">
+        Drill Collar 1
+    </system:String>
+    <system:String x:Key="DrillDeviceTypeEnumDrillCollarNameDrillCollar2">
+        Drill Collar 2
+    </system:String>
+    <system:String x:Key="DrillDeviceTypeEnumBushingWeight">
+        Bushing Weight:
+    </system:String>
+    <system:String x:Key="DrillDeviceTypeEnumBushingLength">
+        Bushing Length:
+    </system:String>
+    <system:String x:Key="DrillDeviceTypeEnumBushingBushing1">
+        Bushing
+    </system:String>
 
+    <system:String x:Key="LblOperationProcessCalculation">
+        Operation Process Calculation:
+    </system:String>
     <system:String x:Key="LblShallowHeight">
         Shallow Height:
     </system:String>
@@ -162,7 +237,10 @@
         Calculate For Drilling Work
     </system:String>
     <system:String x:Key="LblDrillingType">
-        Type:
+        Driving Type:
+    </system:String>
+    <system:String x:Key="LblRedressingCount">
+        Redressing Count:
     </system:String>
     <system:String x:Key="LblDrillingDifficulty">
         Difficulty:
@@ -177,12 +255,6 @@
 
     <system:String x:Key="GroupBushingWorkTitle">
         Calculate For Bushing Work
-    </system:String>
-    <system:String x:Key="LblBushingWeight">
-        Bushing Weight:
-    </system:String>
-    <system:String x:Key="LblBushingLength">
-        Bushing Length:
     </system:String>
     <system:String x:Key="LblBushingHeight">
         Bushing Height:
@@ -213,6 +285,12 @@
     </system:String>
     <system:String x:Key="LblCurrentCumulation">
         Current Cumulation:
+    </system:String>
+    <system:String x:Key="LblRealWirelineCutLength">
+        Real Cutting Length:
+    </system:String>
+    <system:String x:Key="LblTotalCutted">
+        Total Cutted:
     </system:String>
     <system:String x:Key="BtnRefresh">
         Refresh
@@ -253,7 +331,19 @@
     </system:String>
 
     <system:String x:Key="OptionTitle">
+        Option
+    </system:String>
+    <system:String x:Key="OptionTabSystem">
         System Option
+    </system:String>
+    <system:String x:Key="OptionTabSqlServer">
+        SQL Server Database Option
+    </system:String>
+    <system:String x:Key="LblOptionLanguage">
+        Language
+    </system:String>
+    <system:String x:Key="LblOptionUnit">
+        Unit
     </system:String>
     <system:String x:Key="LblSerialNumber">
         SN
@@ -270,7 +360,7 @@
     <system:String x:Key="LblDbPassword">
         Database Password
     </system:String>
-    
+
     <system:String x:Key="BtnOk">
         Ok
     </system:String>
@@ -280,9 +370,9 @@
     <system:String x:Key="BtnReportSearch">
         Search
     </system:String>
-    
+
     <system:String x:Key="MenuItemUser">
-        _User Menu
+        _User
     </system:String>
     <system:String x:Key="MenuItemSignOut">
         _Switch Account
@@ -303,6 +393,22 @@
         _Option
     </system:String>
 
+    <system:String x:Key="ReportHeaderCutSequence">
+        Sequence
+    </system:String>
+    <system:String x:Key="ReportHeaderCutTime">
+        Cut Time
+    </system:String>
+    <system:String x:Key="ReportHeaderCutValue">
+        Cut Value
+    </system:String>
+    <system:String x:Key="ReportHeaderCutLength">
+        Cut Length
+    </system:String>
+    <system:String x:Key="ReportFooterSummary">
+        Summary:
+    </system:String>
+
     <system:String x:Key="ValidationStringEmpty">The input could not be empty, please input string value at first.</system:String>
     <system:String x:Key="ValidationIntEmpty">The input could not be empty, please input decimal value at first.</system:String>
     <system:String x:Key="ValidationIntError">The input is not valid decimal value, please try again.</system:String>
@@ -311,6 +417,13 @@
 
     <system:String x:Key="ErrorCaption">Error</system:String>
     <system:String x:Key="ErrorCurrentWireNoEmpty">Current wire number could not be empty, please input again.</system:String>
+    <system:String x:Key="ErrorCurrentWireNoInvalid">The input wire number is not matched with current wire number, please click the "Refresh" button to load data of this line.</system:String>
+    <system:String x:Key="ErrorCurrentWireLineStructEmpty">Current wire line struct could not be empty, please input again.</system:String>
+    <system:String x:Key="ErrorCurrentWireLineStrongLevelEmpty">Current wire line strong level could not be empty, please input again.</system:String>
+    <system:String x:Key="ErrorCurrentWireLineTwistDirectionEmpty">Current wire line twist direction could not be empty, please input again.</system:String>
+    <system:String x:Key="ErrorCurrentWireLineOrderLengthZero">Current wire line order length could not be zero, please input again.</system:String>
+    <system:String x:Key="ErrorCurrentCumulationValueZero">The value of current cumulation is zero, please cumulation once at least.</system:String>
+    <system:String x:Key="ErrorCutLengthZero">The cumulate value has reached or exceeded the critical value, advice to input the cut length value to cut down.</system:String>
     <system:String x:Key="ErrorCriticalValueInvalid">Critical value is invalid.</system:String>
     <system:String x:Key="ErrorCriticalDictionaryFileNotFound">Critical dictionary file not found.</system:String>
     <system:String x:Key="ErrorCriticalConfigFileNotFound">Critical config file not found.</system:String>
@@ -336,7 +449,7 @@
     <system:String x:Key="MessageCaption">Message</system:String>
     <system:String x:Key="MessageExitConfirm" xml:space="preserve">Are you sure to exit ?</system:String>
     <system:String x:Key="MessageSaveCriticalCumulateCompulsivelyConfirm" xml:space="preserve">System will save new critical value absolutely with cumulate value.Are you sure to save cumulate value ?Click "Yes" to save both, or click "No" not to save either.</system:String>
-    <system:String x:Key="MessageSaveCriticalCumulateConfirm" xml:space="preserve">Are you sure to save new critical value and cumulate value ?Click "Yes" to save both, Click "No" to save cumulate value only.Or click "Cancel" not to save either.</system:String>
+    <system:String x:Key="MessageSaveCriticalCumulateConfirm" xml:space="preserve">Are you sure to save new critical value and cumulate value ?Click "Yes" to save, Click "No" not to save.</system:String>
     <system:String x:Key="MessageResetCompulsivelyConfirm" xml:space="preserve">The cumulate value has reached or exceeded the critical value, it is time to cut down now, do it ?Click "Yes" to cut it down, click "No" to do nothing.</system:String>
     <system:String x:Key="MessageResetConfirm" xml:space="preserve">Are you sure to cut the cumulate value down ?Click "OK" to cut it down, or click "Cancel" to return.</system:String>
 

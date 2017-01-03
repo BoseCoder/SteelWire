@@ -10,27 +10,29 @@ namespace SteelWire.Business.DbOperator
         {
             if (string.IsNullOrEmpty(account))
             {
-                throw new ArgumentNullException("account");
+                throw new ArgumentNullException(nameof(account));
             }
-            SteelWireContext dbContext = new SteelWireContext();
-            return dbContext.SecurityUser.Any(u => u.Account == account);
+            using (SteelWireBaseContext dbContext = DbContextFactory.GenerateDbContext())
+            {
+                return dbContext.SecurityUser.Any(u => u.Account == account);
+            }
         }
 
         public static SecurityUser Regist(SecurityUser user)
         {
             if (user == null)
             {
-                throw new ArgumentNullException("user");
+                throw new ArgumentNullException(nameof(user));
             }
             if (string.IsNullOrEmpty(user.Account))
             {
-                throw new ArgumentNullException("user.Account");
+                throw new ArgumentException("Account property of user is null.", nameof(user));
             }
             if (string.IsNullOrEmpty(user.Password))
             {
-                throw new ArgumentNullException("user.Password");
+                throw new ArgumentException("Password property of user is null.", nameof(user));
             }
-            using (SteelWireContext dbContext = new SteelWireContext())
+            using (SteelWireBaseContext dbContext = DbContextFactory.GenerateDbContext())
             {
                 dbContext.SecurityUser.Add(user);
                 dbContext.SaveChanges();
@@ -42,15 +44,16 @@ namespace SteelWire.Business.DbOperator
         {
             if (string.IsNullOrEmpty(account))
             {
-                throw new ArgumentNullException("account");
+                throw new ArgumentNullException(nameof(account));
             }
             if (string.IsNullOrEmpty(password))
             {
-                throw new ArgumentNullException("password");
+                throw new ArgumentNullException(nameof(password));
             }
-            SteelWireContext dbContext = new SteelWireContext();
-            SecurityUser user = dbContext.SecurityUser.FirstOrDefault(u => u.Account == account);
-            return user;
+            using (SteelWireBaseContext dbContext = DbContextFactory.GenerateDbContext())
+            {
+                return dbContext.SecurityUser.FirstOrDefault(u => u.Account == account);
+            }
         }
     }
 }

@@ -9,12 +9,21 @@ namespace SteelWire.AppCode.Config
     public class WorkConfig : ConfigurationSection
     {
         /// <summary>
+        /// 当班大钩显示悬重
+        /// </summary>
+        [ConfigurationProperty("realRotaryHookWorkload", IsRequired = true)]
+        public decimal RealRotaryHookWorkload
+        {
+            get { return (decimal)this["realRotaryHookWorkload"]; }
+            set { this["realRotaryHookWorkload"] = value; }
+        }
+        /// <summary>
         /// 钻杆
         /// </summary>
         [ConfigurationProperty("DrillPipes", IsRequired = true)]
-        public AddCollection<DrillPipe> DrillPipes
+        public AddCollection<Drill> DrillPipes
         {
-            get { return (AddCollection<DrillPipe>)this["DrillPipes"]; }
+            get { return (AddCollection<Drill>)this["DrillPipes"]; }
             set { this["DrillPipes"] = value; }
         }
         /// <summary>
@@ -34,6 +43,15 @@ namespace SteelWire.AppCode.Config
         {
             get { return (AddCollection<Drill>)this["DrillCollars"]; }
             set { this["DrillCollars"] = value; }
+        }
+        /// <summary>
+        /// 套管
+        /// </summary>
+        [ConfigurationProperty("Bushings", IsRequired = true)]
+        public AddCollection<Drill> Bushings
+        {
+            get { return (AddCollection<Drill>)this["Bushings"]; }
+            set { this["Bushings"] = value; }
         }
         /// <summary>
         /// 钻井液密度
@@ -72,22 +90,22 @@ namespace SteelWire.AppCode.Config
             set { this["drillingDeepHeight"] = value; }
         }
         /// <summary>
-        /// 钻井方式
+        /// 钻机驱动方式
         /// </summary>
         [ConfigurationProperty("drillingType", IsRequired = true)]
-        public string DrillingType
+        public DrillingTypeEnum DrillingType
         {
-            get { return (string)this["drillingType"]; }
+            get { return (DrillingTypeEnum)this["drillingType"]; }
             set { this["drillingType"] = value; }
         }
         /// <summary>
-        /// 钻井难度
+        /// 划眼次数
         /// </summary>
-        [ConfigurationProperty("drillingDifficulty", IsRequired = true)]
-        public string DrillingDifficulty
+        [ConfigurationProperty("redressingCount", IsRequired = true)]
+        public long RedressingCount
         {
-            get { return (string)this["drillingDifficulty"]; }
-            set { this["drillingDifficulty"] = value; }
+            get { return (long)this["redressingCount"]; }
+            set { this["redressingCount"] = value; }
         }
         /// <summary>
         /// 起下钻钻井深度（浅）
@@ -111,28 +129,10 @@ namespace SteelWire.AppCode.Config
         /// 起下钻次数
         /// </summary>
         [ConfigurationProperty("tripCount", IsRequired = true)]
-        public decimal TripCount
+        public long TripCount
         {
-            get { return (decimal)this["tripCount"]; }
+            get { return (long)this["tripCount"]; }
             set { this["tripCount"] = value; }
-        }
-        /// <summary>
-        /// 套管公称质量
-        /// </summary>
-        [ConfigurationProperty("bushingWeight", IsRequired = true)]
-        public decimal BushingWeight
-        {
-            get { return (decimal)this["bushingWeight"]; }
-            set { this["bushingWeight"] = value; }
-        }
-        /// <summary>
-        /// 套管单根长度
-        /// </summary>
-        [ConfigurationProperty("bushingLength", IsRequired = true)]
-        public decimal BushingLength
-        {
-            get { return (decimal)this["bushingLength"]; }
-            set { this["bushingLength"] = value; }
         }
         /// <summary>
         /// 下套管深度
@@ -164,23 +164,7 @@ namespace SteelWire.AppCode.Config
     }
 
     /// <summary>
-    /// 钻杆
-    /// </summary>
-    public class DrillPipe : Drill
-    {
-        /// <summary>
-        /// 长度
-        /// </summary>
-        [ConfigurationProperty("standLength", IsRequired = true)]
-        public decimal StandLength
-        {
-            get { return (decimal)this["standLength"]; }
-            set { this["standLength"] = value; }
-        }
-    }
-
-    /// <summary>
-    /// 钻杆和钻铤
+    /// 钻杆/加重钻杆/钻铤/套管
     /// </summary>
     public class Drill : ConfigurationElement, ISectionCollectionItem
     {

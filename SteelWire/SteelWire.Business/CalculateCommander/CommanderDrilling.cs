@@ -13,13 +13,13 @@ namespace SteelWire.Business.CalculateCommander
         private readonly CommanderTripOnce _commanderTripOnce;
 
         /// <summary>
-        /// 钻井方式
+        /// 钻机驱动方式
         /// </summary>
-        public decimal Type { get; set; }
+        public decimal DrivingTypeCoefficient { get; set; }
         /// <summary>
-        /// 钻井难度
+        /// 划眼次数
         /// </summary>
-        public decimal Difficulty { get; set; }
+        public long RedressingCount { get; set; }
         /// <summary>
         /// 较深钻井深度
         /// </summary>
@@ -34,11 +34,10 @@ namespace SteelWire.Business.CalculateCommander
         /// </summary>
         /// <param name="commanderTripOnce">一次起下钻</param>
         public CommanderDrilling(CommanderTripOnce commanderTripOnce)
-            : base(0)
         {
             if (commanderTripOnce == null)
             {
-                throw new ArgumentNullException("commanderTripOnce");
+                throw new ArgumentNullException(nameof(commanderTripOnce));
             }
             this._commanderTripOnce = commanderTripOnce;
         }
@@ -61,7 +60,7 @@ namespace SteelWire.Business.CalculateCommander
             decimal deep = this._commanderTripOnce.CalculateValue();
             this._commanderTripOnce.DrillingHeight = this.ShallowHeight;
             decimal shallow = this._commanderTripOnce.CalculateValue();
-            return this.Type * (deep - shallow) * this.Difficulty;
+            return (this.DrivingTypeCoefficient + this.RedressingCount) * (deep - shallow);
         }
     }
 }

@@ -22,18 +22,17 @@ namespace SteelWire.Business.CalculateCommander
         /// <summary>
         /// 起下钻次数
         /// </summary>
-        public decimal Count { get; set; }
+        public long Count { get; set; }
 
         /// <summary>
         /// 构造函数
         /// </summary>
         /// <param name="commanderTripOnce">一次起下钻</param>
         public CommanderTrip(CommanderTripOnce commanderTripOnce)
-            : base(0)
         {
             if (commanderTripOnce == null)
             {
-                throw new ArgumentNullException("commanderTripOnce");
+                throw new ArgumentNullException(nameof(commanderTripOnce));
             }
             this._commanderTripOnce = commanderTripOnce;
         }

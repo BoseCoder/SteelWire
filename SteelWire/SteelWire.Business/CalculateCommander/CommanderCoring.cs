@@ -29,11 +29,10 @@ namespace SteelWire.Business.CalculateCommander
         /// </summary>
         /// <param name="commanderTripOnce">一次起下钻</param>
         public CommanderCoring(CommanderTripOnce commanderTripOnce)
-            : base(0)
         {
             if (commanderTripOnce == null)
             {
-                throw new ArgumentNullException("commanderTripOnce");
+                throw new ArgumentNullException(nameof(commanderTripOnce));
             }
             this._commanderTripOnce = commanderTripOnce;
         }

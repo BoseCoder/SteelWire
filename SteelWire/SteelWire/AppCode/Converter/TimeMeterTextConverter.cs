@@ -18,10 +18,15 @@ namespace SteelWire.AppCode.Converter
             }
             if (!(value is DateTime))
             {
-                return string.Format("{0}", value);
+                return $"{value}";
             }
             DateTime now = (DateTime)value;
-            return now.GetDateTimeFormats('D')[1];
+            string[] formates = now.GetDateTimeFormats('D');
+            if (formates.Length > 1)
+            {
+                return formates[1];
+            }
+            return now.ToShortDateString();
         }
 
         public object ConvertBack(object value, Type typeTarget, object param, CultureInfo culture)

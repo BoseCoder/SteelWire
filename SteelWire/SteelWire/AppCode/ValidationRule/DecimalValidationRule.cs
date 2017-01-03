@@ -1,6 +1,6 @@
 using System.Globalization;
 using System.Windows.Controls;
-using SteelWire.Lang;
+using SteelWire.Language;
 
 namespace SteelWire.AppCode.ValidationRule
 {
@@ -11,7 +11,7 @@ namespace SteelWire.AppCode.ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            string input = string.Format("{0}", value);
+            string input = $"{value}";
             if (string.IsNullOrWhiteSpace(input))
             {
                 return new ValidationResult(false, LanguageManager.GetLocalResourceStringRight(ValidationCodeKey, "DecimalEmpty"));

@@ -2,7 +2,9 @@
 using System.Collections.ObjectModel;
 using System.Security.Cryptography;
 using System.Text;
+using SteelWire.AppCode.Config;
 using SteelWire.AppCode.CustomException;
+using SteelWire.AppCode.Data;
 using SteelWire.AppCode.Dependencies;
 using SteelWire.Business.Database;
 using SteelWire.Business.DbOperator;
@@ -15,47 +17,18 @@ namespace SteelWire.WindowData
     public class Sign
     {
         /// <summary>
-        /// 单例
-        /// </summary>
-        public static readonly Sign Data;
-
-        /// <summary>
-        /// 当前登陆用户ID
-        /// </summary>
-        public int UserID { get; private set; }
-        /// <summary>
-        /// 当前登陆用户账户
-        /// </summary>
-        public string Account { get; private set; }
-        /// <summary>
-        /// 当前登陆用户姓名
-        /// </summary>
-        public string UserName { get; private set; }
-        /// <summary>
-        /// 当前登陆用户显示名
-        /// </summary>
-        public DependencyItem<string> UserDisplay { get; private set; }
-        /// <summary>
         /// 窗口模式（登陆）
         /// </summary>
-        public DependencyItem<bool> IsSign { get; private set; }
+        public DependencyObject<bool> IsSign { get; } = new DependencyObject<bool>(true);
         /// <summary>
         /// 窗口模式（注册）
         /// </summary>
-        public DependencyItem<bool> IsRegist { get; private set; }
+        public DependencyObject<bool> IsRegist { get; } = new DependencyObject<bool>();
 
-        static Sign()
+        public Sign()
         {
-            Data = new Sign();
-        }
-
-        private Sign()
-        {
-            this.UserDisplay = new DependencyItem<string>();
-            this.IsSign = new DependencyItem<bool>(true);
-            this.IsSign.ItemValueChangedHandler += ChangeSignToRegist;
-            this.IsRegist = new DependencyItem<bool>();
-            this.IsRegist.ItemValueChangedHandler += ChangeRegistToSign;
+            this.IsSign.ValueChangedHandler += ChangeWindowMode;
+            this.IsRegist.ValueChangedHandler += ChangeWindowMode;
         }
 
         /// <summary>
@@ -71,14 +44,20 @@ namespace SteelWire.WindowData
             return Convert.ToBase64String(output);
         }
 
-        private void ChangeSignToRegist(object sender, EventArgs e)
+        private void ChangeWindowMode(object sender, EventArgs e)
         {
-            this.IsRegist.ItemValue = !this.IsSign.ItemValue;
-        }
-
-        private void ChangeRegistToSign(object sender, EventArgs e)
-        {
-            this.IsSign.ItemValue = !this.IsRegist.ItemValue;
+            if (ReferenceEquals(sender, this.IsSign))
+            {
+                this.IsRegist.ValueChangedHandler -= ChangeWindowMode;
+                this.IsRegist.Value = !this.IsSign.Value;
+                this.IsRegist.ValueChangedHandler += ChangeWindowMode;
+            }
+            else
+            {
+                this.IsSign.ValueChangedHandler -= ChangeWindowMode;
+                this.IsSign.Value = !this.IsRegist.Value;
+                this.IsSign.ValueChangedHandler += ChangeWindowMode;
+            }
         }
 
         /// <summary>
@@ -87,7 +66,7 @@ namespace SteelWire.WindowData
         /// <returns></returns>
         public bool IsSignIn()
         {
-            return !string.IsNullOrEmpty(this.Account);
+            return !string.IsNullOrEmpty(GlobalData.Account);
         }
 
         /// <summary>
@@ -155,14 +134,14 @@ namespace SteelWire.WindowData
                 Name = userName ?? account,
                 Checked = true,
                 Enabled = true,
-                RegistTime = now,
+                RegistrationTime = now,
                 UpdateTime = now,
                 Machine = new Collection<Machine>
                 {
                     new Machine
                     {
                         MachineCode = Environment.Machine.GetMachineNumber(),
-                        RegistTime = now
+                        RegistrationTime = now
                     }
                 }
             };
@@ -176,10 +155,10 @@ namespace SteelWire.WindowData
         /// <param name="user"></param>
         private void SetUserInfo(SecurityUser user)
         {
-            this.UserID = user.ID;
-            this.Account = user.Account;
-            this.UserName = user.Name;
-            this.UserDisplay.ItemValue = string.IsNullOrEmpty(this.UserName) ? this.Account : this.UserName;
+            GlobalData.UserId = user.ID;
+            GlobalData.SearchUserId = SystemConfigManager.OnceInstance.DataIsolation ? GlobalData.UserId : 0;
+            GlobalData.Account = user.Account;
+            GlobalData.UserDisplay.Value = string.IsNullOrEmpty(user.Name) ? user.Account : user.Name;
         }
     }
 }

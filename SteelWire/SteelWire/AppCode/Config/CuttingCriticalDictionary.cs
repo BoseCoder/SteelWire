@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using BaseConfig;
+using SteelWire.Business.Config;
 
 namespace SteelWire.AppCode.Config
 {
@@ -46,6 +47,37 @@ namespace SteelWire.AppCode.Config
     /// </summary>
     public class WireropeWorkload : ConfigurationElement, ISectionCollectionItem
     {
+
+        /// <summary>
+        /// Key
+        /// </summary>
+        [ConfigurationProperty("key", IsRequired = true)]
+        public string Key
+        {
+            get { return (string)this["key"]; }
+            set { this["key"] = value; }
+        }
+
+        /// <summary>
+        /// 单位体系
+        /// </summary>
+        [ConfigurationProperty("unitSystem", IsRequired = true)]
+        public UnitSystemEnum UnitSystem
+        {
+            get { return (UnitSystemEnum)this["unitSystem"]; }
+            set { this["unitSystem"] = value; }
+        }
+
+        /// <summary>
+        /// 显示名称
+        /// </summary>
+        [ConfigurationProperty("name", IsRequired = true)]
+        public string Name
+        {
+            get { return (string)this["name"]; }
+            set { this["name"] = value; }
+        }
+
         /// <summary>
         /// 钢丝绳直径
         /// </summary>
@@ -68,7 +100,7 @@ namespace SteelWire.AppCode.Config
 
         public object GetKey()
         {
-            return this.Diameter;
+            return this.Key;
         }
     }
 
@@ -78,13 +110,13 @@ namespace SteelWire.AppCode.Config
     public class WireropeCutRole : ConfigurationElement, ISectionCollectionItem
     {
         /// <summary>
-        /// ID
+        /// Key
         /// </summary>
-        [ConfigurationProperty("id", IsRequired = true)]
-        public string ID
+        [ConfigurationProperty("key", IsRequired = true)]
+        public string Key
         {
-            get { return (string)this["id"]; }
-            set { this["id"] = value; }
+            get { return (string)this["key"]; }
+            set { this["key"] = value; }
         }
 
         /// <summary>
@@ -132,12 +164,12 @@ namespace SteelWire.AppCode.Config
         /// </summary>
         public WireropeCutRole()
         {
-            this.ID = Guid.NewGuid().ToString("N");
+            this.Key = Guid.NewGuid().ToString("N");
         }
 
         public object GetKey()
         {
-            return this.ID;
+            return this.Key;
         }
     }
 
@@ -150,9 +182,9 @@ namespace SteelWire.AppCode.Config
         /// 承载绳根数
         /// </summary>
         [ConfigurationProperty("count", IsRequired = true)]
-        public int Count
+        public long Count
         {
-            get { return (int)this["count"]; }
+            get { return (long)this["count"]; }
             set { this["count"] = value; }
         }
 

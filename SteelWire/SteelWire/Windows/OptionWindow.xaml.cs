@@ -1,18 +1,51 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.Data.Entity;
+using System.Linq;
 using System.Windows;
+using SteelWire.AppCode.Config;
 using SteelWire.AppCode.CustomException;
 using SteelWire.AppCode.CustomMessage;
+using SteelWire.AppCode.Data;
+using SteelWire.AppCode.Dependencies;
+using SteelWire.Business.Config;
 using SteelWire.Business.Database;
+using SteelWire.Language;
+using SteelWire.WindowData;
 
 namespace SteelWire.Windows
 {
     public partial class OptionWindow
     {
+        private Option WindowData { get; }
+
         public OptionWindow()
         {
             InitializeComponent();
+
+            this.WindowData = this.DataContext as Option;
+
+            if (DatabaseConfigManager.OnceInstance.DatabaseType == DatabaseType.SqlLite)
+            {
+                this.TabSqlServerOption.Visibility = Visibility.Collapsed;
+            }
+
+            InitializeEnumComboBox();
+        }
+
+        private void InitializeEnumComboBox()
+        {
+            Type languageEnumType = typeof(LanguageEnum);
+            this.CboLanguage.ItemsSource = Enum.GetValues(languageEnumType).Cast<LanguageEnum>().Select(value =>
+                new KeyValuePair<LanguageEnum, DependencyLanguage>(value, DependencyLanguage.Generate(() =>
+                    LanguageManager.GetLocalResourceStringLeft(languageEnumType.Name, value.ToString()))));
+
+            Type unitSystemEnumType = typeof(UnitSystemEnum);
+            this.CboUnitSystem.ItemsSource = Enum.GetValues(unitSystemEnumType).Cast<UnitSystemEnum>().Select(value =>
+                new KeyValuePair<UnitSystemEnum, DependencyLanguage>(value, DependencyLanguage.Generate(() =>
+                    LanguageManager.GetLocalResourceStringLeft(unitSystemEnumType.Name, value.ToString()))));
         }
 
         private void WindowLoaded(object sender, RoutedEventArgs e)
@@ -20,12 +53,19 @@ namespace SteelWire.Windows
             try
             {
                 this.TxtSerialNumber.Text = IntelliLock.Licensing.HardwareID.GetHardwareID(true, true, true, true, true, false);
-                ConnectionStringSettings connSettings = ConfigurationManager.ConnectionStrings["SteelWireContext"];
-                if (connSettings != null && !string.IsNullOrWhiteSpace(connSettings.ConnectionString))
+
+                if (DatabaseConfigManager.OnceInstance.DatabaseType == DatabaseType.SqlServer)
                 {
-                    SteelWireContext dbContext = new SteelWireContext();
-                    this.TxtServer.Text = dbContext.Database.Connection.DataSource;
-                    this.TxtDatabase.Text = dbContext.Database.Connection.Database;
+                    ConnectionStringSettings connSettings =
+                        ConfigurationManager.ConnectionStrings[SteelWireSqlServerContext.ConnectionName];
+                    if (!string.IsNullOrWhiteSpace(connSettings?.ConnectionString))
+                    {
+                        using (SteelWireBaseContext dbContext = DbContextFactory.GenerateDbContext())
+                        {
+                            this.TxtServer.Text = dbContext.Database.Connection.DataSource;
+                            this.TxtDatabase.Text = dbContext.Database.Connection.Database;
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -38,20 +78,23 @@ namespace SteelWire.Windows
         {
             try
             {
-                string connString;
-                if (CheckInput(out connString))
+                this.WindowData.Save();
+                if (DatabaseConfigManager.OnceInstance.DatabaseType == DatabaseType.SqlServer)
                 {
-                    Configuration appConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                    appConfig.ConnectionStrings.ConnectionStrings.Clear();
-                    ConnectionStringSettings connSettings = new ConnectionStringSettings("SteelWireContext", connString)
+                    string connString;
+                    if (CheckInput(out connString))
                     {
-                        ProviderName = "System.Data.EntityClient"
-                    };
-                    appConfig.ConnectionStrings.ConnectionStrings.Add(connSettings);
-                    appConfig.Save();
-                    MessageManager.Information("OptionSave");
-                    this.Close();
+                        Configuration appConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                        ConnectionStringSettings settings = appConfig.ConnectionStrings.ConnectionStrings[SteelWireSqlServerContext.ConnectionName];
+                        if (settings.ConnectionString != connString)
+                        {
+                            settings.ConnectionString = connString;
+                            appConfig.Save();
+                            MessageManager.Information("OptionSave");
+                        }
+                    }
                 }
+                this.Close();
             }
             catch (Exception ex)
             {
@@ -82,15 +125,15 @@ namespace SteelWire.Windows
             {
                 throw new ErrorException("OptionDbPassEmpty");
             }
-            connString = string.Format("Data Source={0};Initial Catalog={1};Integrated Security=False;User ID={2};Password={3};",
-                this.TxtServer.Text.Trim(), this.TxtDatabase.Text.Trim(), this.TxtDbUser.Text.Trim(), this.PassBoxDbUser.Password.Trim());
+            connString =
+                $"Data Source={this.TxtServer.Text.Trim()};Initial Catalog={this.TxtDatabase.Text.Trim()};Integrated Security=False;User ID={this.TxtDbUser.Text.Trim()};Password={this.PassBoxDbUser.Password.Trim()};";
             DbContext dbContext = null;
             try
             {
                 dbContext = new DbContext(connString);
                 dbContext.Database.Connection.Open();
-                connString = string.Format("metadata=res://*/Database.SteelWireModel.csdl|res://*/Database.SteelWireModel.ssdl|res://*/Database.SteelWireModel.msl;provider=System.Data.SqlClient;provider connection string=\"data source={0};initial catalog={1};persist security info=True;user id={2};password={3};MultipleActiveResultSets=True;App=EntityFramework\"",
-                    this.TxtServer.Text.Trim(), this.TxtDatabase.Text.Trim(), this.TxtDbUser.Text.Trim(), this.PassBoxDbUser.Password.Trim());
+                connString =
+                    $"metadata=res://*/Database.SteelWireModel.csdl|res://*/Database.SteelWireModel.ssdl|res://*/Database.SteelWireModel.msl;provider=System.Data.SqlClient;provider connection string=\"data source={this.TxtServer.Text.Trim()};initial catalog={this.TxtDatabase.Text.Trim()};persist security info=True;user id={this.TxtDbUser.Text.Trim()};password={this.PassBoxDbUser.Password.Trim()};MultipleActiveResultSets=True;App=EntityFramework\"";
                 return true;
             }
             catch (Exception ex)
@@ -104,6 +147,12 @@ namespace SteelWire.Windows
                     dbContext.Database.Connection.Close();
                 }
             }
+        }
+
+        private void OptionWindowClosing(object sender, CancelEventArgs e)
+        {
+            GlobalData.Language.Value = SystemConfigManager.OnceInstance.Language;
+            GlobalData.Wireline.UnitSystem.Value = SystemConfigManager.OnceInstance.UnitSystem;
         }
     }
 }

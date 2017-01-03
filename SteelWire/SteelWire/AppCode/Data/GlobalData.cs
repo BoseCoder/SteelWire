@@ -1,48 +1,40 @@
-﻿using IntelliLock.Licensing;
+﻿using SteelWire.AppCode.Config;
 using SteelWire.AppCode.Dependencies;
-using SteelWire.Lang;
-using SteelWire.WindowData;
 
 namespace SteelWire.AppCode.Data
 {
-    public class GlobalData
+    public static class GlobalData
     {
+        public static string AppVersion { get; } = "2.0";
+
+        public static DependencyObject<LanguageEnum> Language { get; } = new DependencyObject<LanguageEnum>();
+
         /// <summary>
-        /// 单例
+        /// 当前登录用户Id
         /// </summary>
-        public static readonly GlobalData Data;
+        public static long UserId { get; set; }
 
-        public DependencyItem<string> AppLicenceStatus { get; private set; }
-        public DependencyItem<string> UserDisplay { get; private set; }
+        /// <summary>
+        /// 查询数据时使用的用户Id（当不启用数据隔离时，该值为0）
+        /// </summary>
+        public static long SearchUserId { get; set; }
 
-        static GlobalData()
-        {
-            Data = new GlobalData
-            {
-                UserDisplay = Sign.Data.UserDisplay,
-                AppLicenceStatus = new DependencyItem<string>()
-            };
-            Data.InitializeData();
-        }
+        /// <summary>
+        /// 当前登录用户账户
+        /// </summary>
+        public static string Account { get; set; }
 
-        public void InitializeData()
-        {
-            if (CurrentLicense.License.LicenseStatus != LicenseStatus.Licensed)
-            {
-                if (CurrentLicense.License.ExpirationDays_Enabled)
-                {
-                    this.AppLicenceStatus.ItemValue = string.Format("  [{0} {1}{2}]",
-                        LanguageManager.GetLocalResourceStringRight("License", "Trial"),
-                        CurrentLicense.License.ExpirationDays,
-                        LanguageManager.GetLocalResourceStringRight("License", "TrialRemoveDay"));
-                }
-                else
-                {
-                    this.AppLicenceStatus.ItemValue = string.Format("  [{0}]",
-                        LanguageManager.GetLocalResourceStringRight("License", "Trial"));
-                }
-            }
-            this.UserDisplay = Sign.Data.UserDisplay;
-        }
+        /// <summary>
+        /// 当前登录用户显示文本
+        /// </summary>
+        public static DependencyObject<string> UserDisplay { get; } = new DependencyObject<string>();
+
+        /// <summary>
+        /// 当前是否登录
+        /// </summary>
+        public static bool IsSignIn => !string.IsNullOrWhiteSpace(Account);
+
+
+        public static WirelineData Wireline { get; } = new WirelineData();
     }
 }

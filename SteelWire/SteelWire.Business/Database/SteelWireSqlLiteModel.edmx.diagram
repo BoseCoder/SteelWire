@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4982a97661554497b21f943c398b8a35" Name="Diagram1">
+        <EntityTypeShape EntityType="SteelWireSqlLiteModel.CriticalConfig" Width="1.5" PointX="8.25" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SteelWireSqlLiteModel.CriticalDictionary" Width="1.5" PointX="3" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SteelWireSqlLiteModel.CriticalRecord" Width="1.5" PointX="10.5" PointY="30" IsExpanded="true" />
+        <EntityTypeShape EntityType="SteelWireSqlLiteModel.CumulationConfig" Width="1.5" PointX="5.25" PointY="25.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SteelWireSqlLiteModel.CumulationDictionary" Width="1.5" PointX="3" PointY="31.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SteelWireSqlLiteModel.CumulationRecord" Width="1.5" PointX="10.5" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SteelWireSqlLiteModel.CutRecord" Width="1.5" PointX="8.25" PointY="30" IsExpanded="true" />
+        <EntityTypeShape EntityType="SteelWireSqlLiteModel.DrillDeviceConfig" Width="1.5" PointX="7.5" PointY="25.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SteelWireSqlLiteModel.DrillingType" Width="1.5" PointX="5.25" PointY="31.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SteelWireSqlLiteModel.Machine" Width="1.5" PointX="3" PointY="38.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SteelWireSqlLiteModel.SecurityUser" Width="1.5" PointX="0.75" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SteelWireSqlLiteModel.WirelineInfo" Width="1.5" PointX="3" PointY="40.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SteelWireSqlLiteModel.WireropeCutRole" Width="1.5" PointX="5.25" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SteelWireSqlLiteModel.WireropeEfficiency" Width="1.5" PointX="5.25" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="SteelWireSqlLiteModel.WireropeWorkload" Width="1.5" PointX="5.25" PointY="22" IsExpanded="true" />
+        <AssociationConnector Association="SteelWireSqlLiteModel.FK_CriticalConfig_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="SteelWireSqlLiteModel.FK_CriticalConfig_1_0" ManuallyRouted="false" />
+        <AssociationConnector Association="SteelWireSqlLiteModel.FK_CriticalRecord_2_0" ManuallyRouted="false" />
+        <AssociationConnector Association="SteelWireSqlLiteModel.FK_CumulationRecord_2_0" ManuallyRouted="false" />
+        <AssociationConnector Association="SteelWireSqlLiteModel.FK_CriticalDictionary_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="SteelWireSqlLiteModel.FK_WireropeCutRole_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="SteelWireSqlLiteModel.FK_WireropeEfficiency_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="SteelWireSqlLiteModel.FK_WireropeWorkload_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="SteelWireSqlLiteModel.FK_CriticalRecord_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="SteelWireSqlLiteModel.FK_CriticalRecord_1_0" ManuallyRouted="false" />
+        <AssociationConnector Association="SteelWireSqlLiteModel.FK_CumulationConfig_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="SteelWireSqlLiteModel.FK_CumulationConfig_1_0" ManuallyRouted="false" />
+        <AssociationConnector Association="SteelWireSqlLiteModel.FK_CumulationRecord_1_0" ManuallyRouted="false" />
+        <AssociationConnector Association="SteelWireSqlLiteModel.FK_DrillDeviceConfig_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="SteelWireSqlLiteModel.FK_CumulationDictionary_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="SteelWireSqlLiteModel.FK_DrillingType_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="SteelWireSqlLiteModel.FK_CumulationRecord_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="SteelWireSqlLiteModel.FK_CumulationRecord_3_0" ManuallyRouted="false" />
+        <AssociationConnector Association="SteelWireSqlLiteModel.FK_CutRecord_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="SteelWireSqlLiteModel.FK_CutRecord_1_0" ManuallyRouted="false" />
+        <AssociationConnector Association="SteelWireSqlLiteModel.FK_Machine_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="SteelWireSqlLiteModel.FK_WirelineInfo_0_0" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

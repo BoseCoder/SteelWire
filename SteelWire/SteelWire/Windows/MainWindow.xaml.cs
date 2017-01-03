@@ -1,9 +1,7 @@
 ﻿using System.ComponentModel;
-using SteelWire.AppCode;
 using SteelWire.AppCode.Config;
 using SteelWire.AppCode.CustomException;
 using SteelWire.AppCode.CustomMessage;
-using SteelWire.Lang;
 using SteelWire.WindowData;
 using System;
 using System.Collections.Generic;
@@ -11,6 +9,9 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using SteelWire.AppCode.Data;
+using SteelWire.AppCode.Dependencies;
+using SteelWire.Language;
 
 
 namespace SteelWire.Windows
@@ -20,25 +21,63 @@ namespace SteelWire.Windows
     /// </summary>
     public partial class MainWindow
     {
+        public Main WindowData { get; }
+
         public MainWindow()
         {
             InitializeComponent();
 
-            if (!Main.Data.ShowSignWindow())
+            this.WindowData = this.DataContext as Main;
+
+            if (this.WindowData == null)
             {
                 this.Close();
                 return;
             }
 
+            ShowOptionWindow();
+
+            if (!this.WindowData.ShowSignWindow())
+            {
+                this.Close();
+                return;
+            }
+
+            ShowOptionWindow();
+
+            InitializeComboBox();
+
+            this.WindowData.WireropeWorkloadCollection.ItemsChangedHandler += WireropeWorkloadCollectionChanged;
+        }
+
+        private void WireropeWorkloadCollectionChanged(object sender, EventArgs e)
+        {
+            this.CboWirelineDiameter.ItemsSource = this.WindowData.WireropeWorkloadCollection.Items.Select(w => w.Value.Name);
+        }
+
+        private void InitializeComboBox()
+        {
             CuttingCriticalDictionary cuttingCriticalDic = CuttingCriticalDictionaryManager.OnceInstance.DictionarySection;
-            this.CboWirelineDiameter.ItemsSource = cuttingCriticalDic.WireropeWorkloads.Cast<WireropeWorkload>().Select(l => l.Diameter);
             this.CboRopeCount.ItemsSource = cuttingCriticalDic.WireropeEfficiencies.Cast<WireropeEfficiency>().Select(e => e.Count);
 
-            WorkDictionary workDic = WorkDictionaryManager.OnceInstance.DictionarySection;
-            this.CboDrillingType.ItemsSource = workDic.DrillingTypes.Cast<DrillingType>()
-                .Select(t => new KeyValuePair<string, string>(t.Name, LanguageManager.GetLocalResourceStringLeft("DrillingType", t.Name)));
-            this.CboDrillingDifficulty.ItemsSource = workDic.DrillingDifficulties.Cast<DrillingDifficulty>()
-                .Select(d => new KeyValuePair<string, string>(d.Name, LanguageManager.GetLocalResourceStringLeft("DrillingDifficulty", d.Name)));
+            this.CboWirelineDiameter.ItemsSource = this.WindowData.WireropeWorkloadCollection.Items.Select(w => w.Value.Name);
+
+            Type drillingTypeEnumType = typeof(DrillingTypeEnum);
+            this.CboDrillingType.ItemsSource =
+                Enum.GetValues(drillingTypeEnumType).Cast<DrillingTypeEnum>().Select(value =>
+                    new KeyValuePair<DrillingTypeEnum, DependencyLanguage>(value, DependencyLanguage.Generate(() =>
+                        LanguageManager.GetLocalResourceStringLeft(drillingTypeEnumType.Name, value.ToString()))));
+        }
+
+        private void ShowOptionWindow()
+        {
+            if (!SystemConfigManager.OnceInstance.Run)
+            {
+                OptionWindow option = new OptionWindow();
+                option.ShowDialog();
+                SystemConfigManager.OnceInstance.Run = true;
+                SystemConfigManager.OnceInstance.SaveConfig();
+            }
         }
 
         #region Action
@@ -47,11 +86,11 @@ namespace SteelWire.Windows
         {
             try
             {
-                if (Main.Data.CheckNeedReset())
+                if (this.WindowData.CheckNeedReset())
                 {
-                    Main.Data.Reset(true);
+                    this.WindowData.Reset(true);
                 }
-                Main.Data.CanCancelExit = true;
+                this.WindowData.CanCancelExit = true;
             }
             catch (Exception ex)
             {
@@ -63,7 +102,7 @@ namespace SteelWire.Windows
         {
             try
             {
-                if (Main.Data.CanCancelExit && !MessageManager.Question("ExitConfirm"))
+                if (this.WindowData.CanCancelExit && !MessageManager.Question("ExitConfirm"))
                 {
                     e.Cancel = true;
                 }
@@ -83,10 +122,10 @@ namespace SteelWire.Windows
             try
             {
                 TimeMeter.OnceInstance.CurrentTime = DateTime.Now;
-                Main.Data.RefreshData();
-                if (Main.Data.CheckNeedReset())
+                this.WindowData.RefreshData();
+                if (this.WindowData.CheckNeedReset())
                 {
-                    Main.Data.Reset(true);
+                    this.WindowData.Reset(true);
                 }
             }
             catch (Exception ex)
@@ -99,11 +138,11 @@ namespace SteelWire.Windows
         {
             try
             {
-                if (Main.Data.Cumulate())
+                if (this.WindowData.Cumulate())
                 {
-                    if (Main.Data.CheckNeedReset())
+                    if (this.WindowData.CheckNeedReset())
                     {
-                        Main.Data.Reset(true);
+                        this.WindowData.Reset(true);
                     }
                 }
             }
@@ -117,7 +156,7 @@ namespace SteelWire.Windows
         {
             try
             {
-                Main.Data.Reset(false);
+                this.WindowData.Reset(false);
             }
             catch (Exception ex)
             {
@@ -129,8 +168,8 @@ namespace SteelWire.Windows
         {
             try
             {
-                Main.Data.CurrentWireNo.ItemValue = string.Empty;
-                Main.Data.RefreshData();
+                this.WindowData.WirelineNumber.Value = string.Empty;
+                this.WindowData.RefreshData();
             }
             catch (Exception ex)
             {
@@ -144,13 +183,22 @@ namespace SteelWire.Windows
 
         private void DecimalBoxPreviewKeyDownEvent(object sender, KeyEventArgs e)
         {
+            NumericBoxPreviewKeyDownEvent(sender, e, true);
+        }
+
+        private void IntBoxPreviewKeyDownEvent(object sender, KeyEventArgs e)
+        {
+            NumericBoxPreviewKeyDownEvent(sender, e, false);
+        }
+
+        private static void NumericBoxPreviewKeyDownEvent(object sender, KeyEventArgs e, bool allowDecimal)
+        {
             if (e.KeyboardDevice.Modifiers == ModifierKeys.Control)
             {
                 return;
             }
             if ((e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
                 || (e.Key >= Key.D0 && e.Key <= Key.D9)
-                || e.Key == Key.Decimal
                 || e.Key == Key.Back || e.Key == Key.Delete
                 || e.Key == Key.Home || e.Key == Key.End
                 || e.Key == Key.Left || e.Key == Key.Right
@@ -159,21 +207,19 @@ namespace SteelWire.Windows
                 if (e.KeyboardDevice.Modifiers != ModifierKeys.None)
                 {
                     e.Handled = true;
-                    return;
                 }
-                TextBox txtBox = (TextBox)sender;
-                if (e.Key == Key.Decimal)
-                {
-                    if (txtBox.Text.Contains(".") || txtBox.SelectionStart < 1)
-                    {
-                        e.Handled = true;
-                    }
-                }
+                return;
             }
-            else
+            if (allowDecimal && (e.Key == Key.Decimal))
             {
-                e.Handled = true;
+                TextBox txtBox = (TextBox)sender;
+                if (txtBox.Text.Contains("."))
+                {
+                    e.Handled = true;
+                }
+                return;
             }
+            e.Handled = true;
         }
 
         #endregion
@@ -182,10 +228,13 @@ namespace SteelWire.Windows
         {
             try
             {
-                Main.Data.ShowSignWindow();
-                if (Main.Data.CheckNeedReset())
+                if (this.WindowData.ShowSignWindow())
                 {
-                    Main.Data.Reset(true);
+                    ShowOptionWindow();
+                    if (this.WindowData.CheckNeedReset())
+                    {
+                        this.WindowData.Reset(true);
+                    }
                 }
             }
             catch (Exception ex)
@@ -231,25 +280,6 @@ namespace SteelWire.Windows
                 else if (!ReportCutWindow.CurrentWindow.IsActive)
                 {
                     ReportCutWindow.CurrentWindow.Activate();
-                }
-            }
-            catch (Exception ex)
-            {
-                BaseException.HandleException(ex);
-            }
-        }
-
-        private void LanguageChange(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (Equals(sender, this.MenuItemEnglish))
-                {
-                    LanguageManager.LoadLanguage("en-US");
-                }
-                else if (Equals(sender, this.MenuItemChinese))
-                {
-                    LanguageManager.LoadLanguage("zh-CN");
                 }
             }
             catch (Exception ex)

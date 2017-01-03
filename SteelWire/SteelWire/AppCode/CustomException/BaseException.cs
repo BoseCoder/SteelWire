@@ -1,7 +1,7 @@
 ﻿using log4net;
-using SteelWire.Lang;
 using System;
 using System.Windows;
+using SteelWire.Language;
 
 namespace SteelWire.AppCode.CustomException
 {
@@ -22,10 +22,9 @@ namespace SteelWire.AppCode.CustomException
 
         private static readonly ILog ExceptionLogger = LogManager.GetLogger("ExceptionLogger");
 
-        public override string Message
-        {
-            get { return LanguageManager.GetLocalResourceStringRight(ErrorCodeKey, base.InnerException.Message); }
-        }
+        public override string Message => base.InnerException == null
+            ? LanguageManager.GetLocalResourceStringRight(ErrorCodeKey, base.Message)
+            : base.InnerException.Message;
 
         protected BaseException(string errorCode, bool showBox, Exception ex)
             : base(errorCode, ex)

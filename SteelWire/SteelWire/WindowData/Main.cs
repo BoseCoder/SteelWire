@@ -9,35 +9,26 @@ using SteelWire.Business.DbOperator;
 using SteelWire.Windows;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
-using System.Transactions;
-
+using IntelliLock.Licensing;
+using SteelWire.AppCode.Data;
+using SteelWire.Business.Config;
+using SteelWire.Language;
+using ConstDictionary = SteelWire.AppCode.Config.ConstDictionary;
 using WireropeWorkload = SteelWire.AppCode.Config.WireropeWorkload;
 using WireropeCutRole = SteelWire.AppCode.Config.WireropeCutRole;
 using WireropeEfficiency = SteelWire.AppCode.Config.WireropeEfficiency;
-using CuttingCriticalDictionary = SteelWire.AppCode.Config.CuttingCriticalDictionary;
-using CuttingCriticalConfig = SteelWire.AppCode.Config.CuttingCriticalConfig;
 
-using DrillingDifficulty = SteelWire.AppCode.Config.DrillingDifficulty;
 using DrillingType = SteelWire.AppCode.Config.DrillingType;
-using WorkDictionary = SteelWire.AppCode.Config.WorkDictionary;
-using DrillPipeConfig = SteelWire.AppCode.Dependencies.DrillPipeConfig;
-using DrillCollarConfig = SteelWire.AppCode.Dependencies.DrillCollarConfig;
-using WorkConfig = SteelWire.AppCode.Config.WorkConfig;
 
 using DbWireropeWorkload = SteelWire.Business.Database.WireropeWorkload;
 using DbWireropeCutRole = SteelWire.Business.Database.WireropeCutRole;
 using DbWireropeEfficiency = SteelWire.Business.Database.WireropeEfficiency;
-using DbCuttingCriticalDictionary = SteelWire.Business.Database.CuttingCriticalDictionary;
-using DbCuttingCriticalConfig = SteelWire.Business.Database.CuttingCriticalConfig;
 
 using DbDrillingType = SteelWire.Business.Database.DrillingType;
-using DbDrillingDifficulty = SteelWire.Business.Database.DrillingDifficulty;
-using DbWorkDictionary = SteelWire.Business.Database.WorkDictionary;
-using DbWorkConfig = SteelWire.Business.Database.WorkConfig;
-using DbDrillPipeConfig = SteelWire.Business.Database.DrillPipeConfig;
-using DbDrillCollarConfig = SteelWire.Business.Database.DrillCollarConfig;
 
 namespace SteelWire.WindowData
 {
@@ -46,112 +37,79 @@ namespace SteelWire.WindowData
     /// </summary>
     public class Main
     {
-        /// <summary>
-        /// 单例
-        /// </summary>
-        public static readonly Main Data;
-
-        static Main()
-        {
-            Data = new Main
-            {
-                DerrickHeight = new DependencyItem<decimal>(),
-                WirelineMaxPower = new DependencyItem<decimal>(),
-                RotaryHookWorkload = new DependencyItem<decimal>(),
-                RopeCount = new DependencyItem<int>(),
-                RollerDiameter = new DependencyItem<decimal>(),
-                WirelineDiameter = new DependencyItem<decimal>(),
-                WirelineCutLengthValue = new DependencyItem<decimal>(),
-                SecurityCoefficientValue = new DependencyItem<decimal>(),
-                PulleyCoefficientValue = new DependencyItem<decimal>(),
-                WirelineCuttingCriticalValue = new DependencyItem<decimal>(),
-
-                FluidDensity = new DependencyItem<decimal>(),
-                ElevatorWeight = new DependencyItem<decimal>(),
-                DrillPipes = new DependencyDrillPipeCollection(),
-                DrillCollars = new DependencyDrillCollection<DrillCollarConfig>(),
-
-                DrillingShallowHeight = new DependencyItem<decimal>(),
-                DrillingDeepHeight = new DependencyItem<decimal>(),
-                DrillingType = new DependencyItem<string>(),
-                DrillingDifficulty = new DependencyItem<string>(),
-                DrillingWorkValue = new DependencyItem<decimal>(),
-
-                TripShallowHeight = new DependencyItem<decimal>(),
-                TripDeepHeight = new DependencyItem<decimal>(),
-                TripCount = new DependencyItem<decimal>(),
-                TripWorkValue = new DependencyItem<decimal>(),
-
-                BushingWeight = new DependencyItem<decimal>(),
-                BushingLength = new DependencyItem<decimal>(),
-                BushingHeight = new DependencyItem<decimal>(),
-                BushingWorkValue = new DependencyItem<decimal>(),
-
-                CoringShallowHeight = new DependencyItem<decimal>(),
-                CoringDeepHeight = new DependencyItem<decimal>(),
-                CoringWorkValue = new DependencyItem<decimal>(),
-
-                TotalWorkValue = new DependencyItem<decimal>(),
-
-                CurrentWireNo = new DependencyItem<string>(),
-                CriticalValue = new DependencyItem<decimal>(),
-                CumulationValue = new DependencyItem<decimal>(),
-                Log = new DependencyItem<string>()
-            };
-
-            Data.InitializeData();
-            Data.InitializeEvent();
-        }
-
         private bool _isInitializeData;
         public bool CanCancelExit { get; set; }
 
-        public DependencyItem<decimal> DerrickHeight { get; private set; }
-        public DependencyItem<decimal> WirelineMaxPower { get; private set; }
-        public DependencyItem<decimal> RotaryHookWorkload { get; private set; }
-        public DependencyItem<int> RopeCount { get; private set; }
-        public DependencyItem<decimal> RollerDiameter { get; private set; }
-        public DependencyItem<decimal> WirelineDiameter { get; private set; }
-        public DependencyItem<decimal> WirelineCutLengthValue { get; private set; }
-        public DependencyItem<decimal> SecurityCoefficientValue { get; private set; }
-        public DependencyItem<decimal> PulleyCoefficientValue { get; private set; }
-        public DependencyItem<decimal> WirelineCuttingCriticalValue { get; private set; }
+        public DependencyLanguage WindowTitle { get; }
+        public DependencyLanguage WelcomeText { get; }
+        public DependencyLanguage SummaryText { get; }
 
-        public DependencyItem<decimal> FluidDensity { get; private set; }
-        public DependencyItem<decimal> ElevatorWeight { get; private set; }
-        public DependencyDrillPipeCollection DrillPipes { get; private set; }
-        public DependencyDrillCollection<DrillCollarConfig> DrillCollars { get; private set; }
+        public DependencyCollection<WireropeWorkload> WireropeWorkloadCollection { get; } =
+            new DependencyCollection<WireropeWorkload>();
 
-        public DependencyItem<decimal> DrillingShallowHeight { get; private set; }
-        public DependencyItem<decimal> DrillingDeepHeight { get; private set; }
-        public DependencyItem<string> DrillingType { get; private set; }
-        public DependencyItem<string> DrillingDifficulty { get; private set; }
-        public DependencyItem<decimal> DrillingWorkValue { get; private set; }
+        public DependencyObject<decimal> DerrickHeight { get; } = new DependencyObject<decimal>();
+        public DependencyObject<decimal> WirelineMaxPower { get; } = new DependencyObject<decimal>();
+        public DependencyObject<decimal> RotaryHookWorkload { get; } = new DependencyObject<decimal>();
+        public DependencyObject<long> RopeCount { get; } = new DependencyObject<long>();
+        public DependencyObject<decimal> RollerDiameter { get; } = new DependencyObject<decimal>();
 
-        public DependencyItem<decimal> TripShallowHeight { get; private set; }
-        public DependencyItem<decimal> TripDeepHeight { get; private set; }
-        public DependencyItem<decimal> TripCount { get; private set; }
-        public DependencyItem<decimal> TripWorkValue { get; private set; }
+        public DependencyObject<decimal> RealRotaryHookWorkload { get; } = new DependencyObject<decimal>();
+        public DependencyObject<decimal> FluidDensity { get; } = new DependencyObject<decimal>();
+        public DependencyObject<decimal> ElevatorWeight { get; } = new DependencyObject<decimal>();
 
-        public DependencyItem<decimal> BushingWeight { get; private set; }
-        public DependencyItem<decimal> BushingLength { get; private set; }
-        public DependencyItem<decimal> BushingHeight { get; private set; }
-        public DependencyItem<decimal> BushingWorkValue { get; private set; }
+        public DependencyDrillCollection<DependencyDrillConfig> DrillPipes { get; } =
+            new DependencyDrillCollection<DependencyDrillConfig>();
 
-        public DependencyItem<decimal> CoringShallowHeight { get; private set; }
-        public DependencyItem<decimal> CoringDeepHeight { get; private set; }
-        public DependencyItem<decimal> CoringWorkValue { get; private set; }
+        public DependencyDrillCollection<DependencyDrillConfig> HeavierDrillPipes { get; } =
+            new DependencyDrillCollection<DependencyDrillConfig>();
 
-        public DependencyItem<decimal> TotalWorkValue { get; private set; }
+        public DependencyDrillCollection<DependencyDrillConfig> DrillCollars { get; } =
+            new DependencyDrillCollection<DependencyDrillConfig>();
 
-        public DependencyItem<string> CurrentWireNo { get; private set; }
-        public DependencyItem<decimal> CriticalValue { get; private set; }
-        public DependencyItem<decimal> CumulationValue { get; private set; }
-        public DependencyItem<string> Log { get; private set; }
+        public DependencyObject<decimal> DrillingShallowHeight { get; } = new DependencyObject<decimal>();
+        public DependencyObject<decimal> DrillingDeepHeight { get; } = new DependencyObject<decimal>();
+        public DependencyObject<DrillingTypeEnum> DrillingType { get; } = new DependencyObject<DrillingTypeEnum>();
+        public DependencyObject<long> RedressingCount { get; } = new DependencyObject<long>();
+        public DependencyObject<decimal> DrillingWorkValue { get; } = new DependencyObject<decimal>();
 
-        private Main()
+        public DependencyObject<decimal> TripShallowHeight { get; } = new DependencyObject<decimal>();
+        public DependencyObject<decimal> TripDeepHeight { get; } = new DependencyObject<decimal>();
+        public DependencyObject<long> TripCount { get; } = new DependencyObject<long>();
+        public DependencyObject<decimal> TripWorkValue { get; } = new DependencyObject<decimal>();
+
+        public DependencyDrillCollection<DependencyDrillConfig> Bushings { get; } =
+            new DependencyDrillCollection<DependencyDrillConfig>();
+
+        public DependencyObject<decimal> BushingHeight { get; } = new DependencyObject<decimal>();
+        public DependencyObject<decimal> BushingWorkValue { get; } = new DependencyObject<decimal>();
+
+        public DependencyObject<decimal> CoringShallowHeight { get; } = new DependencyObject<decimal>();
+        public DependencyObject<decimal> CoringDeepHeight { get; } = new DependencyObject<decimal>();
+        public DependencyObject<decimal> CoringWorkValue { get; } = new DependencyObject<decimal>();
+
+        public DependencyObject<decimal> CumulationValue { get; } = new DependencyObject<decimal>();
+
+        public DependencyObject<decimal> CriticalValue { get; } = new DependencyObject<decimal>();
+        public DependencyObject<decimal> CriticalLength { get; } = new DependencyObject<decimal>();
+        public DependencyObject<string> WirelineNumber { get; } = new DependencyObject<string>();
+        public DependencyObject<decimal> CutLengthValue { get; } = new DependencyObject<decimal>();
+        public DependencyCollection<HistoryData> History { get; } = new DependencyCollection<HistoryData>();
+
+        public Main()
         {
+            const string license = "License";
+            const string trial = "Trial";
+            const string trialRemoveDay = "TrialRemoveDay";
 
+            this.WindowTitle = DependencyLanguage.Generate(() =>
+                $"{LanguageManager.GetLocalResourceStringLeft("AppTitle")} {GlobalData.AppVersion} {LanguageManager.GetLocalResourceStringLeft("Welcome")}{GlobalData.UserDisplay.Value} {(CurrentLicense.License.LicenseStatus == LicenseStatus.Licensed ? null : CurrentLicense.License.ExpirationDays_Enabled ? $"[{LanguageManager.GetLocalResourceStringRight(license, trial)} {CurrentLicense.License.ExpirationDays}{LanguageManager.GetLocalResourceStringRight(license, trialRemoveDay)}]" : $"[{LanguageManager.GetLocalResourceStringRight(license, trial)}]")}");
+            this.WelcomeText = DependencyLanguage.Generate(
+                () => $"{LanguageManager.GetLocalResourceStringLeft("Welcome")}{GlobalData.UserDisplay.Value}");
+            this.SummaryText = DependencyLanguage.Generate(() =>
+                $"{LanguageManager.GetLocalResourceStringLeft("GroupCumulationAndResetTitle")} -- {LanguageManager.GetLocalResourceStringLeft("LblWirelineCuttingTitle")}{(this.CriticalValue.Value > 0 ? $"{this.CriticalValue.Value:F3}" : "0")}{UnitData.TonKilometre.Value} -- {LanguageManager.GetLocalResourceStringLeft("LblWirelineCutLength")}{(this.CriticalLength.Value > 0 ? $"{this.CriticalLength.Value:F3}" : "0")}{UnitData.Metre.Value}");
+
+            InitializeData();
+            InitializeEvent();
         }
 
         /// <summary>
@@ -159,33 +117,62 @@ namespace SteelWire.WindowData
         /// </summary>
         private void InitializeEvent()
         {
-            this.DerrickHeight.ItemValueChangedHandler += DerrickHeightChanged;
-            this.WirelineMaxPower.ItemValueChangedHandler += SecurityCoefficientValueChanged;
-            this.RotaryHookWorkload.ItemValueChangedHandler += SecurityCoefficientValueChanged;
-            this.RopeCount.ItemValueChangedHandler += SecurityCoefficientValueChanged;
-            this.RollerDiameter.ItemValueChangedHandler += PulleyCoefficientValueChanged;
-            this.WirelineDiameter.ItemValueChangedHandler += PulleyCoefficientValueChanged;
+            GlobalData.UserDisplay.ValueChangedHandler += UserDisplayChanged;
+            GlobalData.Wireline.Diameter.ValueChangedHandler += CriticalValueChanged;
+            GlobalData.Wireline.UnitSystem.ValueChangedHandler += UnitSystemChanged;
 
-            this.FluidDensity.ItemValueChangedHandler += CommonCoefficientValueChanged;
-            this.ElevatorWeight.ItemValueChangedHandler += CommonCoefficientValueChanged;
+            this.DerrickHeight.ValueChangedHandler += DerrickHeightChanged;
+            this.WirelineMaxPower.ValueChangedHandler += AllSecurityCoefficientValueChanged;
+            this.RotaryHookWorkload.ValueChangedHandler += CriticalValueChanged;
+            this.RopeCount.ValueChangedHandler += AllSecurityCoefficientValueChanged;
+            this.RollerDiameter.ValueChangedHandler += CriticalValueChanged;
+
+            this.RealRotaryHookWorkload.ValueChangedHandler += CommonCoefficientValueChanged;
+            this.FluidDensity.ValueChangedHandler += CommonCoefficientValueChanged;
+            this.ElevatorWeight.ValueChangedHandler += CommonCoefficientValueChanged;
             this.DrillPipes.ItemsChangedHandler += CommonCoefficientValueChanged;
+            this.HeavierDrillPipes.ItemsChangedHandler += CommonCoefficientValueChanged;
             this.DrillCollars.ItemsChangedHandler += CommonCoefficientValueChanged;
 
-            this.DrillingShallowHeight.ItemValueChangedHandler += DrillingWorkValueChanged;
-            this.DrillingDeepHeight.ItemValueChangedHandler += DrillingWorkValueChanged;
-            this.DrillingType.ItemValueChangedHandler += DrillingWorkValueChanged;
-            this.DrillingDifficulty.ItemValueChangedHandler += DrillingWorkValueChanged;
+            this.DrillingShallowHeight.ValueChangedHandler += DrillingWorkValueChanged;
+            this.DrillingDeepHeight.ValueChangedHandler += DrillingWorkValueChanged;
+            this.DrillingType.ValueChangedHandler += DrillingWorkValueChanged;
+            this.RedressingCount.ValueChangedHandler += DrillingWorkValueChanged;
 
-            this.TripDeepHeight.ItemValueChangedHandler += TripWorkValueChanged;
-            this.TripShallowHeight.ItemValueChangedHandler += TripWorkValueChanged;
-            this.TripCount.ItemValueChangedHandler += TripWorkValueChanged;
+            this.TripDeepHeight.ValueChangedHandler += TripWorkValueChanged;
+            this.TripShallowHeight.ValueChangedHandler += TripWorkValueChanged;
+            this.TripCount.ValueChangedHandler += TripWorkValueChanged;
 
-            this.BushingWeight.ItemValueChangedHandler += BushingWorkValueChanged;
-            this.BushingLength.ItemValueChangedHandler += BushingWorkValueChanged;
-            this.BushingHeight.ItemValueChangedHandler += BushingWorkValueChanged;
+            this.Bushings.ItemsChangedHandler += BushingWorkValueChanged;
+            this.BushingHeight.ValueChangedHandler += BushingWorkValueChanged;
 
-            this.CoringShallowHeight.ItemValueChangedHandler += CoringWorkValueChanged;
-            this.CoringDeepHeight.ItemValueChangedHandler += CoringWorkValueChanged;
+            this.CoringShallowHeight.ValueChangedHandler += CoringWorkValueChanged;
+            this.CoringDeepHeight.ValueChangedHandler += CoringWorkValueChanged;
+
+            this.CriticalValue.ValueChangedHandler += SummaryTextChanged;
+            this.CriticalLength.ValueChangedHandler += SummaryTextChanged;
+            UnitData.TonKilometre.ValueChangedHandler += SummaryTextChanged;
+            UnitData.Metre.ValueChangedHandler += SummaryTextChanged;
+        }
+
+        private void UserDisplayChanged(object sender, EventArgs e)
+        {
+            this.WindowTitle.Value = this.WindowTitle.VlueGenerater?.Invoke();
+            this.WelcomeText.Value = this.WelcomeText.VlueGenerater?.Invoke();
+        }
+
+        private void SummaryTextChanged(object sender, EventArgs e)
+        {
+            this.SummaryText.Value = this.SummaryText.VlueGenerater?.Invoke();
+        }
+
+        private void UnitSystemChanged(object sender, EventArgs e)
+        {
+            if (!this._isInitializeData)
+            {
+                InitializeWireropeWorkloads();
+                CommonCoefficientValueChanged(sender, e);
+            }
         }
 
         /// <summary>
@@ -195,97 +182,56 @@ namespace SteelWire.WindowData
         {
             this._isInitializeData = true;
 
+            InitializeWireropeWorkloads();
+
+            WireropeWorkload wireropeWorkload = ConstDictionary.WireropeWorkloads.FirstOrDefault(d =>
+                d.UnitSystem == GlobalData.Wireline.UnitSystem.Value);
+            if (wireropeWorkload != null)
+            {
+                GlobalData.Wireline.Diameter.Value = wireropeWorkload.Name;
+            }
+            this.WirelineNumber.Value = SystemConfigManager.OnceInstance.LastWirelineNumber;
+
             CuttingCriticalConfig criticalConf = CuttingCriticalConfigManager.OnceInstance.ConfigSection;
             WorkConfig workConf = WorkConfigManager.OnceInstance.ConfigSection;
 
-            this.DerrickHeight.ItemValue = criticalConf.DerrickHeight;
-            this.WirelineMaxPower.ItemValue = criticalConf.WirelineMaxPower;
-            this.RotaryHookWorkload.ItemValue = criticalConf.RotaryHookWorkload;
-            this.RollerDiameter.ItemValue = criticalConf.RollerDiameter;
-            this.WirelineDiameter.ItemValue = criticalConf.WirelineDiameter;
-            this.RopeCount.ItemValue = criticalConf.RopeCount;
+            this.DerrickHeight.Value = criticalConf.DerrickHeight;
+            this.WirelineMaxPower.Value = criticalConf.WirelineMaxPower;
+            this.RotaryHookWorkload.Value = criticalConf.RotaryHookWorkload;
+            this.RollerDiameter.Value = criticalConf.RollerDiameter;
+            this.RopeCount.Value = criticalConf.RopeCount;
 
-            this.FluidDensity.ItemValue = workConf.FluidDensity;
-            this.ElevatorWeight.ItemValue = workConf.ElevatorWeight;
-            this.DrillPipes.DrillPipes.Clear();
-            this.DrillPipes.AddRange(workConf.DrillPipes.Cast<DrillPipe>()
-                .Select(d => new DrillPipeConfig
-                {
-                    Name = new DependencyItem<string>
-                    {
-                        ItemValue = d.Name
-                    },
-                    Weight = new DependencyItem<decimal>
-                    {
-                        ItemValue = d.Weight
-                    },
-                    Length = new DependencyItem<decimal>
-                    {
-                        ItemValue = d.Length
-                    },
-                    StandLength = new DependencyItem<decimal>
-                    {
-                        ItemValue = d.StandLength
-                    }
-                }));
-            this.DrillPipes.DrillPipes.ResetLocalItems();
-            this.DrillPipes.HeavierDrillPipes.Clear();
-            this.DrillPipes.AddRange(workConf.HeavierDrillPipes.Cast<Drill>()
-                .Select(d => new HeavierDrillPipeConfig
-                {
-                    Name = new DependencyItem<string>
-                    {
-                        ItemValue = d.Name
-                    },
-                    Weight = new DependencyItem<decimal>
-                    {
-                        ItemValue = d.Weight
-                    },
-                    Length = new DependencyItem<decimal>
-                    {
-                        ItemValue = d.Length
-                    }
-                }));
-            this.DrillPipes.HeavierDrillPipes.ResetLocalItems();
+            this.RealRotaryHookWorkload.Value = workConf.RealRotaryHookWorkload;
+            this.FluidDensity.Value = workConf.FluidDensity;
+            this.ElevatorWeight.Value = workConf.ElevatorWeight;
+            this.DrillPipes.Clear();
+            this.DrillPipes.AddRange(workConf.DrillPipes.Cast<Drill>()
+                .Select(d => new DependencyDrillConfig(DrillDeviceTypeEnum.DrillPipe, d.Name, d.Weight, d.Length)));
+            this.HeavierDrillPipes.Clear();
+            this.HeavierDrillPipes.AddRange(workConf.HeavierDrillPipes.Cast<Drill>()
+                .Select(d => new DependencyDrillConfig(DrillDeviceTypeEnum.HeavierDrillPipe, d.Name, d.Weight, d.Length)));
             this.DrillCollars.Clear();
             this.DrillCollars.AddRange(workConf.DrillCollars.Cast<Drill>()
-                .Select(d => new DrillCollarConfig
-                {
-                    Name = new DependencyItem<string>
-                    {
-                        ItemValue = d.Name
-                    },
-                    Weight = new DependencyItem<decimal>
-                    {
-                        ItemValue = d.Weight
-                    },
-                    Length = new DependencyItem<decimal>
-                    {
-                        ItemValue = d.Length
-                    },
-                }));
-            this.DrillCollars.ResetLocalItems();
+                .Select(d => new DependencyDrillConfig(DrillDeviceTypeEnum.DrillCollar, d.Name, d.Weight, d.Length)));
 
-            this.DrillingShallowHeight.ItemValue = workConf.DrillingShallowHeight;
-            this.DrillingDeepHeight.ItemValue = workConf.DrillingDeepHeight;
-            this.DrillingType.ItemValue = workConf.DrillingType;
-            this.DrillingDifficulty.ItemValue = workConf.DrillingDifficulty;
+            this.DrillingShallowHeight.Value = workConf.DrillingShallowHeight;
+            this.DrillingDeepHeight.Value = workConf.DrillingDeepHeight;
+            this.DrillingType.Value = workConf.DrillingType;
+            this.RedressingCount.Value = workConf.RedressingCount;
 
-            this.TripShallowHeight.ItemValue = workConf.TripShallowHeight;
-            this.TripDeepHeight.ItemValue = workConf.TripDeepHeight;
-            this.TripCount.ItemValue = workConf.TripCount;
+            this.TripShallowHeight.Value = workConf.TripShallowHeight;
+            this.TripDeepHeight.Value = workConf.TripDeepHeight;
+            this.TripCount.Value = workConf.TripCount;
 
-            this.BushingWeight.ItemValue = workConf.BushingWeight;
-            this.BushingLength.ItemValue = workConf.BushingLength;
-            this.BushingHeight.ItemValue = workConf.BushingHeight;
+            this.Bushings.Clear();
+            this.Bushings.AddRange(workConf.Bushings.Cast<Drill>()
+                .Select(d => new DependencyDrillConfig(DrillDeviceTypeEnum.Bushing, d.Name, d.Weight, d.Length)));
+            this.BushingHeight.Value = workConf.BushingHeight;
 
-            this.CoringShallowHeight.ItemValue = workConf.CoringShallowHeight;
-            this.CoringDeepHeight.ItemValue = workConf.CoringDeepHeight;
-            this.CurrentWireNo.ItemValue = WorkConfigManager.OnceInstance.CurrentWireNo;
+            this.CoringShallowHeight.Value = workConf.CoringShallowHeight;
+            this.CoringDeepHeight.Value = workConf.CoringDeepHeight;
 
             CalculateWirelineCutLength();
-            CalculateSecurityCoefficient();
-            CalculatePulleyCoefficient();
             CalculateWirelineCuttingCritical();
             CommanderTripOnce commanderOnce = CreateCommanderOnce();
             CalculateDrillingWork(commanderOnce);
@@ -293,7 +239,16 @@ namespace SteelWire.WindowData
             CalculateBushingWork();
             CalculateCoringWork(commanderOnce);
             CalculateTotalWork();
+
             this._isInitializeData = false;
+        }
+
+        private void InitializeWireropeWorkloads()
+        {
+            CuttingCriticalDictionary criticalDic = CuttingCriticalDictionaryManager.OnceInstance.DictionarySection;
+            this.WireropeWorkloadCollection.Clear();
+            this.WireropeWorkloadCollection.AddRange(criticalDic.WireropeWorkloads.Cast<WireropeWorkload>()
+                .Where(l => l.UnitSystem == GlobalData.Wireline.UnitSystem.Value));
         }
 
         /// <summary>
@@ -306,8 +261,38 @@ namespace SteelWire.WindowData
             if (!this._isInitializeData)
             {
                 CalculateWirelineCutLength();
+                CalculateWirelineCuttingCritical();
             }
-            WirelineCuttingCriticalValueChanged(sender, e);
+        }
+
+        /// <summary>
+        /// 计算切绳长度
+        /// </summary>
+        private void CalculateWirelineCutLength()
+        {
+            CuttingCriticalDictionary criticalDic = CuttingCriticalDictionaryManager.OnceInstance.DictionarySection;
+            WireropeCutRole wireropeCutRole = criticalDic.WireropeCutRoles.Cast<WireropeCutRole>()
+                .FirstOrDefault(
+                    r =>
+                        r.MinDerrickHeight <= this.DerrickHeight.Value && r.MaxDerrickHeight >= this.DerrickHeight.Value);
+            if (wireropeCutRole == null)
+            {
+                this.CriticalLength.Value = -1;
+                return;
+            }
+            CommanderRopeCut commander = new CommanderRopeCut
+            {
+                WirelineCutMinLength = wireropeCutRole.MinCutLength,
+                WirelineCutMaxLength = wireropeCutRole.MaxCutLength
+            };
+            try
+            {
+                this.CriticalLength.Value = commander.GetWirelineCutLength();
+            }
+            catch (Exception)
+            {
+                this.CriticalLength.Value = -1;
+            }
         }
 
         /// <summary>
@@ -315,35 +300,19 @@ namespace SteelWire.WindowData
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SecurityCoefficientValueChanged(object sender, EventArgs e)
+        private void AllSecurityCoefficientValueChanged(object sender, EventArgs e)
         {
             if (!this._isInitializeData)
             {
-                CalculateSecurityCoefficient();
+                CriticalValueChanged(sender, e);
+                CommonCoefficientValueChanged(sender, e);
             }
-            WirelineCuttingCriticalValueChanged(sender, e);
-        }
-
-        /// <summary>
-        /// 钢丝绳直径变化事件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void PulleyCoefficientValueChanged(object sender, EventArgs e)
-        {
-            if (!this._isInitializeData)
-            {
-                CalculatePulleyCoefficient();
-            }
-            WirelineCuttingCriticalValueChanged(sender, e);
         }
 
         /// <summary>
         /// 切绳临界值变化事件
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void WirelineCuttingCriticalValueChanged(object sender, EventArgs e)
+        private void CriticalValueChanged(object sender, EventArgs e)
         {
             if (!this._isInitializeData)
             {
@@ -429,6 +398,62 @@ namespace SteelWire.WindowData
         }
 
         /// <summary>
+        /// 计算切绳临界值
+        /// </summary>
+        private void CalculateWirelineCuttingCritical()
+        {
+            CuttingCriticalDictionary criticalDic = CuttingCriticalDictionaryManager.OnceInstance.DictionarySection;
+            WireropeCutRole wireropeCutRole = criticalDic.WireropeCutRoles.Cast<WireropeCutRole>()
+                .FirstOrDefault(
+                    r =>
+                        r.MinDerrickHeight <= this.DerrickHeight.Value && r.MaxDerrickHeight >= this.DerrickHeight.Value);
+            if (wireropeCutRole == null)
+            {
+                this.CriticalValue.Value = -1;
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(GlobalData.Wireline.Diameter.Value))
+            {
+                this.CriticalValue.Value = -1;
+                return;
+            }
+            DependencyObject<WireropeWorkload> wireropeWorkload =
+                this.WireropeWorkloadCollection.Items.FirstOrDefault(
+                    l => l.Value.Name == GlobalData.Wireline.Diameter.Value);
+            if (wireropeWorkload == null)
+            {
+                this.CriticalValue.Value = -1;
+                return;
+            }
+            WireropeEfficiency wireropeEfficiency = criticalDic.WireropeEfficiencies[this.RopeCount.Value];
+            if (wireropeEfficiency == null)
+            {
+                this.CriticalValue.Value = -1;
+                return;
+            }
+            CommanderRopeCut commander = new CommanderRopeCut
+            {
+                WirelineWorkloadPerMetre = wireropeWorkload.Value.Workload,
+                WirelineCutMinLength = wireropeCutRole.MinCutLength,
+                WirelineCutMaxLength = wireropeCutRole.MaxCutLength,
+                WirelineMaxPower = this.WirelineMaxPower.Value,
+                RotaryHookWorkload = this.RotaryHookWorkload.Value,
+                RopeEfficiency = wireropeEfficiency.RollingValue,
+                RopeCount = this.RopeCount.Value,
+                RollerDiameter = this.RollerDiameter.Value,
+                WirelineDiameter = wireropeWorkload.Value.Diameter
+            };
+            try
+            {
+                this.CriticalValue.Value = commander.CalculateValue();
+            }
+            catch (Exception)
+            {
+                this.CriticalValue.Value = -1;
+            }
+        }
+
+        /// <summary>
         /// 构建一次起下钻钻井计算对象
         /// </summary>
         /// <returns></returns>
@@ -436,137 +461,44 @@ namespace SteelWire.WindowData
         {
             return new CommanderTripOnce
             {
-                FluidDensity = this.FluidDensity.ItemValue,
-                ElevatorWeight = this.ElevatorWeight.ItemValue,
-                DrillPipeWeight = this.DrillPipes.AverageWeight.ItemValue,
-                DrillPipeLength = this.DrillPipes.TotalLength.ItemValue,
-                DrillCollarWeight = this.DrillCollars.AverageWeight.ItemValue,
-                DrillCollarLength = this.DrillCollars.TotalLength.ItemValue
+                FluidDensity = this.FluidDensity.Value,
+                UnitSystemCoefficient =
+                    Business.Config.ConstDictionary.UnitSystemDictionary[GlobalData.Wireline.UnitSystem.Value],
+                ElevatorWeight = this.ElevatorWeight.Value,
+                DrillPipeWeight = this.DrillPipes.AverageWeight,
+                DrillPipeLength = this.DrillPipes.TotalLength,
+                HeavierDrillPipeWeight = this.HeavierDrillPipes.AverageWeight,
+                HeavierDrillPipeLength = this.HeavierDrillPipes.TotalLength,
+                DrillCollarWeight = this.DrillCollars.AverageWeight,
+                DrillCollarLength = this.DrillCollars.TotalLength
             };
         }
 
         /// <summary>
-        /// 计算切绳长度
+        /// 计算安全系数（服役系数）
         /// </summary>
-        private void CalculateWirelineCutLength()
+        /// <exception cref="ConfigurationErrorsException"></exception>
+        private decimal CalculateSecurityCoefficient()
         {
             CuttingCriticalDictionary criticalDic = CuttingCriticalDictionaryManager.OnceInstance.DictionarySection;
-            WireropeCutRole wireropeCutRole = criticalDic.WireropeCutRoles.Cast<WireropeCutRole>()
-                .FirstOrDefault(r => r.MinDerrickHeight <= this.DerrickHeight.ItemValue && r.MaxDerrickHeight >= this.DerrickHeight.ItemValue);
-            if (wireropeCutRole == null)
-            {
-                this.WirelineCutLengthValue.ItemValue = -1;
-                return;
-            }
-            CommanderRopeCut commander = new CommanderRopeCut
-            {
-                WirelineCutMinLength = wireropeCutRole.MinCutLength,
-                WirelineCutMaxLength = wireropeCutRole.MaxCutLength
-            };
-            try
-            {
-                this.WirelineCutLengthValue.ItemValue = commander.GetWirelineCutLength();
-            }
-            catch (Exception)
-            {
-                this.WirelineCutLengthValue.ItemValue = -1;
-            }
-        }
-
-        /// <summary>
-        /// 计算安全系数
-        /// </summary>
-        private void CalculateSecurityCoefficient()
-        {
-            CuttingCriticalDictionary criticalDic = CuttingCriticalDictionaryManager.OnceInstance.DictionarySection;
-            WireropeEfficiency wireropeEfficiency = criticalDic.WireropeEfficiencies[this.RopeCount.ItemValue];
+            WireropeEfficiency wireropeEfficiency = criticalDic.WireropeEfficiencies[this.RopeCount.Value];
             if (wireropeEfficiency == null)
             {
-                this.SecurityCoefficientValue.ItemValue = -1;
-                return;
+                throw new ConfigurationErrorsException("Could not find config of wirerope efficiency.");
             }
             CommanderRopeCut commander = new CommanderRopeCut
             {
-                WirelineMaxPower = this.WirelineMaxPower.ItemValue,
-                RotaryHookWorkload = this.RotaryHookWorkload.ItemValue,
+                WirelineMaxPower = this.WirelineMaxPower.Value,
+                RotaryHookWorkload = this.RealRotaryHookWorkload.Value,
                 RopeEfficiency = wireropeEfficiency.RollingValue,
-                RopeCount = this.RopeCount.ItemValue
+                RopeCount = this.RopeCount.Value
             };
-            try
+            decimal securityCoefficient = commander.GetSecurityCoefficient();
+            if (securityCoefficient > 9)
             {
-                this.SecurityCoefficientValue.ItemValue = commander.GetSecurityCoefficient();
+                securityCoefficient = 9;
             }
-            catch (Exception)
-            {
-                this.SecurityCoefficientValue.ItemValue = -1;
-            }
-        }
-
-        /// <summary>
-        /// 计算滑轮系数
-        /// </summary>
-        private void CalculatePulleyCoefficient()
-        {
-            CommanderRopeCut commander = new CommanderRopeCut
-            {
-                RollerDiameter = this.RollerDiameter.ItemValue,
-                WirelineDiameter = this.WirelineDiameter.ItemValue
-            };
-            try
-            {
-                this.PulleyCoefficientValue.ItemValue = commander.GetPulleyCoefficient();
-            }
-            catch (Exception)
-            {
-                this.PulleyCoefficientValue.ItemValue = -1;
-            }
-        }
-
-        /// <summary>
-        /// 计算切绳临界值
-        /// </summary>
-        private void CalculateWirelineCuttingCritical()
-        {
-            CuttingCriticalDictionary criticalDic = CuttingCriticalDictionaryManager.OnceInstance.DictionarySection;
-            WireropeCutRole wireropeCutRole = criticalDic.WireropeCutRoles.Cast<WireropeCutRole>()
-                .FirstOrDefault(r => r.MinDerrickHeight <= this.DerrickHeight.ItemValue && r.MaxDerrickHeight >= this.DerrickHeight.ItemValue);
-            if (wireropeCutRole == null)
-            {
-                this.WirelineCuttingCriticalValue.ItemValue = -1;
-                return;
-            }
-            WireropeWorkload wireropeWorkload = criticalDic.WireropeWorkloads[this.WirelineDiameter.ItemValue];
-            if (wireropeWorkload == null)
-            {
-                this.WirelineCuttingCriticalValue.ItemValue = -1;
-                return;
-            }
-            WireropeEfficiency wireropeEfficiency = criticalDic.WireropeEfficiencies[this.RopeCount.ItemValue];
-            if (wireropeEfficiency == null)
-            {
-                this.WirelineCuttingCriticalValue.ItemValue = -1;
-                return;
-            }
-            CommanderRopeCut commander = new CommanderRopeCut
-            {
-                WirelineWorkloadPerMetre = wireropeWorkload.Workload,
-                WirelineCutMinLength = wireropeCutRole.MinCutLength,
-                WirelineCutMaxLength = wireropeCutRole.MaxCutLength,
-                WirelineMaxPower = this.WirelineMaxPower.ItemValue,
-                RotaryHookWorkload = this.RotaryHookWorkload.ItemValue,
-                RopeEfficiency = wireropeEfficiency.RollingValue,
-                RopeCount = this.RopeCount.ItemValue,
-                RollerDiameter = this.RollerDiameter.ItemValue,
-                WirelineDiameter = this.WirelineDiameter.ItemValue
-            };
-            try
-            {
-                this.WirelineCuttingCriticalValue.ItemValue = commander.CalculateValue();
-            }
-            catch (Exception)
-            {
-                this.WirelineCuttingCriticalValue.ItemValue = -1;
-            }
+            return securityCoefficient;
         }
 
         /// <summary>
@@ -576,32 +508,27 @@ namespace SteelWire.WindowData
         private void CalculateDrillingWork(CommanderTripOnce commanderOnce)
         {
             WorkDictionary workDic = WorkDictionaryManager.OnceInstance.DictionarySection;
-            DrillingType type = workDic.DrillingTypes[this.DrillingType.ItemValue];
+            DrillingType type = workDic.DrillingTypes[this.DrillingType.Value];
             if (type == null)
             {
-                this.DrillingWorkValue.ItemValue = -1;
+                this.DrillingWorkValue.Value = -1;
                 return;
             }
-            DrillingDifficulty difficulty = workDic.DrillingDifficulties[this.DrillingDifficulty.ItemValue];
-            if (difficulty == null)
-            {
-                this.DrillingWorkValue.ItemValue = -1;
-                return;
-            }
-            CommanderDrilling commander = new CommanderDrilling(commanderOnce)
-            {
-                Type = type.Coefficient,
-                Difficulty = difficulty.Difficulty,
-                DeepHeight = this.DrillingDeepHeight.ItemValue,
-                ShallowHeight = this.DrillingShallowHeight.ItemValue
-            };
             try
             {
-                this.DrillingWorkValue.ItemValue = commander.CalculateValue();
+                decimal securityCoefficient = CalculateSecurityCoefficient();
+                CommanderDrilling commander = new CommanderDrilling(commanderOnce)
+                {
+                    DrivingTypeCoefficient = type.Coefficient,
+                    RedressingCount = this.RedressingCount.Value,
+                    DeepHeight = this.DrillingDeepHeight.Value,
+                    ShallowHeight = this.DrillingShallowHeight.Value
+                };
+                this.DrillingWorkValue.Value = securityCoefficient * commander.CalculateValue();
             }
             catch (Exception)
             {
-                this.DrillingWorkValue.ItemValue = -1;
+                this.DrillingWorkValue.Value = -1;
             }
         }
 
@@ -611,19 +538,20 @@ namespace SteelWire.WindowData
         /// <param name="commanderOnce"></param>
         private void CalculateTripWork(CommanderTripOnce commanderOnce)
         {
-            CommanderTrip commander = new CommanderTrip(commanderOnce)
-            {
-                DeepHeight = this.TripDeepHeight.ItemValue,
-                ShallowHeight = this.TripShallowHeight.ItemValue,
-                Count = this.TripCount.ItemValue
-            };
             try
             {
-                this.TripWorkValue.ItemValue = commander.CalculateValue();
+                decimal securityCoefficient = CalculateSecurityCoefficient();
+                CommanderTrip commander = new CommanderTrip(commanderOnce)
+                {
+                    DeepHeight = this.TripDeepHeight.Value,
+                    ShallowHeight = this.TripShallowHeight.Value,
+                    Count = this.TripCount.Value
+                };
+                this.TripWorkValue.Value = securityCoefficient * commander.CalculateValue();
             }
             catch (Exception)
             {
-                this.TripWorkValue.ItemValue = -1;
+                this.TripWorkValue.Value = -1;
             }
         }
 
@@ -632,21 +560,24 @@ namespace SteelWire.WindowData
         /// </summary>
         private void CalculateBushingWork()
         {
-            CommanderBushing commander = new CommanderBushing
-            {
-                FluidDensity = this.FluidDensity.ItemValue,
-                ElevatorWeight = this.ElevatorWeight.ItemValue,
-                BushingWeight = this.BushingWeight.ItemValue,
-                BushingLength = this.BushingLength.ItemValue,
-                BushingHeight = this.BushingHeight.ItemValue
-            };
             try
             {
-                this.BushingWorkValue.ItemValue = commander.CalculateValue();
+                decimal securityCoefficient = CalculateSecurityCoefficient();
+                CommanderBushing commander = new CommanderBushing
+                {
+                    FluidDensity = this.FluidDensity.Value,
+                    UnitSystemCoefficient =
+                        Business.Config.ConstDictionary.UnitSystemDictionary[GlobalData.Wireline.UnitSystem.Value],
+                    ElevatorWeight = this.ElevatorWeight.Value,
+                    BushingWeight = this.Bushings.AverageWeight,
+                    BushingLength = this.Bushings.TotalLength,
+                    BushingHeight = this.BushingHeight.Value
+                };
+                this.BushingWorkValue.Value = securityCoefficient * commander.CalculateValue();
             }
             catch (Exception)
             {
-                this.BushingWorkValue.ItemValue = -1;
+                this.BushingWorkValue.Value = -1;
             }
         }
 
@@ -656,18 +587,19 @@ namespace SteelWire.WindowData
         /// <param name="commanderOnce"></param>
         private void CalculateCoringWork(CommanderTripOnce commanderOnce)
         {
-            CommanderCoring commander = new CommanderCoring(commanderOnce)
-            {
-                DeepHeight = this.CoringDeepHeight.ItemValue,
-                ShallowHeight = this.CoringShallowHeight.ItemValue
-            };
             try
             {
-                this.CoringWorkValue.ItemValue = commander.CalculateValue();
+                decimal securityCoefficient = CalculateSecurityCoefficient();
+                CommanderCoring commander = new CommanderCoring(commanderOnce)
+                {
+                    DeepHeight = this.CoringDeepHeight.Value,
+                    ShallowHeight = this.CoringShallowHeight.Value
+                };
+                this.CoringWorkValue.Value = securityCoefficient * commander.CalculateValue();
             }
             catch (Exception)
             {
-                this.CoringWorkValue.ItemValue = -1;
+                this.CoringWorkValue.Value = -1;
             }
         }
 
@@ -676,18 +608,18 @@ namespace SteelWire.WindowData
         /// </summary>
         private void CalculateTotalWork()
         {
-            if (this.DrillingWorkValue.ItemValue < 0
-                || this.TripWorkValue.ItemValue < 0
-                || this.BushingWorkValue.ItemValue < 0
-                || this.CoringWorkValue.ItemValue < 0)
+            if (this.DrillingWorkValue.Value < 0
+                || this.TripWorkValue.Value < 0
+                || this.BushingWorkValue.Value < 0
+                || this.CoringWorkValue.Value < 0)
             {
-                this.TotalWorkValue.ItemValue = -1;
+                this.CumulationValue.Value = -1;
                 return;
             }
-            this.TotalWorkValue.ItemValue = this.DrillingWorkValue.ItemValue
-                + this.TripWorkValue.ItemValue
-                + this.BushingWorkValue.ItemValue
-                + this.CoringWorkValue.ItemValue;
+            this.CumulationValue.Value = this.DrillingWorkValue.Value
+                                         + this.TripWorkValue.Value
+                                         + this.BushingWorkValue.Value
+                                         + this.CoringWorkValue.Value;
         }
 
         /// <summary>
@@ -699,6 +631,7 @@ namespace SteelWire.WindowData
             SignWindow signWindow = new SignWindow();
             if (signWindow.ShowDialog() == true)
             {
+                SystemConfigManager.InitializeConfig();
                 CuttingCriticalDictionaryManager.InitializeConfig();
                 CuttingCriticalConfigManager.InitializeConfig();
                 WorkDictionaryManager.InitializeConfig();
@@ -714,36 +647,90 @@ namespace SteelWire.WindowData
         /// 刷新数据
         /// </summary>
         /// <param name="dbContext"></param>
-        public void RefreshData(SteelWireContext dbContext = null)
+        public void RefreshData(SteelWireBaseContext dbContext = null)
         {
-            CumulationReset data = null;
-            if (!string.IsNullOrWhiteSpace(this.CurrentWireNo.ItemValue))
+            WirelineInfo lineInfo = null;
+            CriticalRecord criticalRecord = null;
+            CutRecord cutRecord = null;
+            decimal totalValue = 0;
+            if (!string.IsNullOrWhiteSpace(this.WirelineNumber.Value))
             {
                 if (dbContext == null)
                 {
-                    dbContext = new SteelWireContext();
+                    using (dbContext = DbContextFactory.GenerateDbContext())
+                    {
+                        GetRefreshData(dbContext, out lineInfo, ref criticalRecord, ref cutRecord, ref totalValue);
+                        GetRefreshHistory(dbContext);
+                    }
                 }
-                data = ResetOperator.GetCurrentData(dbContext, Sign.Data.UserID, this.CurrentWireNo.ItemValue);
+                else
+                {
+                    GetRefreshData(dbContext, out lineInfo, ref criticalRecord, ref cutRecord, ref totalValue);
+                    GetRefreshHistory(dbContext);
+                }
             }
-            RefreshSetData(data);
+            RefreshSetData(lineInfo, criticalRecord, cutRecord, totalValue);
+        }
+
+        private void GetRefreshHistory(SteelWireBaseContext dbContext)
+        {
+            this.History.Items.Clear();
+            List<HistoryData> historyData = new List<HistoryData>();
+            List<CutRecord> cutRecords = CutOperator.GetHistory(dbContext, GlobalData.SearchUserId, 30);
+            historyData.AddRange(cutRecords.Select(r => new HistoryData
+                (r.UpdateTime, r.WirelineInfo, r.SecurityUser, HistoryEnum.Cut, r.CutValue)));
+            List<CumulationRecord> cumulationRecords = CumulationOperator.GetHistory(dbContext, GlobalData.SearchUserId, 30);
+            historyData.AddRange(cumulationRecords.Select(r => new HistoryData
+                (r.CalculateTime, r.CutRecord?.WirelineInfo, r.SecurityUser, HistoryEnum.Cumulate, r.CumulationValue)));
+            historyData = historyData.OrderByDescending(d => d.Time).Take(30).ToList();
+            this.History.AddRange(historyData);
+        }
+
+        private void GetRefreshData(SteelWireBaseContext dbContext, out WirelineInfo lineInfo,
+            ref CriticalRecord criticalRecord, ref CutRecord cutRecord, ref decimal totalValue)
+        {
+            lineInfo = WirelineOperator.GetWireline(dbContext, this.WirelineNumber.Value);
+            if (lineInfo != null)
+            {
+                criticalRecord = CriticalOperator.GetLastRecord(dbContext, GlobalData.SearchUserId, lineInfo.ID);
+                cutRecord = CutOperator.GetLastRecord(dbContext, GlobalData.SearchUserId, lineInfo.ID);
+                totalValue = CutOperator.GetTotalCuttedValue(dbContext, GlobalData.SearchUserId, lineInfo.ID);
+            }
         }
 
         /// <summary>
         /// 刷新后设置数据
         /// </summary>
-        /// <param name="data"></param>
-        private void RefreshSetData(CumulationReset data)
+        /// <param name="lineInfo"></param>
+        /// <param name="criticalRecord"></param>
+        /// <param name="cutRecord"></param>
+        /// <param name="totalCuttedValue"></param>
+        private void RefreshSetData(WirelineInfo lineInfo, CriticalRecord criticalRecord, CutRecord cutRecord,
+            decimal totalCuttedValue)
         {
-            if (data != null)
+            if (lineInfo != null)
             {
-                this.CriticalValue.ItemValue = data.CriticalValue;
-                this.CumulationValue.ItemValue = data.CumulationValue;
+                GlobalData.Wireline.Id = lineInfo.ID;
+                GlobalData.Wireline.Number = lineInfo.Number;
+                GlobalData.Wireline.Diameter.Value = lineInfo.Diameter;
+                GlobalData.Wireline.Struct.Value = lineInfo.Struct;
+                GlobalData.Wireline.StrongLevel.Value = lineInfo.StrongLevel;
+                GlobalData.Wireline.TwistDirection.Value = lineInfo.TwistDirection;
+                GlobalData.Wireline.OrderLength.Value = lineInfo.OrderLength;
+                UnitSystemEnum unitSystem;
+                if (Enum.TryParse(lineInfo.UnitSystem, out unitSystem))
+                {
+                    GlobalData.Wireline.UnitSystem.Value = unitSystem;
+                }
             }
             else
             {
-                this.CriticalValue.ItemValue = 0;
-                this.CumulationValue.ItemValue = 0;
+                GlobalData.Wireline.Id = 0;
+                GlobalData.Wireline.Number = string.Empty;
             }
+            GlobalData.Wireline.CriticalValue.Value = criticalRecord?.CriticalValue ?? 0;
+            GlobalData.Wireline.CumulationValue.Value = cutRecord?.CumulationValue ?? 0;
+            GlobalData.Wireline.TotalCuttedValue.Value = totalCuttedValue;
         }
 
         /// <summary>
@@ -751,7 +738,50 @@ namespace SteelWire.WindowData
         /// </summary>
         public void DownLoadConfig()
         {
-            // 数据库下载配置信息功能未实现
+            // TODO 数据库下载配置信息功能未实现
+        }
+
+        private void CheckUploadData(out FileInfo dicInfo, out FileInfo configInfo)
+        {
+            if (string.IsNullOrWhiteSpace(this.WirelineNumber.Value))
+            {
+                throw new ErrorException("CurrentWireNoEmpty");
+            }
+            if (!string.IsNullOrWhiteSpace(GlobalData.Wireline.Number) &&
+                this.WirelineNumber.Value != GlobalData.Wireline.Number)
+            {
+                throw new ErrorException("CurrentWireNoInvalid");
+            }
+            if (string.IsNullOrWhiteSpace(GlobalData.Wireline.Struct.Value))
+            {
+                throw new ErrorException("CurrentWireLineStructEmpty");
+            }
+            if (string.IsNullOrWhiteSpace(GlobalData.Wireline.StrongLevel.Value))
+            {
+                throw new ErrorException("CurrentWireLineStrongLevelEmpty");
+            }
+            if (string.IsNullOrWhiteSpace(GlobalData.Wireline.TwistDirection.Value))
+            {
+                throw new ErrorException("CurrentWireLineTwistDirectionEmpty");
+            }
+            if (GlobalData.Wireline.OrderLength.Value <= 0)
+            {
+                throw new ErrorException("CurrentWireLineOrderLengthZero");
+            }
+            if (this.CumulationValue.Value <= 0)
+            {
+                throw new ErrorException("CumulationValueInvalid");
+            }
+            dicInfo = WorkDictionaryManager.GetConfigFile();
+            if (dicInfo == null)
+            {
+                throw new ErrorException("CumulationDictionaryFileNotFound");
+            }
+            configInfo = WorkConfigManager.GetConfigFile();
+            if (configInfo == null)
+            {
+                throw new ErrorException("CumulationConfigFileNotFound");
+            }
         }
 
         /// <summary>
@@ -760,67 +790,92 @@ namespace SteelWire.WindowData
         /// <returns></returns>
         public bool Cumulate()
         {
-            if (string.IsNullOrWhiteSpace(this.CurrentWireNo.ItemValue))
-            {
-                throw new ErrorException("CurrentWireNoEmpty");
-            }
-            bool done = false;
+            FileInfo dicInfo, configInfo;
+            CheckUploadData(out dicInfo, out configInfo);
             DateTime now = DateTime.Now;
-            using (SteelWireContext dbContext = new SteelWireContext())
+            using (SteelWireBaseContext dbContext = DbContextFactory.GenerateDbContext())
             {
-                using (TransactionScope t = new TransactionScope())
+                using (DbContextTransaction t = dbContext.Database.BeginTransaction())
                 {
                     //if (WorkOperator.ExistWork(dbContext, Sign.Data.UserID, DateTime.Now))
                     //{
                     //    throw new InfoException("HaveCumulatedToday");
                     //}
-                    CumulationReset data = ResetOperator.GetCurrentData(dbContext, Sign.Data.UserID, this.CurrentWireNo.ItemValue);
-                    if (data == null)
+                    try
                     {
-                        if (MessageManager.Question("SaveCriticalCumulateCompulsivelyConfirm"))
+                        CutRecord data = null;
+                        if (GlobalData.Wireline.Id > 0)
                         {
-                            Cumulate(dbContext, now, true);
-                            done = true;
+                            data = CutOperator.GetLastRecord(dbContext, GlobalData.SearchUserId, GlobalData.Wireline.Id);
                         }
+                        if (data == null)
+                        {
+                            if (MessageManager.Question("SaveCriticalCumulateCompulsivelyConfirm"))
+                            {
+                                Cumulate(dbContext, dicInfo, configInfo, now);
+                                dbContext.SaveChanges();
+                                t.Commit();
+                                return true;
+                            }
+                            return false;
+                        }
+                        if (MessageManager.Question("SaveCriticalCumulateConfirm"))
+                        {
+                            Cumulate(dbContext, dicInfo, configInfo, now);
+                            dbContext.SaveChanges();
+                            t.Commit();
+                            return true;
+                        }
+                        return false;
                     }
-                    else
+                    catch (Exception)
                     {
-                        bool? result = MessageManager.Choose("SaveCriticalCumulateConfirm");
-                        if (result.HasValue)
-                        {
-                            if (result.Value)
-                            {
-                                Cumulate(dbContext, now, true);
-                                done = true;
-                            }
-                            else
-                            {
-                                Cumulate(dbContext, now);
-                                done = true;
-                            }
-                        }
+                        t.Rollback();
+                        throw;
                     }
-                    t.Complete();
                 }
             }
-            return done;
+        }
+
+        private void UpdateWirelineInfo(SteelWireBaseContext dbContext, out bool diameterChanged,
+            out bool unitSystemChanged)
+        {
+            WirelineInfo wirelineInfo = new WirelineInfo
+            {
+                ID = GlobalData.Wireline.Id,
+                Number = this.WirelineNumber.Value,
+                Diameter = GlobalData.Wireline.Diameter.Value,
+                Struct = GlobalData.Wireline.Struct.Value,
+                StrongLevel = GlobalData.Wireline.StrongLevel.Value,
+                TwistDirection = GlobalData.Wireline.TwistDirection.Value,
+                OrderLength = GlobalData.Wireline.OrderLength.Value,
+                UnitSystem = GlobalData.Wireline.UnitSystem.Value.ToString(),
+                UpdateUserID = GlobalData.UserId
+            };
+            WirelineOperator.UpdateWireline(dbContext, wirelineInfo, out diameterChanged, out unitSystemChanged);
+            GlobalData.Wireline.Id = wirelineInfo.ID;
         }
 
         /// <summary>
         /// 累计（上传配置和数据到数据库）
         /// </summary>
         /// <param name="dbContext"></param>
+        /// <param name="dicInfo"></param>
+        /// <param name="configInfo"></param>
         /// <param name="now"></param>
-        /// <param name="reset"></param>
-        private void Cumulate(SteelWireContext dbContext, DateTime now, bool reset = false)
+        private void Cumulate(SteelWireBaseContext dbContext, FileInfo dicInfo, FileInfo configInfo, DateTime now)
         {
-            if (reset)
+            bool lineDiameterUpdate, unitSystemUpdate;
+            bool criticalConfigUpdate = this.ChangeToCriticalConfig();
+            bool cumulationConfigUpdate = this.ChangeToWorkConfig();
+            if (SystemConfigManager.OnceInstance.LastWirelineNumber != this.WirelineNumber.Value)
             {
-                this.UpdateCritical(dbContext, now);
-                dbContext.SaveChanges();
+                SystemConfigManager.OnceInstance.LastWirelineNumber = GlobalData.Wireline.Number;
+                SystemConfigManager.OnceInstance.SaveConfig();
             }
-            UpdateWork(dbContext, now);
-            dbContext.SaveChanges();
+            UpdateWirelineInfo(dbContext, out lineDiameterUpdate, out unitSystemUpdate);
+            CriticalConfig configData = this.UpdateCritical(dbContext, criticalConfigUpdate, lineDiameterUpdate, unitSystemUpdate, now);
+            UpdateWork(dbContext, dicInfo, configInfo, configData, cumulationConfigUpdate, unitSystemUpdate, now);
             RefreshData(dbContext);
         }
 
@@ -833,34 +888,29 @@ namespace SteelWire.WindowData
             CuttingCriticalConfigManager.OnceInstance.ReloadConfig();
             CuttingCriticalConfig criticalConf = CuttingCriticalConfigManager.OnceInstance.ConfigSection;
             bool changed = false;
-            if (criticalConf.DerrickHeight != DerrickHeight.ItemValue)
+            if (criticalConf.DerrickHeight != this.DerrickHeight.Value)
             {
-                criticalConf.DerrickHeight = DerrickHeight.ItemValue;
+                criticalConf.DerrickHeight = this.DerrickHeight.Value;
                 changed = true;
             }
-            if (criticalConf.WirelineMaxPower != WirelineMaxPower.ItemValue)
+            if (criticalConf.WirelineMaxPower != this.WirelineMaxPower.Value)
             {
-                criticalConf.WirelineMaxPower = WirelineMaxPower.ItemValue;
+                criticalConf.WirelineMaxPower = this.WirelineMaxPower.Value;
                 changed = true;
             }
-            if (criticalConf.RotaryHookWorkload != RotaryHookWorkload.ItemValue)
+            if (criticalConf.RotaryHookWorkload != this.RotaryHookWorkload.Value)
             {
-                criticalConf.RotaryHookWorkload = RotaryHookWorkload.ItemValue;
+                criticalConf.RotaryHookWorkload = this.RotaryHookWorkload.Value;
                 changed = true;
             }
-            if (criticalConf.RollerDiameter != RollerDiameter.ItemValue)
+            if (criticalConf.RollerDiameter != this.RollerDiameter.Value)
             {
-                criticalConf.RollerDiameter = RollerDiameter.ItemValue;
+                criticalConf.RollerDiameter = this.RollerDiameter.Value;
                 changed = true;
             }
-            if (criticalConf.WirelineDiameter != WirelineDiameter.ItemValue)
+            if (criticalConf.RopeCount != this.RopeCount.Value)
             {
-                criticalConf.WirelineDiameter = WirelineDiameter.ItemValue;
-                changed = true;
-            }
-            if (criticalConf.RopeCount != RopeCount.ItemValue)
-            {
-                criticalConf.RopeCount = RopeCount.ItemValue;
+                criticalConf.RopeCount = this.RopeCount.Value;
                 changed = true;
             }
             if (changed)
@@ -874,10 +924,14 @@ namespace SteelWire.WindowData
         /// 上传临界值
         /// </summary>
         /// <param name="dbContext"></param>
+        /// <param name="configUpdate"></param>
+        /// <param name="lineDiameterUpdate"></param>
+        /// <param name="unitSystemUpdate"></param>
         /// <param name="now"></param>
-        public void UpdateCritical(SteelWireContext dbContext, DateTime now)
+        private CriticalConfig UpdateCritical(SteelWireBaseContext dbContext, bool configUpdate, bool lineDiameterUpdate,
+            bool unitSystemUpdate, DateTime now)
         {
-            if (this.WirelineCuttingCriticalValue.ItemValue <= 0)
+            if (this.CriticalValue.Value <= 0)
             {
                 throw new ErrorException("CriticalValueInvalid");
             }
@@ -891,32 +945,31 @@ namespace SteelWire.WindowData
             {
                 throw new ErrorException("CriticalConfigFileNotFound");
             }
-            bool overWrite;
-            DbCuttingCriticalDictionary dicData;
-            bool dicUpdate = CriticalOperator.IsNeedUpdateDictionary(dbContext, Sign.Data.UserID,
-                dicInfo.LastWriteTime.Ticks, out overWrite, out dicData);
-            if (dicUpdate)
+            CriticalDictionary dictionaryData;
+            bool dictionaryUpdate = CriticalOperator.IsNeedUpdateCriticalDictionary(dbContext, GlobalData.SearchUserId,
+                dicInfo.LastWriteTime.Ticks, out dictionaryData);
+            if (dictionaryUpdate)
             {
-                if (overWrite)
-                {
-                    dicInfo.LastWriteTime = now;
-                }
+                dicInfo.LastWriteTime = now;
                 CuttingCriticalDictionary dictionary = CuttingCriticalDictionaryManager.OnceInstance.DictionarySection;
-                dicData = new DbCuttingCriticalDictionary
+                dictionaryData = new CriticalDictionary
                 {
-                    ConfigUserID = Sign.Data.UserID,
+                    ConfigUserID = GlobalData.UserId,
                     ConfigTime = now,
                     ConfigTimeStamp = dicInfo.LastWriteTime.Ticks,
                     WireropeWorkload = dictionary.WireropeWorkloads.Cast<WireropeWorkload>()
                         .Select(w => new DbWireropeWorkload
                         {
+                            Key = w.Key,
+                            Name = w.Name,
+                            UnitSystem = w.UnitSystem.ToString(),
                             Diameter = w.Diameter,
                             Workload = w.Workload
                         }).ToList(),
                     WireropeCutRole = dictionary.WireropeCutRoles.Cast<WireropeCutRole>()
                         .Select(w => new DbWireropeCutRole
                         {
-                            Key = w.ID,
+                            Key = w.Key,
                             MinDerrickHeight = w.MinDerrickHeight,
                             MaxDerrickHeight = w.MaxDerrickHeight,
                             MinCutLength = w.MinCutLength,
@@ -930,106 +983,72 @@ namespace SteelWire.WindowData
                             RollingValue = w.RollingValue
                         }).ToList()
                 };
-                CriticalOperator.UpdateDictionary(dbContext, dicData);
+                CriticalOperator.UpdateCriticalDictionary(dbContext, dictionaryData);
             }
-            decimal criticalValue = Math.Round(this.WirelineCuttingCriticalValue.ItemValue, 8);
-            bool configChanged = this.ChangeToCriticalConfig();
-            if (!configChanged)
+            CriticalConfig configData;
+            if (!configUpdate)
             {
-                configChanged = CriticalOperator.IsNeedUpdateCritical(dbContext, Sign.Data.UserID,
-                    this.CurrentWireNo.ItemValue, configInfo.LastWriteTime.Ticks, criticalValue, out overWrite);
+                configUpdate = CriticalOperator.IsNeedUpdateCriticalConfig(dbContext, GlobalData.SearchUserId,
+                    configInfo.LastWriteTime.Ticks, out configData);
             }
-            if (dicUpdate || configChanged)
+            if (dictionaryUpdate || configUpdate)
             {
                 configInfo.LastWriteTime = now;
-                DbCuttingCriticalConfig configData = new DbCuttingCriticalConfig
+                configData = new CriticalConfig
                 {
-                    DictionaryID = dicData.ID,
-                    ConfigUserID = Sign.Data.UserID,
+                    DictionaryID = dictionaryData.ID,
+                    ConfigUserID = GlobalData.UserId,
                     ConfigTime = now,
                     ConfigTimeStamp = configInfo.LastWriteTime.Ticks,
-                    DerrickHeight = this.DerrickHeight.ItemValue,
-                    WirelineMaxPower = this.WirelineMaxPower.ItemValue,
-                    RotaryHookWorkload = this.RotaryHookWorkload.ItemValue,
-                    RollerDiameter = this.RollerDiameter.ItemValue,
-                    WirelineDiameter = this.WirelineDiameter.ItemValue,
-                    RopeCount = this.RopeCount.ItemValue,
-                    CuttingCriticalValue = criticalValue
+                    DerrickHeight = this.DerrickHeight.Value,
+                    WirelineMaxPower = this.WirelineMaxPower.Value,
+                    RotaryHookWorkload = this.RotaryHookWorkload.Value,
+                    RollerDiameter = this.RollerDiameter.Value,
+                    RopeCount = this.RopeCount.Value
                 };
-                CriticalOperator.UpdateCriticalValue(dbContext, Sign.Data.UserID, this.CurrentWireNo.ItemValue, configData);
+                CriticalOperator.UpdateCriticalConfig(dbContext, configData);
             }
+            else
+            {
+                configData = CriticalOperator.GetLastConfig(dbContext, GlobalData.SearchUserId);
+            }
+            bool recordUpdate = lineDiameterUpdate || unitSystemUpdate || dictionaryUpdate || configUpdate;
+            decimal criticalValue = Math.Round(this.CriticalValue.Value, 8);
+            if (!recordUpdate)
+            {
+                recordUpdate = CriticalOperator.IsNeedUpdateCriticalRecord(dbContext, GlobalData.SearchUserId,
+                    GlobalData.Wireline.Id,
+                    criticalValue);
+            }
+            if (recordUpdate)
+            {
+                CriticalRecord recordData = new CriticalRecord
+                {
+                    CriticalConfigID = configData.ID,
+                    WirelineID = GlobalData.Wireline.Id,
+                    CalculateUserID = GlobalData.UserId,
+                    CalculateTime = now,
+                    WirelineDiameter = GlobalData.Wireline.Diameter.Value,
+                    CriticalValue = criticalValue
+                };
+                CriticalOperator.UpdateCriticalRecord(dbContext, recordData);
+            }
+            return configData;
         }
 
         /// <summary>
         /// 保存到本地配置文件
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <param name="drills"></param>
         /// <param name="configs"></param>
         /// <returns></returns>
-        private bool ChangeDrillList<T>(AddCollection<DrillPipe> drills, IEnumerable<T> configs)
-            where T : DrillPipeConfig, new()
+        private bool ChangeDrillList(AddCollection<Drill> drills,
+            IEnumerable<DependencyObject<DependencyDrillConfig>> configs)
         {
             bool changed = false;
-            IEnumerable<DrillPipe> remove = drills.Cast<DrillPipe>().Where(d => configs.All(p => p.Name.ItemValue != d.Name));
-            if (remove.Any())
-            {
-                foreach (DrillPipe drill in remove)
-                {
-                    drills.Remove(drill);
-                }
-                changed = true;
-            }
-            foreach (T config in configs)
-            {
-                DrillPipe item = drills[config.Name.ItemValue];
-                if (item == null)
-                {
-                    item = new DrillPipe
-                    {
-                        Name = config.Name.ItemValue,
-                        Weight = config.Weight.ItemValue,
-                        Length = config.Length.ItemValue,
-                        StandLength = config.StandLength.ItemValue
-                    };
-                    drills.Add(item);
-                    changed = true;
-                }
-                else
-                {
-                    if (item.Weight != config.Weight.ItemValue)
-                    {
-                        item.Weight = config.Weight.ItemValue;
-                        changed = true;
-                    }
-                    if (item.Length != config.Length.ItemValue)
-                    {
-                        item.Length = config.Length.ItemValue;
-                        changed = true;
-                    }
-                    if (item.StandLength != config.StandLength.ItemValue)
-                    {
-                        item.StandLength = config.StandLength.ItemValue;
-                        changed = true;
-                    }
-                }
-            }
-            return changed;
-        }
-
-        /// <summary>
-        /// 保存到本地配置文件
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="drills"></param>
-        /// <param name="configs"></param>
-        /// <returns></returns>
-        private bool ChangeDrillList<T>(AddCollection<Drill> drills, IEnumerable<T> configs)
-            where T : DrillConfig, new()
-        {
-            bool changed = false;
-            IEnumerable<Drill> remove = drills.Cast<Drill>().Where(d => configs.All(p => p.Name.ItemValue != d.Name));
-            if (remove.Any())
+            List<Drill> remove =
+                drills.Cast<Drill>().Where(d => configs.All(p => p.Value.Name.Value != d.Name)).ToList();
+            if (remove.Count > 0)
             {
                 foreach (Drill drill in remove)
                 {
@@ -1037,30 +1056,30 @@ namespace SteelWire.WindowData
                 }
                 changed = true;
             }
-            foreach (T config in configs)
+            foreach (DependencyObject<DependencyDrillConfig> config in configs)
             {
-                Drill item = drills[config.Name.ItemValue];
+                Drill item = drills[config.Value.Name.Value];
                 if (item == null)
                 {
                     item = new Drill
                     {
-                        Name = config.Name.ItemValue,
-                        Weight = config.Weight.ItemValue,
-                        Length = config.Length.ItemValue
+                        Name = config.Value.Name.Value,
+                        Weight = config.Value.Weight.Value,
+                        Length = config.Value.Length.Value
                     };
                     drills.Add(item);
                     changed = true;
                 }
                 else
                 {
-                    if (item.Weight != config.Weight.ItemValue)
+                    if (item.Weight != config.Value.Weight.Value)
                     {
-                        item.Weight = config.Weight.ItemValue;
+                        item.Weight = config.Value.Weight.Value;
                         changed = true;
                     }
-                    if (item.Length != config.Length.ItemValue)
+                    if (item.Length != config.Value.Length.Value)
                     {
-                        item.Length = config.Length.ItemValue;
+                        item.Length = config.Value.Length.Value;
                         changed = true;
                     }
                 }
@@ -1078,29 +1097,28 @@ namespace SteelWire.WindowData
             WorkConfig workConf = WorkConfigManager.OnceInstance.ConfigSection;
             bool changed = false;
 
-            if (WorkConfigManager.OnceInstance.CurrentWireNo != this.CurrentWireNo.ItemValue)
-            {
-                WorkConfigManager.OnceInstance.CurrentWireNo = this.CurrentWireNo.ItemValue;
-                changed = true;
-            }
-
             #region Common
 
-            if (workConf.FluidDensity != this.FluidDensity.ItemValue)
+            if (workConf.RealRotaryHookWorkload != this.RealRotaryHookWorkload.Value)
             {
-                workConf.FluidDensity = this.FluidDensity.ItemValue;
+                workConf.RealRotaryHookWorkload = this.RealRotaryHookWorkload.Value;
                 changed = true;
             }
-            if (workConf.ElevatorWeight != this.ElevatorWeight.ItemValue)
+            if (workConf.FluidDensity != this.FluidDensity.Value)
             {
-                workConf.ElevatorWeight = this.ElevatorWeight.ItemValue;
+                workConf.FluidDensity = this.FluidDensity.Value;
                 changed = true;
             }
-            if (ChangeDrillList(workConf.DrillPipes, this.DrillPipes.DrillPipes.Items))
+            if (workConf.ElevatorWeight != this.ElevatorWeight.Value)
+            {
+                workConf.ElevatorWeight = this.ElevatorWeight.Value;
+                changed = true;
+            }
+            if (ChangeDrillList(workConf.DrillPipes, this.DrillPipes.Items))
             {
                 changed = true;
             }
-            if (ChangeDrillList(workConf.HeavierDrillPipes, this.DrillPipes.HeavierDrillPipes.Items))
+            if (ChangeDrillList(workConf.HeavierDrillPipes, this.HeavierDrillPipes.Items))
             {
                 changed = true;
             }
@@ -1108,78 +1126,81 @@ namespace SteelWire.WindowData
             {
                 changed = true;
             }
+
             #endregion
 
             #region Drilling
-            if (workConf.DrillingShallowHeight != this.DrillingShallowHeight.ItemValue)
+
+            if (workConf.DrillingShallowHeight != this.DrillingShallowHeight.Value)
             {
-                workConf.DrillingShallowHeight = this.DrillingShallowHeight.ItemValue;
+                workConf.DrillingShallowHeight = this.DrillingShallowHeight.Value;
                 changed = true;
             }
-            if (workConf.DrillingDeepHeight != this.DrillingDeepHeight.ItemValue)
+            if (workConf.DrillingDeepHeight != this.DrillingDeepHeight.Value)
             {
-                workConf.DrillingDeepHeight = this.DrillingDeepHeight.ItemValue;
+                workConf.DrillingDeepHeight = this.DrillingDeepHeight.Value;
                 changed = true;
             }
-            if (workConf.DrillingType != this.DrillingType.ItemValue)
+            if (workConf.DrillingType != this.DrillingType.Value)
             {
-                workConf.DrillingType = this.DrillingType.ItemValue;
+                workConf.DrillingType = this.DrillingType.Value;
                 changed = true;
             }
-            if (workConf.DrillingDifficulty != this.DrillingDifficulty.ItemValue)
+            if (workConf.RedressingCount != this.RedressingCount.Value)
             {
-                workConf.DrillingDifficulty = this.DrillingDifficulty.ItemValue;
+                workConf.RedressingCount = this.RedressingCount.Value;
                 changed = true;
             }
+
             #endregion
 
             #region Trip
-            if (workConf.TripShallowHeight != this.TripShallowHeight.ItemValue)
+
+            if (workConf.TripShallowHeight != this.TripShallowHeight.Value)
             {
-                workConf.TripShallowHeight = this.TripShallowHeight.ItemValue;
+                workConf.TripShallowHeight = this.TripShallowHeight.Value;
                 changed = true;
             }
-            if (workConf.TripDeepHeight != this.TripDeepHeight.ItemValue)
+            if (workConf.TripDeepHeight != this.TripDeepHeight.Value)
             {
-                workConf.TripDeepHeight = this.TripDeepHeight.ItemValue;
+                workConf.TripDeepHeight = this.TripDeepHeight.Value;
                 changed = true;
             }
-            if (workConf.TripCount != this.TripCount.ItemValue)
+            if (workConf.TripCount != this.TripCount.Value)
             {
-                workConf.TripCount = this.TripCount.ItemValue;
+                workConf.TripCount = this.TripCount.Value;
                 changed = true;
             }
+
             #endregion
 
             #region Bushing
-            if (workConf.BushingWeight != BushingWeight.ItemValue)
+
+            if (ChangeDrillList(workConf.Bushings, this.Bushings.Items))
             {
-                workConf.BushingWeight = BushingWeight.ItemValue;
                 changed = true;
             }
-            if (workConf.BushingLength != BushingLength.ItemValue)
+            if (workConf.BushingHeight != BushingHeight.Value)
             {
-                workConf.BushingLength = BushingLength.ItemValue;
+                workConf.BushingHeight = BushingHeight.Value;
                 changed = true;
             }
-            if (workConf.BushingHeight != BushingHeight.ItemValue)
-            {
-                workConf.BushingHeight = BushingHeight.ItemValue;
-                changed = true;
-            }
+
             #endregion
 
             #region Coring
-            if (workConf.CoringShallowHeight != CoringShallowHeight.ItemValue)
+
+            if (workConf.CoringShallowHeight != CoringShallowHeight.Value)
             {
-                workConf.CoringShallowHeight = CoringShallowHeight.ItemValue;
+                workConf.CoringShallowHeight = CoringShallowHeight.Value;
                 changed = true;
             }
-            if (workConf.CoringDeepHeight != CoringDeepHeight.ItemValue)
+            if (workConf.CoringDeepHeight != CoringDeepHeight.Value)
             {
-                workConf.CoringDeepHeight = CoringDeepHeight.ItemValue;
+                workConf.CoringDeepHeight = CoringDeepHeight.Value;
                 changed = true;
             }
+
             #endregion
 
             if (changed)
@@ -1193,116 +1214,127 @@ namespace SteelWire.WindowData
         /// 上传作业累计值
         /// </summary>
         /// <param name="dbContext"></param>
+        /// <param name="dicInfo"></param>
+        /// <param name="configInfo"></param>
+        /// <param name="criticalConfigData"></param>
+        /// <param name="configUpdate"></param>
+        /// <param name="unitSystemUpdate"></param>
         /// <param name="now"></param>
-        public void UpdateWork(SteelWireContext dbContext, DateTime now)
+        private void UpdateWork(SteelWireBaseContext dbContext, FileInfo dicInfo, FileInfo configInfo,
+            CriticalConfig criticalConfigData, bool configUpdate, bool unitSystemUpdate, DateTime now)
         {
-            if (this.TotalWorkValue.ItemValue <= 0)
+            CumulationDictionary dictionaryData;
+            bool dictionaryUpdate = CumulationOperator.IsNeedUpdateCumulationDictionary(dbContext,
+                GlobalData.SearchUserId,
+                dicInfo.LastWriteTime.Ticks, out dictionaryData);
+            if (dictionaryUpdate)
             {
-                throw new ErrorException("CumulationValueInvalid");
-            }
-            FileInfo dicInfo = WorkDictionaryManager.GetConfigFile();
-            if (dicInfo == null)
-            {
-                throw new ErrorException("CumulationDictionaryFileNotFound");
-            }
-            FileInfo configInfo = WorkConfigManager.GetConfigFile();
-            if (configInfo == null)
-            {
-                throw new ErrorException("CumulationConfigFileNotFound");
-            }
-            bool overWrite;
-            DbWorkDictionary dicData;
-            bool dicUpdate = WorkOperator.IsNeedUpdateDictionary(dbContext, Sign.Data.UserID,
-                dicInfo.LastWriteTime.Ticks, out overWrite, out dicData);
-            if (dicUpdate)
-            {
-                if (overWrite)
-                {
-                    dicInfo.LastWriteTime = now;
-                }
+                dicInfo.LastWriteTime = now;
                 WorkDictionary dictionary = WorkDictionaryManager.OnceInstance.DictionarySection;
-                dicData = new DbWorkDictionary
+                dictionaryData = new CumulationDictionary
                 {
-                    ConfigUserID = Sign.Data.UserID,
+                    ConfigUserID = GlobalData.UserId,
                     ConfigTime = now,
                     ConfigTimeStamp = dicInfo.LastWriteTime.Ticks,
                     DrillingType = dictionary.DrillingTypes.Cast<DrillingType>()
                         .Select(d => new DbDrillingType
                         {
-                            DrillingTypeName = d.Name,
+                            Name = d.Name.ToString(),
                             Coefficient = d.Coefficient
-                        }).ToList(),
-                    DrillingDifficulty = dictionary.DrillingDifficulties.Cast<DrillingDifficulty>()
-                        .Select(d => new DbDrillingDifficulty
-                        {
-                            DrillingDifficultyName = d.Name,
-                            DrillingDifficultyValue = d.Difficulty
                         }).ToList()
                 };
-                WorkOperator.UpdateDictionary(dbContext, dicData);
+                CumulationOperator.UpdateCumulationDictionary(dbContext, dictionaryData);
             }
-            this.ChangeToWorkConfig();
-            configInfo.LastWriteTime = now;
-            DbWorkConfig workData = new DbWorkConfig
+            CumulationConfig configData;
+            if (!configUpdate)
             {
-                ConfigUserID = Sign.Data.UserID,
-                DictionaryID = dicData.ID,
-                ConfigTime = now,
-                ConfigTimeStamp = configInfo.LastWriteTime.Ticks,
-                FluidDensity = this.FluidDensity.ItemValue,
-                ElevatorWeight = this.ElevatorWeight.ItemValue,
-                DrillPipeConfig = this.DrillPipes.DrillPipes.Items
-                    .Where(d => d.Weight.ItemValue > 0 && d.Length.ItemValue > 0 && d.StandLength.ItemValue > 0)
-                    .Select(d => new DbDrillPipeConfig
-                    {
-                        DrillPipeName = d.Name.ItemValue,
-                        DrillPipeWeight = d.Weight.ItemValue,
-                        DrillPipeLength = d.Length.ItemValue,
-                        DrillPipeType = DrillPipeTypeEnum.DrillPipe.ToString(),
-                        DrillPipeStandLength = d.StandLength.ItemValue
-                    }).ToList(),
-                DrillCollarConfig = this.DrillCollars.Items
-                    .Where(d => d.Weight.ItemValue > 0 && d.Length.ItemValue > 0)
-                    .Select(d => new DbDrillCollarConfig
-                    {
-                        DrillCollarName = d.Name.ItemValue,
-                        DrillCollarWeight = d.Weight.ItemValue,
-                        DrillCollarLength = d.Length.ItemValue
-                    }).ToList(),
-
-                DrillingShallowHeight = this.DrillingShallowHeight.ItemValue,
-                DrillingDeepHeight = this.DrillingDeepHeight.ItemValue,
-                DrillingType = this.DrillingType.ItemValue,
-                DrillingDifficulty = this.DrillingDifficulty.ItemValue,
-
-                TripShallowHeight = this.TripShallowHeight.ItemValue,
-                TripDeepHeight = this.TripDeepHeight.ItemValue,
-                TripCount = this.TripCount.ItemValue,
-
-                BushingWeight = this.BushingWeight.ItemValue,
-                BushingLength = this.BushingLength.ItemValue,
-                BushingHeight = this.BushingHeight.ItemValue,
-
-                CoringShallowHeight = this.CoringShallowHeight.ItemValue,
-                CoringDeepHeight = this.CoringDeepHeight.ItemValue,
-                WorkValue = this.TotalWorkValue.ItemValue
-            };
-            IEnumerable<DbDrillPipeConfig> heavierDrillPipes = this.DrillPipes.HeavierDrillPipes.Items
-                .Where(d => d.Weight.ItemValue > 0 && d.Length.ItemValue > 0)
-                .Select(d => new DbDrillPipeConfig
+                configUpdate = CumulationOperator.IsNeedUpdateCumulationConfig(dbContext, GlobalData.SearchUserId,
+                    configInfo.LastWriteTime.Ticks, out configData);
+            }
+            if (dictionaryUpdate || configUpdate)
+            {
+                configInfo.LastWriteTime = now;
+                configData = new CumulationConfig
                 {
-                    DrillPipeName = d.Name.ItemValue,
-                    DrillPipeWeight = d.Weight.ItemValue,
-                    DrillPipeLength = d.Length.ItemValue,
-                    DrillPipeType = DrillPipeTypeEnum.HeavierDrillPipe.ToString(),
-                    DrillPipeStandLength = 0
-                });
-            foreach (DbDrillPipeConfig heavierDrillPipe in heavierDrillPipes)
-            {
-                workData.DrillPipeConfig.Add(heavierDrillPipe);
+                    ConfigUserID = GlobalData.UserId,
+                    DictionaryID = dictionaryData.ID,
+                    ConfigTime = now,
+                    ConfigTimeStamp = configInfo.LastWriteTime.Ticks,
+                    RealRotaryHookWorkload = this.RealRotaryHookWorkload.Value,
+                    FluidDensity = this.FluidDensity.Value,
+                    ElevatorWeight = this.ElevatorWeight.Value,
+                    DrillDeviceConfig = this.DrillPipes.Items
+                        .Where(d => d.Value.Weight.Value > 0 && d.Value.Length.Value > 0)
+                        .Select(d => new DrillDeviceConfig
+                        {
+                            Name = d.Value.Name.Value,
+                            Weight = d.Value.Weight.Value,
+                            Length = d.Value.Length.Value,
+                            Type = DrillDeviceTypeEnum.DrillPipe.ToString()
+                        })
+                        .Union(this.HeavierDrillPipes.Items
+                            .Where(d => d.Value.Weight.Value > 0 && d.Value.Length.Value > 0)
+                            .Select(d => new DrillDeviceConfig
+                            {
+                                Name = d.Value.Name.Value,
+                                Weight = d.Value.Weight.Value,
+                                Length = d.Value.Length.Value,
+                                Type = DrillDeviceTypeEnum.HeavierDrillPipe.ToString()
+                            }))
+                        .Union(this.DrillCollars.Items
+                            .Where(d => d.Value.Weight.Value > 0 && d.Value.Length.Value > 0)
+                            .Select(d => new DrillDeviceConfig
+                            {
+                                Name = d.Value.Name.Value,
+                                Weight = d.Value.Weight.Value,
+                                Length = d.Value.Length.Value,
+                                Type = DrillDeviceTypeEnum.DrillCollar.ToString()
+                            }))
+                        .Union(this.Bushings.Items
+                            .Where(d => d.Value.Weight.Value > 0 && d.Value.Length.Value > 0)
+                            .Select(d => new DrillDeviceConfig
+                            {
+                                Name = d.Value.Name.Value,
+                                Weight = d.Value.Weight.Value,
+                                Length = d.Value.Length.Value,
+                                Type = DrillDeviceTypeEnum.Bushing.ToString()
+                            })).ToList(),
+                    DrillingShallowHeight = this.DrillingShallowHeight.Value,
+                    DrillingDeepHeight = this.DrillingDeepHeight.Value,
+                    DrillingType = this.DrillingType.Value.ToString(),
+                    RedressingCount = this.RedressingCount.Value,
+
+                    TripShallowHeight = this.TripShallowHeight.Value,
+                    TripDeepHeight = this.TripDeepHeight.Value,
+                    TripCount = this.TripCount.Value,
+
+                    BushingHeight = this.BushingHeight.Value,
+
+                    CoringShallowHeight = this.CoringShallowHeight.Value,
+                    CoringDeepHeight = this.CoringDeepHeight.Value
+                };
+                CumulationOperator.UpdateCumulationConfig(dbContext, configData);
             }
-            WorkOperator.UpdateWork(dbContext, Sign.Data.UserID, this.CurrentWireNo.ItemValue,
-                workData, Math.Round(this.WirelineCuttingCriticalValue.ItemValue, 8));
+            else
+            {
+                configData = CumulationOperator.GetLastConfig(dbContext, GlobalData.SearchUserId);
+            }
+            if (unitSystemUpdate)
+            {
+                CutOperator.CalculateAllRecord(dbContext, GlobalData.SearchUserId, GlobalData.UserId,
+                    GlobalData.Wireline.Id,
+                    now);
+            }
+            CumulationRecord recordData = new CumulationRecord
+            {
+                CalculateUserID = GlobalData.UserId,
+                CriticalConfigID = criticalConfigData.ID,
+                CumulationConfigID = configData.ID,
+                CalculateTime = now,
+                CumulationValue = Math.Round(this.CumulationValue.Value, 8)
+            };
+            CumulationOperator.UpdateCumulationRecord(dbContext, GlobalData.SearchUserId, GlobalData.Wireline.Id,
+                recordData);
         }
 
         /// <summary>
@@ -1311,8 +1343,29 @@ namespace SteelWire.WindowData
         /// <returns></returns>
         public bool CheckNeedReset()
         {
-            return this.CriticalValue.ItemValue > 0
-                && Math.Round(this.CumulationValue.ItemValue, 3) >= Math.Round(this.CriticalValue.ItemValue, 3);
+            return GlobalData.Wireline.CriticalValue.Value > 0
+                   && Math.Round(GlobalData.Wireline.CumulationValue.Value, 3) >=
+                   Math.Round(GlobalData.Wireline.CriticalValue.Value, 3);
+        }
+
+        private void CheckReset()
+        {
+            if (string.IsNullOrWhiteSpace(this.WirelineNumber.Value))
+            {
+                throw new ErrorException("CurrentWireNoEmpty");
+            }
+            if (this.WirelineNumber.Value != GlobalData.Wireline.Number)
+            {
+                throw new ErrorException("CurrentWireNoInvalid");
+            }
+            if (GlobalData.Wireline.CumulationValue.Value <= 0)
+            {
+                throw new ErrorException("CurrentCumulationValueZero");
+            }
+            if (this.CutLengthValue.Value <= 0)
+            {
+                throw new InfoException("CutLengthZero");
+            }
         }
 
         /// <summary>
@@ -1322,32 +1375,32 @@ namespace SteelWire.WindowData
         /// <returns></returns>
         public void Reset(bool warningMode)
         {
-            if (string.IsNullOrWhiteSpace(this.CurrentWireNo.ItemValue))
+            CheckReset();
+            using (SteelWireBaseContext dbContext = DbContextFactory.GenerateDbContext())
             {
-                throw new ErrorException("CurrentWireNoEmpty");
-            }
-            SteelWireContext dbContext = new SteelWireContext();
-            //if (ResetOperator.ExistReset(dbContext, Sign.Data.UserID, DateTime.Now))
-            //{
-            //    throw new InfoException("HaveResetToday");
-            //}
-            CumulationReset data = ResetOperator.GetCurrentData(dbContext, Sign.Data.UserID, this.CurrentWireNo.ItemValue);
-            if (data == null)
-            {
-                throw new ErrorException("CumulationDataNotFound");
-            }
-            if (warningMode)
-            {
-                if (MessageManager.Question("ResetCompulsivelyConfirm"))
+                //if (ResetOperator.ExistReset(dbContext, Sign.Data.UserID, DateTime.Now))
+                //{
+                //    throw new InfoException("HaveResetToday");
+                //}
+                CutRecord recordData = CutOperator.GetLastRecord(dbContext, GlobalData.SearchUserId,
+                    GlobalData.Wireline.Id);
+                if (recordData == null)
                 {
-                    Reset(dbContext, data);
+                    throw new ErrorException("CumulationDataNotFound");
+                }
+                if (warningMode)
+                {
+                    if (MessageManager.Question("ResetCompulsivelyConfirm"))
+                    {
+                        Reset(dbContext, recordData);
+                        return;
+                    }
                     return;
                 }
-                return;
-            }
-            if (MessageManager.Question("ResetConfirm"))
-            {
-                Reset(dbContext, data);
+                if (MessageManager.Question("ResetConfirm"))
+                {
+                    Reset(dbContext, recordData);
+                }
             }
         }
 
@@ -1355,10 +1408,11 @@ namespace SteelWire.WindowData
         /// 切绳并上传数据
         /// </summary>
         /// <param name="dbContext"></param>
-        /// <param name="data"></param>
-        private void Reset(SteelWireContext dbContext, CumulationReset data)
+        /// <param name="recordData"></param>
+        private void Reset(SteelWireBaseContext dbContext, CutRecord recordData)
         {
-            ResetOperator.Reset(dbContext, Sign.Data.UserID, this.CurrentWireNo.ItemValue, data);
+            CutOperator.Cut(dbContext, GlobalData.SearchUserId, GlobalData.UserId, GlobalData.Wireline.Id,
+                this.CutLengthValue.Value, recordData);
             dbContext.SaveChanges();
             RefreshData(dbContext);
         }

@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using BaseConfig;
-using SteelWire.WindowData;
+using SteelWire.AppCode.Data;
 
 namespace SteelWire.AppCode.Config
 {
@@ -41,8 +41,7 @@ namespace SteelWire.AppCode.Config
 
         public static void InitializeConfig()
         {
-            OnceInstance = new WorkDictionaryManager("WorkDictionary",
-                string.Format("Config\\{0}", Sign.Data.Account), "WorkDictionary.config");
+            OnceInstance = new WorkDictionaryManager("WorkDictionary", $"Config\\{GlobalData.Account}", "WorkDictionary.config");
             OnceInstance.ReadConfig();
             bool needWrite = false;
 
@@ -58,11 +57,6 @@ namespace SteelWire.AppCode.Config
             if (dictionary.DrillingTypes.Count < 1)
             {
                 ConstDictionary.InitializeConfigDictionary(dictionary.DrillingTypes, ConstDictionary.ConstDrillingTypes);
-            }
-            if (dictionary.DrillingDifficulties.Count < 1)
-            {
-                ConstDictionary.InitializeConfigDictionary(dictionary.DrillingDifficulties,
-                    ConstDictionary.ConstDrillingDifficulties);
             }
 
             #endregion

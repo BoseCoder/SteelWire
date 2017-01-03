@@ -2,7 +2,7 @@
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace SqlServerTypes
+namespace SteelWire.SqlServerTypes
 {
     /// <summary>
     /// Utility methods related to CLR Types for SQL Server 
@@ -35,10 +35,7 @@ namespace SqlServerTypes
             var ptr = LoadLibrary(path);
             if (ptr == IntPtr.Zero)
             {
-                throw new Exception(string.Format(
-                    "Error loading {0} (ErrorCode: {1})",
-                    assemblyName,
-                    Marshal.GetLastWin32Error()));
+                throw new Exception($"Error loading {assemblyName} (ErrorCode: {Marshal.GetLastWin32Error()})");
             }
         }
     }

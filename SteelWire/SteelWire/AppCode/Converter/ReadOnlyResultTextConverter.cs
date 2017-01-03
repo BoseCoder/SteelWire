@@ -11,30 +11,34 @@ namespace SteelWire.AppCode.Converter
     {
         public object Convert(object value, Type typeTarget, object param, CultureInfo culture)
         {
-            if (value is int)
-            {
-                if ((int)value < 0)
-                {
-                    return "Error";
-                }
-            }
-            if (value is decimal)
-            {
-                if ((decimal)value < 0)
-                {
-                    return "Error";
-                }
-            }
             string format = param as string;
+            if (value != null)
+            {
+                Type dataType = value.GetType();
+                if (dataType == typeof(int))
+                {
+                    if ((int)value < 0)
+                    {
+                        return "Error";
+                    }
+                }
+                else if (dataType == typeof(decimal))
+                {
+                    if ((decimal)value < 0)
+                    {
+                        return "Error";
+                    }
+                    if (string.IsNullOrWhiteSpace(format))
+                    {
+                        return $"{value:F3}";
+                    }
+                }
+            }
             if (!string.IsNullOrWhiteSpace(format))
             {
                 return string.Format(format, value);
             }
-            if (value is decimal)
-            {
-                return string.Format("{0:F3}", value);
-            }
-            return string.Format("{0}", value);
+            return $"{value}";
         }
 
         public object ConvertBack(object value, Type typeTarget, object param, CultureInfo culture)

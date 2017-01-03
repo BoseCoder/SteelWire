@@ -1,5 +1,5 @@
-﻿using SteelWire.Lang;
-using System.Windows;
+﻿using System.Windows;
+using SteelWire.Language;
 
 namespace SteelWire.AppCode.CustomMessage
 {
