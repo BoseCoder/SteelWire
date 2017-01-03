@@ -190,7 +190,7 @@ namespace SteelWire.WindowData
             {
                 GlobalData.Wireline.Diameter.Value = wireropeWorkload.Name;
             }
-            this.WirelineNumber.Value = SystemConfigManager.OnceInstance.LastWirelineNumber;
+            this.WirelineNumber.Value = UserConfigManager.OnceInstance.LastWirelineNumber;
 
             CuttingCriticalConfig criticalConf = CuttingCriticalConfigManager.OnceInstance.ConfigSection;
             WorkConfig workConf = WorkConfigManager.OnceInstance.ConfigSection;
@@ -631,7 +631,7 @@ namespace SteelWire.WindowData
             SignWindow signWindow = new SignWindow();
             if (signWindow.ShowDialog() == true)
             {
-                SystemConfigManager.InitializeConfig();
+                UserConfigManager.InitializeConfig();
                 CuttingCriticalDictionaryManager.InitializeConfig();
                 CuttingCriticalConfigManager.InitializeConfig();
                 WorkDictionaryManager.InitializeConfig();
@@ -868,10 +868,10 @@ namespace SteelWire.WindowData
             bool lineDiameterUpdate, unitSystemUpdate;
             bool criticalConfigUpdate = this.ChangeToCriticalConfig();
             bool cumulationConfigUpdate = this.ChangeToWorkConfig();
-            if (SystemConfigManager.OnceInstance.LastWirelineNumber != this.WirelineNumber.Value)
+            if (UserConfigManager.OnceInstance.LastWirelineNumber != this.WirelineNumber.Value)
             {
-                SystemConfigManager.OnceInstance.LastWirelineNumber = GlobalData.Wireline.Number;
-                SystemConfigManager.OnceInstance.SaveConfig();
+                UserConfigManager.OnceInstance.LastWirelineNumber = GlobalData.Wireline.Number;
+                UserConfigManager.OnceInstance.SaveConfig();
             }
             UpdateWirelineInfo(dbContext, out lineDiameterUpdate, out unitSystemUpdate);
             CriticalConfig configData = this.UpdateCritical(dbContext, criticalConfigUpdate, lineDiameterUpdate, unitSystemUpdate, now);

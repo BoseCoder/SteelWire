@@ -36,7 +36,7 @@ namespace SteelWire.AppCode.Data
 
         static UnitData()
         {
-            GlobalData.Wireline.UnitSystem.Value = SystemConfigManager.OnceInstance.UnitSystem;
+            GlobalData.Wireline.UnitSystem.Value = UserConfigManager.OnceInstance.UnitSystem;
             GlobalData.Wireline.UnitSystem.ValueChangedHandler += UnitSystemChanged;
         }
 

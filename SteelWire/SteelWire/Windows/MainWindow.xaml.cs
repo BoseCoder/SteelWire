@@ -71,12 +71,12 @@ namespace SteelWire.Windows
 
         private void ShowOptionWindow()
         {
-            if (!SystemConfigManager.OnceInstance.Run)
+            if (!UserConfigManager.OnceInstance.Run)
             {
                 OptionWindow option = new OptionWindow();
                 option.ShowDialog();
-                SystemConfigManager.OnceInstance.Run = true;
-                SystemConfigManager.OnceInstance.SaveConfig();
+                UserConfigManager.OnceInstance.Run = true;
+                UserConfigManager.OnceInstance.SaveConfig();
             }
         }
 
@@ -213,7 +213,13 @@ namespace SteelWire.Windows
             if (allowDecimal && (e.Key == Key.Decimal))
             {
                 TextBox txtBox = (TextBox)sender;
-                if (txtBox.Text.Contains("."))
+                if (txtBox.Text.EndsWith("."))
+                {
+                    txtBox.SelectionLength = 0;
+                    txtBox.SelectionStart = txtBox.Text.Length;
+                    e.Handled = true;
+                }
+                else if (txtBox.Text.Contains("."))
                 {
                     e.Handled = true;
                 }

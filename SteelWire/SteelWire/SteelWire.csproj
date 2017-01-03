@@ -204,7 +204,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AppCode\Config\SystemConfigManager.cs" />
+    <Compile Include="AppCode\Config\UserConfigManager.cs" />
     <Compile Include="AppCode\Converter\ControlVisiableConverter.cs" />
     <Compile Include="AppCode\Converter\CumulationItemForeColorConverter.cs" />
     <Compile Include="AppCode\CustomException\BaseException.cs" />

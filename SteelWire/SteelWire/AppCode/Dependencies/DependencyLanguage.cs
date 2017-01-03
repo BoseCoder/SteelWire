@@ -12,7 +12,7 @@ namespace SteelWire.AppCode.Dependencies
 
         static DependencyLanguage()
         {
-            GlobalData.Language.Value = SystemConfigManager.OnceInstance.Language;
+            GlobalData.Language.Value = UserConfigManager.OnceInstance.Language;
             GlobalData.Language.ValueChangedHandler += LanguageChanged;
         }
 

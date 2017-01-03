@@ -10,6 +10,9 @@ namespace SteelWire.Business.Config
         [BaseConfigKey]
         public DatabaseType DatabaseType { get; set; }
 
+        [BaseConfigKey]
+        public bool DataIsolation { get; set; }
+
         private DatabaseConfigManager(string key, string subFolder, string fileName)
             : base(key, subFolder, fileName)
         { }
@@ -21,22 +24,10 @@ namespace SteelWire.Business.Config
 
         public static void InitializeConfig()
         {
-            OnceInstance = new DatabaseConfigManager("DatabaseConfig",
-                "Config", "DatabaseConfig.config");
+            OnceInstance = new DatabaseConfigManager("DatabaseConfig", "Config", "DatabaseConfig.config");
             OnceInstance.ReadConfig();
-            bool needWrite = false;
 
-            #region ConfigSection
-
-            if (OnceInstance.DatabaseType == DatabaseType.None)
-            {
-                needWrite = true;
-                OnceInstance.DatabaseType = DatabaseType.SqlLite;
-            }
-
-            #endregion
-
-            if (needWrite)
+            if (!OnceInstance.AppConfig.HasFile)
             {
                 OnceInstance.SaveConfig();
             }

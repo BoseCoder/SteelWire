@@ -13,7 +13,7 @@ namespace SteelWire
         {
             base.OnStartup(e);
 
-            LanguageManager.LoadLanguage(SystemConfigManager.OnceInstance.Language);
+            LanguageManager.LoadLanguage(UserConfigManager.OnceInstance.Language);
         }
     }
 }

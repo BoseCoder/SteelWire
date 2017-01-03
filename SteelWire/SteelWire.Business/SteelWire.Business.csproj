@@ -45,6 +45,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite, Version=1.0.104.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
@@ -77,39 +78,39 @@
     <Compile Include="Config\ConstDictionary.cs" />
     <Compile Include="Config\DatabaseConfigManager.cs" />
     <Compile Include="Database\CriticalConfig.cs">
-      <DependentUpon>SteelWireSqlLiteModel.tt</DependentUpon>
+      <DependentUpon>SteelWireSqlServerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\CriticalDictionary.cs">
-      <DependentUpon>SteelWireSqlLiteModel.tt</DependentUpon>
+      <DependentUpon>SteelWireSqlServerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\CriticalRecord.cs">
-      <DependentUpon>SteelWireSqlLiteModel.tt</DependentUpon>
+      <DependentUpon>SteelWireSqlServerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\CumulationConfig.cs">
-      <DependentUpon>SteelWireSqlLiteModel.tt</DependentUpon>
+      <DependentUpon>SteelWireSqlServerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\CumulationDictionary.cs">
-      <DependentUpon>SteelWireSqlLiteModel.tt</DependentUpon>
+      <DependentUpon>SteelWireSqlServerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\CumulationRecord.cs">
-      <DependentUpon>SteelWireSqlLiteModel.tt</DependentUpon>
+      <DependentUpon>SteelWireSqlServerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\CutRecord.cs">
-      <DependentUpon>SteelWireSqlLiteModel.tt</DependentUpon>
+      <DependentUpon>SteelWireSqlServerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\DatabaseType.cs" />
     <Compile Include="Database\DbContextFactory.cs" />
     <Compile Include="Database\DrillDeviceConfig.cs">
-      <DependentUpon>SteelWireSqlLiteModel.tt</DependentUpon>
+      <DependentUpon>SteelWireSqlServerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\DrillingType.cs">
-      <DependentUpon>SteelWireSqlLiteModel.tt</DependentUpon>
+      <DependentUpon>SteelWireSqlServerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\Machine.cs">
-      <DependentUpon>SteelWireSqlLiteModel.tt</DependentUpon>
+      <DependentUpon>SteelWireSqlServerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\SecurityUser.cs">
-      <DependentUpon>SteelWireSqlLiteModel.tt</DependentUpon>
+      <DependentUpon>SteelWireSqlServerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\SteelWireBaseContext.cs" />
     <Compile Include="Database\SteelWireSqlLiteModel.Context.cs">
@@ -127,18 +128,32 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SteelWireSqlLiteModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Database\SteelWireSqlServerModel.Context.cs" />
+    <Compile Include="Database\SteelWireSqlServerModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SteelWireSqlServerModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\SteelWireSqlServerModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SteelWireSqlServerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\SteelWireSqlServerModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SteelWireSqlServerModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Database\WirelineInfo.cs">
-      <DependentUpon>SteelWireSqlLiteModel.tt</DependentUpon>
+      <DependentUpon>SteelWireSqlServerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\WireropeCutRole.cs">
-      <DependentUpon>SteelWireSqlLiteModel.tt</DependentUpon>
+      <DependentUpon>SteelWireSqlServerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\WireropeEfficiency.cs">
-      <DependentUpon>SteelWireSqlLiteModel.tt</DependentUpon>
+      <DependentUpon>SteelWireSqlServerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\WireropeWorkload.cs">
-      <DependentUpon>SteelWireSqlLiteModel.tt</DependentUpon>
+      <DependentUpon>SteelWireSqlServerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DbOperator\CriticalOperator.cs" />
     <Compile Include="DbOperator\CutOperator.cs" />
@@ -157,6 +172,13 @@
     </EntityDeploy>
     <None Include="Database\SteelWireSqlLiteModel.edmx.diagram">
       <DependentUpon>SteelWireSqlLiteModel.edmx</DependentUpon>
+    </None>
+    <EntityDeploy Include="Database\SteelWireSqlServerModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SteelWireSqlServerModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Database\SteelWireSqlServerModel.edmx.diagram">
+      <DependentUpon>SteelWireSqlServerModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -179,6 +201,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SteelWireSqlLiteModel.edmx</DependentUpon>
       <LastGenOutput>SteelWireSqlLiteModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Database\SteelWireSqlServerModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SteelWireSqlServerModel.edmx</DependentUpon>
+      <LastGenOutput>SteelWireSqlServerModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Database\SteelWireSqlServerModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SteelWireSqlServerModel.edmx</DependentUpon>
+      <LastGenOutput>SteelWireSqlServerModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

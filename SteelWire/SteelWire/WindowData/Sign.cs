@@ -2,10 +2,10 @@
 using System.Collections.ObjectModel;
 using System.Security.Cryptography;
 using System.Text;
-using SteelWire.AppCode.Config;
 using SteelWire.AppCode.CustomException;
 using SteelWire.AppCode.Data;
 using SteelWire.AppCode.Dependencies;
+using SteelWire.Business.Config;
 using SteelWire.Business.Database;
 using SteelWire.Business.DbOperator;
 
@@ -156,7 +156,7 @@ namespace SteelWire.WindowData
         private void SetUserInfo(SecurityUser user)
         {
             GlobalData.UserId = user.ID;
-            GlobalData.SearchUserId = SystemConfigManager.OnceInstance.DataIsolation ? GlobalData.UserId : 0;
+            GlobalData.SearchUserId = DatabaseConfigManager.OnceInstance.DataIsolation ? GlobalData.UserId : 0;
             GlobalData.Account = user.Account;
             GlobalData.UserDisplay.Value = string.IsNullOrEmpty(user.Name) ? user.Account : user.Name;
         }

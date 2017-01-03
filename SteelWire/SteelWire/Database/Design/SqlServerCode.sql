@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      Microsoft SQL Server 2008                    */
-/* Created on:     2016/12/31 18:18:47                          */
+/* Created on:     2017/1/3 15:46:16                            */
 /*==============================================================*/
 
 
@@ -132,8 +132,8 @@ go
 
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('WireLineInfo') and o.name = 'FK_WIRELINEINFO_R_SECURITYUSER')
-alter table WireLineInfo
+   where r.fkeyid = object_id('WirelineInfo') and o.name = 'FK_WIRELINEINFO_R_SECURITYUSER')
+alter table WirelineInfo
    drop constraint FK_WIRELINEINFO_R_SECURITYUSER
 go
 
@@ -399,18 +399,18 @@ go
 
 if exists (select 1
             from  sysindexes
-           where  id    = object_id('WireLineInfo')
+           where  id    = object_id('WirelineInfo')
             and   name  = 'Relationship_18_FK'
             and   indid > 0
             and   indid < 255)
-   drop index WireLineInfo.Relationship_18_FK
+   drop index WirelineInfo.Relationship_18_FK
 go
 
 if exists (select 1
             from  sysobjects
-           where  id = object_id('WireLineInfo')
+           where  id = object_id('WirelineInfo')
             and   type = 'U')
-   drop table WireLineInfo
+   drop table WirelineInfo
 go
 
 if exists (select 1
@@ -521,8 +521,9 @@ go
 create table CriticalRecord (
    ID                   bigint               identity,
    CriticalConfigID     bigint               not null,
-   WireLineID           bigint               not null,
+   WirelineID           bigint               not null,
    CalculateUserID      bigint               not null,
+   WirelineDiameter     varchar(100)         not null,
    CriticalValue        decimal(18,8)        not null,
    CalculateTime        datetime             not null,
    constraint PK_CRITICALRECORD primary key (ID)
@@ -541,7 +542,7 @@ go
 /* Index: Relationship_6_FK                                     */
 /*==============================================================*/
 create index Relationship_6_FK on CriticalRecord (
-WireLineID ASC
+WirelineID ASC
 )
 go
 
@@ -667,11 +668,12 @@ go
 /*==============================================================*/
 create table CutRecord (
    ID                   bigint               identity,
-   WireLineID           bigint               not null,
+   WirelineID           bigint               not null,
    UpdateUserID         bigint               not null,
    CumulationValue      decimal(18,8)        not null,
    CutValue             decimal(18,8)        not null,
    RemainValue          decimal(18,8)        not null,
+   CutLength            decimal(18,8)        not null,
    UpdateTime           datetime             not null,
    constraint PK_CUTRECORD primary key (ID)
 )
@@ -681,7 +683,7 @@ go
 /* Index: Relationship_7_FK                                     */
 /*==============================================================*/
 create index Relationship_7_FK on CutRecord (
-WireLineID ASC
+WirelineID ASC
 )
 go
 
@@ -772,9 +774,9 @@ create table SecurityUser (
 go
 
 /*==============================================================*/
-/* Table: WireLineInfo                                          */
+/* Table: WirelineInfo                                          */
 /*==============================================================*/
-create table WireLineInfo (
+create table WirelineInfo (
    ID                   bigint               identity,
    UpdateUserID         bigint               not null,
    Number               varchar(100)         not null,
@@ -783,6 +785,7 @@ create table WireLineInfo (
    StrongLevel          varchar(100)         not null,
    TwistDirection       varchar(100)         not null,
    OrderLength          decimal(18,8)        not null,
+   UnitSystem           varchar(100)         not null,
    UpdateTime           datetime             not null,
    constraint PK_WIRELINEINFO primary key (ID)
 )
@@ -791,7 +794,7 @@ go
 /*==============================================================*/
 /* Index: Relationship_18_FK                                    */
 /*==============================================================*/
-create index Relationship_18_FK on WireLineInfo (
+create index Relationship_18_FK on WirelineInfo (
 UpdateUserID ASC
 )
 go
@@ -889,8 +892,8 @@ alter table CriticalRecord
 go
 
 alter table CriticalRecord
-   add constraint FK_CRITICALRECO_R_WIRELINEINFO foreign key (WireLineID)
-      references WireLineInfo (ID)
+   add constraint FK_CRITICALRECO_R_WIRELINEINFO foreign key (WirelineID)
+      references WirelineInfo (ID)
 go
 
 alter table CumulationConfig
@@ -934,8 +937,8 @@ alter table CutRecord
 go
 
 alter table CutRecord
-   add constraint FK_CUTRECORD_R_WIRELINEINFO foreign key (WireLineID)
-      references WireLineInfo (ID)
+   add constraint FK_CUTRECORD_R_WIRELINEINFO foreign key (WirelineID)
+      references WirelineInfo (ID)
 go
 
 alter table DrillDeviceConfig
@@ -953,7 +956,7 @@ alter table Machine
       references SecurityUser (ID)
 go
 
-alter table WireLineInfo
+alter table WirelineInfo
    add constraint FK_WIRELINEINFO_R_SECURITYUSER foreign key (UpdateUserID)
       references SecurityUser (ID)
 go

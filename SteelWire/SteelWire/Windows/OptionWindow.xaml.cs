@@ -151,8 +151,8 @@ namespace SteelWire.Windows
 
         private void OptionWindowClosing(object sender, CancelEventArgs e)
         {
-            GlobalData.Language.Value = SystemConfigManager.OnceInstance.Language;
-            GlobalData.Wireline.UnitSystem.Value = SystemConfigManager.OnceInstance.UnitSystem;
+            GlobalData.Language.Value = UserConfigManager.OnceInstance.Language;
+            GlobalData.Wireline.UnitSystem.Value = UserConfigManager.OnceInstance.UnitSystem;
         }
     }
 }

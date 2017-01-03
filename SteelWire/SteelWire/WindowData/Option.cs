@@ -7,9 +7,9 @@ namespace SteelWire.WindowData
     {
         public void Save()
         {
-            SystemConfigManager.OnceInstance.Language = GlobalData.Language.Value;
-            SystemConfigManager.OnceInstance.UnitSystem = GlobalData.Wireline.UnitSystem.Value;
-            SystemConfigManager.OnceInstance.SaveConfig();
+            UserConfigManager.OnceInstance.Language = GlobalData.Language.Value;
+            UserConfigManager.OnceInstance.UnitSystem = GlobalData.Wireline.UnitSystem.Value;
+            UserConfigManager.OnceInstance.SaveConfig();
         }
     }
 }

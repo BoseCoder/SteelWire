@@ -1,0 +1,1391 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SteelWireSqlServerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CriticalConfig">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DictionaryID" Type="bigint" Nullable="false" />
+          <Property Name="ConfigUserID" Type="bigint" Nullable="false" />
+          <Property Name="DerrickHeight" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="WirelineMaxPower" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="RotaryHookWorkload" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="RollerDiameter" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="RopeCount" Type="bigint" Nullable="false" />
+          <Property Name="ConfigTime" Type="datetime" Nullable="false" />
+          <Property Name="ConfigTimeStamp" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CriticalDictionary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConfigUserID" Type="bigint" Nullable="false" />
+          <Property Name="ConfigTime" Type="datetime" Nullable="false" />
+          <Property Name="ConfigTimeStamp" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CriticalRecord">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CriticalConfigID" Type="bigint" Nullable="false" />
+          <Property Name="WirelineID" Type="bigint" Nullable="false" />
+          <Property Name="CalculateUserID" Type="bigint" Nullable="false" />
+          <Property Name="WirelineDiameter" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CriticalValue" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="CalculateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CumulationConfig">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DictionaryID" Type="bigint" Nullable="false" />
+          <Property Name="ConfigUserID" Type="bigint" Nullable="false" />
+          <Property Name="RealRotaryHookWorkload" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="FluidDensity" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="ElevatorWeight" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="DrillingShallowHeight" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="DrillingDeepHeight" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="DrillingType" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="RedressingCount" Type="bigint" Nullable="false" />
+          <Property Name="TripShallowHeight" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="TripDeepHeight" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="TripCount" Type="bigint" Nullable="false" />
+          <Property Name="BushingHeight" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="CoringShallowHeight" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="CoringDeepHeight" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="ConfigTime" Type="datetime" Nullable="false" />
+          <Property Name="ConfigTimeStamp" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CumulationDictionary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConfigUserID" Type="bigint" Nullable="false" />
+          <Property Name="ConfigTime" Type="datetime" Nullable="false" />
+          <Property Name="ConfigTimeStamp" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CumulationRecord">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CutRecordID" Type="bigint" Nullable="false" />
+          <Property Name="CriticalConfigID" Type="bigint" Nullable="false" />
+          <Property Name="CumulationConfigID" Type="bigint" Nullable="false" />
+          <Property Name="CalculateUserID" Type="bigint" Nullable="false" />
+          <Property Name="CumulationValue" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="CalculateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CutRecord">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WirelineID" Type="bigint" Nullable="false" />
+          <Property Name="UpdateUserID" Type="bigint" Nullable="false" />
+          <Property Name="CumulationValue" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="CutValue" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="RemainValue" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="CutLength" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DrillDeviceConfig">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CumulationConfigID" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Weight" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="Length" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DrillingType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DictionaryID" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Coefficient" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Machine">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegistrationUserID" Type="bigint" Nullable="false" />
+          <Property Name="MachineCode" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="RegistrationTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SecurityUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Account" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Checked" Type="bit" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="RegistrationTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WirelineInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UpdateUserID" Type="bigint" Nullable="false" />
+          <Property Name="Number" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Diameter" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Struct" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="StrongLevel" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TwistDirection" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="OrderLength" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="UnitSystem" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WireropeCutRole">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DictionaryID" Type="bigint" Nullable="false" />
+          <Property Name="Key" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="MinDerrickHeight" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="MaxDerrickHeight" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="MinCutLength" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="MaxCutLength" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WireropeEfficiency">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DictionaryID" Type="bigint" Nullable="false" />
+          <Property Name="RopeCount" Type="bigint" Nullable="false" />
+          <Property Name="SlidingValue" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="RollingValue" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WireropeWorkload">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DictionaryID" Type="bigint" Nullable="false" />
+          <Property Name="Key" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="UnitSystem" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Diameter" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="Workload" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CRITICALCONF_R_CRITICALDICT">
+          <End Role="CriticalDictionary" Type="Self.CriticalDictionary" Multiplicity="1" />
+          <End Role="CriticalConfig" Type="Self.CriticalConfig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CriticalDictionary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CriticalConfig">
+              <PropertyRef Name="DictionaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRITICALCONF_R_SECURITYUSER">
+          <End Role="SecurityUser" Type="Self.SecurityUser" Multiplicity="1" />
+          <End Role="CriticalConfig" Type="Self.CriticalConfig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CriticalConfig">
+              <PropertyRef Name="ConfigUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRITICALDICT_R_SECURITYUSER">
+          <End Role="SecurityUser" Type="Self.SecurityUser" Multiplicity="1" />
+          <End Role="CriticalDictionary" Type="Self.CriticalDictionary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CriticalDictionary">
+              <PropertyRef Name="ConfigUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRITICALRECO_R_CRITICALCONF">
+          <End Role="CriticalConfig" Type="Self.CriticalConfig" Multiplicity="1" />
+          <End Role="CriticalRecord" Type="Self.CriticalRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CriticalConfig">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CriticalRecord">
+              <PropertyRef Name="CriticalConfigID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRITICALRECO_R_SECURITYUSER">
+          <End Role="SecurityUser" Type="Self.SecurityUser" Multiplicity="1" />
+          <End Role="CriticalRecord" Type="Self.CriticalRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CriticalRecord">
+              <PropertyRef Name="CalculateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRITICALRECO_R_WIRELINEINFO">
+          <End Role="WirelineInfo" Type="Self.WirelineInfo" Multiplicity="1" />
+          <End Role="CriticalRecord" Type="Self.CriticalRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WirelineInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CriticalRecord">
+              <PropertyRef Name="WirelineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUMULATIONCO_R_CUMULATIONDI">
+          <End Role="CumulationDictionary" Type="Self.CumulationDictionary" Multiplicity="1" />
+          <End Role="CumulationConfig" Type="Self.CumulationConfig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CumulationDictionary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CumulationConfig">
+              <PropertyRef Name="DictionaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUMULATIONCO_R_SECURITYUSER">
+          <End Role="SecurityUser" Type="Self.SecurityUser" Multiplicity="1" />
+          <End Role="CumulationConfig" Type="Self.CumulationConfig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CumulationConfig">
+              <PropertyRef Name="ConfigUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUMULATIONDI_R_SECURITYUSER">
+          <End Role="SecurityUser" Type="Self.SecurityUser" Multiplicity="1" />
+          <End Role="CumulationDictionary" Type="Self.CumulationDictionary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CumulationDictionary">
+              <PropertyRef Name="ConfigUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUMULATIONRE_R_CRITICALCONF">
+          <End Role="CriticalConfig" Type="Self.CriticalConfig" Multiplicity="1" />
+          <End Role="CumulationRecord" Type="Self.CumulationRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CriticalConfig">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CumulationRecord">
+              <PropertyRef Name="CriticalConfigID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUMULATIONRE_R_CUMULATIONCO">
+          <End Role="CumulationConfig" Type="Self.CumulationConfig" Multiplicity="1" />
+          <End Role="CumulationRecord" Type="Self.CumulationRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CumulationConfig">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CumulationRecord">
+              <PropertyRef Name="CumulationConfigID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUMULATIONRE_R_CUTRECORD">
+          <End Role="CutRecord" Type="Self.CutRecord" Multiplicity="1" />
+          <End Role="CumulationRecord" Type="Self.CumulationRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CutRecord">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CumulationRecord">
+              <PropertyRef Name="CutRecordID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUMULATIONRE_R_SECURITYUSER">
+          <End Role="SecurityUser" Type="Self.SecurityUser" Multiplicity="1" />
+          <End Role="CumulationRecord" Type="Self.CumulationRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CumulationRecord">
+              <PropertyRef Name="CalculateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUTRECORD_R_SECURITYUSER">
+          <End Role="SecurityUser" Type="Self.SecurityUser" Multiplicity="1" />
+          <End Role="CutRecord" Type="Self.CutRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CutRecord">
+              <PropertyRef Name="UpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUTRECORD_R_WIRELINEINFO">
+          <End Role="WirelineInfo" Type="Self.WirelineInfo" Multiplicity="1" />
+          <End Role="CutRecord" Type="Self.CutRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WirelineInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CutRecord">
+              <PropertyRef Name="WirelineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DRILLDEVICEC_R_CUMULATIONCO">
+          <End Role="CumulationConfig" Type="Self.CumulationConfig" Multiplicity="1" />
+          <End Role="DrillDeviceConfig" Type="Self.DrillDeviceConfig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CumulationConfig">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DrillDeviceConfig">
+              <PropertyRef Name="CumulationConfigID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DRILLINGTYPE_R_CUMULATIONDI">
+          <End Role="CumulationDictionary" Type="Self.CumulationDictionary" Multiplicity="1" />
+          <End Role="DrillingType" Type="Self.DrillingType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CumulationDictionary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DrillingType">
+              <PropertyRef Name="DictionaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MACHINE_R_SECURITYUSER">
+          <End Role="SecurityUser" Type="Self.SecurityUser" Multiplicity="1" />
+          <End Role="Machine" Type="Self.Machine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Machine">
+              <PropertyRef Name="RegistrationUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WIRELINEINFO_R_SECURITYUSER">
+          <End Role="SecurityUser" Type="Self.SecurityUser" Multiplicity="1" />
+          <End Role="WirelineInfo" Type="Self.WirelineInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WirelineInfo">
+              <PropertyRef Name="UpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WIREROPECUTR_R_CRITICALDICT">
+          <End Role="CriticalDictionary" Type="Self.CriticalDictionary" Multiplicity="1" />
+          <End Role="WireropeCutRole" Type="Self.WireropeCutRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CriticalDictionary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WireropeCutRole">
+              <PropertyRef Name="DictionaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WIREROPEEFFI_R_CRITICALDICT">
+          <End Role="CriticalDictionary" Type="Self.CriticalDictionary" Multiplicity="1" />
+          <End Role="WireropeEfficiency" Type="Self.WireropeEfficiency" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CriticalDictionary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WireropeEfficiency">
+              <PropertyRef Name="DictionaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WIREROPEWORK_R_CRITICALDICT">
+          <End Role="CriticalDictionary" Type="Self.CriticalDictionary" Multiplicity="1" />
+          <End Role="WireropeWorkload" Type="Self.WireropeWorkload" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CriticalDictionary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WireropeWorkload">
+              <PropertyRef Name="DictionaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SteelWireSqlServerModelStoreContainer">
+          <EntitySet Name="CriticalConfig" EntityType="Self.CriticalConfig" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CriticalDictionary" EntityType="Self.CriticalDictionary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CriticalRecord" EntityType="Self.CriticalRecord" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CumulationConfig" EntityType="Self.CumulationConfig" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CumulationDictionary" EntityType="Self.CumulationDictionary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CumulationRecord" EntityType="Self.CumulationRecord" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CutRecord" EntityType="Self.CutRecord" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DrillDeviceConfig" EntityType="Self.DrillDeviceConfig" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DrillingType" EntityType="Self.DrillingType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Machine" EntityType="Self.Machine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SecurityUser" EntityType="Self.SecurityUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WirelineInfo" EntityType="Self.WirelineInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WireropeCutRole" EntityType="Self.WireropeCutRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WireropeEfficiency" EntityType="Self.WireropeEfficiency" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WireropeWorkload" EntityType="Self.WireropeWorkload" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CRITICALCONF_R_CRITICALDICT" Association="Self.FK_CRITICALCONF_R_CRITICALDICT">
+            <End Role="CriticalDictionary" EntitySet="CriticalDictionary" />
+            <End Role="CriticalConfig" EntitySet="CriticalConfig" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRITICALCONF_R_SECURITYUSER" Association="Self.FK_CRITICALCONF_R_SECURITYUSER">
+            <End Role="SecurityUser" EntitySet="SecurityUser" />
+            <End Role="CriticalConfig" EntitySet="CriticalConfig" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRITICALDICT_R_SECURITYUSER" Association="Self.FK_CRITICALDICT_R_SECURITYUSER">
+            <End Role="SecurityUser" EntitySet="SecurityUser" />
+            <End Role="CriticalDictionary" EntitySet="CriticalDictionary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRITICALRECO_R_CRITICALCONF" Association="Self.FK_CRITICALRECO_R_CRITICALCONF">
+            <End Role="CriticalConfig" EntitySet="CriticalConfig" />
+            <End Role="CriticalRecord" EntitySet="CriticalRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRITICALRECO_R_SECURITYUSER" Association="Self.FK_CRITICALRECO_R_SECURITYUSER">
+            <End Role="SecurityUser" EntitySet="SecurityUser" />
+            <End Role="CriticalRecord" EntitySet="CriticalRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRITICALRECO_R_WIRELINEINFO" Association="Self.FK_CRITICALRECO_R_WIRELINEINFO">
+            <End Role="WirelineInfo" EntitySet="WirelineInfo" />
+            <End Role="CriticalRecord" EntitySet="CriticalRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUMULATIONCO_R_CUMULATIONDI" Association="Self.FK_CUMULATIONCO_R_CUMULATIONDI">
+            <End Role="CumulationDictionary" EntitySet="CumulationDictionary" />
+            <End Role="CumulationConfig" EntitySet="CumulationConfig" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUMULATIONCO_R_SECURITYUSER" Association="Self.FK_CUMULATIONCO_R_SECURITYUSER">
+            <End Role="SecurityUser" EntitySet="SecurityUser" />
+            <End Role="CumulationConfig" EntitySet="CumulationConfig" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUMULATIONDI_R_SECURITYUSER" Association="Self.FK_CUMULATIONDI_R_SECURITYUSER">
+            <End Role="SecurityUser" EntitySet="SecurityUser" />
+            <End Role="CumulationDictionary" EntitySet="CumulationDictionary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUMULATIONRE_R_CRITICALCONF" Association="Self.FK_CUMULATIONRE_R_CRITICALCONF">
+            <End Role="CriticalConfig" EntitySet="CriticalConfig" />
+            <End Role="CumulationRecord" EntitySet="CumulationRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUMULATIONRE_R_CUMULATIONCO" Association="Self.FK_CUMULATIONRE_R_CUMULATIONCO">
+            <End Role="CumulationConfig" EntitySet="CumulationConfig" />
+            <End Role="CumulationRecord" EntitySet="CumulationRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUMULATIONRE_R_CUTRECORD" Association="Self.FK_CUMULATIONRE_R_CUTRECORD">
+            <End Role="CutRecord" EntitySet="CutRecord" />
+            <End Role="CumulationRecord" EntitySet="CumulationRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUMULATIONRE_R_SECURITYUSER" Association="Self.FK_CUMULATIONRE_R_SECURITYUSER">
+            <End Role="SecurityUser" EntitySet="SecurityUser" />
+            <End Role="CumulationRecord" EntitySet="CumulationRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUTRECORD_R_SECURITYUSER" Association="Self.FK_CUTRECORD_R_SECURITYUSER">
+            <End Role="SecurityUser" EntitySet="SecurityUser" />
+            <End Role="CutRecord" EntitySet="CutRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUTRECORD_R_WIRELINEINFO" Association="Self.FK_CUTRECORD_R_WIRELINEINFO">
+            <End Role="WirelineInfo" EntitySet="WirelineInfo" />
+            <End Role="CutRecord" EntitySet="CutRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DRILLDEVICEC_R_CUMULATIONCO" Association="Self.FK_DRILLDEVICEC_R_CUMULATIONCO">
+            <End Role="CumulationConfig" EntitySet="CumulationConfig" />
+            <End Role="DrillDeviceConfig" EntitySet="DrillDeviceConfig" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DRILLINGTYPE_R_CUMULATIONDI" Association="Self.FK_DRILLINGTYPE_R_CUMULATIONDI">
+            <End Role="CumulationDictionary" EntitySet="CumulationDictionary" />
+            <End Role="DrillingType" EntitySet="DrillingType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MACHINE_R_SECURITYUSER" Association="Self.FK_MACHINE_R_SECURITYUSER">
+            <End Role="SecurityUser" EntitySet="SecurityUser" />
+            <End Role="Machine" EntitySet="Machine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WIRELINEINFO_R_SECURITYUSER" Association="Self.FK_WIRELINEINFO_R_SECURITYUSER">
+            <End Role="SecurityUser" EntitySet="SecurityUser" />
+            <End Role="WirelineInfo" EntitySet="WirelineInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WIREROPECUTR_R_CRITICALDICT" Association="Self.FK_WIREROPECUTR_R_CRITICALDICT">
+            <End Role="CriticalDictionary" EntitySet="CriticalDictionary" />
+            <End Role="WireropeCutRole" EntitySet="WireropeCutRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WIREROPEEFFI_R_CRITICALDICT" Association="Self.FK_WIREROPEEFFI_R_CRITICALDICT">
+            <End Role="CriticalDictionary" EntitySet="CriticalDictionary" />
+            <End Role="WireropeEfficiency" EntitySet="WireropeEfficiency" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WIREROPEWORK_R_CRITICALDICT" Association="Self.FK_WIREROPEWORK_R_CRITICALDICT">
+            <End Role="CriticalDictionary" EntitySet="CriticalDictionary" />
+            <End Role="WireropeWorkload" EntitySet="WireropeWorkload" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SteelWireSqlServerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CriticalConfig">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DictionaryID" Type="Int64" Nullable="false" />
+          <Property Name="ConfigUserID" Type="Int64" Nullable="false" />
+          <Property Name="DerrickHeight" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="WirelineMaxPower" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="RotaryHookWorkload" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="RollerDiameter" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="RopeCount" Type="Int64" Nullable="false" />
+          <Property Name="ConfigTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ConfigTimeStamp" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="CriticalDictionary" Relationship="Self.FK_CRITICALCONF_R_CRITICALDICT" FromRole="CriticalConfig" ToRole="CriticalDictionary" />
+          <NavigationProperty Name="SecurityUser" Relationship="Self.FK_CRITICALCONF_R_SECURITYUSER" FromRole="CriticalConfig" ToRole="SecurityUser" />
+          <NavigationProperty Name="CriticalRecord" Relationship="Self.FK_CRITICALRECO_R_CRITICALCONF" FromRole="CriticalConfig" ToRole="CriticalRecord" />
+          <NavigationProperty Name="CumulationRecord" Relationship="Self.FK_CUMULATIONRE_R_CRITICALCONF" FromRole="CriticalConfig" ToRole="CumulationRecord" />
+        </EntityType>
+        <EntityType Name="CriticalDictionary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConfigUserID" Type="Int64" Nullable="false" />
+          <Property Name="ConfigTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ConfigTimeStamp" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="CriticalConfig" Relationship="Self.FK_CRITICALCONF_R_CRITICALDICT" FromRole="CriticalDictionary" ToRole="CriticalConfig" />
+          <NavigationProperty Name="SecurityUser" Relationship="Self.FK_CRITICALDICT_R_SECURITYUSER" FromRole="CriticalDictionary" ToRole="SecurityUser" />
+          <NavigationProperty Name="WireropeCutRole" Relationship="Self.FK_WIREROPECUTR_R_CRITICALDICT" FromRole="CriticalDictionary" ToRole="WireropeCutRole" />
+          <NavigationProperty Name="WireropeEfficiency" Relationship="Self.FK_WIREROPEEFFI_R_CRITICALDICT" FromRole="CriticalDictionary" ToRole="WireropeEfficiency" />
+          <NavigationProperty Name="WireropeWorkload" Relationship="Self.FK_WIREROPEWORK_R_CRITICALDICT" FromRole="CriticalDictionary" ToRole="WireropeWorkload" />
+        </EntityType>
+        <EntityType Name="CriticalRecord">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CriticalConfigID" Type="Int64" Nullable="false" />
+          <Property Name="WirelineID" Type="Int64" Nullable="false" />
+          <Property Name="CalculateUserID" Type="Int64" Nullable="false" />
+          <Property Name="WirelineDiameter" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CriticalValue" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="CalculateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CriticalConfig" Relationship="Self.FK_CRITICALRECO_R_CRITICALCONF" FromRole="CriticalRecord" ToRole="CriticalConfig" />
+          <NavigationProperty Name="SecurityUser" Relationship="Self.FK_CRITICALRECO_R_SECURITYUSER" FromRole="CriticalRecord" ToRole="SecurityUser" />
+          <NavigationProperty Name="WirelineInfo" Relationship="Self.FK_CRITICALRECO_R_WIRELINEINFO" FromRole="CriticalRecord" ToRole="WirelineInfo" />
+        </EntityType>
+        <EntityType Name="CumulationConfig">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DictionaryID" Type="Int64" Nullable="false" />
+          <Property Name="ConfigUserID" Type="Int64" Nullable="false" />
+          <Property Name="RealRotaryHookWorkload" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="FluidDensity" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="ElevatorWeight" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="DrillingShallowHeight" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="DrillingDeepHeight" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="DrillingType" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RedressingCount" Type="Int64" Nullable="false" />
+          <Property Name="TripShallowHeight" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="TripDeepHeight" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="TripCount" Type="Int64" Nullable="false" />
+          <Property Name="BushingHeight" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="CoringShallowHeight" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="CoringDeepHeight" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="ConfigTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ConfigTimeStamp" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="CumulationDictionary" Relationship="Self.FK_CUMULATIONCO_R_CUMULATIONDI" FromRole="CumulationConfig" ToRole="CumulationDictionary" />
+          <NavigationProperty Name="SecurityUser" Relationship="Self.FK_CUMULATIONCO_R_SECURITYUSER" FromRole="CumulationConfig" ToRole="SecurityUser" />
+          <NavigationProperty Name="CumulationRecord" Relationship="Self.FK_CUMULATIONRE_R_CUMULATIONCO" FromRole="CumulationConfig" ToRole="CumulationRecord" />
+          <NavigationProperty Name="DrillDeviceConfig" Relationship="Self.FK_DRILLDEVICEC_R_CUMULATIONCO" FromRole="CumulationConfig" ToRole="DrillDeviceConfig" />
+        </EntityType>
+        <EntityType Name="CumulationDictionary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConfigUserID" Type="Int64" Nullable="false" />
+          <Property Name="ConfigTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ConfigTimeStamp" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="CumulationConfig" Relationship="Self.FK_CUMULATIONCO_R_CUMULATIONDI" FromRole="CumulationDictionary" ToRole="CumulationConfig" />
+          <NavigationProperty Name="SecurityUser" Relationship="Self.FK_CUMULATIONDI_R_SECURITYUSER" FromRole="CumulationDictionary" ToRole="SecurityUser" />
+          <NavigationProperty Name="DrillingType" Relationship="Self.FK_DRILLINGTYPE_R_CUMULATIONDI" FromRole="CumulationDictionary" ToRole="DrillingType" />
+        </EntityType>
+        <EntityType Name="CumulationRecord">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CutRecordID" Type="Int64" Nullable="false" />
+          <Property Name="CriticalConfigID" Type="Int64" Nullable="false" />
+          <Property Name="CumulationConfigID" Type="Int64" Nullable="false" />
+          <Property Name="CalculateUserID" Type="Int64" Nullable="false" />
+          <Property Name="CumulationValue" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="CalculateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CriticalConfig" Relationship="Self.FK_CUMULATIONRE_R_CRITICALCONF" FromRole="CumulationRecord" ToRole="CriticalConfig" />
+          <NavigationProperty Name="CumulationConfig" Relationship="Self.FK_CUMULATIONRE_R_CUMULATIONCO" FromRole="CumulationRecord" ToRole="CumulationConfig" />
+          <NavigationProperty Name="CutRecord" Relationship="Self.FK_CUMULATIONRE_R_CUTRECORD" FromRole="CumulationRecord" ToRole="CutRecord" />
+          <NavigationProperty Name="SecurityUser" Relationship="Self.FK_CUMULATIONRE_R_SECURITYUSER" FromRole="CumulationRecord" ToRole="SecurityUser" />
+        </EntityType>
+        <EntityType Name="CutRecord">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WirelineID" Type="Int64" Nullable="false" />
+          <Property Name="UpdateUserID" Type="Int64" Nullable="false" />
+          <Property Name="CumulationValue" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="CutValue" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="RemainValue" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="CutLength" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CumulationRecord" Relationship="Self.FK_CUMULATIONRE_R_CUTRECORD" FromRole="CutRecord" ToRole="CumulationRecord" />
+          <NavigationProperty Name="SecurityUser" Relationship="Self.FK_CUTRECORD_R_SECURITYUSER" FromRole="CutRecord" ToRole="SecurityUser" />
+          <NavigationProperty Name="WirelineInfo" Relationship="Self.FK_CUTRECORD_R_WIRELINEINFO" FromRole="CutRecord" ToRole="WirelineInfo" />
+        </EntityType>
+        <EntityType Name="DrillDeviceConfig">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CumulationConfigID" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Weight" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="Length" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <NavigationProperty Name="CumulationConfig" Relationship="Self.FK_DRILLDEVICEC_R_CUMULATIONCO" FromRole="DrillDeviceConfig" ToRole="CumulationConfig" />
+        </EntityType>
+        <EntityType Name="DrillingType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DictionaryID" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Coefficient" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <NavigationProperty Name="CumulationDictionary" Relationship="Self.FK_DRILLINGTYPE_R_CUMULATIONDI" FromRole="DrillingType" ToRole="CumulationDictionary" />
+        </EntityType>
+        <EntityType Name="Machine">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegistrationUserID" Type="Int64" Nullable="false" />
+          <Property Name="MachineCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RegistrationTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SecurityUser" Relationship="Self.FK_MACHINE_R_SECURITYUSER" FromRole="Machine" ToRole="SecurityUser" />
+        </EntityType>
+        <EntityType Name="SecurityUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Account" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Checked" Type="Boolean" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="RegistrationTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CriticalConfig" Relationship="Self.FK_CRITICALCONF_R_SECURITYUSER" FromRole="SecurityUser" ToRole="CriticalConfig" />
+          <NavigationProperty Name="CriticalDictionary" Relationship="Self.FK_CRITICALDICT_R_SECURITYUSER" FromRole="SecurityUser" ToRole="CriticalDictionary" />
+          <NavigationProperty Name="CriticalRecord" Relationship="Self.FK_CRITICALRECO_R_SECURITYUSER" FromRole="SecurityUser" ToRole="CriticalRecord" />
+          <NavigationProperty Name="CumulationConfig" Relationship="Self.FK_CUMULATIONCO_R_SECURITYUSER" FromRole="SecurityUser" ToRole="CumulationConfig" />
+          <NavigationProperty Name="CumulationDictionary" Relationship="Self.FK_CUMULATIONDI_R_SECURITYUSER" FromRole="SecurityUser" ToRole="CumulationDictionary" />
+          <NavigationProperty Name="CumulationRecord" Relationship="Self.FK_CUMULATIONRE_R_SECURITYUSER" FromRole="SecurityUser" ToRole="CumulationRecord" />
+          <NavigationProperty Name="CutRecord" Relationship="Self.FK_CUTRECORD_R_SECURITYUSER" FromRole="SecurityUser" ToRole="CutRecord" />
+          <NavigationProperty Name="Machine" Relationship="Self.FK_MACHINE_R_SECURITYUSER" FromRole="SecurityUser" ToRole="Machine" />
+          <NavigationProperty Name="WirelineInfo" Relationship="Self.FK_WIRELINEINFO_R_SECURITYUSER" FromRole="SecurityUser" ToRole="WirelineInfo" />
+        </EntityType>
+        <EntityType Name="WirelineInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UpdateUserID" Type="Int64" Nullable="false" />
+          <Property Name="Number" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Diameter" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Struct" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StrongLevel" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TwistDirection" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OrderLength" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="UnitSystem" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CriticalRecord" Relationship="Self.FK_CRITICALRECO_R_WIRELINEINFO" FromRole="WirelineInfo" ToRole="CriticalRecord" />
+          <NavigationProperty Name="CutRecord" Relationship="Self.FK_CUTRECORD_R_WIRELINEINFO" FromRole="WirelineInfo" ToRole="CutRecord" />
+          <NavigationProperty Name="SecurityUser" Relationship="Self.FK_WIRELINEINFO_R_SECURITYUSER" FromRole="WirelineInfo" ToRole="SecurityUser" />
+        </EntityType>
+        <EntityType Name="WireropeCutRole">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DictionaryID" Type="Int64" Nullable="false" />
+          <Property Name="Key" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MinDerrickHeight" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="MaxDerrickHeight" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="MinCutLength" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="MaxCutLength" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <NavigationProperty Name="CriticalDictionary" Relationship="Self.FK_WIREROPECUTR_R_CRITICALDICT" FromRole="WireropeCutRole" ToRole="CriticalDictionary" />
+        </EntityType>
+        <EntityType Name="WireropeEfficiency">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DictionaryID" Type="Int64" Nullable="false" />
+          <Property Name="RopeCount" Type="Int64" Nullable="false" />
+          <Property Name="SlidingValue" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="RollingValue" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <NavigationProperty Name="CriticalDictionary" Relationship="Self.FK_WIREROPEEFFI_R_CRITICALDICT" FromRole="WireropeEfficiency" ToRole="CriticalDictionary" />
+        </EntityType>
+        <EntityType Name="WireropeWorkload">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DictionaryID" Type="Int64" Nullable="false" />
+          <Property Name="Key" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UnitSystem" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Diameter" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="Workload" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <NavigationProperty Name="CriticalDictionary" Relationship="Self.FK_WIREROPEWORK_R_CRITICALDICT" FromRole="WireropeWorkload" ToRole="CriticalDictionary" />
+        </EntityType>
+        <Association Name="FK_CRITICALCONF_R_CRITICALDICT">
+          <End Role="CriticalDictionary" Type="Self.CriticalDictionary" Multiplicity="1" />
+          <End Role="CriticalConfig" Type="Self.CriticalConfig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CriticalDictionary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CriticalConfig">
+              <PropertyRef Name="DictionaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRITICALCONF_R_SECURITYUSER">
+          <End Role="SecurityUser" Type="Self.SecurityUser" Multiplicity="1" />
+          <End Role="CriticalConfig" Type="Self.CriticalConfig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CriticalConfig">
+              <PropertyRef Name="ConfigUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRITICALRECO_R_CRITICALCONF">
+          <End Role="CriticalConfig" Type="Self.CriticalConfig" Multiplicity="1" />
+          <End Role="CriticalRecord" Type="Self.CriticalRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CriticalConfig">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CriticalRecord">
+              <PropertyRef Name="CriticalConfigID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUMULATIONRE_R_CRITICALCONF">
+          <End Role="CriticalConfig" Type="Self.CriticalConfig" Multiplicity="1" />
+          <End Role="CumulationRecord" Type="Self.CumulationRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CriticalConfig">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CumulationRecord">
+              <PropertyRef Name="CriticalConfigID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRITICALDICT_R_SECURITYUSER">
+          <End Role="SecurityUser" Type="Self.SecurityUser" Multiplicity="1" />
+          <End Role="CriticalDictionary" Type="Self.CriticalDictionary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CriticalDictionary">
+              <PropertyRef Name="ConfigUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WIREROPECUTR_R_CRITICALDICT">
+          <End Role="CriticalDictionary" Type="Self.CriticalDictionary" Multiplicity="1" />
+          <End Role="WireropeCutRole" Type="Self.WireropeCutRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CriticalDictionary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WireropeCutRole">
+              <PropertyRef Name="DictionaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WIREROPEEFFI_R_CRITICALDICT">
+          <End Role="CriticalDictionary" Type="Self.CriticalDictionary" Multiplicity="1" />
+          <End Role="WireropeEfficiency" Type="Self.WireropeEfficiency" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CriticalDictionary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WireropeEfficiency">
+              <PropertyRef Name="DictionaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WIREROPEWORK_R_CRITICALDICT">
+          <End Role="CriticalDictionary" Type="Self.CriticalDictionary" Multiplicity="1" />
+          <End Role="WireropeWorkload" Type="Self.WireropeWorkload" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CriticalDictionary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WireropeWorkload">
+              <PropertyRef Name="DictionaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRITICALRECO_R_SECURITYUSER">
+          <End Role="SecurityUser" Type="Self.SecurityUser" Multiplicity="1" />
+          <End Role="CriticalRecord" Type="Self.CriticalRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CriticalRecord">
+              <PropertyRef Name="CalculateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRITICALRECO_R_WIRELINEINFO">
+          <End Role="WirelineInfo" Type="Self.WirelineInfo" Multiplicity="1" />
+          <End Role="CriticalRecord" Type="Self.CriticalRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WirelineInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CriticalRecord">
+              <PropertyRef Name="WirelineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUMULATIONCO_R_CUMULATIONDI">
+          <End Role="CumulationDictionary" Type="Self.CumulationDictionary" Multiplicity="1" />
+          <End Role="CumulationConfig" Type="Self.CumulationConfig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CumulationDictionary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CumulationConfig">
+              <PropertyRef Name="DictionaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUMULATIONCO_R_SECURITYUSER">
+          <End Role="SecurityUser" Type="Self.SecurityUser" Multiplicity="1" />
+          <End Role="CumulationConfig" Type="Self.CumulationConfig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CumulationConfig">
+              <PropertyRef Name="ConfigUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUMULATIONRE_R_CUMULATIONCO">
+          <End Role="CumulationConfig" Type="Self.CumulationConfig" Multiplicity="1" />
+          <End Role="CumulationRecord" Type="Self.CumulationRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CumulationConfig">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CumulationRecord">
+              <PropertyRef Name="CumulationConfigID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DRILLDEVICEC_R_CUMULATIONCO">
+          <End Role="CumulationConfig" Type="Self.CumulationConfig" Multiplicity="1" />
+          <End Role="DrillDeviceConfig" Type="Self.DrillDeviceConfig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CumulationConfig">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DrillDeviceConfig">
+              <PropertyRef Name="CumulationConfigID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUMULATIONDI_R_SECURITYUSER">
+          <End Role="SecurityUser" Type="Self.SecurityUser" Multiplicity="1" />
+          <End Role="CumulationDictionary" Type="Self.CumulationDictionary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CumulationDictionary">
+              <PropertyRef Name="ConfigUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DRILLINGTYPE_R_CUMULATIONDI">
+          <End Role="CumulationDictionary" Type="Self.CumulationDictionary" Multiplicity="1" />
+          <End Role="DrillingType" Type="Self.DrillingType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CumulationDictionary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DrillingType">
+              <PropertyRef Name="DictionaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUMULATIONRE_R_CUTRECORD">
+          <End Role="CutRecord" Type="Self.CutRecord" Multiplicity="1" />
+          <End Role="CumulationRecord" Type="Self.CumulationRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CutRecord">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CumulationRecord">
+              <PropertyRef Name="CutRecordID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUMULATIONRE_R_SECURITYUSER">
+          <End Role="SecurityUser" Type="Self.SecurityUser" Multiplicity="1" />
+          <End Role="CumulationRecord" Type="Self.CumulationRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CumulationRecord">
+              <PropertyRef Name="CalculateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUTRECORD_R_SECURITYUSER">
+          <End Role="SecurityUser" Type="Self.SecurityUser" Multiplicity="1" />
+          <End Role="CutRecord" Type="Self.CutRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CutRecord">
+              <PropertyRef Name="UpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUTRECORD_R_WIRELINEINFO">
+          <End Role="WirelineInfo" Type="Self.WirelineInfo" Multiplicity="1" />
+          <End Role="CutRecord" Type="Self.CutRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WirelineInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CutRecord">
+              <PropertyRef Name="WirelineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MACHINE_R_SECURITYUSER">
+          <End Role="SecurityUser" Type="Self.SecurityUser" Multiplicity="1" />
+          <End Role="Machine" Type="Self.Machine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Machine">
+              <PropertyRef Name="RegistrationUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WIRELINEINFO_R_SECURITYUSER">
+          <End Role="SecurityUser" Type="Self.SecurityUser" Multiplicity="1" />
+          <End Role="WirelineInfo" Type="Self.WirelineInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WirelineInfo">
+              <PropertyRef Name="UpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SteelWireSqlServerContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CriticalConfig" EntityType="Self.CriticalConfig" />
+          <EntitySet Name="CriticalDictionary" EntityType="Self.CriticalDictionary" />
+          <EntitySet Name="CriticalRecord" EntityType="Self.CriticalRecord" />
+          <EntitySet Name="CumulationConfig" EntityType="Self.CumulationConfig" />
+          <EntitySet Name="CumulationDictionary" EntityType="Self.CumulationDictionary" />
+          <EntitySet Name="CumulationRecord" EntityType="Self.CumulationRecord" />
+          <EntitySet Name="CutRecord" EntityType="Self.CutRecord" />
+          <EntitySet Name="DrillDeviceConfig" EntityType="Self.DrillDeviceConfig" />
+          <EntitySet Name="DrillingType" EntityType="Self.DrillingType" />
+          <EntitySet Name="Machine" EntityType="Self.Machine" />
+          <EntitySet Name="SecurityUser" EntityType="Self.SecurityUser" />
+          <EntitySet Name="WirelineInfo" EntityType="Self.WirelineInfo" />
+          <EntitySet Name="WireropeCutRole" EntityType="Self.WireropeCutRole" />
+          <EntitySet Name="WireropeEfficiency" EntityType="Self.WireropeEfficiency" />
+          <EntitySet Name="WireropeWorkload" EntityType="Self.WireropeWorkload" />
+          <AssociationSet Name="FK_CRITICALCONF_R_CRITICALDICT" Association="Self.FK_CRITICALCONF_R_CRITICALDICT">
+            <End Role="CriticalDictionary" EntitySet="CriticalDictionary" />
+            <End Role="CriticalConfig" EntitySet="CriticalConfig" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRITICALCONF_R_SECURITYUSER" Association="Self.FK_CRITICALCONF_R_SECURITYUSER">
+            <End Role="SecurityUser" EntitySet="SecurityUser" />
+            <End Role="CriticalConfig" EntitySet="CriticalConfig" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRITICALRECO_R_CRITICALCONF" Association="Self.FK_CRITICALRECO_R_CRITICALCONF">
+            <End Role="CriticalConfig" EntitySet="CriticalConfig" />
+            <End Role="CriticalRecord" EntitySet="CriticalRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUMULATIONRE_R_CRITICALCONF" Association="Self.FK_CUMULATIONRE_R_CRITICALCONF">
+            <End Role="CriticalConfig" EntitySet="CriticalConfig" />
+            <End Role="CumulationRecord" EntitySet="CumulationRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRITICALDICT_R_SECURITYUSER" Association="Self.FK_CRITICALDICT_R_SECURITYUSER">
+            <End Role="SecurityUser" EntitySet="SecurityUser" />
+            <End Role="CriticalDictionary" EntitySet="CriticalDictionary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WIREROPECUTR_R_CRITICALDICT" Association="Self.FK_WIREROPECUTR_R_CRITICALDICT">
+            <End Role="CriticalDictionary" EntitySet="CriticalDictionary" />
+            <End Role="WireropeCutRole" EntitySet="WireropeCutRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WIREROPEEFFI_R_CRITICALDICT" Association="Self.FK_WIREROPEEFFI_R_CRITICALDICT">
+            <End Role="CriticalDictionary" EntitySet="CriticalDictionary" />
+            <End Role="WireropeEfficiency" EntitySet="WireropeEfficiency" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WIREROPEWORK_R_CRITICALDICT" Association="Self.FK_WIREROPEWORK_R_CRITICALDICT">
+            <End Role="CriticalDictionary" EntitySet="CriticalDictionary" />
+            <End Role="WireropeWorkload" EntitySet="WireropeWorkload" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRITICALRECO_R_SECURITYUSER" Association="Self.FK_CRITICALRECO_R_SECURITYUSER">
+            <End Role="SecurityUser" EntitySet="SecurityUser" />
+            <End Role="CriticalRecord" EntitySet="CriticalRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRITICALRECO_R_WIRELINEINFO" Association="Self.FK_CRITICALRECO_R_WIRELINEINFO">
+            <End Role="WirelineInfo" EntitySet="WirelineInfo" />
+            <End Role="CriticalRecord" EntitySet="CriticalRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUMULATIONCO_R_CUMULATIONDI" Association="Self.FK_CUMULATIONCO_R_CUMULATIONDI">
+            <End Role="CumulationDictionary" EntitySet="CumulationDictionary" />
+            <End Role="CumulationConfig" EntitySet="CumulationConfig" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUMULATIONCO_R_SECURITYUSER" Association="Self.FK_CUMULATIONCO_R_SECURITYUSER">
+            <End Role="SecurityUser" EntitySet="SecurityUser" />
+            <End Role="CumulationConfig" EntitySet="CumulationConfig" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUMULATIONRE_R_CUMULATIONCO" Association="Self.FK_CUMULATIONRE_R_CUMULATIONCO">
+            <End Role="CumulationConfig" EntitySet="CumulationConfig" />
+            <End Role="CumulationRecord" EntitySet="CumulationRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DRILLDEVICEC_R_CUMULATIONCO" Association="Self.FK_DRILLDEVICEC_R_CUMULATIONCO">
+            <End Role="CumulationConfig" EntitySet="CumulationConfig" />
+            <End Role="DrillDeviceConfig" EntitySet="DrillDeviceConfig" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUMULATIONDI_R_SECURITYUSER" Association="Self.FK_CUMULATIONDI_R_SECURITYUSER">
+            <End Role="SecurityUser" EntitySet="SecurityUser" />
+            <End Role="CumulationDictionary" EntitySet="CumulationDictionary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DRILLINGTYPE_R_CUMULATIONDI" Association="Self.FK_DRILLINGTYPE_R_CUMULATIONDI">
+            <End Role="CumulationDictionary" EntitySet="CumulationDictionary" />
+            <End Role="DrillingType" EntitySet="DrillingType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUMULATIONRE_R_CUTRECORD" Association="Self.FK_CUMULATIONRE_R_CUTRECORD">
+            <End Role="CutRecord" EntitySet="CutRecord" />
+            <End Role="CumulationRecord" EntitySet="CumulationRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUMULATIONRE_R_SECURITYUSER" Association="Self.FK_CUMULATIONRE_R_SECURITYUSER">
+            <End Role="SecurityUser" EntitySet="SecurityUser" />
+            <End Role="CumulationRecord" EntitySet="CumulationRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUTRECORD_R_SECURITYUSER" Association="Self.FK_CUTRECORD_R_SECURITYUSER">
+            <End Role="SecurityUser" EntitySet="SecurityUser" />
+            <End Role="CutRecord" EntitySet="CutRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUTRECORD_R_WIRELINEINFO" Association="Self.FK_CUTRECORD_R_WIRELINEINFO">
+            <End Role="WirelineInfo" EntitySet="WirelineInfo" />
+            <End Role="CutRecord" EntitySet="CutRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MACHINE_R_SECURITYUSER" Association="Self.FK_MACHINE_R_SECURITYUSER">
+            <End Role="SecurityUser" EntitySet="SecurityUser" />
+            <End Role="Machine" EntitySet="Machine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WIRELINEINFO_R_SECURITYUSER" Association="Self.FK_WIRELINEINFO_R_SECURITYUSER">
+            <End Role="SecurityUser" EntitySet="SecurityUser" />
+            <End Role="WirelineInfo" EntitySet="WirelineInfo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SteelWireSqlServerModelStoreContainer" CdmEntityContainer="SteelWireSqlServerContext">
+          <EntitySetMapping Name="CriticalConfig">
+            <EntityTypeMapping TypeName="SteelWireSqlServerModel.CriticalConfig">
+              <MappingFragment StoreEntitySet="CriticalConfig">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DictionaryID" ColumnName="DictionaryID" />
+                <ScalarProperty Name="ConfigUserID" ColumnName="ConfigUserID" />
+                <ScalarProperty Name="DerrickHeight" ColumnName="DerrickHeight" />
+                <ScalarProperty Name="WirelineMaxPower" ColumnName="WirelineMaxPower" />
+                <ScalarProperty Name="RotaryHookWorkload" ColumnName="RotaryHookWorkload" />
+                <ScalarProperty Name="RollerDiameter" ColumnName="RollerDiameter" />
+                <ScalarProperty Name="RopeCount" ColumnName="RopeCount" />
+                <ScalarProperty Name="ConfigTime" ColumnName="ConfigTime" />
+                <ScalarProperty Name="ConfigTimeStamp" ColumnName="ConfigTimeStamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CriticalDictionary">
+            <EntityTypeMapping TypeName="SteelWireSqlServerModel.CriticalDictionary">
+              <MappingFragment StoreEntitySet="CriticalDictionary">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ConfigUserID" ColumnName="ConfigUserID" />
+                <ScalarProperty Name="ConfigTime" ColumnName="ConfigTime" />
+                <ScalarProperty Name="ConfigTimeStamp" ColumnName="ConfigTimeStamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CriticalRecord">
+            <EntityTypeMapping TypeName="SteelWireSqlServerModel.CriticalRecord">
+              <MappingFragment StoreEntitySet="CriticalRecord">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CriticalConfigID" ColumnName="CriticalConfigID" />
+                <ScalarProperty Name="WirelineID" ColumnName="WirelineID" />
+                <ScalarProperty Name="CalculateUserID" ColumnName="CalculateUserID" />
+                <ScalarProperty Name="WirelineDiameter" ColumnName="WirelineDiameter" />
+                <ScalarProperty Name="CriticalValue" ColumnName="CriticalValue" />
+                <ScalarProperty Name="CalculateTime" ColumnName="CalculateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CumulationConfig">
+            <EntityTypeMapping TypeName="SteelWireSqlServerModel.CumulationConfig">
+              <MappingFragment StoreEntitySet="CumulationConfig">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DictionaryID" ColumnName="DictionaryID" />
+                <ScalarProperty Name="ConfigUserID" ColumnName="ConfigUserID" />
+                <ScalarProperty Name="RealRotaryHookWorkload" ColumnName="RealRotaryHookWorkload" />
+                <ScalarProperty Name="FluidDensity" ColumnName="FluidDensity" />
+                <ScalarProperty Name="ElevatorWeight" ColumnName="ElevatorWeight" />
+                <ScalarProperty Name="DrillingShallowHeight" ColumnName="DrillingShallowHeight" />
+                <ScalarProperty Name="DrillingDeepHeight" ColumnName="DrillingDeepHeight" />
+                <ScalarProperty Name="DrillingType" ColumnName="DrillingType" />
+                <ScalarProperty Name="RedressingCount" ColumnName="RedressingCount" />
+                <ScalarProperty Name="TripShallowHeight" ColumnName="TripShallowHeight" />
+                <ScalarProperty Name="TripDeepHeight" ColumnName="TripDeepHeight" />
+                <ScalarProperty Name="TripCount" ColumnName="TripCount" />
+                <ScalarProperty Name="BushingHeight" ColumnName="BushingHeight" />
+                <ScalarProperty Name="CoringShallowHeight" ColumnName="CoringShallowHeight" />
+                <ScalarProperty Name="CoringDeepHeight" ColumnName="CoringDeepHeight" />
+                <ScalarProperty Name="ConfigTime" ColumnName="ConfigTime" />
+                <ScalarProperty Name="ConfigTimeStamp" ColumnName="ConfigTimeStamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CumulationDictionary">
+            <EntityTypeMapping TypeName="SteelWireSqlServerModel.CumulationDictionary">
+              <MappingFragment StoreEntitySet="CumulationDictionary">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ConfigUserID" ColumnName="ConfigUserID" />
+                <ScalarProperty Name="ConfigTime" ColumnName="ConfigTime" />
+                <ScalarProperty Name="ConfigTimeStamp" ColumnName="ConfigTimeStamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CumulationRecord">
+            <EntityTypeMapping TypeName="SteelWireSqlServerModel.CumulationRecord">
+              <MappingFragment StoreEntitySet="CumulationRecord">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CutRecordID" ColumnName="CutRecordID" />
+                <ScalarProperty Name="CriticalConfigID" ColumnName="CriticalConfigID" />
+                <ScalarProperty Name="CumulationConfigID" ColumnName="CumulationConfigID" />
+                <ScalarProperty Name="CalculateUserID" ColumnName="CalculateUserID" />
+                <ScalarProperty Name="CumulationValue" ColumnName="CumulationValue" />
+                <ScalarProperty Name="CalculateTime" ColumnName="CalculateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CutRecord">
+            <EntityTypeMapping TypeName="SteelWireSqlServerModel.CutRecord">
+              <MappingFragment StoreEntitySet="CutRecord">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="WirelineID" ColumnName="WirelineID" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="CumulationValue" ColumnName="CumulationValue" />
+                <ScalarProperty Name="CutValue" ColumnName="CutValue" />
+                <ScalarProperty Name="RemainValue" ColumnName="RemainValue" />
+                <ScalarProperty Name="CutLength" ColumnName="CutLength" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DrillDeviceConfig">
+            <EntityTypeMapping TypeName="SteelWireSqlServerModel.DrillDeviceConfig">
+              <MappingFragment StoreEntitySet="DrillDeviceConfig">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CumulationConfigID" ColumnName="CumulationConfigID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DrillingType">
+            <EntityTypeMapping TypeName="SteelWireSqlServerModel.DrillingType">
+              <MappingFragment StoreEntitySet="DrillingType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DictionaryID" ColumnName="DictionaryID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Coefficient" ColumnName="Coefficient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Machine">
+            <EntityTypeMapping TypeName="SteelWireSqlServerModel.Machine">
+              <MappingFragment StoreEntitySet="Machine">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RegistrationUserID" ColumnName="RegistrationUserID" />
+                <ScalarProperty Name="MachineCode" ColumnName="MachineCode" />
+                <ScalarProperty Name="RegistrationTime" ColumnName="RegistrationTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SecurityUser">
+            <EntityTypeMapping TypeName="SteelWireSqlServerModel.SecurityUser">
+              <MappingFragment StoreEntitySet="SecurityUser">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Checked" ColumnName="Checked" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="RegistrationTime" ColumnName="RegistrationTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WirelineInfo">
+            <EntityTypeMapping TypeName="SteelWireSqlServerModel.WirelineInfo">
+              <MappingFragment StoreEntitySet="WirelineInfo">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Diameter" ColumnName="Diameter" />
+                <ScalarProperty Name="Struct" ColumnName="Struct" />
+                <ScalarProperty Name="StrongLevel" ColumnName="StrongLevel" />
+                <ScalarProperty Name="TwistDirection" ColumnName="TwistDirection" />
+                <ScalarProperty Name="OrderLength" ColumnName="OrderLength" />
+                <ScalarProperty Name="UnitSystem" ColumnName="UnitSystem" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WireropeCutRole">
+            <EntityTypeMapping TypeName="SteelWireSqlServerModel.WireropeCutRole">
+              <MappingFragment StoreEntitySet="WireropeCutRole">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DictionaryID" ColumnName="DictionaryID" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="MinDerrickHeight" ColumnName="MinDerrickHeight" />
+                <ScalarProperty Name="MaxDerrickHeight" ColumnName="MaxDerrickHeight" />
+                <ScalarProperty Name="MinCutLength" ColumnName="MinCutLength" />
+                <ScalarProperty Name="MaxCutLength" ColumnName="MaxCutLength" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WireropeEfficiency">
+            <EntityTypeMapping TypeName="SteelWireSqlServerModel.WireropeEfficiency">
+              <MappingFragment StoreEntitySet="WireropeEfficiency">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DictionaryID" ColumnName="DictionaryID" />
+                <ScalarProperty Name="RopeCount" ColumnName="RopeCount" />
+                <ScalarProperty Name="SlidingValue" ColumnName="SlidingValue" />
+                <ScalarProperty Name="RollingValue" ColumnName="RollingValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WireropeWorkload">
+            <EntityTypeMapping TypeName="SteelWireSqlServerModel.WireropeWorkload">
+              <MappingFragment StoreEntitySet="WireropeWorkload">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DictionaryID" ColumnName="DictionaryID" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UnitSystem" ColumnName="UnitSystem" />
+                <ScalarProperty Name="Diameter" ColumnName="Diameter" />
+                <ScalarProperty Name="Workload" ColumnName="Workload" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
