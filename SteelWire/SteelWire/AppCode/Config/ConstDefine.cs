@@ -80,7 +80,7 @@
     public enum HistoryEnum
     {
         /// <summary>
-        /// 累积
+        /// 累计
         /// </summary>
         Cumulate,
         /// <summary>

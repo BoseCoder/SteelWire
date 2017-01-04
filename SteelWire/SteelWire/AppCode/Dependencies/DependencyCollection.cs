@@ -21,7 +21,8 @@ namespace SteelWire.AppCode.Dependencies
             }
             foreach (T item in items)
             {
-                Add(item);
+                DependencyObject<T> dependencyObject = new DependencyObject<T>(item);
+                this.Items.Add(dependencyObject);
             }
             this.OnItemsChanged(EventArgs.Empty);
         }
@@ -58,12 +59,15 @@ namespace SteelWire.AppCode.Dependencies
         private static void ItemsPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             DependencyCollection<TC, TI> dependency = (DependencyCollection<TC, TI>)sender;
-            dependency.OnItemsChanged(EventArgs.Empty);
+            dependency.ItemsChangedHandler?.Invoke(dependency, EventArgs.Empty);
         }
         public TC Items => (TC)this.ReadLocalValue(ItemsPropertyKey.DependencyProperty);
 
         protected virtual void OnItemsChanged(EventArgs e)
         {
+            TC items = this.Items;
+            this.ClearValue(ItemsPropertyKey);
+            this.SetValue(ItemsPropertyKey, items);
             this.ItemsChangedHandler?.Invoke(this, e);
         }
 
@@ -106,15 +110,5 @@ namespace SteelWire.AppCode.Dependencies
             this.Items.Clear();
             OnItemsChanged(EventArgs.Empty);
         }
-
-        //public void ResetLocalItems()
-        //{
-        //    TC localValue = new TC();
-        //    foreach (TI element in this.Items)
-        //    {
-        //        localValue.Add(element);
-        //    }
-        //    this.SetValue(ItemsPropertyKey, localValue);
-        //}
     }
 }

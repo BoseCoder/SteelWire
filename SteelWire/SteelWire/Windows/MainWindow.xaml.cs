@@ -140,6 +140,7 @@ namespace SteelWire.Windows
             {
                 if (this.WindowData.Cumulate())
                 {
+                    this.WindowData.RefreshData();
                     if (this.WindowData.CheckNeedReset())
                     {
                         this.WindowData.Reset(true);

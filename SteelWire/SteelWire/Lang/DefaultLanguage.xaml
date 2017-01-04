@@ -423,7 +423,8 @@
     <system:String x:Key="ErrorCurrentWireLineTwistDirectionEmpty">Current wire line twist direction could not be empty, please input again.</system:String>
     <system:String x:Key="ErrorCurrentWireLineOrderLengthZero">Current wire line order length could not be zero, please input again.</system:String>
     <system:String x:Key="ErrorCurrentCumulationValueZero">The value of current cumulation is zero, please cumulation once at least.</system:String>
-    <system:String x:Key="ErrorCutLengthZero">The cumulate value has reached or exceeded the critical value, advice to input the cut length value to cut down.</system:String>
+    <system:String x:Key="ErrorCutLengthZero">The value of cut length could not be zero, please input again.</system:String>
+    <system:String x:Key="ErrorInfoCutLengthZero">The cumulate value has reached or exceeded the critical value, advice to input the cut length value to cut down.</system:String>
     <system:String x:Key="ErrorCriticalValueInvalid">Critical value is invalid.</system:String>
     <system:String x:Key="ErrorCriticalDictionaryFileNotFound">Critical dictionary file not found.</system:String>
     <system:String x:Key="ErrorCriticalConfigFileNotFound">Critical config file not found.</system:String>

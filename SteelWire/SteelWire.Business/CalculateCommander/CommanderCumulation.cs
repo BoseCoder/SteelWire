@@ -120,11 +120,10 @@ namespace SteelWire.Business.CalculateCommander
                 DeepHeight = this._cumulationConfig.CoringDeepHeight,
                 ShallowHeight = this._cumulationConfig.CoringShallowHeight
             };
-            return securityCoefficient *
-                   (commanderDrilling.CalculateValue() +
+            return (commanderDrilling.CalculateValue() +
                     commanderTrip.CalculateValue() +
                     commanderBushing.CalculateValue() +
-                    commanderCoring.CalculateValue());
+                    commanderCoring.CalculateValue()) / securityCoefficient;
         }
     }
 }

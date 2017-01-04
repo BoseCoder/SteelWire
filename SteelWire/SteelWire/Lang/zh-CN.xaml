@@ -45,7 +45,7 @@
     </system:String>
 
     <system:String x:Key="HistoryEnumCumulate">
-        累积
+        累计
     </system:String>
     <system:String x:Key="HistoryEnumCut">
         切绳
@@ -422,8 +422,9 @@
     <system:String x:Key="ErrorCurrentWireLineStrongLevelEmpty">当前绳的钢绳强度级别不能为空，请重新输入！</system:String>
     <system:String x:Key="ErrorCurrentWireLineTwistDirectionEmpty">当前绳的钢绳捻向不能为空，请重新输入！</system:String>
     <system:String x:Key="ErrorCurrentWireLineOrderLengthZero">当前绳的钢绳订货长度不能为0，请重新输入！</system:String>
-    <system:String x:Key="ErrorCurrentCumulationValueZero">当前累积值为0，请至少先累积一次后再切绳！</system:String>
-    <system:String x:Key="ErrorCutLengthZero">当前累计值已经达到或者超过当前临界值，建议输入切绳实际长度后进行切绳操作！</system:String>
+    <system:String x:Key="ErrorCurrentCumulationValueZero">当前累计值为0，请至少先累积一次后再切绳！</system:String>
+    <system:String x:Key="ErrorCutLengthZero">切绳实际长度不能为0，请重新输入！</system:String>
+    <system:String x:Key="ErrorInfoCutLengthZero">当前累计值已经达到或者超过当前临界值，建议输入切绳实际长度后进行切绳操作！</system:String>
     <system:String x:Key="ErrorCriticalValueInvalid">临界值无效！</system:String>
     <system:String x:Key="ErrorCriticalDictionaryFileNotFound">用于计算临界值的字典文件丢失。</system:String>
     <system:String x:Key="ErrorCriticalConfigFileNotFound">用于计算临界值的配置文件丢失。</system:String>

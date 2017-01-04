@@ -17,6 +17,14 @@ namespace SteelWire.AppCode.Data
 
         public HistoryData(DateTime time, WirelineInfo lineInfo, SecurityUser user, HistoryEnum action, decimal result)
         {
+            if (lineInfo == null)
+            {
+                throw new ArgumentNullException(nameof(lineInfo));
+            }
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
             this.Time = time;
             this.LineInfo = lineInfo;
             this.User = user;

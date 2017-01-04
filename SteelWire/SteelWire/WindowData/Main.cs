@@ -403,10 +403,8 @@ namespace SteelWire.WindowData
         private void CalculateWirelineCuttingCritical()
         {
             CuttingCriticalDictionary criticalDic = CuttingCriticalDictionaryManager.OnceInstance.DictionarySection;
-            WireropeCutRole wireropeCutRole = criticalDic.WireropeCutRoles.Cast<WireropeCutRole>()
-                .FirstOrDefault(
-                    r =>
-                        r.MinDerrickHeight <= this.DerrickHeight.Value && r.MaxDerrickHeight >= this.DerrickHeight.Value);
+            WireropeCutRole wireropeCutRole = criticalDic.WireropeCutRoles.Cast<WireropeCutRole>().FirstOrDefault(r =>
+                r.MinDerrickHeight <= this.DerrickHeight.Value && r.MaxDerrickHeight >= this.DerrickHeight.Value);
             if (wireropeCutRole == null)
             {
                 this.CriticalValue.Value = -1;
@@ -524,7 +522,7 @@ namespace SteelWire.WindowData
                     DeepHeight = this.DrillingDeepHeight.Value,
                     ShallowHeight = this.DrillingShallowHeight.Value
                 };
-                this.DrillingWorkValue.Value = securityCoefficient * commander.CalculateValue();
+                this.DrillingWorkValue.Value = commander.CalculateValue() / securityCoefficient;
             }
             catch (Exception)
             {
@@ -547,7 +545,7 @@ namespace SteelWire.WindowData
                     ShallowHeight = this.TripShallowHeight.Value,
                     Count = this.TripCount.Value
                 };
-                this.TripWorkValue.Value = securityCoefficient * commander.CalculateValue();
+                this.TripWorkValue.Value = commander.CalculateValue() / securityCoefficient;
             }
             catch (Exception)
             {
@@ -573,7 +571,7 @@ namespace SteelWire.WindowData
                     BushingLength = this.Bushings.TotalLength,
                     BushingHeight = this.BushingHeight.Value
                 };
-                this.BushingWorkValue.Value = securityCoefficient * commander.CalculateValue();
+                this.BushingWorkValue.Value = commander.CalculateValue() / securityCoefficient;
             }
             catch (Exception)
             {
@@ -595,7 +593,7 @@ namespace SteelWire.WindowData
                     DeepHeight = this.CoringDeepHeight.Value,
                     ShallowHeight = this.CoringShallowHeight.Value
                 };
-                this.CoringWorkValue.Value = securityCoefficient * commander.CalculateValue();
+                this.CoringWorkValue.Value = commander.CalculateValue() / securityCoefficient;
             }
             catch (Exception)
             {
@@ -681,7 +679,7 @@ namespace SteelWire.WindowData
                 (r.UpdateTime, r.WirelineInfo, r.SecurityUser, HistoryEnum.Cut, r.CutValue)));
             List<CumulationRecord> cumulationRecords = CumulationOperator.GetHistory(dbContext, GlobalData.SearchUserId, 30);
             historyData.AddRange(cumulationRecords.Select(r => new HistoryData
-                (r.CalculateTime, r.CutRecord?.WirelineInfo, r.SecurityUser, HistoryEnum.Cumulate, r.CumulationValue)));
+                (r.CalculateTime, r.CutRecord.WirelineInfo, r.SecurityUser, HistoryEnum.Cumulate, r.CumulationValue)));
             historyData = historyData.OrderByDescending(d => d.Time).Take(30).ToList();
             this.History.AddRange(historyData);
         }
@@ -741,7 +739,8 @@ namespace SteelWire.WindowData
             // TODO 数据库下载配置信息功能未实现
         }
 
-        private void CheckUploadData(out FileInfo dicInfo, out FileInfo configInfo)
+        private void CheckUploadData(out FileInfo criticalDicInfo, out FileInfo criticalConfigInfo,
+            out FileInfo workDicInfo, out FileInfo workConfigInfo)
         {
             if (string.IsNullOrWhiteSpace(this.WirelineNumber.Value))
             {
@@ -768,17 +767,31 @@ namespace SteelWire.WindowData
             {
                 throw new ErrorException("CurrentWireLineOrderLengthZero");
             }
+            if (this.CriticalValue.Value <= 0)
+            {
+                throw new ErrorException("CriticalValueInvalid");
+            }
             if (this.CumulationValue.Value <= 0)
             {
                 throw new ErrorException("CumulationValueInvalid");
             }
-            dicInfo = WorkDictionaryManager.GetConfigFile();
-            if (dicInfo == null)
+            criticalDicInfo = CuttingCriticalDictionaryManager.GetConfigFile();
+            if (criticalDicInfo == null)
+            {
+                throw new ErrorException("CriticalDictionaryFileNotFound");
+            }
+            criticalConfigInfo = CuttingCriticalConfigManager.GetConfigFile();
+            if (criticalConfigInfo == null)
+            {
+                throw new ErrorException("CriticalConfigFileNotFound");
+            }
+            workDicInfo = WorkDictionaryManager.GetConfigFile();
+            if (workDicInfo == null)
             {
                 throw new ErrorException("CumulationDictionaryFileNotFound");
             }
-            configInfo = WorkConfigManager.GetConfigFile();
-            if (configInfo == null)
+            workConfigInfo = WorkConfigManager.GetConfigFile();
+            if (workConfigInfo == null)
             {
                 throw new ErrorException("CumulationConfigFileNotFound");
             }
@@ -790,8 +803,8 @@ namespace SteelWire.WindowData
         /// <returns></returns>
         public bool Cumulate()
         {
-            FileInfo dicInfo, configInfo;
-            CheckUploadData(out dicInfo, out configInfo);
+            FileInfo criticalDicInfo, criticalConfigInfo, workDicInfo, workConfigInfo;
+            CheckUploadData(out criticalDicInfo, out criticalConfigInfo, out workDicInfo, out workConfigInfo);
             DateTime now = DateTime.Now;
             using (SteelWireBaseContext dbContext = DbContextFactory.GenerateDbContext())
             {
@@ -812,7 +825,7 @@ namespace SteelWire.WindowData
                         {
                             if (MessageManager.Question("SaveCriticalCumulateCompulsivelyConfirm"))
                             {
-                                Cumulate(dbContext, dicInfo, configInfo, now);
+                                Cumulate(dbContext, criticalDicInfo, criticalConfigInfo, workDicInfo, workConfigInfo, now);
                                 dbContext.SaveChanges();
                                 t.Commit();
                                 return true;
@@ -821,7 +834,7 @@ namespace SteelWire.WindowData
                         }
                         if (MessageManager.Question("SaveCriticalCumulateConfirm"))
                         {
-                            Cumulate(dbContext, dicInfo, configInfo, now);
+                            Cumulate(dbContext, criticalDicInfo, criticalConfigInfo, workDicInfo, workConfigInfo, now);
                             dbContext.SaveChanges();
                             t.Commit();
                             return true;
@@ -837,8 +850,7 @@ namespace SteelWire.WindowData
             }
         }
 
-        private void UpdateWirelineInfo(SteelWireBaseContext dbContext, out bool diameterChanged,
-            out bool unitSystemChanged)
+        private void UpdateWirelineInfo(SteelWireBaseContext dbContext, out bool diameterChanged, out bool unitSystemChanged)
         {
             WirelineInfo wirelineInfo = new WirelineInfo
             {
@@ -860,23 +872,29 @@ namespace SteelWire.WindowData
         /// 累计（上传配置和数据到数据库）
         /// </summary>
         /// <param name="dbContext"></param>
-        /// <param name="dicInfo"></param>
-        /// <param name="configInfo"></param>
+        /// <param name="criticalDicInfo"></param>
+        /// <param name="criticalConfigInfo"></param>
+        /// <param name="workDicInfo"></param>
+        /// <param name="workConfigInfo"></param>
         /// <param name="now"></param>
-        private void Cumulate(SteelWireBaseContext dbContext, FileInfo dicInfo, FileInfo configInfo, DateTime now)
+        private void Cumulate(SteelWireBaseContext dbContext, FileInfo criticalDicInfo, FileInfo criticalConfigInfo,
+            FileInfo workDicInfo, FileInfo workConfigInfo, DateTime now)
         {
             bool lineDiameterUpdate, unitSystemUpdate;
             bool criticalConfigUpdate = this.ChangeToCriticalConfig();
             bool cumulationConfigUpdate = this.ChangeToWorkConfig();
-            if (UserConfigManager.OnceInstance.LastWirelineNumber != this.WirelineNumber.Value)
+            string wirelineNumber = string.IsNullOrWhiteSpace(GlobalData.Wireline.Number)
+                ? this.WirelineNumber.Value
+                : GlobalData.Wireline.Number;
+            if (UserConfigManager.OnceInstance.LastWirelineNumber != wirelineNumber)
             {
-                UserConfigManager.OnceInstance.LastWirelineNumber = GlobalData.Wireline.Number;
+                UserConfigManager.OnceInstance.LastWirelineNumber = wirelineNumber;
                 UserConfigManager.OnceInstance.SaveConfig();
             }
             UpdateWirelineInfo(dbContext, out lineDiameterUpdate, out unitSystemUpdate);
-            CriticalConfig configData = this.UpdateCritical(dbContext, criticalConfigUpdate, lineDiameterUpdate, unitSystemUpdate, now);
-            UpdateWork(dbContext, dicInfo, configInfo, configData, cumulationConfigUpdate, unitSystemUpdate, now);
-            RefreshData(dbContext);
+            CriticalConfig configData = this.UpdateCritical(dbContext, criticalDicInfo, criticalConfigInfo,
+                criticalConfigUpdate, lineDiameterUpdate, unitSystemUpdate, now);
+            UpdateWork(dbContext, workDicInfo, workConfigInfo, configData, cumulationConfigUpdate, unitSystemUpdate, now);
         }
 
         /// <summary>
@@ -924,39 +942,27 @@ namespace SteelWire.WindowData
         /// 上传临界值
         /// </summary>
         /// <param name="dbContext"></param>
+        /// <param name="criticalDicInfo"></param>
+        /// <param name="criticalConfigInfo"></param>
         /// <param name="configUpdate"></param>
         /// <param name="lineDiameterUpdate"></param>
         /// <param name="unitSystemUpdate"></param>
         /// <param name="now"></param>
-        private CriticalConfig UpdateCritical(SteelWireBaseContext dbContext, bool configUpdate, bool lineDiameterUpdate,
-            bool unitSystemUpdate, DateTime now)
+        private CriticalConfig UpdateCritical(SteelWireBaseContext dbContext, FileInfo criticalDicInfo, FileInfo criticalConfigInfo,
+            bool configUpdate, bool lineDiameterUpdate, bool unitSystemUpdate, DateTime now)
         {
-            if (this.CriticalValue.Value <= 0)
-            {
-                throw new ErrorException("CriticalValueInvalid");
-            }
-            FileInfo dicInfo = CuttingCriticalDictionaryManager.GetConfigFile();
-            if (dicInfo == null)
-            {
-                throw new ErrorException("CriticalDictionaryFileNotFound");
-            }
-            FileInfo configInfo = CuttingCriticalConfigManager.GetConfigFile();
-            if (configInfo == null)
-            {
-                throw new ErrorException("CriticalConfigFileNotFound");
-            }
             CriticalDictionary dictionaryData;
             bool dictionaryUpdate = CriticalOperator.IsNeedUpdateCriticalDictionary(dbContext, GlobalData.SearchUserId,
-                dicInfo.LastWriteTime.Ticks, out dictionaryData);
+                criticalDicInfo.LastWriteTime.Ticks, out dictionaryData);
             if (dictionaryUpdate)
             {
-                dicInfo.LastWriteTime = now;
+                criticalDicInfo.LastWriteTime = now;
                 CuttingCriticalDictionary dictionary = CuttingCriticalDictionaryManager.OnceInstance.DictionarySection;
                 dictionaryData = new CriticalDictionary
                 {
                     ConfigUserID = GlobalData.UserId,
                     ConfigTime = now,
-                    ConfigTimeStamp = dicInfo.LastWriteTime.Ticks,
+                    ConfigTimeStamp = criticalDicInfo.LastWriteTime.Ticks,
                     WireropeWorkload = dictionary.WireropeWorkloads.Cast<WireropeWorkload>()
                         .Select(w => new DbWireropeWorkload
                         {
@@ -989,17 +995,17 @@ namespace SteelWire.WindowData
             if (!configUpdate)
             {
                 configUpdate = CriticalOperator.IsNeedUpdateCriticalConfig(dbContext, GlobalData.SearchUserId,
-                    configInfo.LastWriteTime.Ticks, out configData);
+                    criticalConfigInfo.LastWriteTime.Ticks, out configData);
             }
             if (dictionaryUpdate || configUpdate)
             {
-                configInfo.LastWriteTime = now;
+                criticalConfigInfo.LastWriteTime = now;
                 configData = new CriticalConfig
                 {
                     DictionaryID = dictionaryData.ID,
                     ConfigUserID = GlobalData.UserId,
                     ConfigTime = now,
-                    ConfigTimeStamp = configInfo.LastWriteTime.Ticks,
+                    ConfigTimeStamp = criticalConfigInfo.LastWriteTime.Ticks,
                     DerrickHeight = this.DerrickHeight.Value,
                     WirelineMaxPower = this.WirelineMaxPower.Value,
                     RotaryHookWorkload = this.RotaryHookWorkload.Value,
@@ -1214,28 +1220,28 @@ namespace SteelWire.WindowData
         /// 上传作业累计值
         /// </summary>
         /// <param name="dbContext"></param>
-        /// <param name="dicInfo"></param>
-        /// <param name="configInfo"></param>
+        /// <param name="workDicInfo"></param>
+        /// <param name="workConfigInfo"></param>
         /// <param name="criticalConfigData"></param>
         /// <param name="configUpdate"></param>
         /// <param name="unitSystemUpdate"></param>
         /// <param name="now"></param>
-        private void UpdateWork(SteelWireBaseContext dbContext, FileInfo dicInfo, FileInfo configInfo,
+        private void UpdateWork(SteelWireBaseContext dbContext, FileInfo workDicInfo, FileInfo workConfigInfo,
             CriticalConfig criticalConfigData, bool configUpdate, bool unitSystemUpdate, DateTime now)
         {
             CumulationDictionary dictionaryData;
             bool dictionaryUpdate = CumulationOperator.IsNeedUpdateCumulationDictionary(dbContext,
                 GlobalData.SearchUserId,
-                dicInfo.LastWriteTime.Ticks, out dictionaryData);
+                workDicInfo.LastWriteTime.Ticks, out dictionaryData);
             if (dictionaryUpdate)
             {
-                dicInfo.LastWriteTime = now;
+                workDicInfo.LastWriteTime = now;
                 WorkDictionary dictionary = WorkDictionaryManager.OnceInstance.DictionarySection;
                 dictionaryData = new CumulationDictionary
                 {
                     ConfigUserID = GlobalData.UserId,
                     ConfigTime = now,
-                    ConfigTimeStamp = dicInfo.LastWriteTime.Ticks,
+                    ConfigTimeStamp = workDicInfo.LastWriteTime.Ticks,
                     DrillingType = dictionary.DrillingTypes.Cast<DrillingType>()
                         .Select(d => new DbDrillingType
                         {
@@ -1249,17 +1255,17 @@ namespace SteelWire.WindowData
             if (!configUpdate)
             {
                 configUpdate = CumulationOperator.IsNeedUpdateCumulationConfig(dbContext, GlobalData.SearchUserId,
-                    configInfo.LastWriteTime.Ticks, out configData);
+                    workConfigInfo.LastWriteTime.Ticks, out configData);
             }
             if (dictionaryUpdate || configUpdate)
             {
-                configInfo.LastWriteTime = now;
+                workConfigInfo.LastWriteTime = now;
                 configData = new CumulationConfig
                 {
                     ConfigUserID = GlobalData.UserId,
                     DictionaryID = dictionaryData.ID,
                     ConfigTime = now,
-                    ConfigTimeStamp = configInfo.LastWriteTime.Ticks,
+                    ConfigTimeStamp = workConfigInfo.LastWriteTime.Ticks,
                     RealRotaryHookWorkload = this.RealRotaryHookWorkload.Value,
                     FluidDensity = this.FluidDensity.Value,
                     ElevatorWeight = this.ElevatorWeight.Value,
@@ -1348,7 +1354,7 @@ namespace SteelWire.WindowData
                    Math.Round(GlobalData.Wireline.CriticalValue.Value, 3);
         }
 
-        private void CheckReset()
+        private void CheckReset(bool isWarningMode)
         {
             if (string.IsNullOrWhiteSpace(this.WirelineNumber.Value))
             {
@@ -1362,20 +1368,30 @@ namespace SteelWire.WindowData
             {
                 throw new ErrorException("CurrentCumulationValueZero");
             }
-            if (this.CutLengthValue.Value <= 0)
+            if (isWarningMode)
             {
-                throw new InfoException("CutLengthZero");
+                if (this.CutLengthValue.Value <= 0)
+                {
+                    throw new InfoException("InfoCutLengthZero");
+                }
+            }
+            else
+            {
+                if (this.CutLengthValue.Value <= 0)
+                {
+                    throw new ErrorException("CutLengthZero");
+                }
             }
         }
 
         /// <summary>
         /// 切绳并上传数据
         /// </summary>
-        /// <param name="warningMode"></param>
+        /// <param name="isWarningMode"></param>
         /// <returns></returns>
-        public void Reset(bool warningMode)
+        public void Reset(bool isWarningMode)
         {
-            CheckReset();
+            CheckReset(isWarningMode);
             using (SteelWireBaseContext dbContext = DbContextFactory.GenerateDbContext())
             {
                 //if (ResetOperator.ExistReset(dbContext, Sign.Data.UserID, DateTime.Now))
@@ -1388,7 +1404,7 @@ namespace SteelWire.WindowData
                 {
                     throw new ErrorException("CumulationDataNotFound");
                 }
-                if (warningMode)
+                if (isWarningMode)
                 {
                     if (MessageManager.Question("ResetCompulsivelyConfirm"))
                     {

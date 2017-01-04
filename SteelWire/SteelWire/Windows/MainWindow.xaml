@@ -6,7 +6,7 @@
         xmlns:validationRule="clr-namespace:SteelWire.AppCode.ValidationRule"
         xmlns:windowData="clr-namespace:SteelWire.WindowData"
         DataContext="{DynamicResource WindowDataKey}"
-        MinWidth="800" MinHeight="600" Width="1670" Height="840" WindowStartupLocation="CenterScreen"
+        MinWidth="800" MinHeight="600" Width="1670" Height="840" WindowStartupLocation="CenterScreen" WindowState="Maximized"
         Icon="/SteelWire;component/Resources/Images/Icon.ico" ContentRendered="WindowRendered" Closing="WindowOnClosing">
     <Window.Resources>
         <windowData:Main x:Key="WindowDataKey"></windowData:Main>
@@ -154,7 +154,7 @@
                     </Label.Content>
                 </Label>
             </Grid>
-            <Expander Header="{DynamicResource GroupWirelineCuttingCriticalValueTitle}" DockPanel.Dock="Top" BorderBrush="#FFD5DFE5" Background="#FF3598DC" Foreground="White" BorderThickness="0,1,0,0">
+            <Expander Header="{DynamicResource GroupWirelineCuttingCriticalValueTitle}" DockPanel.Dock="Top" BorderBrush="#FFD5DFE5" Background="#FF3598DC" Foreground="White" BorderThickness="0,1,0,0" IsExpanded="True">
                 <Border Margin="0" Background="White" BorderThickness="1,0,1,1" BorderBrush="#FFD5DFE5">
                     <DockPanel Margin="0,10,10,10">
                         <WrapPanel DockPanel.Dock="Top">
@@ -351,13 +351,16 @@
                                         </Binding>
                                     </TextBox.Text>
                                 </TextBox>
+                                <Label>
+                                    <Binding Path="Value" Source="{x:Static data:UnitData.Metre}"></Binding>
+                                </Label>
                             </WrapPanel>
                         </WrapPanel>
                     </DockPanel>
                 </Border>
             </Expander>
-            <Expander Header="{DynamicResource GroupCommonCoefficientTitle}" DockPanel.Dock="Top"
-                      BorderBrush="#FFD5DFE5" Background="#FF3598DC" Foreground="White" Margin="0,2,0,0" BorderThickness="0,1,0,0">
+            <Expander Header="{DynamicResource GroupCommonCoefficientTitle}" DockPanel.Dock="Top" BorderBrush="#FFD5DFE5" Background="#FF3598DC" 
+                      Foreground="White" Margin="0,2,0,0" BorderThickness="0,1,0,0" IsExpanded="True">
                 <Border Margin="0" Background="White" BorderThickness="1,0,1,1" BorderBrush="#FFD5DFE5">
                     <DockPanel Margin="10,0,10,0">
                         <WrapPanel Margin="0,0,0,10">
