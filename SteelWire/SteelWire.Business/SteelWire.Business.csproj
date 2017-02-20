@@ -116,6 +116,8 @@
     <Compile Include="Database\SecurityUser.cs">
       <DependentUpon>SteelWireSqlServerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\SqlLiteUpgrade.cs" />
+    <Compile Include="Database\SqlServerUpgrade.cs" />
     <Compile Include="Database\SteelWireBaseContext.cs" />
     <Compile Include="Database\SteelWireSqlLiteModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -161,6 +163,7 @@
     </Compile>
     <Compile Include="DbOperator\CriticalOperator.cs" />
     <Compile Include="DbOperator\CutOperator.cs" />
+    <Compile Include="Database\DatabaseUpgrade.cs" />
     <Compile Include="DbOperator\WirelineOperator.cs" />
     <Compile Include="DbOperator\CumulationOperator.cs" />
     <Compile Include="DbOperator\UserOperator.cs" />
