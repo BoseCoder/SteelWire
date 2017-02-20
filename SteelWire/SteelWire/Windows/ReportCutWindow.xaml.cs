@@ -78,7 +78,7 @@ namespace SteelWire.Windows
                             new ReportParameter("ReportParamFooterSummary",
                                 LanguageManager.GetLocalResourceStringLeft("ReportFooterSummary"))
                         };
-                        List<CutRecord> dataSource = CutOperator.GetAllHistory(GlobalData.SearchUserId, GlobalData.Wireline.Id);
+                        List<CutRecord> dataSource = CutOperator.GetAllHistory(GlobalData.SearchUserId, lineInfo.ID);
                         ReportDataSource reportDataSource = new ReportDataSource
                         {
                             Name = "DataSetMain",

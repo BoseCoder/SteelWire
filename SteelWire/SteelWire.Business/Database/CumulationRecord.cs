@@ -24,7 +24,7 @@ namespace SteelWire.Business.Database
     
         public virtual CriticalConfig CriticalConfig { get; set; }
         public virtual CumulationConfig CumulationConfig { get; set; }
-        public virtual SecurityUser SecurityUser { get; set; }
         public virtual CutRecord CutRecord { get; set; }
+        public virtual SecurityUser SecurityUser { get; set; }
     }
 }

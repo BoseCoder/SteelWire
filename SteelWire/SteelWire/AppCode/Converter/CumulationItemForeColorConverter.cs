@@ -15,7 +15,7 @@ namespace SteelWire.AppCode.Converter
             if (values != null && values.Length == 2 && values[0] is decimal && values[1] is decimal)
             {
                 decimal critical = (decimal)values[0];
-                if (critical > 0)
+                if (critical > decimal.Zero)
                 {
                     decimal cumulation = (decimal)values[1];
                     if (cumulation > critical)

@@ -36,7 +36,7 @@ namespace SteelWire.Business.DbOperator
                 quary = quary.Where(d => d.UpdateUserID == searchUserId);
             }
             CutRecord record = quary.OrderByDescending(d => d.UpdateTime).FirstOrDefault();
-            if (record != null && record.CutValue > 0)
+            if (record != null && record.CutValue > decimal.Zero)
             {
                 record = null;
             }
@@ -84,7 +84,7 @@ namespace SteelWire.Business.DbOperator
             {
                 quary = quary.Where(d => d.UpdateUserID == searchUserId);
             }
-            return quary.Where(d => d.CutValue > 0).OrderByDescending(d => d.UpdateTime).Take(count).ToList();
+            return quary.Where(d => d.CutValue > decimal.Zero).OrderByDescending(d => d.UpdateTime).Take(count).ToList();
         }
 
         public static List<CutRecord> GetAllHistory(long searchUserId, long lineId)
@@ -114,7 +114,7 @@ namespace SteelWire.Business.DbOperator
             {
                 quary = quary.Where(d => d.UpdateUserID == searchUserId);
             }
-            return quary.Where(d => d.CutValue > 0).OrderBy(d => d.UpdateTime).ToList();
+            return quary.Where(d => d.CutValue > decimal.Zero).OrderBy(d => d.UpdateTime).ToList();
         }
 
         public static bool ExistCutRecord(long searchUserId, long lineId, DateTime date)
@@ -144,7 +144,7 @@ namespace SteelWire.Business.DbOperator
             IQueryable<CutRecord> quary = dbContext.CutRecord.Where(d => d.WirelineID == lineId
                                                                          && d.UpdateTime >= startTime
                                                                          && d.UpdateTime < endTime
-                                                                         && d.CutValue > 0);
+                                                                         && d.CutValue > decimal.Zero);
             if (searchUserId > 0)
             {
                 quary = quary.Where(d => d.UpdateUserID == searchUserId);
@@ -189,7 +189,7 @@ namespace SteelWire.Business.DbOperator
                 data = GetLastRecord(dbContext, searchUserId, lineId);
             }
             data.CutValue = data.CumulationValue;
-            data.RemainValue = 0M;
+            data.RemainValue = decimal.Zero;
             data.CutLength = cutLength;
             data.UpdateUserID = updaterId;
             data.UpdateTime = DateTime.Now;
@@ -218,7 +218,7 @@ namespace SteelWire.Business.DbOperator
             List<CutRecord> cutRecords = GetAllHistory(dbContext, searchUserId, lineId);
             foreach (CutRecord cutRecord in cutRecords)
             {
-                decimal cumulationValue = 0;
+                decimal cumulationValue = decimal.Zero;
                 foreach (CumulationRecord cumulationRecord in cutRecord.CumulationRecord)
                 {
                     CriticalConfig criticalConfig = cumulationRecord.CriticalConfig;
@@ -236,14 +236,14 @@ namespace SteelWire.Business.DbOperator
                     cumulationValue += cumulationRecord.CumulationValue;
                 }
                 cutRecord.CumulationValue = cumulationValue;
-                if (cutRecord.CutValue > 0)
+                if (cutRecord.CutValue > decimal.Zero)
                 {
                     cutRecord.CutValue = cumulationValue;
-                    cutRecord.RemainValue = 0;
+                    cutRecord.RemainValue = decimal.Zero;
                 }
                 else
                 {
-                    cutRecord.CutValue = 0;
+                    cutRecord.CutValue = decimal.Zero;
                     cutRecord.RemainValue = cumulationValue;
                 }
                 cutRecord.UpdateUserID = updaterId;

@@ -9,11 +9,13 @@ namespace SteelWire.AppCode.Dependencies
     {
         public decimal AverageWeight { get; private set; }
         public decimal TotalLength { get; private set; }
-        protected override void OnItemsChanged(EventArgs e)
+
+        private void CalculateProperty()
         {
-            List<DependencyObject<T>> list = this.Items.Where(d => d.Value.Weight.Value > 0 && d.Value.Length.Value > 0).ToList();
+            List<DependencyObject<T>> list = this.Items
+                .Where(d => d.Value.Weight.Value > decimal.Zero && d.Value.Length.Value > decimal.Zero).ToList();
             this.TotalLength = list.Sum(item => item.Value.Length.Value);
-            if (this.TotalLength > 0)
+            if (this.TotalLength > decimal.Zero)
             {
                 if (list.Count == 1)
                 {
@@ -27,19 +29,24 @@ namespace SteelWire.AppCode.Dependencies
             }
             else
             {
-                this.AverageWeight = 0;
+                this.AverageWeight = decimal.Zero;
             }
+        }
+        protected override void OnItemsChanged(EventArgs e)
+        {
+            CalculateProperty();
             base.OnItemsChanged(e);
         }
-        public override void Add(T item)
+        protected override void AddItem(T item)
         {
             item.Weight.ValueChangedHandler += DrillPropertyChanged;
             item.Length.ValueChangedHandler += DrillPropertyChanged;
-            base.Add(item);
+            base.AddItem(item);
         }
         private void DrillPropertyChanged(object sender, EventArgs e)
         {
-            OnItemsChanged(e);
+            CalculateProperty();
+            this.OnItemsChangedHandler(e); ;
         }
     }
 }

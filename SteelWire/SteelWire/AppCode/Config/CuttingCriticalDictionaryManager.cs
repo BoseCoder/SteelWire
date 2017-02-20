@@ -36,47 +36,53 @@ namespace SteelWire.AppCode.Config
 
         static CuttingCriticalDictionaryManager()
         {
-            InitializeConfig();
+            InitializeConfig(false);
         }
 
-        public static void InitializeConfig()
+        public static void InitializeConfig(bool canWrite = true)
         {
             OnceInstance = new CuttingCriticalDictionaryManager("CuttingCriticalDictionary",
                 $"Config\\{GlobalData.Account}", "CuttingCriticalDictionary.config");
             OnceInstance.ReadConfig();
-            bool needWrite = false;
 
-            #region DictionarySectionInstance
+            if (canWrite)
+            {
+                bool needWrite = false;
 
-            CuttingCriticalDictionary dictionary = OnceInstance.DictionarySection;
-            if (dictionary == null)
-            {
-                needWrite = true;
-                dictionary = new CuttingCriticalDictionary();
-                OnceInstance.DictionarySection = dictionary;
-            }
-            if (dictionary.WireropeWorkloads.Count < 1)
-            {
-                needWrite = true;
-                ConstDictionary.InitializeConfigDictionary(dictionary.WireropeWorkloads, ConstDictionary.WireropeWorkloads);
-            }
-            if (dictionary.WireropeCutRoles.Count < 1)
-            {
-                needWrite = true;
-                ConstDictionary.InitializeConfigDictionary(dictionary.WireropeCutRoles, ConstDictionary.ConstWireropeCutRoles);
-            }
-            if (dictionary.WireropeEfficiencies.Count < 1)
-            {
-                needWrite = true;
-                ConstDictionary.InitializeConfigDictionary(dictionary.WireropeEfficiencies,
-                    ConstDictionary.ConstWireropeEfficiencies);
-            }
+                #region DictionarySectionInstance
 
-            #endregion
+                CuttingCriticalDictionary dictionary = OnceInstance.DictionarySection;
+                if (dictionary == null)
+                {
+                    needWrite = true;
+                    dictionary = new CuttingCriticalDictionary();
+                    OnceInstance.DictionarySection = dictionary;
+                }
+                if (dictionary.WireropeWorkloads.Count < 1)
+                {
+                    needWrite = true;
+                    ConstDictionary.InitializeConfigDictionary(dictionary.WireropeWorkloads,
+                        ConstDictionary.WireropeWorkloads);
+                }
+                if (dictionary.WireropeCutRoles.Count < 1)
+                {
+                    needWrite = true;
+                    ConstDictionary.InitializeConfigDictionary(dictionary.WireropeCutRoles,
+                        ConstDictionary.ConstWireropeCutRoles);
+                }
+                if (dictionary.WireropeEfficiencies.Count < 1)
+                {
+                    needWrite = true;
+                    ConstDictionary.InitializeConfigDictionary(dictionary.WireropeEfficiencies,
+                        ConstDictionary.ConstWireropeEfficiencies);
+                }
 
-            if (needWrite)
-            {
-                OnceInstance.SaveConfig();
+                #endregion
+
+                if (needWrite)
+                {
+                    OnceInstance.SaveConfig();
+                }
             }
         }
     }

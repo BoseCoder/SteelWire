@@ -18,7 +18,9 @@ namespace SteelWire.Business.Database
         public long DictionaryID { get; set; }
         public string Key { get; set; }
         public decimal MinDerrickHeight { get; set; }
+        public bool AllowMinDerrickHeight { get; set; }
         public decimal MaxDerrickHeight { get; set; }
+        public bool AllowMaxDerrickHeight { get; set; }
         public decimal MinCutLength { get; set; }
         public decimal MaxCutLength { get; set; }
     

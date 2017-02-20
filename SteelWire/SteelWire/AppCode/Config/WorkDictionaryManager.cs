@@ -36,34 +36,39 @@ namespace SteelWire.AppCode.Config
 
         static WorkDictionaryManager()
         {
-            InitializeConfig();
+            InitializeConfig(false);
         }
 
-        public static void InitializeConfig()
+        public static void InitializeConfig(bool canWrite = true)
         {
             OnceInstance = new WorkDictionaryManager("WorkDictionary", $"Config\\{GlobalData.Account}", "WorkDictionary.config");
             OnceInstance.ReadConfig();
-            bool needWrite = false;
 
-            #region DictionarySection
-
-            WorkDictionary dictionary = OnceInstance.DictionarySection;
-            if (dictionary == null)
+            if (canWrite)
             {
-                needWrite = true;
-                dictionary = new WorkDictionary();
-                OnceInstance.DictionarySection = dictionary;
-            }
-            if (dictionary.DrillingTypes.Count < 1)
-            {
-                ConstDictionary.InitializeConfigDictionary(dictionary.DrillingTypes, ConstDictionary.ConstDrillingTypes);
-            }
+                bool needWrite = false;
 
-            #endregion
+                #region DictionarySection
 
-            if (needWrite)
-            {
-                OnceInstance.SaveConfig();
+                WorkDictionary dictionary = OnceInstance.DictionarySection;
+                if (dictionary == null)
+                {
+                    needWrite = true;
+                    dictionary = new WorkDictionary();
+                    OnceInstance.DictionarySection = dictionary;
+                }
+                if (dictionary.DrillingTypes.Count < 1)
+                {
+                    ConstDictionary.InitializeConfigDictionary(dictionary.DrillingTypes,
+                        ConstDictionary.ConstDrillingTypes);
+                }
+
+                #endregion
+
+                if (needWrite)
+                {
+                    OnceInstance.SaveConfig();
+                }
             }
         }
     }

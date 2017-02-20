@@ -8,6 +8,10 @@ namespace SteelWire.Business.CalculateCommander
     public class CommanderRopeCut : CommanderBase
     {
         /// <summary>
+        /// 安全系数最大值为9
+        /// </summary>
+        const decimal SecurityCoefficientMaxValue = 9;
+        /// <summary>
         /// 钢丝绳每米工作量
         /// </summary>
         public decimal WirelineWorkloadPerMetre { get; set; }
@@ -44,9 +48,13 @@ namespace SteelWire.Business.CalculateCommander
         /// </summary>
         public long RopeCount { get; set; }
         /// <summary>
+        /// 安全系数是否限制为9
+        /// </summary>
+        public bool SecurityCoefficientLimitNine { get; set; }
+        /// <summary>
         /// 安全系数修正系数
         /// </summary>
-        public decimal SecurityCoefficient { get; private set; }
+        public decimal SecurityCorrectionCoefficient { get; private set; }
         /// <summary>
         /// 滚筒直径
         /// </summary>
@@ -78,9 +86,9 @@ namespace SteelWire.Business.CalculateCommander
         {
             this.WirelineCutLength = CalculateWirelineCutLength();
             this.FastLinePower = CalculateFastLinePower();
-            this.SecurityCoefficient = CalculateSecurityCoefficient();
+            this.SecurityCorrectionCoefficient = CalculateSecurityCoefficient();
             this.PulleyCoefficient = CalculatePulleyCoefficient();
-            return this.WirelineWorkloadPerMetre * this.WirelineCutLength * this.SecurityCoefficient * this.PulleyCoefficient;
+            return this.WirelineWorkloadPerMetre * this.WirelineCutLength * this.SecurityCorrectionCoefficient * this.PulleyCoefficient;
         }
 
         #region WirelineCutLength
@@ -120,7 +128,7 @@ namespace SteelWire.Business.CalculateCommander
         /// </summary>
         private void CheckInputForCalculateFastLinePower()
         {
-            if (this.RopeEfficiency == 0)
+            if (this.RopeEfficiency == decimal.Zero)
             {
                 throw new DivideByZeroException("RopeEfficiency is invalid.");
             }
@@ -128,7 +136,7 @@ namespace SteelWire.Business.CalculateCommander
             {
                 throw new DivideByZeroException("RopeCount is invalid.");
             }
-            if (this.RotaryHookWorkload == 0)
+            if (this.RotaryHookWorkload == decimal.Zero)
             {
                 throw new DivideByZeroException("RotaryHookWorkload is invalid.");
             }
@@ -160,7 +168,7 @@ namespace SteelWire.Business.CalculateCommander
         /// </summary>
         private void CheckInputForCalculateSecurityCoefficient()
         {
-            if (this.FastLinePower == 0)
+            if (this.FastLinePower == decimal.Zero)
             {
                 throw new DivideByZeroException("FastLinePower is invalid.");
             }
@@ -172,7 +180,11 @@ namespace SteelWire.Business.CalculateCommander
         /// <returns></returns>
         private decimal CalculateSecurityCoefficient()
         {
-            decimal coefficient = (this.WirelineMaxPower / this.FastLinePower);
+            decimal coefficient = this.WirelineMaxPower / this.FastLinePower;
+            if (this.SecurityCoefficientLimitNine && coefficient > SecurityCoefficientMaxValue)
+            {
+                coefficient = SecurityCoefficientMaxValue;
+            }
             decimal pow = (decimal)Math.Pow((double)coefficient, 2);
             return -0.016M * pow + 0.344M * coefficient - 0.326M;
         }
@@ -198,7 +210,7 @@ namespace SteelWire.Business.CalculateCommander
         /// </summary>
         private void CheckInputForCalculatePulleyCoefficient()
         {
-            if (this.WirelineDiameter == 0)
+            if (this.WirelineDiameter == decimal.Zero)
             {
                 throw new DivideByZeroException("WirelineDiameter is invalid.");
             }

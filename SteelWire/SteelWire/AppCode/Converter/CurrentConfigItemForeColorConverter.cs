@@ -26,7 +26,7 @@ namespace SteelWire.AppCode.Converter
             }
             else if (dataType == typeof(decimal))
             {
-                if ((decimal)value <= 0)
+                if ((decimal)value <= decimal.Zero)
                 {
                     return new SolidColorBrush(Color.FromRgb(255, 0, 0));
                 }

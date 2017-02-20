@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SteelWireSqlLiteModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=F:\Projects\Workshop\GitHub\SteelWire.B\trunk\SteelWire\SteelWire\Database\SteelWire.db;password=SteelWire" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="SteelWireSqlLiteModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\Database\SteelWire.db;password=SteelWire" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CriticalConfig">
           <Key>
             <PropertyRef Name="ID" />
@@ -163,7 +163,9 @@
           <Property Name="DictionaryID" Type="integer" Nullable="false" />
           <Property Name="Key" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="MinDerrickHeight" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="AllowMinDerrickHeight" Type="bit" Nullable="false" />
           <Property Name="MaxDerrickHeight" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="AllowMaxDerrickHeight" Type="bit" Nullable="false" />
           <Property Name="MinCutLength" Type="decimal" Precision="18" Scale="8" Nullable="false" />
           <Property Name="MaxCutLength" Type="decimal" Precision="18" Scale="8" Nullable="false" />
         </EntityType>
@@ -762,7 +764,9 @@
           <Property Name="DictionaryID" Type="Int64" Nullable="false" />
           <Property Name="Key" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MinDerrickHeight" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="AllowMinDerrickHeight" Type="Boolean" Nullable="false" />
           <Property Name="MaxDerrickHeight" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="AllowMaxDerrickHeight" Type="Boolean" Nullable="false" />
           <Property Name="MinCutLength" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
           <Property Name="MaxCutLength" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
           <NavigationProperty Name="CriticalDictionary" Relationship="Self.FK_WireropeCutRole_0_0" FromRole="WireropeCutRole" ToRole="CriticalDictionary" />
@@ -1335,7 +1339,9 @@
                 <ScalarProperty Name="DictionaryID" ColumnName="DictionaryID" />
                 <ScalarProperty Name="Key" ColumnName="Key" />
                 <ScalarProperty Name="MinDerrickHeight" ColumnName="MinDerrickHeight" />
+                <ScalarProperty Name="AllowMinDerrickHeight" ColumnName="AllowMinDerrickHeight" />
                 <ScalarProperty Name="MaxDerrickHeight" ColumnName="MaxDerrickHeight" />
+                <ScalarProperty Name="AllowMaxDerrickHeight" ColumnName="AllowMaxDerrickHeight" />
                 <ScalarProperty Name="MinCutLength" ColumnName="MinCutLength" />
                 <ScalarProperty Name="MaxCutLength" ColumnName="MaxCutLength" />
               </MappingFragment>

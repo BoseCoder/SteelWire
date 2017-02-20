@@ -163,7 +163,9 @@
           <Property Name="DictionaryID" Type="bigint" Nullable="false" />
           <Property Name="Key" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="MinDerrickHeight" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="AllowMinDerrickHeight" Type="bit" Nullable="false" />
           <Property Name="MaxDerrickHeight" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="AllowMaxDerrickHeight" Type="bit" Nullable="false" />
           <Property Name="MinCutLength" Type="decimal" Precision="18" Scale="8" Nullable="false" />
           <Property Name="MaxCutLength" Type="decimal" Precision="18" Scale="8" Nullable="false" />
         </EntityType>
@@ -762,7 +764,9 @@
           <Property Name="DictionaryID" Type="Int64" Nullable="false" />
           <Property Name="Key" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="MinDerrickHeight" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="AllowMinDerrickHeight" Type="Boolean" Nullable="false" />
           <Property Name="MaxDerrickHeight" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="AllowMaxDerrickHeight" Type="Boolean" Nullable="false" />
           <Property Name="MinCutLength" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
           <Property Name="MaxCutLength" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
           <NavigationProperty Name="CriticalDictionary" Relationship="Self.FK_WIREROPECUTR_R_CRITICALDICT" FromRole="WireropeCutRole" ToRole="CriticalDictionary" />
@@ -1335,7 +1339,9 @@
                 <ScalarProperty Name="DictionaryID" ColumnName="DictionaryID" />
                 <ScalarProperty Name="Key" ColumnName="Key" />
                 <ScalarProperty Name="MinDerrickHeight" ColumnName="MinDerrickHeight" />
+                <ScalarProperty Name="AllowMinDerrickHeight" ColumnName="AllowMinDerrickHeight" />
                 <ScalarProperty Name="MaxDerrickHeight" ColumnName="MaxDerrickHeight" />
+                <ScalarProperty Name="AllowMaxDerrickHeight" ColumnName="AllowMaxDerrickHeight" />
                 <ScalarProperty Name="MinCutLength" ColumnName="MinCutLength" />
                 <ScalarProperty Name="MaxCutLength" ColumnName="MaxCutLength" />
               </MappingFragment>

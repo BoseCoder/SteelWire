@@ -418,6 +418,7 @@
     <system:String x:Key="ErrorCaption">错误</system:String>
     <system:String x:Key="ErrorCurrentWireNoEmpty">当前绳编号不能为空，请重新输入！</system:String>
     <system:String x:Key="ErrorCurrentWireNoInvalid">输入的绳编号与当前绳编号不匹配，请点击“刷新”按钮加载该绳的最新数据！</system:String>
+    <system:String x:Key="ErrorCurrentWireLineDiameterEmpty">当前绳的钢丝绳直径不能为空，请重新选择！</system:String>
     <system:String x:Key="ErrorCurrentWireLineStructEmpty">当前绳的钢绳结构不能为空，请重新输入！</system:String>
     <system:String x:Key="ErrorCurrentWireLineStrongLevelEmpty">当前绳的钢绳强度级别不能为空，请重新输入！</system:String>
     <system:String x:Key="ErrorCurrentWireLineTwistDirectionEmpty">当前绳的钢绳捻向不能为空，请重新输入！</system:String>

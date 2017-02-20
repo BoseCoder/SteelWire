@@ -807,7 +807,9 @@ create table WireropeCutRole (
    DictionaryID         bigint               not null,
    "Key"                varchar(100)         not null,
    MinDerrickHeight     decimal(18,8)        not null,
+   AllowMinDerrickHeight     bit        not null,
    MaxDerrickHeight     decimal(18,8)        not null,
+   AllowMaxDerrickHeight     bit        not null,
    MinCutLength         decimal(18,8)        not null,
    MaxCutLength         decimal(18,8)        not null,
    constraint PK_WIREROPECUTROLE primary key (ID)

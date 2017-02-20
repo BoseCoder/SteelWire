@@ -84,7 +84,7 @@ namespace SteelWire.AppCode.Config
                 },
                 new WireropeWorkload
                 {
-                    Key = "InternationalSystem1",
+                    Key = "InternationalSystem8/8",
                     UnitSystem = UnitSystemEnum.ImperialSystem,
                     Name = "1",
                     Diameter = 1M,
@@ -92,44 +92,159 @@ namespace SteelWire.AppCode.Config
                 },
                 new WireropeWorkload
                 {
-                    Key = "InternationalSystem11/8",
+                    Key = "InternationalSystem9/8",
                     UnitSystem = UnitSystemEnum.ImperialSystem,
-                    Name = "11/8",
-                    Diameter = 1.375M,
+                    Name = "1-1/8",
+                    Diameter = 1.125M,
                     Workload = 10M
                 },
                 new WireropeWorkload
                 {
-                    Key = "InternationalSystem11/4",
+                    Key = "InternationalSystem10/8",
                     UnitSystem = UnitSystemEnum.ImperialSystem,
-                    Name = "11/4",
-                    Diameter = 2.75M,
+                    Name = "1-1/4",
+                    Diameter = 1.25M,
                     Workload = 14M
                 },
                 new WireropeWorkload
                 {
-                    Key = "InternationalSystem13/8",
+                    Key = "InternationalSystem11/8",
                     UnitSystem = UnitSystemEnum.ImperialSystem,
-                    Name = "13/8",
-                    Diameter = 1.625M,
+                    Name = "1-3/8",
+                    Diameter = 1.375M,
                     Workload = 18M
                 },
                 new WireropeWorkload
                 {
-                    Key = "InternationalSystem11/2",
+                    Key = "InternationalSystem12/8",
                     UnitSystem = UnitSystemEnum.ImperialSystem,
-                    Name = "11/2",
-                    Diameter = 5.5M,
+                    Name = "1-1/2",
+                    Diameter = 1.5M,
                     Workload = 21M
                 }
             };
-            ConstWireropeCutRoles = new List<WireropeCutRole>{
-                new WireropeCutRole{MinDerrickHeight = 22M,MaxDerrickHeight = 27.9M,MinCutLength = 16M,MaxCutLength = 18M},
-                new WireropeCutRole{MinDerrickHeight = 28M,MaxDerrickHeight = 36.5M,MinCutLength = 18M,MaxCutLength = 20M},
-                new WireropeCutRole{MinDerrickHeight = 36.6M,MaxDerrickHeight = 40.4M,MinCutLength = 22M,MaxCutLength = 24M},
-                new WireropeCutRole{MinDerrickHeight = 40.5M,MaxDerrickHeight = 42.9M,MinCutLength = 24M,MaxCutLength = 26M},
-                new WireropeCutRole{MinDerrickHeight = 43M,MaxDerrickHeight = 46M,MinCutLength = 26M,MaxCutLength = 28M},
-                new WireropeCutRole{MinDerrickHeight = 46M,MaxDerrickHeight = 0M,MinCutLength = 33M,MaxCutLength = 35M}
+            ConstWireropeCutRoles = new List<WireropeCutRole>
+            {
+                new WireropeCutRole
+                {
+                    UnitSystem = UnitSystemEnum.InternationalSystem,
+                    MinDerrickHeight = 22M,
+                    AllowMinDerrickHeight = true,
+                    MaxDerrickHeight = 27.9M,
+                    AllowMaxDerrickHeight = true,
+                    MinCutLength = 17M,
+                    MaxCutLength = 17M
+                },
+                new WireropeCutRole
+                {
+                    UnitSystem = UnitSystemEnum.InternationalSystem,
+                    MinDerrickHeight = 27.9M,
+                    AllowMinDerrickHeight = false,
+                    MaxDerrickHeight = 36.5M,
+                    AllowMaxDerrickHeight = true,
+                    MinCutLength = 19M,
+                    MaxCutLength = 19M
+                },
+                new WireropeCutRole
+                {
+                    UnitSystem = UnitSystemEnum.InternationalSystem,
+                    MinDerrickHeight = 36.5M,
+                    AllowMinDerrickHeight = false,
+                    MaxDerrickHeight = 40.4M,
+                    AllowMaxDerrickHeight = true,
+                    MinCutLength = 23M,
+                    MaxCutLength = 23M
+                },
+                new WireropeCutRole
+                {
+                    UnitSystem = UnitSystemEnum.InternationalSystem,
+                    MinDerrickHeight = 40.4M,
+                    AllowMinDerrickHeight = false,
+                    MaxDerrickHeight = 42.9M,
+                    AllowMaxDerrickHeight = true,
+                    MinCutLength = 25M,
+                    MaxCutLength = 25M
+                },
+                new WireropeCutRole
+                {
+                    UnitSystem = UnitSystemEnum.InternationalSystem,
+                    MinDerrickHeight = 42.9M,
+                    AllowMinDerrickHeight = false,
+                    MaxDerrickHeight = 46M,
+                    AllowMaxDerrickHeight = true,
+                    MinCutLength = 27M,
+                    MaxCutLength = 27M
+                },
+                new WireropeCutRole
+                {
+                    UnitSystem = UnitSystemEnum.InternationalSystem,
+                    MinDerrickHeight = 46M,
+                    AllowMinDerrickHeight = false,
+                    MaxDerrickHeight = decimal.MaxValue,
+                    AllowMaxDerrickHeight = true,
+                    MinCutLength = 34M,
+                    MaxCutLength = 34M
+                },
+                new WireropeCutRole
+                {
+                    UnitSystem = UnitSystemEnum.ImperialSystem,
+                    MinDerrickHeight = 72M,
+                    AllowMinDerrickHeight = true,
+                    MaxDerrickHeight = 91.9M,
+                    AllowMaxDerrickHeight = true,
+                    MinCutLength = 56M,
+                    MaxCutLength = 56M
+                },
+                new WireropeCutRole
+                {
+                    UnitSystem = UnitSystemEnum.ImperialSystem,
+                    MinDerrickHeight = 91.9M,
+                    AllowMinDerrickHeight = false,
+                    MaxDerrickHeight = 119.9M,
+                    AllowMaxDerrickHeight = true,
+                    MinCutLength = 62M,
+                    MaxCutLength = 62M
+                },
+                new WireropeCutRole
+                {
+                    UnitSystem = UnitSystemEnum.ImperialSystem,
+                    MinDerrickHeight = 119.9M,
+                    AllowMinDerrickHeight = false,
+                    MaxDerrickHeight = 132.9M,
+                    AllowMaxDerrickHeight = true,
+                    MinCutLength = 76M,
+                    MaxCutLength = 76M
+                },
+                new WireropeCutRole
+                {
+                    UnitSystem = UnitSystemEnum.ImperialSystem,
+                    MinDerrickHeight = 132.9M,
+                    AllowMinDerrickHeight = false,
+                    MaxDerrickHeight = 140.9M,
+                    AllowMaxDerrickHeight = true,
+                    MinCutLength = 82M,
+                    MaxCutLength = 82M
+                },
+                new WireropeCutRole
+                {
+                    UnitSystem = UnitSystemEnum.ImperialSystem,
+                    MinDerrickHeight = 140.9M,
+                    AllowMinDerrickHeight = false,
+                    MaxDerrickHeight = 151M,
+                    AllowMaxDerrickHeight = true,
+                    MinCutLength = 89M,
+                    MaxCutLength = 89M
+                },
+                new WireropeCutRole
+                {
+                    UnitSystem = UnitSystemEnum.ImperialSystem,
+                    MinDerrickHeight = 151M,
+                    AllowMinDerrickHeight = false,
+                    MaxDerrickHeight = decimal.MaxValue,
+                    AllowMaxDerrickHeight = true,
+                    MinCutLength = 112M,
+                    MaxCutLength = 112M
+                },
             };
             ConstWireropeEfficiencies = new List<WireropeEfficiency>
             {

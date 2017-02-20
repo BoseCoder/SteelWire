@@ -418,6 +418,7 @@
     <system:String x:Key="ErrorCaption">Error</system:String>
     <system:String x:Key="ErrorCurrentWireNoEmpty">Current wire number could not be empty, please input again.</system:String>
     <system:String x:Key="ErrorCurrentWireNoInvalid">The input wire number is not matched with current wire number, please click the "Refresh" button to load data of this line.</system:String>
+    <system:String x:Key="ErrorCurrentWireLineDiameterEmpty">Current wire line diameter could not be empty, please select again.</system:String>
     <system:String x:Key="ErrorCurrentWireLineStructEmpty">Current wire line struct could not be empty, please input again.</system:String>
     <system:String x:Key="ErrorCurrentWireLineStrongLevelEmpty">Current wire line strong level could not be empty, please input again.</system:String>
     <system:String x:Key="ErrorCurrentWireLineTwistDirectionEmpty">Current wire line twist direction could not be empty, please input again.</system:String>

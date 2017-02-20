@@ -4,22 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4982a97661554497b21f943c398b8a35" Name="Diagram1">
-        <EntityTypeShape EntityType="SteelWireSqlLiteModel.CriticalConfig" Width="1.5" PointX="8.25" PointY="18.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="SteelWireSqlLiteModel.CriticalDictionary" Width="1.5" PointX="3" PointY="18.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SteelWireSqlLiteModel.CriticalRecord" Width="1.5" PointX="10.5" PointY="30" IsExpanded="true" />
-        <EntityTypeShape EntityType="SteelWireSqlLiteModel.CumulationConfig" Width="1.5" PointX="5.25" PointY="25.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SteelWireSqlLiteModel.CumulationDictionary" Width="1.5" PointX="3" PointY="31.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="SteelWireSqlLiteModel.CumulationRecord" Width="1.5" PointX="10.5" PointY="24.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="SteelWireSqlLiteModel.CutRecord" Width="1.5" PointX="8.25" PointY="30" IsExpanded="true" />
-        <EntityTypeShape EntityType="SteelWireSqlLiteModel.DrillDeviceConfig" Width="1.5" PointX="7.5" PointY="25.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="SteelWireSqlLiteModel.DrillingType" Width="1.5" PointX="5.25" PointY="31.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SteelWireSqlLiteModel.Machine" Width="1.5" PointX="3" PointY="38.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="SteelWireSqlLiteModel.SecurityUser" Width="1.5" PointX="0.75" PointY="18.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="SteelWireSqlLiteModel.WirelineInfo" Width="1.5" PointX="3" PointY="40.875" IsExpanded="true" />
+      <Diagram DiagramId="71f8293837f844529ba75a2938ef6f4d" Name="Diagram1">
+        <EntityTypeShape EntityType="SteelWireSqlLiteModel.CriticalConfig" Width="1.5" PointX="8.25" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SteelWireSqlLiteModel.CriticalDictionary" Width="1.5" PointX="3" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="SteelWireSqlLiteModel.CriticalRecord" Width="1.5" PointX="10.5" PointY="30.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SteelWireSqlLiteModel.CumulationConfig" Width="1.5" PointX="5.25" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SteelWireSqlLiteModel.CumulationDictionary" Width="1.5" PointX="3" PointY="31.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SteelWireSqlLiteModel.CumulationRecord" Width="1.5" PointX="10.5" PointY="24.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SteelWireSqlLiteModel.CutRecord" Width="1.5" PointX="8.25" PointY="30.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SteelWireSqlLiteModel.DrillDeviceConfig" Width="1.5" PointX="7.5" PointY="26.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SteelWireSqlLiteModel.DrillingType" Width="1.5" PointX="5.25" PointY="31.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SteelWireSqlLiteModel.Machine" Width="1.5" PointX="3" PointY="38.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SteelWireSqlLiteModel.SecurityUser" Width="1.5" PointX="0.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SteelWireSqlLiteModel.WirelineInfo" Width="1.5" PointX="3" PointY="41.375" IsExpanded="true" />
         <EntityTypeShape EntityType="SteelWireSqlLiteModel.WireropeCutRole" Width="1.5" PointX="5.25" PointY="15.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SteelWireSqlLiteModel.WireropeEfficiency" Width="1.5" PointX="5.25" PointY="19" IsExpanded="true" />
-        <EntityTypeShape EntityType="SteelWireSqlLiteModel.WireropeWorkload" Width="1.5" PointX="5.25" PointY="22" IsExpanded="true" />
+        <EntityTypeShape EntityType="SteelWireSqlLiteModel.WireropeEfficiency" Width="1.5" PointX="5.25" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SteelWireSqlLiteModel.WireropeWorkload" Width="1.5" PointX="5.25" PointY="22.375" IsExpanded="true" />
         <AssociationConnector Association="SteelWireSqlLiteModel.FK_CriticalConfig_0_0" ManuallyRouted="false" />
         <AssociationConnector Association="SteelWireSqlLiteModel.FK_CriticalConfig_1_0" ManuallyRouted="false" />
         <AssociationConnector Association="SteelWireSqlLiteModel.FK_CriticalRecord_2_0" ManuallyRouted="false" />

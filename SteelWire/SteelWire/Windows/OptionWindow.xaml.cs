@@ -8,7 +8,6 @@ using System.Windows;
 using SteelWire.AppCode.Config;
 using SteelWire.AppCode.CustomException;
 using SteelWire.AppCode.CustomMessage;
-using SteelWire.AppCode.Data;
 using SteelWire.AppCode.Dependencies;
 using SteelWire.Business.Config;
 using SteelWire.Business.Database;
@@ -78,7 +77,7 @@ namespace SteelWire.Windows
         {
             try
             {
-                this.WindowData.Save();
+                Option.SaveConfig();
                 if (DatabaseConfigManager.OnceInstance.DatabaseType == DatabaseType.SqlServer)
                 {
                     string connString;
@@ -133,7 +132,7 @@ namespace SteelWire.Windows
                 dbContext = new DbContext(connString);
                 dbContext.Database.Connection.Open();
                 connString =
-                    $"metadata=res://*/Database.SteelWireModel.csdl|res://*/Database.SteelWireModel.ssdl|res://*/Database.SteelWireModel.msl;provider=System.Data.SqlClient;provider connection string=\"data source={this.TxtServer.Text.Trim()};initial catalog={this.TxtDatabase.Text.Trim()};persist security info=True;user id={this.TxtDbUser.Text.Trim()};password={this.PassBoxDbUser.Password.Trim()};MultipleActiveResultSets=True;App=EntityFramework\"";
+                    $"metadata=res://*/Database.SteelWireSqlServerModel.csdl|res://*/Database.SteelWireSqlServerModel.ssdl|res://*/Database.SteelWireSqlServerModel.msl;provider=System.Data.SqlClient;provider connection string=\"data source={this.TxtServer.Text.Trim()};initial catalog={this.TxtDatabase.Text.Trim()};persist security info=True;user id={this.TxtDbUser.Text.Trim()};password={this.PassBoxDbUser.Password.Trim()};MultipleActiveResultSets=True;App=EntityFramework\"";
                 return true;
             }
             catch (Exception ex)
@@ -151,8 +150,7 @@ namespace SteelWire.Windows
 
         private void OptionWindowClosing(object sender, CancelEventArgs e)
         {
-            GlobalData.Language.Value = UserConfigManager.OnceInstance.Language;
-            GlobalData.Wireline.UnitSystem.Value = UserConfigManager.OnceInstance.UnitSystem;
+            Option.ReadConfig();
         }
     }
 }

@@ -29,17 +29,22 @@ namespace SteelWire.AppCode.Config
 
         static UserConfigManager()
         {
-            InitializeConfig();
+            InitializeConfig(false);
         }
 
-        public static void InitializeConfig()
+        public static void InitializeConfig(bool canWrite = true)
         {
             OnceInstance = new UserConfigManager("UserConfig", $"Config\\{GlobalData.Account}", "UserConfig.config");
             OnceInstance.ReadConfig();
 
-            if (!OnceInstance.AppConfig.HasFile)
+            if (canWrite)
             {
-                OnceInstance.SaveConfig();
+                if (!OnceInstance.AppConfig.HasFile)
+                {
+                    OnceInstance.Language = SystemConfigManager.OnceInstance.Language;
+                    OnceInstance.UnitSystem = SystemConfigManager.OnceInstance.UnitSystem;
+                    OnceInstance.SaveConfig();
+                }
             }
         }
     }

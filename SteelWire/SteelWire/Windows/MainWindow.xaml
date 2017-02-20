@@ -284,13 +284,13 @@
                                 <Grid Width="125" Margin="0,0,5,0">
                                     <Label x:Name="LblWirelineDiameter" Content="{DynamicResource LblWirelineDiameter}" HorizontalAlignment="Right"/>
                                 </Grid>
-                                <ComboBox x:Name="CboWirelineDiameter" Width="120">
+                                <ComboBox x:Name="CboWirelineDiameter" Width="120" DisplayMemberPath="Value.Name" SelectedValuePath="Value.Name">
+                                    <ComboBox.ItemsSource>
+                                        <Binding Path="WireropeWorkloadCollection.Items" Mode="OneWay" Source="{StaticResource WindowDataKey}"></Binding>
+                                    </ComboBox.ItemsSource>
                                     <ComboBox.SelectedValue>
                                         <Binding Path="Diameter.Value" Mode="TwoWay" Source="{x:Static data:GlobalData.Wireline}"
                                                  UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <validationRule:DecimalValidationRule />
-                                            </Binding.ValidationRules>
                                         </Binding>
                                     </ComboBox.SelectedValue>
                                 </ComboBox>
@@ -364,7 +364,7 @@
                 <Border Margin="0" Background="White" BorderThickness="1,0,1,1" BorderBrush="#FFD5DFE5">
                     <DockPanel Margin="10,0,10,0">
                         <WrapPanel Margin="0,0,0,10">
-                            <ListView x:Name="ListViewDrillPipes"
+                            <ListView x:Name="ListViewDrillPipes" Focusable="False"
             					Template="{DynamicResource ListViewTemplate}"
             					ItemTemplate="{DynamicResource ListViewItemTemplate}"
             					ItemContainerStyle="{DynamicResource ListViewItemContainerStyle}" Margin="0,10,0,0">
@@ -378,7 +378,7 @@
                                     </ItemsPanelTemplate>
                                 </ListView.ItemsPanel>
                             </ListView>
-                            <ListView x:Name="ListViewHeavierDrillPipes"
+                            <ListView x:Name="ListViewHeavierDrillPipes" Focusable="False"
             					Template="{DynamicResource ListViewTemplate}"
             					ItemTemplate="{DynamicResource ListViewItemTemplate}"
             					ItemContainerStyle="{DynamicResource ListViewItemContainerStyle}" Margin="0,10,0,0">
@@ -392,7 +392,7 @@
                                     </ItemsPanelTemplate>
                                 </ListView.ItemsPanel>
                             </ListView>
-                            <ListView x:Name="ListViewDrillCollars"
+                            <ListView x:Name="ListViewDrillCollars" Focusable="False"
             					Template="{DynamicResource ListViewTemplate}"
             					ItemTemplate="{DynamicResource ListViewItemTemplate}"
             					ItemContainerStyle="{DynamicResource ListViewItemContainerStyle}" Margin="0,10,0,0">
@@ -406,7 +406,7 @@
                                     </ItemsPanelTemplate>
                                 </ListView.ItemsPanel>
                             </ListView>
-                            <ListView x:Name="ListViewBushing"
+                            <ListView x:Name="ListViewBushing" Focusable="False"
             					Template="{DynamicResource ListViewTemplate}"
             					ItemTemplate="{DynamicResource ListViewItemTemplate}"
             					ItemContainerStyle="{DynamicResource ListViewItemContainerStyle}" Margin="0,10,0,0">

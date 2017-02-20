@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using SteelWire.AppCode.Config;
+using SteelWire.AppCode.Data;
 using SteelWire.Language;
 
 namespace SteelWire
@@ -13,7 +15,14 @@ namespace SteelWire
         {
             base.OnStartup(e);
 
-            LanguageManager.LoadLanguage(UserConfigManager.OnceInstance.Language);
+            GlobalData.Language.Value = SystemConfigManager.OnceInstance.Language;
+            LanguageManager.LoadLanguage(GlobalData.Language.Value);
+            GlobalData.Language.ValueChangedHandler += LanguageChanged;
+        }
+
+        private static void LanguageChanged(object sender, EventArgs e)
+        {
+            LanguageManager.LoadLanguage(GlobalData.Language.Value);
         }
     }
 }

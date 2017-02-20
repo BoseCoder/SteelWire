@@ -63,16 +63,13 @@ namespace SteelWire.Business.CalculateCommander
         {
             CommanderRopeCut commanderRopeCut = new CommanderRopeCut
             {
+                SecurityCoefficientLimitNine = true,
                 WirelineMaxPower = this._criticalConfig.WirelineMaxPower,
                 RotaryHookWorkload = this._cumulationConfig.RealRotaryHookWorkload,
                 RopeEfficiency = this._wireropeEfficiency.RollingValue,
                 RopeCount = this._criticalConfig.RopeCount
             };
             decimal securityCoefficient = commanderRopeCut.GetSecurityCoefficient();
-            if (securityCoefficient > 9)
-            {
-                securityCoefficient = 9;
-            }
             List<DrillDeviceConfig> drillPipes =
                 this._drillDeviceConfigs.Where(c => c.Type == DrillDeviceTypeEnum.DrillPipe.ToString()).ToList();
             List<DrillDeviceConfig> heavierDrillPipes =

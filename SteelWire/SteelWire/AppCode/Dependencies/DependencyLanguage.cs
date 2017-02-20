@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using SteelWire.AppCode.Config;
 using SteelWire.AppCode.Data;
-using SteelWire.Language;
 
 namespace SteelWire.AppCode.Dependencies
 {
@@ -12,7 +10,6 @@ namespace SteelWire.AppCode.Dependencies
 
         static DependencyLanguage()
         {
-            GlobalData.Language.Value = UserConfigManager.OnceInstance.Language;
             GlobalData.Language.ValueChangedHandler += LanguageChanged;
         }
 
@@ -30,7 +27,6 @@ namespace SteelWire.AppCode.Dependencies
 
         private static void LanguageChanged(object sender, EventArgs e)
         {
-            LanguageManager.LoadLanguage(GlobalData.Language.Value);
             foreach (DependencyLanguage languageObject in DependencyLanguageObjects)
             {
                 languageObject.Value = GenerateValue(languageObject.VlueGenerater);

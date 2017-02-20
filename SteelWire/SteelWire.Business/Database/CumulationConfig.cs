@@ -40,8 +40,8 @@ namespace SteelWire.Business.Database
         public System.DateTime ConfigTime { get; set; }
         public long ConfigTimeStamp { get; set; }
     
-        public virtual SecurityUser SecurityUser { get; set; }
         public virtual CumulationDictionary CumulationDictionary { get; set; }
+        public virtual SecurityUser SecurityUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CumulationRecord> CumulationRecord { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

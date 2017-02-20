@@ -38,73 +38,77 @@ namespace SteelWire.AppCode.Config
 
         static WorkConfigManager()
         {
-            InitializeConfig();
+            InitializeConfig(false);
         }
 
-        public static void InitializeConfig()
+        public static void InitializeConfig(bool canWrite = true)
         {
             OnceInstance = new WorkConfigManager("WorkConfig", $"Config\\{GlobalData.Account}", "WorkConfig.config");
             OnceInstance.ReadConfig();
-            WorkDictionary dictionary = WorkDictionaryManager.OnceInstance.DictionarySection;
-            bool needWrite = false;
 
-            #region ConfigSection
+            if (canWrite)
+            {
+                bool needWrite = false;
 
-            WorkConfig current = OnceInstance.ConfigSection;
-            if (current == null)
-            {
-                needWrite = true;
-                current = new WorkConfig();
-                OnceInstance.ConfigSection = current;
-            }
-            if (current.DrillPipes.Count < 1)
-            {
-                needWrite = true;
-                current.DrillPipes.Add(new Drill
-                {
-                    Name = "DrillPipe1"
-                });
-            }
-            if (current.HeavierDrillPipes.Count < 1)
-            {
-                needWrite = true;
-                current.HeavierDrillPipes.Add(new Drill
-                {
-                    Name = "HeavierDrillPipe1"
-                });
-            }
-            if (current.DrillCollars.Count < 1)
-            {
-                needWrite = true;
-                current.DrillCollars.Add(new Drill
-                {
-                    Name = "DrillCollar1"
-                });
-                current.DrillCollars.Add(new Drill
-                {
-                    Name = "DrillCollar2"
-                });
-            }
-            if (current.Bushings.Count < 1)
-            {
-                needWrite = true;
-                current.Bushings.Add(new Drill
-                {
-                    Name = "Bushing1"
-                });
-            }
-            List<DrillingType> drillingTypes = dictionary.DrillingTypes.Cast<DrillingType>().ToList();
-            if (drillingTypes.All(d => !Equals(d.Name, current.DrillingType)))
-            {
-                needWrite = true;
-                current.DrillingType = drillingTypes.First().Name;
-            }
+                #region ConfigSection
 
-            #endregion
+                WorkConfig current = OnceInstance.ConfigSection;
+                if (current == null)
+                {
+                    needWrite = true;
+                    current = new WorkConfig();
+                    OnceInstance.ConfigSection = current;
+                }
+                if (current.DrillPipes.Count < 1)
+                {
+                    needWrite = true;
+                    current.DrillPipes.Add(new Drill
+                    {
+                        Name = "DrillPipe1"
+                    });
+                }
+                if (current.HeavierDrillPipes.Count < 1)
+                {
+                    needWrite = true;
+                    current.HeavierDrillPipes.Add(new Drill
+                    {
+                        Name = "HeavierDrillPipe1"
+                    });
+                }
+                if (current.DrillCollars.Count < 1)
+                {
+                    needWrite = true;
+                    current.DrillCollars.Add(new Drill
+                    {
+                        Name = "DrillCollar1"
+                    });
+                    current.DrillCollars.Add(new Drill
+                    {
+                        Name = "DrillCollar2"
+                    });
+                }
+                if (current.Bushings.Count < 1)
+                {
+                    needWrite = true;
+                    current.Bushings.Add(new Drill
+                    {
+                        Name = "Bushing1"
+                    });
+                }
+                WorkDictionary dictionary = WorkDictionaryManager.OnceInstance.DictionarySection;
+                List<DrillingType> drillingTypes = dictionary.DrillingTypes.Cast<DrillingType>().ToList();
+                if (drillingTypes.All(d => !Equals(d.Name, current.DrillingType)))
+                {
+                    needWrite = true;
+                    current.DrillingType = drillingTypes.First().Name;
+                }
 
-            if (needWrite)
-            {
-                OnceInstance.SaveConfig();
+                #endregion
+
+                if (needWrite)
+                {
+                    OnceInstance.SaveConfig();
+                }
             }
         }
     }

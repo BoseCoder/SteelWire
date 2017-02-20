@@ -38,37 +38,42 @@ namespace SteelWire.AppCode.Config
 
         static CuttingCriticalConfigManager()
         {
-            InitializeConfig();
+            InitializeConfig(false);
         }
 
-        public static void InitializeConfig()
+        public static void InitializeConfig(bool canWrite = true)
         {
             OnceInstance = new CuttingCriticalConfigManager("CuttingCriticalConfig", $"Config\\{GlobalData.Account}", "CuttingCriticalConfig.config");
             OnceInstance.ReadConfig();
-            CuttingCriticalDictionary dictionary = CuttingCriticalDictionaryManager.OnceInstance.DictionarySection;
-            bool needWrite = false;
 
-            #region ConfigSection
-
-            CuttingCriticalConfig current = OnceInstance.ConfigSection;
-            if (current == null)
+            if (canWrite)
             {
-                needWrite = true;
-                current = new CuttingCriticalConfig();
-                OnceInstance.ConfigSection = current;
-            }
-            List<WireropeEfficiency> wireropeEfficiencies = dictionary.WireropeEfficiencies.Cast<WireropeEfficiency>().ToList();
-            if (wireropeEfficiencies.All(w => w.Count != current.RopeCount))
-            {
-                needWrite = true;
-                current.RopeCount = wireropeEfficiencies.First().Count;
-            }
+                bool needWrite = false;
 
-            #endregion
+                #region ConfigSection
 
-            if (needWrite)
-            {
-                OnceInstance.SaveConfig();
+                CuttingCriticalConfig current = OnceInstance.ConfigSection;
+                if (current == null)
+                {
+                    needWrite = true;
+                    current = new CuttingCriticalConfig();
+                    OnceInstance.ConfigSection = current;
+                }
+                CuttingCriticalDictionary dictionary = CuttingCriticalDictionaryManager.OnceInstance.DictionarySection;
+                List<WireropeEfficiency> wireropeEfficiencies =
+                    dictionary.WireropeEfficiencies.Cast<WireropeEfficiency>().ToList();
+                if (wireropeEfficiencies.All(w => w.Count != current.RopeCount))
+                {
+                    needWrite = true;
+                    current.RopeCount = wireropeEfficiencies.First().Count;
+                }
+
+                #endregion
+
+                if (needWrite)
+                {
+                    OnceInstance.SaveConfig();
+                }
             }
         }
     }

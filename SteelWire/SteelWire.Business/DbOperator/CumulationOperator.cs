@@ -64,7 +64,7 @@ namespace SteelWire.Business.DbOperator
 
         #endregion
 
-        #region Cumulation Dictionary
+        #region Cumulation Config
 
         public static CumulationConfig GetLastConfig(long searchUserId)
         {
@@ -146,16 +146,16 @@ namespace SteelWire.Business.DbOperator
                     UpdateUserID = cumulationRecord.CalculateUserID,
                     UpdateTime = cumulationRecord.CalculateTime,
                     CumulationValue = cumulationRecord.CumulationValue,
-                    CutValue = 0,
+                    CutValue = decimal.Zero,
                     RemainValue = cumulationRecord.CumulationValue,
-                    CutLength = 0
+                    CutLength = decimal.Zero
                 };
                 dbContext.CutRecord.Add(cutRecord);
                 dbContext.SaveChanges();
             }
             else
             {
-                cutRecord.CumulationValue = cutRecord.CumulationRecord.Sum(d => d.CumulationValue);
+                cutRecord.CumulationValue = cutRecord.CumulationRecord.Sum(d => d.CumulationValue) + cumulationRecord.CumulationValue;
             }
             cumulationRecord.CutRecordID = cutRecord.ID;
             dbContext.CumulationRecord.Add(cumulationRecord);

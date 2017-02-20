@@ -120,6 +120,16 @@ namespace SteelWire.AppCode.Config
         }
 
         /// <summary>
+        /// 单位体系
+        /// </summary>
+        [ConfigurationProperty("unitSystem", IsRequired = true)]
+        public UnitSystemEnum UnitSystem
+        {
+            get { return (UnitSystemEnum)this["unitSystem"]; }
+            set { this["unitSystem"] = value; }
+        }
+
+        /// <summary>
         /// 井架高度最小值
         /// </summary>
         [ConfigurationProperty("minDerrickHeight", IsRequired = true)]
@@ -130,6 +140,16 @@ namespace SteelWire.AppCode.Config
         }
 
         /// <summary>
+        /// 允许井架高度最小值
+        /// </summary>
+        [ConfigurationProperty("allowMinDerrickHeight", IsRequired = true)]
+        public bool AllowMinDerrickHeight
+        {
+            get { return (bool)this["allowMinDerrickHeight"]; }
+            set { this["allowMinDerrickHeight"] = value; }
+        }
+
+        /// <summary>
         /// 井架高度最大值
         /// </summary>
         [ConfigurationProperty("maxDerrickHeight", IsRequired = true)]
@@ -137,6 +157,16 @@ namespace SteelWire.AppCode.Config
         {
             get { return (decimal)this["maxDerrickHeight"]; }
             set { this["maxDerrickHeight"] = value; }
+        }
+
+        /// <summary>
+        /// 允许井架高度最大值
+        /// </summary>
+        [ConfigurationProperty("allowMaxDerrickHeight", IsRequired = true)]
+        public bool AllowMaxDerrickHeight
+        {
+            get { return (bool)this["allowMaxDerrickHeight"]; }
+            set { this["allowMaxDerrickHeight"] = value; }
         }
 
         /// <summary>

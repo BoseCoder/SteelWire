@@ -106,9 +106,9 @@ namespace SteelWire.WindowData
             this.WelcomeText = DependencyLanguage.Generate(
                 () => $"{LanguageManager.GetLocalResourceStringLeft("Welcome")}{GlobalData.UserDisplay.Value}");
             this.SummaryText = DependencyLanguage.Generate(() =>
-                $"{LanguageManager.GetLocalResourceStringLeft("GroupCumulationAndResetTitle")} -- {LanguageManager.GetLocalResourceStringLeft("LblWirelineCuttingTitle")}{(this.CriticalValue.Value > 0 ? $"{this.CriticalValue.Value:F3}" : "0")}{UnitData.TonKilometre.Value} -- {LanguageManager.GetLocalResourceStringLeft("LblWirelineCutLength")}{(this.CriticalLength.Value > 0 ? $"{this.CriticalLength.Value:F3}" : "0")}{UnitData.Metre.Value}");
+                $"{LanguageManager.GetLocalResourceStringLeft("GroupCumulationAndResetTitle")} -- {LanguageManager.GetLocalResourceStringLeft("LblWirelineCuttingTitle")}{(this.CriticalValue.Value > decimal.Zero ? $"{this.CriticalValue.Value:F3}" : "0")}{UnitData.TonKilometre.Value} -- {LanguageManager.GetLocalResourceStringLeft("LblWirelineCutLength")}{(this.CriticalLength.Value > decimal.Zero ? $"{this.CriticalLength.Value:F3}" : "0")}{UnitData.Metre.Value}");
 
-            InitializeData();
+            //InitializeData();
             InitializeEvent();
         }
 
@@ -168,7 +168,7 @@ namespace SteelWire.WindowData
 
         private void UnitSystemChanged(object sender, EventArgs e)
         {
-            if (!this._isInitializeData)
+            if (GlobalData.IsSignIn)
             {
                 InitializeWireropeWorkloads();
                 CommonCoefficientValueChanged(sender, e);
@@ -190,7 +190,6 @@ namespace SteelWire.WindowData
             {
                 GlobalData.Wireline.Diameter.Value = wireropeWorkload.Name;
             }
-            this.WirelineNumber.Value = UserConfigManager.OnceInstance.LastWirelineNumber;
 
             CuttingCriticalConfig criticalConf = CuttingCriticalConfigManager.OnceInstance.ConfigSection;
             WorkConfig workConf = WorkConfigManager.OnceInstance.ConfigSection;
@@ -249,6 +248,7 @@ namespace SteelWire.WindowData
             this.WireropeWorkloadCollection.Clear();
             this.WireropeWorkloadCollection.AddRange(criticalDic.WireropeWorkloads.Cast<WireropeWorkload>()
                 .Where(l => l.UnitSystem == GlobalData.Wireline.UnitSystem.Value));
+            GlobalData.Wireline.Diameter.Value = this.WireropeWorkloadCollection.Items.First().Value.Name;
         }
 
         /// <summary>
@@ -271,10 +271,14 @@ namespace SteelWire.WindowData
         private void CalculateWirelineCutLength()
         {
             CuttingCriticalDictionary criticalDic = CuttingCriticalDictionaryManager.OnceInstance.DictionarySection;
-            WireropeCutRole wireropeCutRole = criticalDic.WireropeCutRoles.Cast<WireropeCutRole>()
-                .FirstOrDefault(
-                    r =>
-                        r.MinDerrickHeight <= this.DerrickHeight.Value && r.MaxDerrickHeight >= this.DerrickHeight.Value);
+            WireropeCutRole wireropeCutRole = criticalDic.WireropeCutRoles.Cast<WireropeCutRole>().FirstOrDefault(r =>
+                r.UnitSystem == GlobalData.Wireline.UnitSystem.Value
+                && (r.AllowMinDerrickHeight
+                    ? this.DerrickHeight.Value >= r.MinDerrickHeight
+                    : this.DerrickHeight.Value > r.MinDerrickHeight)
+                && (r.AllowMaxDerrickHeight
+                    ? this.DerrickHeight.Value <= r.MaxDerrickHeight
+                    : this.DerrickHeight.Value < r.MaxDerrickHeight));
             if (wireropeCutRole == null)
             {
                 this.CriticalLength.Value = -1;
@@ -404,7 +408,13 @@ namespace SteelWire.WindowData
         {
             CuttingCriticalDictionary criticalDic = CuttingCriticalDictionaryManager.OnceInstance.DictionarySection;
             WireropeCutRole wireropeCutRole = criticalDic.WireropeCutRoles.Cast<WireropeCutRole>().FirstOrDefault(r =>
-                r.MinDerrickHeight <= this.DerrickHeight.Value && r.MaxDerrickHeight >= this.DerrickHeight.Value);
+                r.UnitSystem == GlobalData.Wireline.UnitSystem.Value
+                && (r.AllowMinDerrickHeight
+                    ? this.DerrickHeight.Value >= r.MinDerrickHeight
+                    : this.DerrickHeight.Value > r.MinDerrickHeight)
+                && (r.AllowMaxDerrickHeight
+                    ? this.DerrickHeight.Value <= r.MaxDerrickHeight
+                    : this.DerrickHeight.Value < r.MaxDerrickHeight));
             if (wireropeCutRole == null)
             {
                 this.CriticalValue.Value = -1;
@@ -473,7 +483,7 @@ namespace SteelWire.WindowData
         }
 
         /// <summary>
-        /// 计算安全系数（服役系数）
+        /// 计算服役系数
         /// </summary>
         /// <exception cref="ConfigurationErrorsException"></exception>
         private decimal CalculateSecurityCoefficient()
@@ -486,17 +496,13 @@ namespace SteelWire.WindowData
             }
             CommanderRopeCut commander = new CommanderRopeCut
             {
+                SecurityCoefficientLimitNine = true,
                 WirelineMaxPower = this.WirelineMaxPower.Value,
                 RotaryHookWorkload = this.RealRotaryHookWorkload.Value,
                 RopeEfficiency = wireropeEfficiency.RollingValue,
                 RopeCount = this.RopeCount.Value
             };
-            decimal securityCoefficient = commander.GetSecurityCoefficient();
-            if (securityCoefficient > 9)
-            {
-                securityCoefficient = 9;
-            }
-            return securityCoefficient;
+            return commander.GetSecurityCoefficient();
         }
 
         /// <summary>
@@ -606,10 +612,10 @@ namespace SteelWire.WindowData
         /// </summary>
         private void CalculateTotalWork()
         {
-            if (this.DrillingWorkValue.Value < 0
-                || this.TripWorkValue.Value < 0
-                || this.BushingWorkValue.Value < 0
-                || this.CoringWorkValue.Value < 0)
+            if (this.DrillingWorkValue.Value < decimal.Zero
+                || this.TripWorkValue.Value < decimal.Zero
+                || this.BushingWorkValue.Value < decimal.Zero
+                || this.CoringWorkValue.Value < decimal.Zero)
             {
                 this.CumulationValue.Value = -1;
                 return;
@@ -630,6 +636,8 @@ namespace SteelWire.WindowData
             if (signWindow.ShowDialog() == true)
             {
                 UserConfigManager.InitializeConfig();
+                Option.ReadConfig();
+                this.WirelineNumber.Value = UserConfigManager.OnceInstance.LastWirelineNumber;
                 CuttingCriticalDictionaryManager.InitializeConfig();
                 CuttingCriticalConfigManager.InitializeConfig();
                 WorkDictionaryManager.InitializeConfig();
@@ -650,7 +658,7 @@ namespace SteelWire.WindowData
             WirelineInfo lineInfo = null;
             CriticalRecord criticalRecord = null;
             CutRecord cutRecord = null;
-            decimal totalValue = 0;
+            decimal totalValue = decimal.Zero;
             if (!string.IsNullOrWhiteSpace(this.WirelineNumber.Value))
             {
                 if (dbContext == null)
@@ -751,6 +759,10 @@ namespace SteelWire.WindowData
             {
                 throw new ErrorException("CurrentWireNoInvalid");
             }
+            if (string.IsNullOrWhiteSpace(GlobalData.Wireline.Diameter.Value))
+            {
+                throw new ErrorException("CurrentWireLineDiameterEmpty");
+            }
             if (string.IsNullOrWhiteSpace(GlobalData.Wireline.Struct.Value))
             {
                 throw new ErrorException("CurrentWireLineStructEmpty");
@@ -763,15 +775,15 @@ namespace SteelWire.WindowData
             {
                 throw new ErrorException("CurrentWireLineTwistDirectionEmpty");
             }
-            if (GlobalData.Wireline.OrderLength.Value <= 0)
+            if (GlobalData.Wireline.OrderLength.Value <= decimal.Zero)
             {
                 throw new ErrorException("CurrentWireLineOrderLengthZero");
             }
-            if (this.CriticalValue.Value <= 0)
+            if (this.CriticalValue.Value <= decimal.Zero)
             {
                 throw new ErrorException("CriticalValueInvalid");
             }
-            if (this.CumulationValue.Value <= 0)
+            if (this.CumulationValue.Value <= decimal.Zero)
             {
                 throw new ErrorException("CumulationValueInvalid");
             }
@@ -977,7 +989,9 @@ namespace SteelWire.WindowData
                         {
                             Key = w.Key,
                             MinDerrickHeight = w.MinDerrickHeight,
+                            AllowMinDerrickHeight = w.AllowMinDerrickHeight,
                             MaxDerrickHeight = w.MaxDerrickHeight,
+                            AllowMaxDerrickHeight = w.AllowMaxDerrickHeight,
                             MinCutLength = w.MinCutLength,
                             MaxCutLength = w.MaxCutLength
                         }).ToList(),
@@ -1270,7 +1284,7 @@ namespace SteelWire.WindowData
                     FluidDensity = this.FluidDensity.Value,
                     ElevatorWeight = this.ElevatorWeight.Value,
                     DrillDeviceConfig = this.DrillPipes.Items
-                        .Where(d => d.Value.Weight.Value > 0 && d.Value.Length.Value > 0)
+                        .Where(d => d.Value.Weight.Value > decimal.Zero && d.Value.Length.Value > decimal.Zero)
                         .Select(d => new DrillDeviceConfig
                         {
                             Name = d.Value.Name.Value,
@@ -1279,7 +1293,7 @@ namespace SteelWire.WindowData
                             Type = DrillDeviceTypeEnum.DrillPipe.ToString()
                         })
                         .Union(this.HeavierDrillPipes.Items
-                            .Where(d => d.Value.Weight.Value > 0 && d.Value.Length.Value > 0)
+                            .Where(d => d.Value.Weight.Value > decimal.Zero && d.Value.Length.Value > decimal.Zero)
                             .Select(d => new DrillDeviceConfig
                             {
                                 Name = d.Value.Name.Value,
@@ -1288,7 +1302,7 @@ namespace SteelWire.WindowData
                                 Type = DrillDeviceTypeEnum.HeavierDrillPipe.ToString()
                             }))
                         .Union(this.DrillCollars.Items
-                            .Where(d => d.Value.Weight.Value > 0 && d.Value.Length.Value > 0)
+                            .Where(d => d.Value.Weight.Value > decimal.Zero && d.Value.Length.Value > decimal.Zero)
                             .Select(d => new DrillDeviceConfig
                             {
                                 Name = d.Value.Name.Value,
@@ -1297,7 +1311,7 @@ namespace SteelWire.WindowData
                                 Type = DrillDeviceTypeEnum.DrillCollar.ToString()
                             }))
                         .Union(this.Bushings.Items
-                            .Where(d => d.Value.Weight.Value > 0 && d.Value.Length.Value > 0)
+                            .Where(d => d.Value.Weight.Value > decimal.Zero && d.Value.Length.Value > decimal.Zero)
                             .Select(d => new DrillDeviceConfig
                             {
                                 Name = d.Value.Name.Value,
@@ -1328,8 +1342,7 @@ namespace SteelWire.WindowData
             if (unitSystemUpdate)
             {
                 CutOperator.CalculateAllRecord(dbContext, GlobalData.SearchUserId, GlobalData.UserId,
-                    GlobalData.Wireline.Id,
-                    now);
+                    GlobalData.Wireline.Id, now);
             }
             CumulationRecord recordData = new CumulationRecord
             {
@@ -1349,7 +1362,7 @@ namespace SteelWire.WindowData
         /// <returns></returns>
         public bool CheckNeedReset()
         {
-            return GlobalData.Wireline.CriticalValue.Value > 0
+            return GlobalData.Wireline.CriticalValue.Value > decimal.Zero
                    && Math.Round(GlobalData.Wireline.CumulationValue.Value, 3) >=
                    Math.Round(GlobalData.Wireline.CriticalValue.Value, 3);
         }
@@ -1364,20 +1377,20 @@ namespace SteelWire.WindowData
             {
                 throw new ErrorException("CurrentWireNoInvalid");
             }
-            if (GlobalData.Wireline.CumulationValue.Value <= 0)
+            if (GlobalData.Wireline.CumulationValue.Value <= decimal.Zero)
             {
                 throw new ErrorException("CurrentCumulationValueZero");
             }
             if (isWarningMode)
             {
-                if (this.CutLengthValue.Value <= 0)
+                if (this.CutLengthValue.Value <= decimal.Zero)
                 {
                     throw new InfoException("InfoCutLengthZero");
                 }
             }
             else
             {
-                if (this.CutLengthValue.Value <= 0)
+                if (this.CutLengthValue.Value <= decimal.Zero)
                 {
                     throw new ErrorException("CutLengthZero");
                 }
@@ -1431,6 +1444,7 @@ namespace SteelWire.WindowData
                 this.CutLengthValue.Value, recordData);
             dbContext.SaveChanges();
             RefreshData(dbContext);
+            this.CutLengthValue.Value = decimal.Zero;
         }
     }
 }

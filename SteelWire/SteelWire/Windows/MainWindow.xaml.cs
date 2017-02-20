@@ -46,21 +46,12 @@ namespace SteelWire.Windows
             ShowOptionWindow();
 
             InitializeComboBox();
-
-            this.WindowData.WireropeWorkloadCollection.ItemsChangedHandler += WireropeWorkloadCollectionChanged;
-        }
-
-        private void WireropeWorkloadCollectionChanged(object sender, EventArgs e)
-        {
-            this.CboWirelineDiameter.ItemsSource = this.WindowData.WireropeWorkloadCollection.Items.Select(w => w.Value.Name);
         }
 
         private void InitializeComboBox()
         {
             CuttingCriticalDictionary cuttingCriticalDic = CuttingCriticalDictionaryManager.OnceInstance.DictionarySection;
             this.CboRopeCount.ItemsSource = cuttingCriticalDic.WireropeEfficiencies.Cast<WireropeEfficiency>().Select(e => e.Count);
-
-            this.CboWirelineDiameter.ItemsSource = this.WindowData.WireropeWorkloadCollection.Items.Select(w => w.Value.Name);
 
             Type drillingTypeEnumType = typeof(DrillingTypeEnum);
             this.CboDrillingType.ItemsSource =
@@ -71,7 +62,14 @@ namespace SteelWire.Windows
 
         private void ShowOptionWindow()
         {
-            if (!UserConfigManager.OnceInstance.Run)
+            if (!SystemConfigManager.OnceInstance.Run)
+            {
+                OptionWindow option = new OptionWindow();
+                option.ShowDialog();
+                SystemConfigManager.OnceInstance.Run = true;
+                SystemConfigManager.OnceInstance.SaveConfig();
+            }
+            if (GlobalData.IsSignIn && !UserConfigManager.OnceInstance.Run)
             {
                 OptionWindow option = new OptionWindow();
                 option.ShowDialog();
