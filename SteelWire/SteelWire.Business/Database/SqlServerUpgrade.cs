@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 
@@ -35,24 +36,42 @@ update SystemConfig set [Value] = @Value where [Key] = @Key"
         {
             using (SteelWireSqlServerContext dbContext = new SteelWireSqlServerContext())
             {
-                DbCommand dbCommand = dbContext.Database.Connection.CreateCommand();
-                dbCommand.CommandText = @"if exists (select 1
+                try
+                {
+                    if (dbContext.Database.Connection.State == ConnectionState.Closed)
+                    {
+                        dbContext.Database.Connection.Open();
+                    }
+                    DbCommand dbCommand = dbContext.Database.Connection.CreateCommand();
+                    dbCommand.CommandText = @"if exists (select 1
             from  sysobjects
            where  id = object_id('SystemConfig')
             and   type = 'U')
-	select [Value] from SystemConfig where [Key]=@Key;
+    begin
+        if not exists (select 1 from SystemConfig where [Key]=@Key)
+            insert into SystemConfig ([Key],[Value]) values (@Key,@Value);
+        select [Value] from SystemConfig where [Key]=@Key;
+    end
 else
 	begin
 		create table SystemConfig ([Key] varchar(50) not null, [Value] varchar(200) not null);
 		insert into SystemConfig ([Key],[Value]) values (@Key,@Value);
 		select [Value] from SystemConfig where [Key]=@Key;
 	end";
-                dbCommand.Parameters.Add(new SqlParameter("@Key", DatabaseVersionKey));
-                dbCommand.Parameters.Add(new SqlParameter("@Value", DatabaseDefaultVersion));
-                object result = dbCommand.ExecuteScalar();
-                int version;
-                int.TryParse($"{result}", out version);
-                return version;
+                    dbCommand.Parameters.Add(new SqlParameter("@Key", DatabaseVersionKey));
+                    dbCommand.Parameters.Add(new SqlParameter("@Value", DatabaseDefaultVersion));
+                    object result = dbCommand.ExecuteScalar();
+                    int version;
+                    int.TryParse($"{result}", out version);
+                    return version;
+                }
+                finally
+                {
+                    if (dbContext.Database.Connection.State == ConnectionState.Open)
+                    {
+                        dbContext.Database.Connection.Close();
+                    }
+                }
             }
         }
 
@@ -60,9 +79,23 @@ else
         {
             using (SteelWireSqlServerContext dbContext = new SteelWireSqlServerContext())
             {
-                return dbContext.Database.ExecuteSqlCommand(sql,
-                    new SqlParameter("@Key", DatabaseVersionKey),
-                    new SqlParameter("@Value", $"{version}"));
+                try
+                {
+                    if (dbContext.Database.Connection.State == ConnectionState.Closed)
+                    {
+                        dbContext.Database.Connection.Open();
+                    }
+                    return dbContext.Database.ExecuteSqlCommand(sql,
+                        new SqlParameter("@Key", DatabaseVersionKey),
+                        new SqlParameter("@Value", $"{version}"));
+                }
+                finally
+                {
+                    if (dbContext.Database.Connection.State == ConnectionState.Open)
+                    {
+                        dbContext.Database.Connection.Close();
+                    }
+                }
             }
         }
     }
