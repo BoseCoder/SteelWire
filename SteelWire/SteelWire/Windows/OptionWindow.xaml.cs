@@ -18,13 +18,9 @@ namespace SteelWire.Windows
 {
     public partial class OptionWindow
     {
-        private Option WindowData { get; }
-
         public OptionWindow()
         {
             InitializeComponent();
-
-            this.WindowData = this.DataContext as Option;
 
             if (DatabaseConfigManager.OnceInstance.DatabaseType == DatabaseType.SqlLite)
             {
@@ -59,7 +55,7 @@ namespace SteelWire.Windows
                         ConfigurationManager.ConnectionStrings[SteelWireSqlServerContext.ConnectionName];
                     if (!string.IsNullOrWhiteSpace(connSettings?.ConnectionString))
                     {
-                        using (SteelWireBaseContext dbContext = DbContextFactory.GenerateDbContext())
+                        using (SteelWireSqlServerContext dbContext = new SteelWireSqlServerContext())
                         {
                             this.TxtServer.Text = dbContext.Database.Connection.DataSource;
                             this.TxtDatabase.Text = dbContext.Database.Connection.Database;

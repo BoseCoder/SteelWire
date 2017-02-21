@@ -180,6 +180,13 @@ namespace SteelWire.Windows
 
         #region Input Limit
 
+        private void NumericBoxGotKeyboardFocusEvent(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            TextBox txtBox = (TextBox)sender;
+            txtBox.SelectionStart = 0;
+            txtBox.SelectionLength = txtBox.Text.Length;
+        }
+
         private void DecimalBoxPreviewKeyDownEvent(object sender, KeyEventArgs e)
         {
             NumericBoxPreviewKeyDownEvent(sender, e, true);
@@ -209,17 +216,17 @@ namespace SteelWire.Windows
                 }
                 return;
             }
-            if (allowDecimal && (e.Key == Key.Decimal))
+            if (allowDecimal && (e.Key == Key.Decimal || e.Key == Key.OemPeriod))
             {
                 TextBox txtBox = (TextBox)sender;
-                if (txtBox.Text.EndsWith("."))
+                int pointIndex = txtBox.Text.IndexOf(".", StringComparison.Ordinal);
+                if (pointIndex > -1)
                 {
-                    txtBox.SelectionLength = 0;
-                    txtBox.SelectionStart = txtBox.Text.Length;
-                    e.Handled = true;
-                }
-                else if (txtBox.Text.Contains("."))
-                {
+                    if (txtBox.SelectionStart == pointIndex)
+                    {
+                        txtBox.SelectionLength = 0;
+                        txtBox.SelectionStart += 1;
+                    }
                     e.Handled = true;
                 }
                 return;
