@@ -8,6 +8,7 @@ using System.Windows;
 using SteelWire.AppCode.Config;
 using SteelWire.AppCode.CustomException;
 using SteelWire.AppCode.CustomMessage;
+using SteelWire.AppCode.Data;
 using SteelWire.AppCode.Dependencies;
 using SteelWire.Business.Config;
 using SteelWire.Business.Database;
@@ -21,11 +22,6 @@ namespace SteelWire.Windows
         public OptionWindow()
         {
             InitializeComponent();
-
-            if (DatabaseConfigManager.OnceInstance.DatabaseType == DatabaseType.SqlLite)
-            {
-                this.TabSqlServerOption.Visibility = Visibility.Collapsed;
-            }
 
             InitializeEnumComboBox();
         }
@@ -49,8 +45,9 @@ namespace SteelWire.Windows
             {
                 this.TxtSerialNumber.Text = IntelliLock.Licensing.HardwareID.GetHardwareID(true, true, true, true, true, false);
 
-                if (DatabaseConfigManager.OnceInstance.DatabaseType == DatabaseType.SqlServer)
+                if (!GlobalData.IsSignIn && DatabaseConfigManager.OnceInstance.DatabaseType == DatabaseType.SqlServer)
                 {
+                    this.TabSqlServerOption.Visibility = Visibility.Visible;
                     ConnectionStringSettings connSettings =
                         ConfigurationManager.ConnectionStrings[SteelWireSqlServerContext.ConnectionName];
                     if (!string.IsNullOrWhiteSpace(connSettings?.ConnectionString))
@@ -74,7 +71,7 @@ namespace SteelWire.Windows
             try
             {
                 Option.SaveConfig();
-                if (DatabaseConfigManager.OnceInstance.DatabaseType == DatabaseType.SqlServer)
+                if (!GlobalData.IsSignIn && DatabaseConfigManager.OnceInstance.DatabaseType == DatabaseType.SqlServer)
                 {
                     string connString;
                     if (CheckInput(out connString))

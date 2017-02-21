@@ -55,7 +55,7 @@
                         </Grid>
                     </StackPanel>
                 </TabItem>
-                <TabItem Name="TabSqlServerOption" Header="{DynamicResource OptionTabSqlServer}">
+                <TabItem Name="TabSqlServerOption" Header="{DynamicResource OptionTabSqlServer}" Visibility="Collapsed">
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                         <Grid Margin="0,20,0,0">
                             <Label Content="{DynamicResource LblServer}" HorizontalAlignment="Right" Margin="0,0,205,0"/>

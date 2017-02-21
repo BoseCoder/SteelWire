@@ -348,6 +348,7 @@
 		<row><td>EntityFramework.resources.dll</td><td>{22490221-806C-4C70-90C4-A7DD334F9A0A}</td><td>ZH_HANS</td><td>2</td><td/><td>entityframework.resources.dl</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td>{B9CCB8EE-ED37-4CA6-BCB4-1CDB8433F7FF}</td><td>LANG</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT1</td><td>{57197D97-4A62-49C6-A40E-B3E7659B75FB}</td><td>DATABASEDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>ISX_DEFAULTCOMPONENT10</td><td>{0E6A8E8C-B2BD-485F-99E6-657EB4A6F328}</td><td>ProgramFiles64Folder</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT2</td><td>{7855656A-D42A-47C7-82AA-6A088B650BA6}</td><td>SQLSERVERTYPES</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT3</td><td>{D21D87D4-CFC7-428D-852F-FCD6DB83A376}</td><td>X64</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT4</td><td>{3A6808F4-8466-4CAA-9D44-1372BA5CCF37}</td><td>X86</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
@@ -355,6 +356,7 @@
 		<row><td>ISX_DEFAULTCOMPONENT6</td><td>{76A314E0-05D4-4624-AC59-ED4D826D7E32}</td><td>X861</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT7</td><td>{1C70E15A-965A-495D-B2FC-4DFF4BF8C780}</td><td>ZH_HANS</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT8</td><td>{57A8697E-357B-4383-92C0-684924330787}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>ISX_DEFAULTCOMPONENT9</td><td>{8F1911AF-9DE5-4E66-80C3-AD1B1131F959}</td><td>AppDataFolder</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>IntelliLock.Licensing.dll</td><td>{152C4EF7-6DEB-452E-B79D-63B302FB1DE6}</td><td>INSTALLDIR</td><td>2</td><td/><td>intellilock.licensing.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>Microsoft.ReportViewer.Common.dll</td><td>{7954DD1E-7F72-4C9C-962C-53CC0F488642}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.reportviewer.commo</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>Microsoft.ReportViewer.DataVisualization.DLL</td><td>{2BD77C61-7316-419F-BAE5-CA2F8B6CF07B}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.reportviewer.datav</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
@@ -1097,6 +1099,7 @@
 	<table name="CreateFolder">
 		<col key="yes" def="s72">Directory_</col>
 		<col key="yes" def="s72">Component_</col>
+		<row><td>AppDataFolder</td><td>ISX_DEFAULTCOMPONENT9</td></row>
 		<row><td>DATABASEDIR</td><td>ISX_DEFAULTCOMPONENT1</td></row>
 		<row><td>INSTALLDIR</td><td>BaseConfig.dll</td></row>
 		<row><td>INSTALLDIR</td><td>EntityFramework.SqlServer.dll</td></row>
@@ -1105,6 +1108,7 @@
 		<row><td>INSTALLDIR</td><td>EntityFramework.resources.dll</td></row>
 		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT</td></row>
 		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT1</td></row>
+		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT10</td></row>
 		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT2</td></row>
 		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT3</td></row>
 		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT4</td></row>
@@ -1112,6 +1116,7 @@
 		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT6</td></row>
 		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT7</td></row>
 		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT8</td></row>
+		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT9</td></row>
 		<row><td>INSTALLDIR</td><td>IntelliLock.Licensing.dll</td></row>
 		<row><td>INSTALLDIR</td><td>Microsoft.ReportViewer.Common.dll</td></row>
 		<row><td>INSTALLDIR</td><td>Microsoft.ReportViewer.DataVisualization.DLL</td></row>
@@ -1146,6 +1151,7 @@
 		<row><td>INSTALLDIR</td><td>msvcr100.dll</td></row>
 		<row><td>INSTALLDIR</td><td>msvcr100.dll1</td></row>
 		<row><td>LANG</td><td>ISX_DEFAULTCOMPONENT</td></row>
+		<row><td>ProgramFiles64Folder</td><td>ISX_DEFAULTCOMPONENT10</td></row>
 		<row><td>SQLSERVERTYPES</td><td>ISX_DEFAULTCOMPONENT2</td></row>
 		<row><td>X64</td><td>ISX_DEFAULTCOMPONENT3</td></row>
 		<row><td>X64</td><td>SqlServerSpatial110.dll</td></row>
@@ -1987,6 +1993,7 @@
 		<row><td>AlwaysInstall</td><td>EntityFramework.resources.dll</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT1</td></row>
+		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT10</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT2</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT3</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT4</td></row>
@@ -1994,6 +2001,7 @@
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT6</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT7</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT8</td></row>
+		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT9</td></row>
 		<row><td>AlwaysInstall</td><td>IntelliLock.Licensing.dll</td></row>
 		<row><td>AlwaysInstall</td><td>Microsoft.ReportViewer.Common.dll</td></row>
 		<row><td>AlwaysInstall</td><td>Microsoft.ReportViewer.DataVisualization.DLL</td></row>
@@ -2239,6 +2247,7 @@
 		<row><td>EntityFramework.resources.dll</td><td/><td/><td>_A7FE5C2B_F118_409C_8674_65DEAB6C5ED8_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td/><td/><td>_FD98E147_587B_4677_8576_1F3F62D09773_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT1</td><td/><td/><td>_81DFA084_60DC_4747_937A_22A96109DC7F_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>ISX_DEFAULTCOMPONENT10</td><td/><td/><td>_909D3A59_5CB6_4C59_8E10_0E884599D6FD_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT2</td><td/><td/><td>_98FA3862_9563_45A6_8CEA_356E44D49EE5_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT3</td><td/><td/><td>_6A3BE78F_2C8E_4645_BE6A_D84CEA5BBF7C_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT4</td><td/><td/><td>_6691D537_F50C_445A_97EA_6B1D79163E30_FILTER</td><td/><td/><td/><td/></row>
@@ -2246,6 +2255,7 @@
 		<row><td>ISX_DEFAULTCOMPONENT6</td><td/><td/><td>_C314407D_84F9_4404_9184_C05A3DE88AE2_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT7</td><td/><td/><td>_54F0E2AB_D459_4942_8E92_2A301E7E212C_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT8</td><td/><td/><td>_5F4E0237_EC92_4824_AF3F_1D45E6405E52_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>ISX_DEFAULTCOMPONENT9</td><td/><td/><td>_3930EB5F_765F_4BA6_B05C_50E2CBB40BB5_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>IntelliLock.Licensing.dll</td><td/><td/><td>_8EA37E32_C359_4ABB_BC65_E229ADD58F80_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>Microsoft.ReportViewer.Common.dll</td><td/><td/><td>_4833B56B_1925_498D_A9C7_BA887F545F89_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>Microsoft.ReportViewer.DataVisualization.DLL</td><td/><td/><td>_5764C57C_113E_4ED7_947A_1DD3B3C1DEB1_FILTER</td><td/><td/><td/><td/></row>
@@ -4221,7 +4231,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>ISTheme</td><td>InstallShield Blue.theme</td></row>
 		<row><td>ISUSLock</td><td>{A4778217-24A5-48C3-A021-2899868D4315}</td></row>
 		<row><td>ISUSSignature</td><td>{3D9FAFB1-1374-4134-913B-EB877D76EB57}</td></row>
-		<row><td>ISVisitedViews</td><td>viewAssistant</td></row>
+		<row><td>ISVisitedViews</td><td>viewAssistant,viewISToday</td></row>
 		<row><td>Limited</td><td>1</td></row>
 		<row><td>LockPermissionMode</td><td>1</td></row>
 		<row><td>MsiExecCmdLineOptions</td><td/></row>
@@ -4599,7 +4609,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>PROGRAMFILETOLAUNCHATEND</td><td>[INSTALLDIR]SteelWire.exe</td><td/></row>
 		<row><td>ProductCode</td><td>{CFFD2A60-B445-4B64-ACF1-8CEB0D4DD34C}</td><td/></row>
 		<row><td>ProductName</td><td>SteelWire</td><td/></row>
-		<row><td>ProductVersion</td><td>2.0</td><td/></row>
+		<row><td>ProductVersion</td><td>2.1</td><td/></row>
 		<row><td>ProgressType0</td><td>install</td><td/></row>
 		<row><td>ProgressType1</td><td>Installing</td><td/></row>
 		<row><td>ProgressType2</td><td>installed</td><td/></row>
