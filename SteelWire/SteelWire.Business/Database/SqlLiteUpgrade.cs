@@ -13,12 +13,15 @@ namespace SteelWire.Business.Database
         {
             UpgradeSql = new Dictionary<int, List<string>>
             {
-                {1, new List<string>
                 {
-                    @"ALTER TABLE WireropeCutRole ADD COLUMN AllowMinDerrickHeight BOOLEAN NOT NULL DEFAULT '0';",
-                    @"ALTER TABLE WireropeCutRole ADD COLUMN AllowMaxDerrickHeight BOOLEAN NOT NULL DEFAULT '0';",
-                    @"UPDATE SystemConfig SET [Value] = @Value WHERE [Key] = @Key;"
-                } }
+                    1,
+                    new List<string>
+                    {
+                        @"ALTER TABLE WireropeCutRole ADD COLUMN AllowMinDerrickHeight BOOLEAN NOT NULL DEFAULT '0';",
+                        @"ALTER TABLE WireropeCutRole ADD COLUMN AllowMaxDerrickHeight BOOLEAN NOT NULL DEFAULT '0';",
+                        @"UPDATE SystemConfig SET [Value] = @Value WHERE [Key] = @Key;"
+                    }
+                }
             };
         }
 
