@@ -7,27 +7,26 @@ namespace SteelWire.Business.Database
 {
     public class SqlServerUpgrade : DatabaseUpgrade
     {
-        protected override Dictionary<int, string> UpgradeSql { get; }
+        protected override Dictionary<int, List<string>> UpgradeSql { get; }
 
         public SqlServerUpgrade()
         {
-            UpgradeSql = new Dictionary<int, string>
+            UpgradeSql = new Dictionary<int, List<string>>
             {
                 {
                     1,
-                    @"if not exists(select 1 from syscolumns where id=object_id('WireropeCutRole') and name='AllowMinDerrickHeight') 
-	begin
-		alter table WireropeCutRole add AllowMinDerrickHeight bit;
-		update WireropeCutRole set AllowMinDerrickHeight = '0';
-	end
-alter table WireropeCutRole alter column AllowMinDerrickHeight bit not null;
-if not exists(select 1 from syscolumns where id=object_id('WireropeCutRole') and name='AllowMaxDerrickHeight') 
-	begin
-		alter table WireropeCutRole add AllowMaxDerrickHeight bit;
-		update WireropeCutRole set AllowMaxDerrickHeight = '0';
-	end
-alter table WireropeCutRole alter column AllowMaxDerrickHeight bit not null;
-update SystemConfig set [Value] = @Value where [Key] = @Key"
+                    new List<string>
+                    {
+                        @"if not exists(select 1 from syscolumns where id=object_id('WireropeCutRole') and name='AllowMinDerrickHeight') 
+	alter table WireropeCutRole add AllowMinDerrickHeight bit;",
+                        @"update WireropeCutRole set AllowMinDerrickHeight = '0' where AllowMinDerrickHeight is null;",
+                        @"alter table WireropeCutRole alter column AllowMinDerrickHeight bit not null;",
+                        @"if not exists(select 1 from syscolumns where id=object_id('WireropeCutRole') and name='AllowMaxDerrickHeight') 
+	alter table WireropeCutRole add AllowMaxDerrickHeight bit;",
+                        @"update WireropeCutRole set AllowMaxDerrickHeight = '0' where AllowMaxDerrickHeight is null;",
+                        @"alter table WireropeCutRole alter column AllowMaxDerrickHeight bit not null;",
+                        @"update SystemConfig set [Value] = @Value where [Key] = @Key;"
+                    }
                 }
             };
         }
@@ -43,21 +42,15 @@ update SystemConfig set [Value] = @Value where [Key] = @Key"
                         dbContext.Database.Connection.Open();
                     }
                     DbCommand dbCommand = dbContext.Database.Connection.CreateCommand();
-                    dbCommand.CommandText = @"if exists (select 1
+                    dbCommand.CommandText = @"if not exists (select 1
             from  sysobjects
            where  id = object_id('SystemConfig')
             and   type = 'U')
-    begin
-        if not exists (select 1 from SystemConfig where [Key]=@Key)
-            insert into SystemConfig ([Key],[Value]) values (@Key,@Value);
-        select [Value] from SystemConfig where [Key]=@Key;
-    end
-else
-	begin
-		create table SystemConfig ([Key] varchar(50) not null, [Value] varchar(200) not null);
-		insert into SystemConfig ([Key],[Value]) values (@Key,@Value);
-		select [Value] from SystemConfig where [Key]=@Key;
-	end";
+    create table SystemConfig ([Key] varchar(50) not null, [Value] varchar(200) not null);";
+                    dbCommand.ExecuteNonQuery();
+                    dbCommand.CommandText = @"if not exists (select 1 from SystemConfig where [Key]=@Key)
+	insert into SystemConfig ([Key],[Value]) values (@Key,@Value);
+select [Value] from SystemConfig where [Key]=@Key;";
                     dbCommand.Parameters.Add(new SqlParameter("@Key", DatabaseVersionKey));
                     dbCommand.Parameters.Add(new SqlParameter("@Value", DatabaseDefaultVersion));
                     object result = dbCommand.ExecuteScalar();

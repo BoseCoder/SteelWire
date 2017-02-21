@@ -7,7 +7,7 @@ namespace SteelWire.Business.Database
     {
         protected const string DatabaseVersionKey = "DatabaseVersion";
         protected const string DatabaseDefaultVersion = "0";
-        protected abstract Dictionary<int, string> UpgradeSql { get; }
+        protected abstract Dictionary<int, List<string>> UpgradeSql { get; }
 
         protected abstract int GetDatabaseVersion();
         protected abstract int UpgradeDatabase(int version, string sql);
@@ -15,11 +15,14 @@ namespace SteelWire.Business.Database
         public void UpgradeDatabase()
         {
             int oldVersion = GetDatabaseVersion();
-            IOrderedEnumerable<KeyValuePair<int, string>> sqls =
+            IOrderedEnumerable<KeyValuePair<int, List<string>>> sqls =
                 UpgradeSql.Where(s => s.Key > oldVersion).OrderBy(s => s.Key);
-            foreach (KeyValuePair<int, string> sql in sqls)
+            foreach (KeyValuePair<int, List<string>> sqlGroup in sqls)
             {
-                UpgradeDatabase(sql.Key, sql.Value);
+                foreach (string sql in sqlGroup.Value)
+                {
+                    UpgradeDatabase(sqlGroup.Key, sql);
+                }
             }
         }
     }
