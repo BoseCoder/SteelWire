@@ -6,7 +6,7 @@
         xmlns:validationRule="clr-namespace:SteelWire.AppCode.ValidationRule"
         xmlns:windowData="clr-namespace:SteelWire.WindowData"
         DataContext="{DynamicResource WindowDataKey}"
-        MinWidth="800" MinHeight="600" Width="1670" Height="840" WindowStartupLocation="CenterScreen" WindowState="Maximized"
+        MinWidth="1200" MinHeight="600" Width="1670" Height="840" WindowStartupLocation="CenterScreen" WindowState="Maximized"
         Icon="/SteelWire;component/Resources/Images/Icon.ico" ContentRendered="WindowRendered" Closing="WindowOnClosing">
     <Window.Resources>
         <windowData:Main x:Key="WindowDataKey"></windowData:Main>

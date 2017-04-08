@@ -453,7 +453,7 @@
     <system:String x:Key="MessageSaveCriticalCumulateCompulsivelyConfirm" xml:space="preserve">System will save new critical value absolutely with cumulate value.Are you sure to save cumulate value ?Click "Yes" to save both, or click "No" not to save either.</system:String>
     <system:String x:Key="MessageSaveCriticalCumulateConfirm" xml:space="preserve">Are you sure to save new critical value and cumulate value ?Click "Yes" to save, Click "No" not to save.</system:String>
     <system:String x:Key="MessageResetCompulsivelyConfirm" xml:space="preserve">The cumulate value has reached or exceeded the critical value, it is time to cut down now, do it ?Click "Yes" to cut it down, click "No" to do nothing.</system:String>
-    <system:String x:Key="MessageResetConfirm" xml:space="preserve">Are you sure to cut the cumulate value down ?Click "OK" to cut it down, or click "Cancel" to return.</system:String>
+    <system:String x:Key="MessageResetConfirm" xml:space="preserve">Are you sure to cut the cumulate value down ?Click "Yes" to cut it down, or click "No" to return.</system:String>
 
     <system:String x:Key="MessageOptionSave">Option save successfully, please reboot the application.</system:String>
 </ResourceDictionary>

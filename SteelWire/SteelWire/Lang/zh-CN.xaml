@@ -453,7 +453,7 @@
     <system:String x:Key="MessageSaveCriticalCumulateCompulsivelyConfirm" xml:space="preserve">系统将跟随累计值同时保存临界值。是否需要保存累计值？点击“是”都保存，点击“否”都不保存。</system:String>
     <system:String x:Key="MessageSaveCriticalCumulateConfirm" xml:space="preserve">是否保存临界值和累计值？点击“是”保存，点击“否”不保存。</system:String>
     <system:String x:Key="MessageResetCompulsivelyConfirm" xml:space="preserve">当前累计值已经达到或者超过当前临界值，是否切绳？点击“是”进行切绳操作，点击“否”不进行任何操作。</system:String>
-    <system:String x:Key="MessageResetConfirm" xml:space="preserve">是否确定切绳？点击“确定”进行切绳操作，点击“取消”返回。</system:String>
+    <system:String x:Key="MessageResetConfirm" xml:space="preserve">是否确定切绳？点击“是”进行切绳操作，点击“否”返回。</system:String>
 
     <system:String x:Key="MessageOptionSave">保存成功，请重新运行程序！</system:String>
 </ResourceDictionary>

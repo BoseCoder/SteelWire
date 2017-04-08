@@ -9,6 +9,11 @@ namespace SteelWire.AppCode.CustomException
     /// </summary>
     public class InfoException : BaseException
     {
+        /// <summary>
+        /// 多语言错误内容前缀Key
+        /// </summary>
+        public const string MessageCodeKey = "Message";
+
         public InfoException(string errorCode)
             : base(errorCode, true, null)
         { }
@@ -23,7 +28,7 @@ namespace SteelWire.AppCode.CustomException
 
         protected override void ShowMessageBox()
         {
-            MessageBox.Show(this.Message, LanguageManager.GetLocalResourceStringRight(ErrorCodeKey, ErrorCaptionKey),
+            MessageBox.Show(this.Message, LanguageManager.GetLocalResourceStringRight(MessageCodeKey, ErrorCaptionKey),
                 MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
