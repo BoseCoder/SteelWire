@@ -225,7 +225,7 @@
 	<table name="AppSearch">
 		<col key="yes" def="s72">Property</col>
 		<col key="yes" def="s72">Signature_</col>
-		<row><td>DOTNETVERSION45FULL</td><td>DotNet45Full</td></row>
+		<row><td>DOTNETVERSION40FULL</td><td>DotNet40Full</td></row>
 	</table>
 
 	<table name="BBControl">
@@ -341,10 +341,10 @@
 		<col def="S0">ISDotNetInstallerArgsCommit</col>
 		<col def="S0">ISDotNetInstallerArgsUninstall</col>
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
-		<row><td>BaseConfig.dll</td><td>{FA24CA61-CAB2-499E-8B11-58658A822D6A}</td><td>INSTALLDIR</td><td>2</td><td/><td>baseconfig.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>EntityFramework.SqlServer.dll</td><td>{9F69360E-85FA-4E5F-A2D2-F9CCF8566F3D}</td><td>INSTALLDIR</td><td>2</td><td/><td>entityframework.sqlserver.dl</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>BaseConfig.dll</td><td>{0DF2851F-DE62-473A-82A2-0E415028D02C}</td><td>INSTALLDIR</td><td>2</td><td/><td>baseconfig.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>EntityFramework.SqlServer.dll</td><td>{C11347D9-C64F-43FA-A537-5B821F2EF7FC}</td><td>INSTALLDIR</td><td>2</td><td/><td>entityframework.sqlserver.dl</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>EntityFramework.SqlServer.resources.dll</td><td>{C20FA46B-B220-47E4-8766-695AFB7FB874}</td><td>ZH_HANS</td><td>2</td><td/><td>entityframework.sqlserver.re</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>EntityFramework.dll</td><td>{5BF99F40-3CFA-4EFD-B69A-245DA75D6D0E}</td><td>INSTALLDIR</td><td>2</td><td/><td>entityframework.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>EntityFramework.dll</td><td>{98DA93D2-6E64-470B-8F63-2B1C6E8D69FB}</td><td>INSTALLDIR</td><td>2</td><td/><td>entityframework.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>EntityFramework.resources.dll</td><td>{22490221-806C-4C70-90C4-A7DD334F9A0A}</td><td>ZH_HANS</td><td>2</td><td/><td>entityframework.resources.dl</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td>{B9CCB8EE-ED37-4CA6-BCB4-1CDB8433F7FF}</td><td>LANG</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT1</td><td>{57197D97-4A62-49C6-A40E-B3E7659B75FB}</td><td>DATABASEDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
@@ -357,37 +357,22 @@
 		<row><td>ISX_DEFAULTCOMPONENT7</td><td>{1C70E15A-965A-495D-B2FC-4DFF4BF8C780}</td><td>ZH_HANS</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT8</td><td>{57A8697E-357B-4383-92C0-684924330787}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT9</td><td>{8F1911AF-9DE5-4E66-80C3-AD1B1131F959}</td><td>AppDataFolder</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>IntelliLock.Licensing.dll</td><td>{152C4EF7-6DEB-452E-B79D-63B302FB1DE6}</td><td>INSTALLDIR</td><td>2</td><td/><td>intellilock.licensing.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Microsoft.ReportViewer.Common.dll</td><td>{7954DD1E-7F72-4C9C-962C-53CC0F488642}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.reportviewer.commo</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Microsoft.ReportViewer.DataVisualization.DLL</td><td>{2BD77C61-7316-419F-BAE5-CA2F8B6CF07B}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.reportviewer.datav</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Microsoft.ReportViewer.ProcessingObjectModel.DLL</td><td>{F89E6CC1-8260-4D80-88B8-3465606EDF8D}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.reportviewer.proce</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Microsoft.ReportViewer.WinForms.DLL</td><td>{0EDAE9D4-EF91-48E9-8B99-AE7E0C3D716D}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.reportviewer.winfo</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Microsoft.SqlServer.Types.dll</td><td>{04D92639-C9B1-4AD0-A310-9FC53F3D862E}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.sqlserver.types.dl</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>IntelliLock.Licensing.dll</td><td>{B1BC6A97-F724-4140-AE27-5C7E994F1A99}</td><td>INSTALLDIR</td><td>2</td><td/><td>intellilock.licensing.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>Microsoft.ReportViewer.Common.dll</td><td>{DBC73714-1F27-49F2-BBB9-2E27ED38B9FA}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.reportviewer.commo</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>Microsoft.ReportViewer.DataVisualization.DLL</td><td>{C79F98DA-3816-4122-909B-00F7DD560C3A}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.reportviewer.datav</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>Microsoft.ReportViewer.ProcessingObjectModel.DLL</td><td>{EDB1926B-3DC4-45AC-8646-E56E12DC3557}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.reportviewer.proce</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>Microsoft.ReportViewer.WinForms.DLL</td><td>{A03156F4-0CBE-4C95-B9AD-8AF94B496FAF}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.reportviewer.winfo</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>Microsoft.SqlServer.Types.dll</td><td>{AA0C8863-911A-4A49-8084-C72172B35B8E}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.sqlserver.types.dl</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>SQLite.Interop.dll</td><td>{6C9C1288-59B8-4433-8AD7-10B97B083B0D}</td><td>X641</td><td>2</td><td/><td>sqlite.interop.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>SQLite.Interop.dll1</td><td>{AA01FE16-CF86-45DA-8FAB-5E787B719DF6}</td><td>X861</td><td>2</td><td/><td>sqlite.interop.dll1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>SqlServerSpatial110.dll</td><td>{90DE08F2-6240-43DE-8926-1CF0CE13026E}</td><td>X64</td><td>2</td><td/><td>sqlserverspatial110.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>SqlServerSpatial110.dll1</td><td>{E289ECCF-B07F-4C5A-832D-1106AAFC9DD5}</td><td>X86</td><td>2</td><td/><td>sqlserverspatial110.dll1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>SteelWire.Business.dll</td><td>{32BB039E-5675-47B3-B8C2-413C1E559E73}</td><td>INSTALLDIR</td><td>2</td><td/><td>steelwire.business.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>SteelWire.exe</td><td>{1C5E571E-35A9-4A5D-A072-6FC7A3607A41}</td><td>INSTALLDIR</td><td>2</td><td/><td>steelwire.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>System.AppContext.dll</td><td>{78C7F06F-A6B5-442E-859A-13DA973D5A2D}</td><td>INSTALLDIR</td><td>2</td><td/><td>system.appcontext.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>System.Collections.NonGeneric.dll</td><td>{B84B408E-675E-4E7B-8839-3C9C0CF2F49C}</td><td>INSTALLDIR</td><td>2</td><td/><td>system.collections.nongeneri</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>System.Console.dll</td><td>{59032773-3E25-4AB6-A251-54DDBC4295B0}</td><td>INSTALLDIR</td><td>2</td><td/><td>system.console.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>System.Data.SQLite.EF6.dll</td><td>{364B9A5D-AE78-4C72-A012-5600F551FDDA}</td><td>INSTALLDIR</td><td>2</td><td/><td>system.data.sqlite.ef6.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>System.Data.SQLite.Linq.dll</td><td>{10B80092-8495-4E0F-800D-99E10C9CFBEF}</td><td>INSTALLDIR</td><td>2</td><td/><td>system.data.sqlite.linq.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>System.Data.SQLite.dll</td><td>{BEFAE041-EE32-4464-9F23-BDE94958BCA2}</td><td>INSTALLDIR</td><td>2</td><td/><td>system.data.sqlite.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>System.Diagnostics.Process.dll</td><td>{DDCD2F22-C4A3-482B-A3E1-5B826CE1C8CC}</td><td>INSTALLDIR</td><td>2</td><td/><td>system.diagnostics.process.d</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>System.Diagnostics.StackTrace.dll</td><td>{778D18C2-2158-4565-B3EC-48E925417BF1}</td><td>INSTALLDIR</td><td>2</td><td/><td>system.diagnostics.stacktrac</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>System.Diagnostics.TraceSource.dll</td><td>{09DFD5DE-D828-4747-9643-30475AE41AC2}</td><td>INSTALLDIR</td><td>2</td><td/><td>system.diagnostics.tracesour</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>System.IO.FileSystem.Primitives.dll</td><td>{C150DD27-006D-4FA7-8A29-F31914E26B0C}</td><td>INSTALLDIR</td><td>2</td><td/><td>system.io.filesystem.primiti</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>System.IO.FileSystem.Watcher.dll</td><td>{5643BF74-8A1C-4EFB-8A37-049198C08AEA}</td><td>INSTALLDIR</td><td>2</td><td/><td>system.io.filesystem.watcher</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>System.IO.FileSystem.dll</td><td>{34E41095-94FE-419A-BCEC-0DCA55231D65}</td><td>INSTALLDIR</td><td>2</td><td/><td>system.io.filesystem.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>System.Net.NameResolution.dll</td><td>{6434304E-6144-4222-824A-8D419345741C}</td><td>INSTALLDIR</td><td>2</td><td/><td>system.net.nameresolution.dl</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>System.Net.Sockets.dll</td><td>{F69CD0DF-572F-43C0-A3D9-9E9F3C2E8711}</td><td>INSTALLDIR</td><td>2</td><td/><td>system.net.sockets.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>System.Reflection.TypeExtensions.dll</td><td>{3722491D-B830-4FD3-902E-76E39E8DAC2B}</td><td>INSTALLDIR</td><td>2</td><td/><td>system.reflection.typeextens</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>System.Runtime.Serialization.Formatters.dll</td><td>{75256E2C-6953-4C09-BF4C-836FDA144AD1}</td><td>INSTALLDIR</td><td>2</td><td/><td>system.runtime.serialization</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>System.Runtime.Serialization.Primitives.dll</td><td>{1F702C36-8CB1-41D9-8F6D-E45D4FE0B7D7}</td><td>INSTALLDIR</td><td>2</td><td/><td>system.runtime.serialization1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>System.Threading.Thread.dll</td><td>{30038A83-BFE2-4238-8B95-2546F71132AB}</td><td>INSTALLDIR</td><td>2</td><td/><td>system.threading.thread.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>log4net.dll</td><td>{28B83282-684F-46D4-94DE-3935B5333A70}</td><td>INSTALLDIR</td><td>2</td><td/><td>log4net.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>SteelWire.Business.dll</td><td>{1447BF2C-F0E9-4104-BF30-7CAFE39F1BED}</td><td>INSTALLDIR</td><td>2</td><td/><td>steelwire.business.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>SteelWire.exe</td><td>{615670EA-C91B-44C8-9BB9-15471EA700F5}</td><td>INSTALLDIR</td><td>2</td><td/><td>steelwire.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>System.Data.SQLite.EF6.dll</td><td>{D83EF910-A6A8-4F18-81A1-AAC5AD5F9C25}</td><td>INSTALLDIR</td><td>2</td><td/><td>system.data.sqlite.ef6.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>System.Data.SQLite.Linq.dll</td><td>{1BB0E2F6-35B0-4EA1-9346-FEC892323D52}</td><td>INSTALLDIR</td><td>2</td><td/><td>system.data.sqlite.linq.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>System.Data.SQLite.dll</td><td>{822169BA-61C9-4D02-A7A8-C950D8FB534E}</td><td>INSTALLDIR</td><td>2</td><td/><td>system.data.sqlite.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>log4net.dll</td><td>{7CBE5027-524E-4411-9953-752E2B2C3243}</td><td>INSTALLDIR</td><td>2</td><td/><td>log4net.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>msvcr100.dll</td><td>{72E80795-3139-4700-9054-421A916DBE47}</td><td>X64</td><td>2</td><td/><td>msvcr100.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>msvcr100.dll1</td><td>{A99E67D2-C5D1-4CF2-BAFC-1FF627DA64ED}</td><td>X86</td><td>2</td><td/><td>msvcr100.dll1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
@@ -1129,24 +1114,9 @@
 		<row><td>INSTALLDIR</td><td>SqlServerSpatial110.dll1</td></row>
 		<row><td>INSTALLDIR</td><td>SteelWire.Business.dll</td></row>
 		<row><td>INSTALLDIR</td><td>SteelWire.exe</td></row>
-		<row><td>INSTALLDIR</td><td>System.AppContext.dll</td></row>
-		<row><td>INSTALLDIR</td><td>System.Collections.NonGeneric.dll</td></row>
-		<row><td>INSTALLDIR</td><td>System.Console.dll</td></row>
 		<row><td>INSTALLDIR</td><td>System.Data.SQLite.EF6.dll</td></row>
 		<row><td>INSTALLDIR</td><td>System.Data.SQLite.Linq.dll</td></row>
 		<row><td>INSTALLDIR</td><td>System.Data.SQLite.dll</td></row>
-		<row><td>INSTALLDIR</td><td>System.Diagnostics.Process.dll</td></row>
-		<row><td>INSTALLDIR</td><td>System.Diagnostics.StackTrace.dll</td></row>
-		<row><td>INSTALLDIR</td><td>System.Diagnostics.TraceSource.dll</td></row>
-		<row><td>INSTALLDIR</td><td>System.IO.FileSystem.Primitives.dll</td></row>
-		<row><td>INSTALLDIR</td><td>System.IO.FileSystem.Watcher.dll</td></row>
-		<row><td>INSTALLDIR</td><td>System.IO.FileSystem.dll</td></row>
-		<row><td>INSTALLDIR</td><td>System.Net.NameResolution.dll</td></row>
-		<row><td>INSTALLDIR</td><td>System.Net.Sockets.dll</td></row>
-		<row><td>INSTALLDIR</td><td>System.Reflection.TypeExtensions.dll</td></row>
-		<row><td>INSTALLDIR</td><td>System.Runtime.Serialization.Formatters.dll</td></row>
-		<row><td>INSTALLDIR</td><td>System.Runtime.Serialization.Primitives.dll</td></row>
-		<row><td>INSTALLDIR</td><td>System.Threading.Thread.dll</td></row>
 		<row><td>INSTALLDIR</td><td>log4net.dll</td></row>
 		<row><td>INSTALLDIR</td><td>msvcr100.dll</td></row>
 		<row><td>INSTALLDIR</td><td>msvcr100.dll1</td></row>
@@ -2014,24 +1984,9 @@
 		<row><td>AlwaysInstall</td><td>SqlServerSpatial110.dll1</td></row>
 		<row><td>AlwaysInstall</td><td>SteelWire.Business.dll</td></row>
 		<row><td>AlwaysInstall</td><td>SteelWire.exe</td></row>
-		<row><td>AlwaysInstall</td><td>System.AppContext.dll</td></row>
-		<row><td>AlwaysInstall</td><td>System.Collections.NonGeneric.dll</td></row>
-		<row><td>AlwaysInstall</td><td>System.Console.dll</td></row>
 		<row><td>AlwaysInstall</td><td>System.Data.SQLite.EF6.dll</td></row>
 		<row><td>AlwaysInstall</td><td>System.Data.SQLite.Linq.dll</td></row>
 		<row><td>AlwaysInstall</td><td>System.Data.SQLite.dll</td></row>
-		<row><td>AlwaysInstall</td><td>System.Diagnostics.Process.dll</td></row>
-		<row><td>AlwaysInstall</td><td>System.Diagnostics.StackTrace.dll</td></row>
-		<row><td>AlwaysInstall</td><td>System.Diagnostics.TraceSource.dll</td></row>
-		<row><td>AlwaysInstall</td><td>System.IO.FileSystem.Primitives.dll</td></row>
-		<row><td>AlwaysInstall</td><td>System.IO.FileSystem.Watcher.dll</td></row>
-		<row><td>AlwaysInstall</td><td>System.IO.FileSystem.dll</td></row>
-		<row><td>AlwaysInstall</td><td>System.Net.NameResolution.dll</td></row>
-		<row><td>AlwaysInstall</td><td>System.Net.Sockets.dll</td></row>
-		<row><td>AlwaysInstall</td><td>System.Reflection.TypeExtensions.dll</td></row>
-		<row><td>AlwaysInstall</td><td>System.Runtime.Serialization.Formatters.dll</td></row>
-		<row><td>AlwaysInstall</td><td>System.Runtime.Serialization.Primitives.dll</td></row>
-		<row><td>AlwaysInstall</td><td>System.Threading.Thread.dll</td></row>
 		<row><td>AlwaysInstall</td><td>log4net.dll</td></row>
 		<row><td>AlwaysInstall</td><td>msvcr100.dll</td></row>
 		<row><td>AlwaysInstall</td><td>msvcr100.dll1</td></row>
@@ -2049,53 +2004,37 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
-		<row><td>baseconfig.dll</td><td>BaseConfig.dll</td><td>BASECO~1.DLL|BaseConfig.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\BaseConfig.dll</td><td>1</td><td/></row>
+		<row><td>baseconfig.dll</td><td>BaseConfig.dll</td><td>BASECO~1.DLL|BaseConfig.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire\SteelWire.Git\trunk\SteelWire\SteelWire\bin\App\BaseConfig.dll</td><td>1</td><td/></row>
 		<row><td>en_us.xaml</td><td>ISX_DEFAULTCOMPONENT</td><td>EN-US~1.XAM|en-US.xaml</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\Lang\en-US.xaml</td><td>1</td><td/></row>
-		<row><td>entityframework.dll</td><td>EntityFramework.dll</td><td>ENTITY~1.DLL|EntityFramework.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\EntityFramework.dll</td><td>1</td><td/></row>
+		<row><td>entityframework.dll</td><td>EntityFramework.dll</td><td>ENTITY~1.DLL|EntityFramework.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire\SteelWire.Git\trunk\SteelWire\SteelWire\bin\App\EntityFramework.dll</td><td>1</td><td/></row>
 		<row><td>entityframework.resources.dl</td><td>EntityFramework.resources.dll</td><td>ENTITY~1.DLL|EntityFramework.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\zh-Hans\EntityFramework.resources.dll</td><td>1</td><td/></row>
-		<row><td>entityframework.sqlserver.dl</td><td>EntityFramework.SqlServer.dll</td><td>ENTITY~1.DLL|EntityFramework.SqlServer.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\EntityFramework.SqlServer.dll</td><td>1</td><td/></row>
+		<row><td>entityframework.sqlserver.dl</td><td>EntityFramework.SqlServer.dll</td><td>ENTITY~1.DLL|EntityFramework.SqlServer.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire\SteelWire.Git\trunk\SteelWire\SteelWire\bin\App\EntityFramework.SqlServer.dll</td><td>1</td><td/></row>
 		<row><td>entityframework.sqlserver.re</td><td>EntityFramework.SqlServer.resources.dll</td><td>ENTITY~1.DLL|EntityFramework.SqlServer.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\zh-Hans\EntityFramework.SqlServer.resources.dll</td><td>1</td><td/></row>
-		<row><td>entityframework.sqlserver.xm</td><td>ISX_DEFAULTCOMPONENT8</td><td>ENTITY~1.XML|EntityFramework.SqlServer.xml</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\EntityFramework.SqlServer.xml</td><td>1</td><td/></row>
-		<row><td>entityframework.xml</td><td>ISX_DEFAULTCOMPONENT8</td><td>ENTITY~1.XML|EntityFramework.xml</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\EntityFramework.xml</td><td>1</td><td/></row>
-		<row><td>intellilock.licensing.dll</td><td>IntelliLock.Licensing.dll</td><td>INTELL~1.DLL|IntelliLock.Licensing.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\IntelliLock.Licensing.dll</td><td>1</td><td/></row>
-		<row><td>license.license</td><td>ISX_DEFAULTCOMPONENT8</td><td>LICENS~1.LIC|license.license</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\license.license</td><td>1</td><td/></row>
-		<row><td>log4net.config</td><td>ISX_DEFAULTCOMPONENT8</td><td>LOG4NE~1.CON|log4net.config</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\log4net.config</td><td>1</td><td/></row>
-		<row><td>log4net.dll</td><td>log4net.dll</td><td>log4net.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\log4net.dll</td><td>1</td><td/></row>
-		<row><td>log4net.xml</td><td>ISX_DEFAULTCOMPONENT8</td><td>log4net.xml</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\log4net.xml</td><td>1</td><td/></row>
-		<row><td>microsoft.reportviewer.commo</td><td>Microsoft.ReportViewer.Common.dll</td><td>MICROS~1.DLL|Microsoft.ReportViewer.Common.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\Microsoft.ReportViewer.Common.dll</td><td>1</td><td/></row>
-		<row><td>microsoft.reportviewer.datav</td><td>Microsoft.ReportViewer.DataVisualization.DLL</td><td>MICROS~1.DLL|Microsoft.ReportViewer.DataVisualization.DLL</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\Microsoft.ReportViewer.DataVisualization.DLL</td><td>1</td><td/></row>
-		<row><td>microsoft.reportviewer.proce</td><td>Microsoft.ReportViewer.ProcessingObjectModel.DLL</td><td>MICROS~1.DLL|Microsoft.ReportViewer.ProcessingObjectModel.DLL</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\Microsoft.ReportViewer.ProcessingObjectModel.DLL</td><td>1</td><td/></row>
-		<row><td>microsoft.reportviewer.winfo</td><td>Microsoft.ReportViewer.WinForms.DLL</td><td>MICROS~1.DLL|Microsoft.ReportViewer.WinForms.DLL</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\Microsoft.ReportViewer.WinForms.DLL</td><td>1</td><td/></row>
-		<row><td>microsoft.sqlserver.types.dl</td><td>Microsoft.SqlServer.Types.dll</td><td>MICROS~1.DLL|Microsoft.SqlServer.Types.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\Microsoft.SqlServer.Types.dll</td><td>1</td><td/></row>
+		<row><td>entityframework.sqlserver.xm</td><td>ISX_DEFAULTCOMPONENT8</td><td>ENTITY~1.XML|EntityFramework.SqlServer.xml</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire\SteelWire.Git\trunk\SteelWire\SteelWire\bin\App\EntityFramework.SqlServer.xml</td><td>1</td><td/></row>
+		<row><td>entityframework.xml</td><td>ISX_DEFAULTCOMPONENT8</td><td>ENTITY~1.XML|EntityFramework.xml</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire\SteelWire.Git\trunk\SteelWire\SteelWire\bin\App\EntityFramework.xml</td><td>1</td><td/></row>
+		<row><td>intellilock.licensing.dll</td><td>IntelliLock.Licensing.dll</td><td>INTELL~1.DLL|IntelliLock.Licensing.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire\SteelWire.Git\trunk\SteelWire\SteelWire\bin\App\IntelliLock.Licensing.dll</td><td>1</td><td/></row>
+		<row><td>log4net.config</td><td>ISX_DEFAULTCOMPONENT8</td><td>LOG4NE~1.CON|log4net.config</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire\SteelWire.Git\trunk\SteelWire\SteelWire\bin\App\log4net.config</td><td>1</td><td/></row>
+		<row><td>log4net.dll</td><td>log4net.dll</td><td>log4net.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire\SteelWire.Git\trunk\SteelWire\SteelWire\bin\App\log4net.dll</td><td>1</td><td/></row>
+		<row><td>log4net.xml</td><td>ISX_DEFAULTCOMPONENT8</td><td>log4net.xml</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire\SteelWire.Git\trunk\SteelWire\SteelWire\bin\App\log4net.xml</td><td>1</td><td/></row>
+		<row><td>microsoft.reportviewer.commo</td><td>Microsoft.ReportViewer.Common.dll</td><td>MICROS~1.DLL|Microsoft.ReportViewer.Common.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire\SteelWire.Git\trunk\SteelWire\SteelWire\bin\App\Microsoft.ReportViewer.Common.dll</td><td>1</td><td/></row>
+		<row><td>microsoft.reportviewer.datav</td><td>Microsoft.ReportViewer.DataVisualization.DLL</td><td>MICROS~1.DLL|Microsoft.ReportViewer.DataVisualization.DLL</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire\SteelWire.Git\trunk\SteelWire\SteelWire\bin\App\Microsoft.ReportViewer.DataVisualization.DLL</td><td>1</td><td/></row>
+		<row><td>microsoft.reportviewer.proce</td><td>Microsoft.ReportViewer.ProcessingObjectModel.DLL</td><td>MICROS~1.DLL|Microsoft.ReportViewer.ProcessingObjectModel.DLL</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire\SteelWire.Git\trunk\SteelWire\SteelWire\bin\App\Microsoft.ReportViewer.ProcessingObjectModel.DLL</td><td>1</td><td/></row>
+		<row><td>microsoft.reportviewer.winfo</td><td>Microsoft.ReportViewer.WinForms.DLL</td><td>MICROS~1.DLL|Microsoft.ReportViewer.WinForms.DLL</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire\SteelWire.Git\trunk\SteelWire\SteelWire\bin\App\Microsoft.ReportViewer.WinForms.DLL</td><td>1</td><td/></row>
+		<row><td>microsoft.sqlserver.types.dl</td><td>Microsoft.SqlServer.Types.dll</td><td>MICROS~1.DLL|Microsoft.SqlServer.Types.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire\SteelWire.Git\trunk\SteelWire\SteelWire\bin\App\Microsoft.SqlServer.Types.dll</td><td>1</td><td/></row>
 		<row><td>msvcr100.dll</td><td>msvcr100.dll</td><td>msvcr100.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\SqlServerTypes\x64\msvcr100.dll</td><td>1</td><td/></row>
 		<row><td>msvcr100.dll1</td><td>msvcr100.dll1</td><td>msvcr100.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\SqlServerTypes\x86\msvcr100.dll</td><td>1</td><td/></row>
 		<row><td>sqlite.interop.dll</td><td>SQLite.Interop.dll</td><td>SQLITE~1.DLL|SQLite.Interop.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\x64\SQLite.Interop.dll</td><td>1</td><td/></row>
 		<row><td>sqlite.interop.dll1</td><td>SQLite.Interop.dll1</td><td>SQLITE~1.DLL|SQLite.Interop.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\x86\SQLite.Interop.dll</td><td>1</td><td/></row>
 		<row><td>sqlserverspatial110.dll</td><td>SqlServerSpatial110.dll</td><td>SQLSER~1.DLL|SqlServerSpatial110.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\SqlServerTypes\x64\SqlServerSpatial110.dll</td><td>1</td><td/></row>
 		<row><td>sqlserverspatial110.dll1</td><td>SqlServerSpatial110.dll1</td><td>SQLSER~1.DLL|SqlServerSpatial110.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\SqlServerTypes\x86\SqlServerSpatial110.dll</td><td>1</td><td/></row>
-		<row><td>steelwire.business.dll</td><td>SteelWire.Business.dll</td><td>STEELW~1.DLL|SteelWire.Business.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\SteelWire.Business.dll</td><td>1</td><td/></row>
+		<row><td>steelwire.business.dll</td><td>SteelWire.Business.dll</td><td>STEELW~1.DLL|SteelWire.Business.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire\SteelWire.Git\trunk\SteelWire\SteelWire\bin\App\SteelWire.Business.dll</td><td>1</td><td/></row>
 		<row><td>steelwire.db</td><td>ISX_DEFAULTCOMPONENT1</td><td>STEELW~1.DB|SteelWire.db</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\Database\SteelWire.db</td><td>1</td><td/></row>
-		<row><td>steelwire.exe</td><td>SteelWire.exe</td><td>STEELW~1.EXE|SteelWire.exe</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\SteelWire.exe</td><td>1</td><td/></row>
-		<row><td>steelwire.exe.config</td><td>ISX_DEFAULTCOMPONENT8</td><td>STEELW~1.CON|SteelWire.exe.config</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\SteelWire.exe.config</td><td>1</td><td/></row>
-		<row><td>system.appcontext.dll</td><td>System.AppContext.dll</td><td>SYSTEM~1.DLL|System.AppContext.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\System.AppContext.dll</td><td>1</td><td/></row>
-		<row><td>system.collections.nongeneri</td><td>System.Collections.NonGeneric.dll</td><td>SYSTEM~1.DLL|System.Collections.NonGeneric.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\System.Collections.NonGeneric.dll</td><td>1</td><td/></row>
-		<row><td>system.console.dll</td><td>System.Console.dll</td><td>SYSTEM~1.DLL|System.Console.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\System.Console.dll</td><td>1</td><td/></row>
-		<row><td>system.data.sqlite.dll</td><td>System.Data.SQLite.dll</td><td>SYSTEM~1.DLL|System.Data.SQLite.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\System.Data.SQLite.dll</td><td>1</td><td/></row>
-		<row><td>system.data.sqlite.ef6.dll</td><td>System.Data.SQLite.EF6.dll</td><td>SYSTEM~1.DLL|System.Data.SQLite.EF6.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\System.Data.SQLite.EF6.dll</td><td>1</td><td/></row>
-		<row><td>system.data.sqlite.linq.dll</td><td>System.Data.SQLite.Linq.dll</td><td>SYSTEM~1.DLL|System.Data.SQLite.Linq.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\System.Data.SQLite.Linq.dll</td><td>1</td><td/></row>
-		<row><td>system.data.sqlite.xml</td><td>ISX_DEFAULTCOMPONENT8</td><td>SYSTEM~1.XML|System.Data.SQLite.xml</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\System.Data.SQLite.xml</td><td>1</td><td/></row>
-		<row><td>system.diagnostics.process.d</td><td>System.Diagnostics.Process.dll</td><td>SYSTEM~1.DLL|System.Diagnostics.Process.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\System.Diagnostics.Process.dll</td><td>1</td><td/></row>
-		<row><td>system.diagnostics.stacktrac</td><td>System.Diagnostics.StackTrace.dll</td><td>SYSTEM~1.DLL|System.Diagnostics.StackTrace.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\System.Diagnostics.StackTrace.dll</td><td>1</td><td/></row>
-		<row><td>system.diagnostics.tracesour</td><td>System.Diagnostics.TraceSource.dll</td><td>SYSTEM~1.DLL|System.Diagnostics.TraceSource.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\System.Diagnostics.TraceSource.dll</td><td>1</td><td/></row>
-		<row><td>system.io.filesystem.dll</td><td>System.IO.FileSystem.dll</td><td>SYSTEM~1.DLL|System.IO.FileSystem.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\System.IO.FileSystem.dll</td><td>1</td><td/></row>
-		<row><td>system.io.filesystem.primiti</td><td>System.IO.FileSystem.Primitives.dll</td><td>SYSTEM~1.DLL|System.IO.FileSystem.Primitives.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\System.IO.FileSystem.Primitives.dll</td><td>1</td><td/></row>
-		<row><td>system.io.filesystem.watcher</td><td>System.IO.FileSystem.Watcher.dll</td><td>SYSTEM~1.DLL|System.IO.FileSystem.Watcher.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\System.IO.FileSystem.Watcher.dll</td><td>1</td><td/></row>
-		<row><td>system.net.nameresolution.dl</td><td>System.Net.NameResolution.dll</td><td>SYSTEM~1.DLL|System.Net.NameResolution.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\System.Net.NameResolution.dll</td><td>1</td><td/></row>
-		<row><td>system.net.sockets.dll</td><td>System.Net.Sockets.dll</td><td>SYSTEM~1.DLL|System.Net.Sockets.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\System.Net.Sockets.dll</td><td>1</td><td/></row>
-		<row><td>system.reflection.typeextens</td><td>System.Reflection.TypeExtensions.dll</td><td>SYSTEM~1.DLL|System.Reflection.TypeExtensions.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\System.Reflection.TypeExtensions.dll</td><td>1</td><td/></row>
-		<row><td>system.runtime.serialization</td><td>System.Runtime.Serialization.Formatters.dll</td><td>SYSTEM~1.DLL|System.Runtime.Serialization.Formatters.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\System.Runtime.Serialization.Formatters.dll</td><td>1</td><td/></row>
-		<row><td>system.runtime.serialization1</td><td>System.Runtime.Serialization.Primitives.dll</td><td>SYSTEM~1.DLL|System.Runtime.Serialization.Primitives.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\System.Runtime.Serialization.Primitives.dll</td><td>1</td><td/></row>
-		<row><td>system.threading.thread.dll</td><td>System.Threading.Thread.dll</td><td>SYSTEM~1.DLL|System.Threading.Thread.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\System.Threading.Thread.dll</td><td>1</td><td/></row>
+		<row><td>steelwire.exe</td><td>SteelWire.exe</td><td>STEELW~1.EXE|SteelWire.exe</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire\SteelWire.Git\trunk\SteelWire\SteelWire\bin\App\SteelWire.exe</td><td>1</td><td/></row>
+		<row><td>steelwire.exe.config</td><td>ISX_DEFAULTCOMPONENT8</td><td>STEELW~1.CON|SteelWire.exe.config</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire\SteelWire.Git\trunk\SteelWire\SteelWire\bin\App\SteelWire.exe.config</td><td>1</td><td/></row>
+		<row><td>system.data.sqlite.dll</td><td>System.Data.SQLite.dll</td><td>SYSTEM~1.DLL|System.Data.SQLite.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire\SteelWire.Git\trunk\SteelWire\SteelWire\bin\App\System.Data.SQLite.dll</td><td>1</td><td/></row>
+		<row><td>system.data.sqlite.ef6.dll</td><td>System.Data.SQLite.EF6.dll</td><td>SYSTEM~1.DLL|System.Data.SQLite.EF6.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire\SteelWire.Git\trunk\SteelWire\SteelWire\bin\App\System.Data.SQLite.EF6.dll</td><td>1</td><td/></row>
+		<row><td>system.data.sqlite.linq.dll</td><td>System.Data.SQLite.Linq.dll</td><td>SYSTEM~1.DLL|System.Data.SQLite.Linq.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire\SteelWire.Git\trunk\SteelWire\SteelWire\bin\App\System.Data.SQLite.Linq.dll</td><td>1</td><td/></row>
+		<row><td>system.data.sqlite.xml</td><td>ISX_DEFAULTCOMPONENT8</td><td>SYSTEM~1.XML|System.Data.SQLite.xml</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire\SteelWire.Git\trunk\SteelWire\SteelWire\bin\App\System.Data.SQLite.xml</td><td>1</td><td/></row>
 		<row><td>zh_cn.xaml</td><td>ISX_DEFAULTCOMPONENT</td><td>ZH-CN~1.XAM|zh-CN.xaml</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\Lang\zh-CN.xaml</td><td>1</td><td/></row>
 	</table>
 
@@ -2113,6 +2052,7 @@
 		<col key="yes" def="s72">Tag</col>
 		<col def="S255">Data</col>
 		<row><td>SteelWire.exe</td><td/></row>
+		<row><td>SteelWire.exe1</td><td/></row>
 		<row><td>SteelWire.exe2</td><td/></row>
 	</table>
 
@@ -2240,10 +2180,10 @@
 		<col def="S0">FTPLocation</col>
 		<col def="S0">HTTPLocation</col>
 		<col def="S0">Miscellaneous</col>
-		<row><td>BaseConfig.dll</td><td/><td/><td>_9E62F63D_D23E_42F6_B3D8_862C2D56121E_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>EntityFramework.SqlServer.dll</td><td/><td/><td>_FB465CF9_4E45_42F9_9191_70CACEF3384D_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>BaseConfig.dll</td><td/><td/><td>_E3586AD4_F26D_4D36_BB0F_277DBA6A12FC_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>EntityFramework.SqlServer.dll</td><td/><td/><td>_934E5DD9_99EC_44E3_81B3_E1E8DFD31758_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>EntityFramework.SqlServer.resources.dll</td><td/><td/><td>_D6855DE0_8649_4CA5_8D18_C88DED0F5B57_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>EntityFramework.dll</td><td/><td/><td>_05610562_A21C_407C_A622_4E033F8148B9_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>EntityFramework.dll</td><td/><td/><td>_E7DFF84F_D91E_4460_9FA2_4298A8B168CB_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>EntityFramework.resources.dll</td><td/><td/><td>_A7FE5C2B_F118_409C_8674_65DEAB6C5ED8_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td/><td/><td>_FD98E147_587B_4677_8576_1F3F62D09773_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT1</td><td/><td/><td>_81DFA084_60DC_4747_937A_22A96109DC7F_FILTER</td><td/><td/><td/><td/></row>
@@ -2256,37 +2196,22 @@
 		<row><td>ISX_DEFAULTCOMPONENT7</td><td/><td/><td>_54F0E2AB_D459_4942_8E92_2A301E7E212C_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT8</td><td/><td/><td>_5F4E0237_EC92_4824_AF3F_1D45E6405E52_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT9</td><td/><td/><td>_3930EB5F_765F_4BA6_B05C_50E2CBB40BB5_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>IntelliLock.Licensing.dll</td><td/><td/><td>_8EA37E32_C359_4ABB_BC65_E229ADD58F80_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Microsoft.ReportViewer.Common.dll</td><td/><td/><td>_4833B56B_1925_498D_A9C7_BA887F545F89_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Microsoft.ReportViewer.DataVisualization.DLL</td><td/><td/><td>_5764C57C_113E_4ED7_947A_1DD3B3C1DEB1_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Microsoft.ReportViewer.ProcessingObjectModel.DLL</td><td/><td/><td>_42B286C6_BA5D_4D8E_9820_E3D58921902F_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Microsoft.ReportViewer.WinForms.DLL</td><td/><td/><td>_E1A398F4_0BF8_4F22_A274_8D47A2D1CC8E_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Microsoft.SqlServer.Types.dll</td><td/><td/><td>_1C1A099A_4DBA_4201_A39F_B7285C009FA0_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>IntelliLock.Licensing.dll</td><td/><td/><td>_B67EFD5A_F966_4E06_980D_4B357D3E2285_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>Microsoft.ReportViewer.Common.dll</td><td/><td/><td>_9724D21B_383F_4443_A71F_9D9DFEB62D76_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>Microsoft.ReportViewer.DataVisualization.DLL</td><td/><td/><td>_008302AC_FC6E_4978_BDB3_1F34763FE2AD_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>Microsoft.ReportViewer.ProcessingObjectModel.DLL</td><td/><td/><td>_230E3060_5FB8_49D6_B2C3_ECACDF3B93E5_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>Microsoft.ReportViewer.WinForms.DLL</td><td/><td/><td>_DE1F4467_7FC7_49F3_A947_230F74CB2294_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>Microsoft.SqlServer.Types.dll</td><td/><td/><td>_AF5B4F8E_20D2_4934_9407_248EF06C5C01_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>SQLite.Interop.dll</td><td/><td/><td>_38F74EFE_BBA1_4F00_94E4_843195825992_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>SQLite.Interop.dll1</td><td/><td/><td>_B09C28D3_5388_446F_A741_94C382290BF9_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>SqlServerSpatial110.dll</td><td/><td/><td>_9A0F1F7C_2D3E_459B_956A_16613D50AC4E_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>SqlServerSpatial110.dll1</td><td/><td/><td>_5D2941E0_0A53_435F_9B5F_67BCB5D6565C_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>SteelWire.Business.dll</td><td/><td/><td>_21787924_C68E_4674_9F6E_AD0BB2C15881_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>SteelWire.exe</td><td/><td/><td>_074B9B64_6D6A_48B0_947A_5133B2A9C6F1_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>System.AppContext.dll</td><td/><td/><td>_821A432F_2E5C_41F5_B867_C2D7B97A06AA_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>System.Collections.NonGeneric.dll</td><td/><td/><td>_D1FF5216_701A_48D9_830E_949EF34EBC92_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>System.Console.dll</td><td/><td/><td>_FB9C4B81_0058_4CA5_930A_B083370C1693_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>System.Data.SQLite.EF6.dll</td><td/><td/><td>_718BDF34_7D4F_45C6_8BFA_AD64933F97B4_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>System.Data.SQLite.Linq.dll</td><td/><td/><td>_5E50D832_1178_488C_A1A6_EFAF48C86B58_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>System.Data.SQLite.dll</td><td/><td/><td>_530893C5_475E_4957_BA50_3AF6895A6AAD_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>System.Diagnostics.Process.dll</td><td/><td/><td>_4E33568C_9E4F_4DCB_87EF_2FDA8F0B2C77_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>System.Diagnostics.StackTrace.dll</td><td/><td/><td>_C2E708D8_5520_47BE_9CC2_A6C116A432D0_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>System.Diagnostics.TraceSource.dll</td><td/><td/><td>_B373BCFD_B7DC_467B_B099_C8737AE07FF2_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>System.IO.FileSystem.Primitives.dll</td><td/><td/><td>_B0D9AC51_D168_4077_8D72_F92AFE79B6DB_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>System.IO.FileSystem.Watcher.dll</td><td/><td/><td>_BEA07F60_C481_452E_A57D_9734147562AE_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>System.IO.FileSystem.dll</td><td/><td/><td>_03CDB798_0104_4693_9E53_3224C84A168B_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>System.Net.NameResolution.dll</td><td/><td/><td>_93A82697_BB6E_4FDA_B1B4_67D71C7800D5_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>System.Net.Sockets.dll</td><td/><td/><td>_B790265D_FB16_44C6_9897_D845ACA8C06D_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>System.Reflection.TypeExtensions.dll</td><td/><td/><td>_FAD55F51_D039_480E_98D6_8FEB32AE8BAF_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>System.Runtime.Serialization.Formatters.dll</td><td/><td/><td>_1DADF9EE_3BB2_45D4_9154_35121ACEFFDF_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>System.Runtime.Serialization.Primitives.dll</td><td/><td/><td>_F52D6379_DD33_4AAB_8C41_462B0EDBEFE4_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>System.Threading.Thread.dll</td><td/><td/><td>_EA0D845F_B741_4CA4_A02E_5ED3BDF37564_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>log4net.dll</td><td/><td/><td>_0759DE2E_525D_4404_88F0_C5BA5112C712_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>SteelWire.Business.dll</td><td/><td/><td>_0FF4A231_F0FE_43C3_991E_8E8F8AC3DBEA_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>SteelWire.exe</td><td/><td/><td>_98A18A5C_5156_42AF_B54C_8AF8A6697F58_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>System.Data.SQLite.EF6.dll</td><td/><td/><td>_C83FAD0E_9228_4F7C_B79D_7953FA320BDB_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>System.Data.SQLite.Linq.dll</td><td/><td/><td>_5D8E690F_88EE_4FA7_A74B_2546380117E1_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>System.Data.SQLite.dll</td><td/><td/><td>_D9344852_8955_4DA5_9174_38F142589D8B_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>log4net.dll</td><td/><td/><td>_4874ACEA_0691_4E5D_99F5_8408C182493D_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>msvcr100.dll</td><td/><td/><td>_8339F38A_1CF0_47AD_B29A_692C4361D306_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>msvcr100.dll1</td><td/><td/><td>_6A7CFF05_D8AC_4205_A232_F59F38482F08_FILTER</td><td/><td/><td/><td/></row>
 	</table>
@@ -2876,9 +2801,10 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>1033</td><td>Bose Code</td><td>0</td><td/><td>413500978</td></row>
+		<row><td>COMPANY_NAME</td><td>1033</td><td>Bose Code</td><td>0</td><td/><td>-2111486921</td></row>
 		<row><td>DN_AlwaysInstall</td><td>1033</td><td>Always Install</td><td>0</td><td/><td>413500978</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>1033</td><td>The color settings of your system are not adequate for running [ProductName].</td><td>0</td><td/><td>413500978</td></row>
+		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION40FULL</td><td>1033</td><td>Microsoft .NET Framework 4.0 Full package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>-2111478729</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION45FULL</td><td>1033</td><td>Microsoft .NET Framework 4.5 Full package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>413494866</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_OS</td><td>1033</td><td>The operating system is not adequate for running [ProductName].</td><td>0</td><td/><td>413500978</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_PROCESSOR</td><td>1033</td><td>The processor is not adequate for running [ProductName].</td><td>0</td><td/><td>413500978</td></row>
@@ -3691,6 +3617,9 @@
 		<row><td>IDS_SETUPEXE_LAUNCH_COND_E</td><td>1033</td><td>This setup was built with an evaluation version of InstallShield and can only be launched from setup.exe.</td><td>0</td><td/><td>413500978</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME1</td><td>1033</td><td>Wireline Of Well Drilling Calculate Tool</td><td>0</td><td/><td>413483187</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME2</td><td>1033</td><td>钢丝绳钻井吨公里计算工具</td><td>0</td><td/><td>413477075</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME3</td><td>1033</td><td>LAUNCH~1.EXE|Launch SteelWire.exe</td><td>0</td><td/><td>-2111449961</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME4</td><td>1033</td><td>LAUNCH~1.EXE|Launch SteelWire.exe</td><td>0</td><td/><td>-2111457993</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME5</td><td>1033</td><td>LAUNCH~1.EXE|Launch SteelWire.exe</td><td>0</td><td/><td>-2111449801</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO</td><td>1033</td><td>From the list of servers below, select the database server you would like to target.</td><td>0</td><td/><td>413500978</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_DB</td><td>1033</td><td>From the list of catalog names below, select the database catalog you would like to target.</td><td>0</td><td/><td>413500978</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_TEMPLATE</td><td>1033</td><td>[IS_SQLBROWSE_INTRO]</td><td>0</td><td/><td>413500978</td></row>
@@ -3979,10 +3908,11 @@
 		<row><td>IDS__TargetReq_DESC_PROCESSOR</td><td>1033</td><td>The processor is not adequate for running [ProductName].</td><td>0</td><td/><td>413500978</td></row>
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>413500978</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>413500978</td></row>
-		<row><td>ID_STRING1</td><td>1033</td><td>http://www.BoseCode.com</td><td>0</td><td/><td>413500978</td></row>
-		<row><td>ID_STRING2</td><td>1033</td><td>Bose Code</td><td>0</td><td/><td>413500978</td></row>
+		<row><td>ID_STRING1</td><td>1033</td><td>http://www.BoseCode.com</td><td>0</td><td/><td>-2111486921</td></row>
+		<row><td>ID_STRING2</td><td>1033</td><td>Bose Code</td><td>0</td><td/><td>-2111486921</td></row>
 		<row><td>ID_STRING3</td><td>1033</td><td>LAUNCH~1.EXE|Launch SteelWire.exe</td><td>0</td><td/><td>413495443</td></row>
 		<row><td>ID_STRING4</td><td>1033</td><td>LAUNCH~1.EXE|Launch SteelWire.exe</td><td>0</td><td/><td>413524147</td></row>
+		<row><td>ID_STRING5</td><td>1033</td><td>LAUNCH~1.EXE|Launch SteelWire.exe</td><td>0</td><td/><td>-2111498921</td></row>
 		<row><td>IIDS_UITEXT_FeatureUninstalled</td><td>1033</td><td>This feature will remain uninstalled.</td><td>0</td><td/><td>413500978</td></row>
 	</table>
 
@@ -4097,8 +4027,11 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I2">ISIconIndex</col>
 		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\setupicon.ico</td><td>0</td></row>
+		<row><td>SteelWire.exe11_75B64325CEA94748A7048393F14642E5.exe</td><td/><td>F:\Projects\Workshop\GitHub\SteelWire\SteelWire.Git\trunk\SteelWire\SteelWire\bin\App\SteelWire.exe</td><td>0</td></row>
+		<row><td>SteelWire.exe1_59369E85B04B42189FE536011C81260B.exe</td><td/><td>F:\Projects\Workshop\GitHub\SteelWire\SteelWire.Git\trunk\SteelWire\SteelWire\bin\App\SteelWire.exe</td><td>0</td></row>
 		<row><td>SteelWire.exe21_45D8A3AB01B74AE2B6FE773F8BD075F1.exe</td><td/><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\SteelWire.exe</td><td>0</td></row>
 		<row><td>SteelWire.exe2_6310E8C57DCD43DEA30738AC0CF12CE5.exe</td><td/><td>F:\Projects\Workshop\GitHub\SteelWire1\trunk\SteelWire\SteelWire\bin\App\SteelWire.exe</td><td>0</td></row>
+		<row><td>SteelWire.exe_E8B0264AD84D45A8AEF53A04816788B1.exe</td><td/><td>F:\Projects\Workshop\GitHub\SteelWire\SteelWire.Git\trunk\SteelWire\SteelWire\bin\App\SteelWire.exe</td><td>0</td></row>
 	</table>
 
 	<table name="IniFile">
@@ -4289,7 +4222,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 	<table name="LaunchCondition">
 		<col key="yes" def="s255">Condition</col>
 		<col def="l255">Description</col>
-		<row><td>DOTNETVERSION45FULL&gt;="#1"</td><td>##IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION45FULL##</td></row>
+		<row><td>DOTNETVERSION40FULL&gt;="#1"</td><td>##IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION40FULL##</td></row>
 	</table>
 
 	<table name="ListBox">
@@ -4622,7 +4555,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>SERIALNUMBER</td><td/><td/></row>
 		<row><td>SERIALNUMVALSUCCESSRETVAL</td><td>1</td><td/></row>
 		<row><td>SHOWLAUNCHPROGRAM</td><td>-1</td><td/></row>
-		<row><td>SecureCustomProperties</td><td>ISFOUNDNEWERPRODUCTVERSION;USERNAME;COMPANYNAME;ISX_SERIALNUM;SUPPORTDIR;DOTNETVERSION45FULL</td><td/></row>
+		<row><td>SecureCustomProperties</td><td>ISFOUNDNEWERPRODUCTVERSION;USERNAME;COMPANYNAME;ISX_SERIALNUM;SUPPORTDIR;DOTNETVERSION40FULL</td><td/></row>
 		<row><td>SelectedSetupType</td><td>##IDS__DisplayName_Typical##</td><td/></row>
 		<row><td>SetupType</td><td>Typical</td><td/></row>
 		<row><td>UpgradeCode</td><td>{323FE04D-14A0-4B50-BD6E-508DBDCA6A7D}</td><td/></row>
@@ -4667,7 +4600,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="s255">Key</col>
 		<col def="S255">Name</col>
 		<col def="I2">Type</col>
-		<row><td>DotNet45Full</td><td>2</td><td>SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full</td><td>Version</td><td>2</td></row>
+		<row><td>DotNet40Full</td><td>2</td><td>SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full</td><td>Install</td><td>2</td></row>
 	</table>
 
 	<table name="Registry">
@@ -4686,9 +4619,8 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="L255">FileName</col>
 		<col def="s72">DirProperty</col>
 		<col def="i2">InstallMode</col>
-		<row><td>FileKey1</td><td>SteelWire.exe</td><td/><td>boseco_1_bose_code</td><td>2</td></row>
-		<row><td>FileKey2</td><td>SteelWire.exe</td><td/><td>steelw_1_steelwire</td><td>2</td></row>
-		<row><td>SteelWire.exe2</td><td>SteelWire.exe</td><td/><td>steelw_1_steelwire</td><td>2</td></row>
+		<row><td>SteelWire.exe</td><td>SteelWire.exe</td><td/><td>steelw_1_steelwire</td><td>2</td></row>
+		<row><td>SteelWire.exe1</td><td>SteelWire.exe</td><td/><td>steelw_1_steelwire</td><td>2</td></row>
 	</table>
 
 	<table name="RemoveIniFile">
@@ -4774,8 +4706,9 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="S255">ISComments</col>
 		<col def="S255">ISShortcutName</col>
 		<col def="I4">ISAttributes</col>
-		<row><td>SteelWire.exe2</td><td>steelw_1_steelwire</td><td>##IDS_SHORTCUT_DISPLAY_NAME2##</td><td>SteelWire.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>SteelWire.exe2_6310E8C57DCD43DEA30738AC0CF12CE5.exe</td><td>1</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
-		<row><td>SteelWire.exe21</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME2##</td><td>SteelWire.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>SteelWire.exe21_45D8A3AB01B74AE2B6FE773F8BD075F1.exe</td><td>1</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>SteelWire.exe</td><td>steelw_1_steelwire</td><td>##IDS_SHORTCUT_DISPLAY_NAME3##</td><td>SteelWire.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>SteelWire.exe_E8B0264AD84D45A8AEF53A04816788B1.exe</td><td>1</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>SteelWire.exe1</td><td>steelw_1_steelwire</td><td>##IDS_SHORTCUT_DISPLAY_NAME5##</td><td>SteelWire.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>SteelWire.exe1_59369E85B04B42189FE536011C81260B.exe</td><td>1</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>SteelWire.exe11</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME5##</td><td>SteelWire.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>SteelWire.exe11_75B64325CEA94748A7048393F14642E5.exe</td><td>1</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="Signature">
