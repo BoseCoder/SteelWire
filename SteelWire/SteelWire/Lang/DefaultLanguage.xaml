@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
     <system:String x:Key="AppTitle">
-        Wireline Of Well Drilling Calculate Tool
+        Drill Line Ton-Miles Calculate Tools
     </system:String>
     <system:String x:Key="Welcome">
         Welcome,
@@ -141,65 +141,65 @@
         Derrick Height:
     </system:String>
     <system:String x:Key="LblRollerDiameter">
-        Roller Diameter:
+        Diameter Of Drum:
     </system:String>
     <system:String x:Key="LblWirelineCutLength">
         Cut Length:
     </system:String>
     <system:String x:Key="LblWirelineMaxPower">
-        Wireline Max Power:
+        Breaking Force:
     </system:String>
     <system:String x:Key="LblRotaryHookWorkload">
-        Hook Workload:
+        Hook Load:
     </system:String>
     <system:String x:Key="LblRealRotaryHookWorkload">
         Real Hook Workload:
     </system:String>
     <system:String x:Key="LblWirelineDiameter">
-        Wireline Diameter:
+        Diameter Of Rope:
     </system:String>
     <system:String x:Key="LblRopeCount">
-        Rope Count:
+        Line No.:
     </system:String>
     <system:String x:Key="LblSecurityCoefficient">
-        Security Coefficient:
+        Safety Factor Correction Coefficient:
     </system:String>
     <system:String x:Key="LblPulleyCoefficient">
-        Pulley Coefficient:
+        Pulley Ratio Correction Coefficient:
     </system:String>
     <system:String x:Key="LblWirelineCuttingTitle">
-        Critical Value Of Wireline Cutting:
+        Critical Value Of Cut Rope:
     </system:String>
 
     <system:String x:Key="GroupCommonCoefficientTitle">
         Common Coefficient
     </system:String>
     <system:String x:Key="LblFluidDensity">
-        Fluid Density:
+        Drilling Fluid Density:
     </system:String>
     <system:String x:Key="LblElevatorWeight">
-        Elevator Weight:
+        Total Mass Of Travelling Block-Elevator:
     </system:String>
     <system:String x:Key="DrillDeviceTypeEnumDrillPipeWeight">
-        Weight:
+        Nominal Mass:
     </system:String>
     <system:String x:Key="DrillDeviceTypeEnumDrillPipeLength">
-        Stand Len:
+        The Length Of Three Joint Pipe:
     </system:String>
     <system:String x:Key="DrillDeviceTypeEnumDrillPipeDrillPipe1">
         Drill Pipe
     </system:String>
     <system:String x:Key="DrillDeviceTypeEnumHeavierDrillPipeWeight">
-        Weight:
+        Nominal Mass:
     </system:String>
     <system:String x:Key="DrillDeviceTypeEnumHeavierDrillPipeLength">
         Length:
     </system:String>
     <system:String x:Key="DrillDeviceTypeEnumHeavierDrillPipeHeavierDrillPipe1">
-        Heavier Drill Pipe
+        Heavy Weight Drill Pipe
     </system:String>
     <system:String x:Key="DrillDeviceTypeEnumDrillCollarWeight">
-        Weight:
+        Nominal Mass:
     </system:String>
     <system:String x:Key="DrillDeviceTypeEnumDrillCollarLength">
         Length:
@@ -211,10 +211,10 @@
         Drill Collar 2
     </system:String>
     <system:String x:Key="DrillDeviceTypeEnumBushingWeight">
-        Bushing Weight:
+        Casing Nominal Mass:
     </system:String>
     <system:String x:Key="DrillDeviceTypeEnumBushingLength">
-        Bushing Length:
+        The Length Of Casing Joint:
     </system:String>
     <system:String x:Key="DrillDeviceTypeEnumBushingBushing1">
         Bushing
@@ -224,17 +224,17 @@
         Operation Process Calculation:
     </system:String>
     <system:String x:Key="LblShallowHeight">
-        Shallow Height:
+        Depth From:
     </system:String>
     <system:String x:Key="LblDeepHeight">
-        Deep Height:
+        Depth To:
     </system:String>
     <system:String x:Key="LblValueTitle">
-        Value:
+        Calculate:
     </system:String>
 
     <system:String x:Key="GroupDrillingWorkTitle">
-        Calculate For Drilling Work
+        Drilling Ton-Miles Calculation
     </system:String>
     <system:String x:Key="LblDrillingType">
         Driving Type:
@@ -243,25 +243,25 @@
         Redressing Count:
     </system:String>
     <system:String x:Key="LblDrillingDifficulty">
-        Difficulty:
+        Drilling Difficulties:
     </system:String>
 
     <system:String x:Key="GroupTripWorkTitle">
-        Calculate For Trip Work
+        Round Trip Ton-Miles Calculation
     </system:String>
     <system:String x:Key="LblTripCount">
         Trip Count:
     </system:String>
 
     <system:String x:Key="GroupBushingWorkTitle">
-        Calculate For Bushing Work
+        Setting Casing Ton-Miles Calculation
     </system:String>
     <system:String x:Key="LblBushingHeight">
-        Bushing Height:
+        The Depth Of Running Casing:
     </system:String>
 
     <system:String x:Key="GroupCoringWorkTitle">
-        Calculate For Coring Work
+        Coring Ton-Miles Calculation
     </system:String>
 
     <system:String x:Key="GroupTotalWorkTitle">
@@ -272,7 +272,7 @@
     </system:String>
 
     <system:String x:Key="GroupCumulationAndResetTitle">
-        Cumulation &amp; Reset
+        Cumulation &amp; Cut Off
     </system:String>
     <system:String x:Key="LblCurrentDateTitle">
         Current Date:
@@ -281,10 +281,10 @@
         Current Wire No:
     </system:String>
     <system:String x:Key="LblCurrentCritical">
-        Current Critical:
+        Current Critical Value:
     </system:String>
     <system:String x:Key="LblCurrentCumulation">
-        Current Cumulation:
+        Current Total:
     </system:String>
     <system:String x:Key="LblRealWirelineCutLength">
         Real Cutting Length:
@@ -299,7 +299,7 @@
         Cumulate
     </system:String>
     <system:String x:Key="BtnReset">
-        Reset
+        Cut Off
     </system:String>
     <system:String x:Key="BtnSwitchWire">
         Switch Wire
@@ -426,22 +426,22 @@
     <system:String x:Key="ErrorCurrentCumulationValueZero">The value of current cumulation is zero, please cumulation once at least.</system:String>
     <system:String x:Key="ErrorCutLengthZero">The value of cut length could not be zero, please input again.</system:String>
     <system:String x:Key="ErrorInfoCutLengthZero">The cumulate value has reached or exceeded the critical value, advice to input the cut length value to cut down.</system:String>
-    <system:String x:Key="ErrorCriticalValueInvalid">Critical value is invalid.</system:String>
-    <system:String x:Key="ErrorCriticalDictionaryFileNotFound">Critical dictionary file not found.</system:String>
+    <system:String x:Key="ErrorCriticalValueInvalid">Invalid critical value.</system:String>
+    <system:String x:Key="ErrorCriticalDictionaryFileNotFound">Used to calculate the critical value of file is missing.</system:String>
     <system:String x:Key="ErrorCriticalConfigFileNotFound">Critical config file not found.</system:String>
-    <system:String x:Key="ErrorCumulationValueInvalid">Cumulation value is invalid.</system:String>
-    <system:String x:Key="ErrorCumulationDictionaryFileNotFound">Cumulation dictionary file not found.</system:String>
-    <system:String x:Key="ErrorCumulationConfigFileNotFound">Cumulation config file not found.</system:String>
+    <system:String x:Key="ErrorCumulationValueInvalid">Invalid accumulated value.</system:String>
+    <system:String x:Key="ErrorCumulationDictionaryFileNotFound">Used to calculate the accumulated value of file is missing.</system:String>
+    <system:String x:Key="ErrorCumulationConfigFileNotFound">Used to calculate the accumulated value of file is missing.</system:String>
     <system:String x:Key="ErrorHaveCumulatedToday">You have saved cumulate value today.</system:String>
-    <system:String x:Key="ErrorHaveResetToday">You have reset today.</system:String>
-    <system:String x:Key="ErrorCumulationDataNotFound">Cumulation data not found. Try cumulate first.</system:String>
-    <system:String x:Key="ErrorAccountEmpty">Account could not be empty.</system:String>
-    <system:String x:Key="ErrorPasswordEmpty">Password could not be empty.</system:String>
-    <system:String x:Key="ErrorPasswordTooShort">Password is too short, unless length 6 or more.</system:String>
-    <system:String x:Key="ErrorConfirmPasswordNotEqual">Confirm password is not equal to password.</system:String>
-    <system:String x:Key="ErrorAccountNotUnique">This account has already be used, please use another one.</system:String>
-    <system:String x:Key="ErrorUserNotExist">User is not exist.</system:String>
-    <system:String x:Key="ErrorPasswordNotEqual">Password error.</system:String>
+    <system:String x:Key="ErrorHaveResetToday">You have cut off today.</system:String>
+    <system:String x:Key="ErrorCumulationDataNotFound">Do not find out accumulated data.</system:String>
+    <system:String x:Key="ErrorAccountEmpty">Account empty input again.</system:String>
+    <system:String x:Key="ErrorPasswordEmpty">Password empty input again.</system:String>
+    <system:String x:Key="ErrorPasswordTooShort">Password is too short. Please enter at least six or more than six password.</system:String>
+    <system:String x:Key="ErrorConfirmPasswordNotEqual">Twice input do not match the password, please input again.</system:String>
+    <system:String x:Key="ErrorAccountNotUnique">This account has been registered, please input again.</system:String>
+    <system:String x:Key="ErrorUserNotExist">This account does not exist, please check whether the input is correct.</system:String>
+    <system:String x:Key="ErrorPasswordNotEqual">Error password.</system:String>
     <system:String x:Key="ErrorOptionServerEmpty">Database server could not be empty, please input again.</system:String>
     <system:String x:Key="ErrorOptionDatabaseEmpty">Database could not be empty, please input again.</system:String>
     <system:String x:Key="ErrorOptionDbUserEmpty">Database user could not be empty, please input again.</system:String>

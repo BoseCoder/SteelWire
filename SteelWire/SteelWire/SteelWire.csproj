@@ -204,10 +204,11 @@
     <Resource Include="Resources\Images\Icon.ico" />
     <Resource Include="Resources\Images\SignBg.png" />
     <Resource Include="Resources\Images\Icon.png" />
-    <Page Include="Lang\DefaultLanguage.xaml">
+    <Content Include="Lang\DefaultLanguage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Lang\zh-CN.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

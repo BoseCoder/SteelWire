@@ -47,7 +47,7 @@
             </WrapPanel>
         </ControlTemplate>
         <DataTemplate x:Key="ListViewItemTemplate">
-            <DockPanel Width="280" Margin="20,0,20,0">
+            <DockPanel Width="350" Margin="10,0,10,0">
                 <Grid DockPanel.Dock="Left" Width="10">
                     <Image Source="..\Resources\Images\DrillLeft.png" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
                 </Grid>
@@ -63,14 +63,14 @@
                         </Label>
                     </Grid>
                     <WrapPanel Margin="0,10,0,0">
-                        <Grid Width="95" Margin="0,0,5,0">
+                        <Grid Width="195" Margin="0,0,5,0">
                             <Label x:Name="LblWeight" HorizontalAlignment="Right">
                                 <Label.Content>
                                     <Binding Path="Value.WeightTitle.Value" Mode="OneWay" />
                                 </Label.Content>
                             </Label>
                         </Grid>
-                        <TextBox x:Name="TxtWeight" Width="100" MaxLength="10" InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent" GotKeyboardFocus="NumericBoxGotKeyboardFocusEvent">
+                        <TextBox x:Name="TxtWeight" Width="60" MaxLength="10" InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent" GotKeyboardFocus="NumericBoxGotKeyboardFocusEvent">
                             <TextBox.Text>
                                 <Binding Path="Value.Weight.Value" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"
                                          Converter="{StaticResource CurrentConfigValueConverter}">
@@ -85,14 +85,14 @@
                         </Label>
                     </WrapPanel>
                     <WrapPanel Margin="0,10,0,0">
-                        <Grid Width="95" Margin="0,0,5,0">
+                        <Grid Width="195" Margin="0,0,5,0">
                             <Label x:Name="LblLength" HorizontalAlignment="Right">
                                 <Label.Content>
                                     <Binding Path="Value.LengthTitle.Value" Mode="OneWay" />
                                 </Label.Content>
                             </Label>
                         </Grid>
-                        <TextBox x:Name="Txtength" Width="100" MaxLength="10" InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent" GotKeyboardFocus="NumericBoxGotKeyboardFocusEvent">
+                        <TextBox x:Name="Txtength" Width="60" MaxLength="10" InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent" GotKeyboardFocus="NumericBoxGotKeyboardFocusEvent">
                             <TextBox.Text>
                                 <Binding Path="Value.Length.Value" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"
                                          Converter="{StaticResource CurrentConfigValueConverter}">
@@ -160,210 +160,204 @@
             </Grid>
             <Expander Header="{DynamicResource GroupWirelineCuttingCriticalValueTitle}" DockPanel.Dock="Top" BorderBrush="#FFD5DFE5" Background="#FF3598DC" Foreground="White" BorderThickness="0,1,0,0" IsExpanded="True" Focusable="False">
                 <Border Margin="0" Background="White" BorderThickness="1,0,1,1" BorderBrush="#FFD5DFE5" Focusable="False">
-                    <DockPanel Margin="0,10,10,10">
-                        <WrapPanel DockPanel.Dock="Top">
-                            <WrapPanel Margin="10,0,0,0" Width="320">
-                                <Grid Width="125" Margin="0,0,5,0">
-                                    <Label x:Name="LblDerrickHeight" Content="{DynamicResource LblDerrickHeight}" HorizontalAlignment="Right"/>
-                                </Grid>
-                                <TextBox x:Name="TxtDerrickHeight" Width="120" MaxLength="10" InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent" GotKeyboardFocus="NumericBoxGotKeyboardFocusEvent">
-                                    <Binding Path="DerrickHeight.Value" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"
+                    <WrapPanel Margin="10,0,10,10">
+                        <WrapPanel Margin="0,10,0,0" Width="360">
+                            <Grid Width="125" Margin="0,0,5,0">
+                                <Label x:Name="LblDerrickHeight" Content="{DynamicResource LblDerrickHeight}" HorizontalAlignment="Right"/>
+                            </Grid>
+                            <TextBox x:Name="TxtDerrickHeight" Width="120" MaxLength="10" InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent" GotKeyboardFocus="NumericBoxGotKeyboardFocusEvent">
+                                <Binding Path="DerrickHeight.Value" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"
                 							Source="{StaticResource WindowDataKey}"
                 							Converter="{StaticResource CurrentConfigValueConverter}">
+                                    <Binding.ValidationRules>
+                                        <validationRule:DecimalValidationRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox>
+                            <Label>
+                                <Binding Path="Value" Source="{x:Static data:UnitData.Metre}"></Binding>
+                            </Label>
+                        </WrapPanel>
+                        <WrapPanel Margin="0,10,0,0" Width="360">
+                            <Grid Width="125" Margin="0,0,5,0">
+                                <Label x:Name="LblDrillingType" Content="{DynamicResource LblDrillingType}" HorizontalAlignment="Right"/>
+                            </Grid>
+                            <ComboBox x:Name="CboDrillingType" Width="120" SelectedValuePath="Key" DisplayMemberPath="Value.Value">
+                                <ComboBox.SelectedValue>
+                                    <Binding Path="DrillingType.Value" Mode="TwoWay" Source="{StaticResource WindowDataKey}"
+                                             UpdateSourceTrigger="PropertyChanged" />
+                                </ComboBox.SelectedValue>
+                            </ComboBox>
+                        </WrapPanel>
+                        <WrapPanel Margin="0,10,0,0" Width="360">
+                            <Grid Margin="0,0,5,0">
+                                <Label x:Name="LblElevatorWeight" Content="{DynamicResource LblElevatorWeight}" HorizontalAlignment="Right"/>
+                            </Grid>
+                            <TextBox x:Name="TxtElevatorWeight" Width="60" MaxLength="10" InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent" GotKeyboardFocus="NumericBoxGotKeyboardFocusEvent">
+                                <TextBox.Text>
+                                    <Binding Path="ElevatorWeight.Value" Converter="{StaticResource CurrentConfigValueConverter}" Mode="TwoWay"
+                                                 Source="{StaticResource WindowDataKey}" UpdateSourceTrigger="PropertyChanged">
                                         <Binding.ValidationRules>
                                             <validationRule:DecimalValidationRule />
                                         </Binding.ValidationRules>
                                     </Binding>
-                                </TextBox>
-                                <Label>
-                                    <Binding Path="Value" Source="{x:Static data:UnitData.Metre}"></Binding>
-                                </Label>
-                            </WrapPanel>
-                            <WrapPanel Margin="0,0,0,0" Width="320">
-                                <Grid Width="125" Margin="0,0,5,0">
-                                    <Label x:Name="LblDrillingType" Content="{DynamicResource LblDrillingType}" HorizontalAlignment="Right"/>
-                                </Grid>
-                                <ComboBox x:Name="CboDrillingType" Width="120" SelectedValuePath="Key" DisplayMemberPath="Value.Value">
-                                    <ComboBox.SelectedValue>
-                                        <Binding Path="DrillingType.Value" Mode="TwoWay" Source="{StaticResource WindowDataKey}"
-                                             UpdateSourceTrigger="PropertyChanged" />
-                                    </ComboBox.SelectedValue>
-                                </ComboBox>
-                            </WrapPanel>
-                            <WrapPanel Margin="0,0,0,0" Width="320">
-                                <Grid Width="125" Margin="0,0,5,0">
-                                    <Label x:Name="LblElevatorWeight" Content="{DynamicResource LblElevatorWeight}" HorizontalAlignment="Right"/>
-                                </Grid>
-                                <TextBox x:Name="TxtElevatorWeight" Width="120" MaxLength="10" InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent" GotKeyboardFocus="NumericBoxGotKeyboardFocusEvent">
-                                    <TextBox.Text>
-                                        <Binding Path="ElevatorWeight.Value" Converter="{StaticResource CurrentConfigValueConverter}" Mode="TwoWay"
-                                                 Source="{StaticResource WindowDataKey}" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <validationRule:DecimalValidationRule />
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
-                                </TextBox>
-                                <Label>
-                                    <Binding Path="Value" Source="{x:Static data:UnitData.Kilogram}"></Binding>
-                                </Label>
-                            </WrapPanel>
-                            <WrapPanel Margin="0,0,0,0" Width="320">
-                                <Grid Width="125" Margin="0,0,5,0">
-                                    <Label x:Name="LblRollerDiameter" Content="{DynamicResource LblRollerDiameter}" HorizontalAlignment="Right"/>
-                                </Grid>
-                                <TextBox x:Name="TxtRollerDiameter" Width="120" MaxLength="10" InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent" GotKeyboardFocus="NumericBoxGotKeyboardFocusEvent">
-                                    <TextBox.Text>
-                                        <Binding Path="RollerDiameter.Value" Converter="{StaticResource CurrentConfigValueConverter}" Mode="TwoWay"
-                                                 Source="{StaticResource WindowDataKey}" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <validationRule:DecimalValidationRule />
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
-                                </TextBox>
-                                <Label>
-                                    <Binding Path="Value" Source="{x:Static data:UnitData.Millimetre}"></Binding>
-                                </Label>
-                            </WrapPanel>
+                                </TextBox.Text>
+                            </TextBox>
+                            <Label>
+                                <Binding Path="Value" Source="{x:Static data:UnitData.Kilogram}"></Binding>
+                            </Label>
                         </WrapPanel>
-                        <WrapPanel DockPanel.Dock="Top" Margin="0,10,0,0">
-                            <WrapPanel Margin="5,0,0,0" Width="325">
-                                <Grid Width="130" Margin="0,0,5,0">
-                                    <Label x:Name="LblWirelineMaxPower" Content="{DynamicResource LblWirelineMaxPower}" HorizontalAlignment="Right"/>
-                                </Grid>
-                                <TextBox x:Name="TxtWirelineMaxPower" Width="120" MaxLength="10" InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent" GotKeyboardFocus="NumericBoxGotKeyboardFocusEvent">
-                                    <TextBox.Text>
-                                        <Binding Path="WirelineMaxPower.Value" Converter="{StaticResource CurrentConfigValueConverter}"
-                                                 Mode="TwoWay" Source="{StaticResource WindowDataKey}" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <validationRule:DecimalValidationRule />
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
-                                </TextBox>
-                                <Label>
-                                    <Binding Path="Value" Source="{x:Static data:UnitData.Kilonewton}"></Binding>
-                                </Label>
-                            </WrapPanel>
-                            <WrapPanel Margin="0,0,0,0" Width="320">
-                                <Grid Width="125" Margin="0,0,5,0">
-                                    <Label x:Name="LblRotaryHookWorkload" Content="{DynamicResource LblRotaryHookWorkload}" HorizontalAlignment="Right"/>
-                                </Grid>
-                                <TextBox x:Name="TxtRotaryHookWorkload" Width="120" MaxLength="10" InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent" GotKeyboardFocus="NumericBoxGotKeyboardFocusEvent">
-                                    <TextBox.Text>
-                                        <Binding Path="RotaryHookWorkload.Value" Converter="{StaticResource CurrentConfigValueConverter}"
-                                                 Mode="TwoWay" Source="{StaticResource WindowDataKey}" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <validationRule:DecimalValidationRule />
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
-                                </TextBox>
-                                <Label>
-                                    <Binding Path="Value" Source="{x:Static data:UnitData.Kilonewton}"></Binding>
-                                </Label>
-                            </WrapPanel>
-                            <WrapPanel Margin="0,0,0,0" Width="320">
-                                <Grid Width="125" Margin="0,0,5,0">
-                                    <Label x:Name="LblRopeCount" Content="{DynamicResource LblRopeCount}" HorizontalAlignment="Right"/>
-                                </Grid>
-                                <ComboBox x:Name="CboRopeCount" Width="120">
-                                    <ComboBox.SelectedValue>
-                                        <Binding Path="RopeCount.Value" Mode="TwoWay" Source="{StaticResource WindowDataKey}"
-                                                 UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <validationRule:IntValidationRule />
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </ComboBox.SelectedValue>
-                                </ComboBox>
-                            </WrapPanel>
-                            <WrapPanel Margin="0,0,0,0" Width="320">
-                                <Grid Width="125" Margin="0,0,5,0">
-                                    <Label x:Name="LblWirelineDiameter" Content="{DynamicResource LblWirelineDiameter}" HorizontalAlignment="Right"/>
-                                </Grid>
-                                <ComboBox x:Name="CboWirelineDiameter" Width="120" DisplayMemberPath="Value.Name" SelectedValuePath="Value.Name">
-                                    <ComboBox.ItemsSource>
-                                        <Binding Path="WireropeWorkloadCollection.Items" Mode="OneWay" Source="{StaticResource WindowDataKey}"></Binding>
-                                    </ComboBox.ItemsSource>
-                                    <ComboBox.SelectedValue>
-                                        <Binding Path="Diameter.Value" Mode="TwoWay" Source="{x:Static data:GlobalData.Wireline}"
-                                                 UpdateSourceTrigger="PropertyChanged">
-                                        </Binding>
-                                    </ComboBox.SelectedValue>
-                                </ComboBox>
-                                <Label>
-                                    <Binding Path="Value" Source="{x:Static data:UnitData.Millimetre}"></Binding>
-                                </Label>
-                            </WrapPanel>
+                        <WrapPanel Margin="0,10,0,0" Width="360">
+                            <Grid Width="125" Margin="0,0,5,0">
+                                <Label x:Name="LblRollerDiameter" Content="{DynamicResource LblRollerDiameter}" HorizontalAlignment="Right"/>
+                            </Grid>
+                            <TextBox x:Name="TxtRollerDiameter" Width="120" MaxLength="10" InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent" GotKeyboardFocus="NumericBoxGotKeyboardFocusEvent">
+                                <TextBox.Text>
+                                    <Binding Path="RollerDiameter.Value" Converter="{StaticResource CurrentConfigValueConverter}" Mode="TwoWay"
+                                                 Source="{StaticResource WindowDataKey}" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <validationRule:DecimalValidationRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <Label>
+                                <Binding Path="Value" Source="{x:Static data:UnitData.Millimetre}"></Binding>
+                            </Label>
                         </WrapPanel>
-                        <WrapPanel DockPanel.Dock="Top" Margin="0,10,0,0">
-                            <WrapPanel Margin="10,0,0,0" Width="320">
-                                <Grid Width="125" Margin="0,0,5,0">
-                                    <Label x:Name="LblWireLineStruct" Content="{DynamicResource LblWireLineStruct}" HorizontalAlignment="Right"/>
-                                </Grid>
-                                <TextBox x:Name="TxtWireLineStruct" Width="120" GotKeyboardFocus="NumericBoxGotKeyboardFocusEvent">
-                                    <TextBox.Text>
-                                        <Binding Path="Struct.Value" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"
+                        <WrapPanel Margin="0,10,0,0" Width="360">
+                            <Grid Width="125" Margin="0,0,5,0">
+                                <Label x:Name="LblWirelineMaxPower" Content="{DynamicResource LblWirelineMaxPower}" HorizontalAlignment="Right"/>
+                            </Grid>
+                            <TextBox x:Name="TxtWirelineMaxPower" Width="120" MaxLength="10" InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent" GotKeyboardFocus="NumericBoxGotKeyboardFocusEvent">
+                                <TextBox.Text>
+                                    <Binding Path="WirelineMaxPower.Value" Converter="{StaticResource CurrentConfigValueConverter}"
+                                                 Mode="TwoWay" Source="{StaticResource WindowDataKey}" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <validationRule:DecimalValidationRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <Label>
+                                <Binding Path="Value" Source="{x:Static data:UnitData.Kilonewton}"></Binding>
+                            </Label>
+                        </WrapPanel>
+                        <WrapPanel Margin="0,10,0,0" Width="360">
+                            <Grid Width="125" Margin="0,0,5,0">
+                                <Label x:Name="LblRotaryHookWorkload" Content="{DynamicResource LblRotaryHookWorkload}" HorizontalAlignment="Right"/>
+                            </Grid>
+                            <TextBox x:Name="TxtRotaryHookWorkload" Width="120" MaxLength="10" InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent" GotKeyboardFocus="NumericBoxGotKeyboardFocusEvent">
+                                <TextBox.Text>
+                                    <Binding Path="RotaryHookWorkload.Value" Converter="{StaticResource CurrentConfigValueConverter}"
+                                                 Mode="TwoWay" Source="{StaticResource WindowDataKey}" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <validationRule:DecimalValidationRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <Label>
+                                <Binding Path="Value" Source="{x:Static data:UnitData.Kilonewton}"></Binding>
+                            </Label>
+                        </WrapPanel>
+                        <WrapPanel Margin="0,10,0,0" Width="360">
+                            <Grid Width="125" Margin="0,0,5,0">
+                                <Label x:Name="LblRopeCount" Content="{DynamicResource LblRopeCount}" HorizontalAlignment="Right"/>
+                            </Grid>
+                            <ComboBox x:Name="CboRopeCount" Width="120">
+                                <ComboBox.SelectedValue>
+                                    <Binding Path="RopeCount.Value" Mode="TwoWay" Source="{StaticResource WindowDataKey}"
+                                                 UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <validationRule:IntValidationRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </ComboBox.SelectedValue>
+                            </ComboBox>
+                        </WrapPanel>
+                        <WrapPanel Margin="0,10,0,0" Width="360">
+                            <Grid Width="125" Margin="0,0,5,0">
+                                <Label x:Name="LblWirelineDiameter" Content="{DynamicResource LblWirelineDiameter}" HorizontalAlignment="Right"/>
+                            </Grid>
+                            <ComboBox x:Name="CboWirelineDiameter" Width="120" DisplayMemberPath="Value.Name" SelectedValuePath="Value.Name">
+                                <ComboBox.ItemsSource>
+                                    <Binding Path="WireropeWorkloadCollection.Items" Mode="OneWay" Source="{StaticResource WindowDataKey}"></Binding>
+                                </ComboBox.ItemsSource>
+                                <ComboBox.SelectedValue>
+                                    <Binding Path="Diameter.Value" Mode="TwoWay" Source="{x:Static data:GlobalData.Wireline}"
+                                                 UpdateSourceTrigger="PropertyChanged">
+                                    </Binding>
+                                </ComboBox.SelectedValue>
+                            </ComboBox>
+                            <Label>
+                                <Binding Path="Value" Source="{x:Static data:UnitData.Millimetre}"></Binding>
+                            </Label>
+                        </WrapPanel>
+                        <WrapPanel Margin="0,10,0,0" Width="360">
+                            <Grid Width="125" Margin="0,0,5,0">
+                                <Label x:Name="LblWireLineStruct" Content="{DynamicResource LblWireLineStruct}" HorizontalAlignment="Right"/>
+                            </Grid>
+                            <TextBox x:Name="TxtWireLineStruct" Width="120" GotKeyboardFocus="NumericBoxGotKeyboardFocusEvent">
+                                <TextBox.Text>
+                                    <Binding Path="Struct.Value" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"
                 							Source="{x:Static data:GlobalData.Wireline}">
-                                            <Binding.ValidationRules>
-                                                <validationRule:StringValidationRule />
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
-                                </TextBox>
-                            </WrapPanel>
-                            <WrapPanel Margin="0,0,0,0" Width="320">
-                                <Grid Width="125" Margin="0,0,5,0">
-                                    <Label x:Name="LblWireLineStrongLevel" Content="{DynamicResource LblWireLineStrongLevel}" HorizontalAlignment="Right"/>
-                                </Grid>
-                                <TextBox x:Name="TxtWireLineStrongLevel" Width="120" GotKeyboardFocus="NumericBoxGotKeyboardFocusEvent">
-                                    <TextBox.Text>
-                                        <Binding Path="StrongLevel.Value" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"
+                                        <Binding.ValidationRules>
+                                            <validationRule:StringValidationRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                        </WrapPanel>
+                        <WrapPanel Margin="0,10,0,0" Width="360">
+                            <Grid Width="125" Margin="0,0,5,0">
+                                <Label x:Name="LblWireLineStrongLevel" Content="{DynamicResource LblWireLineStrongLevel}" HorizontalAlignment="Right"/>
+                            </Grid>
+                            <TextBox x:Name="TxtWireLineStrongLevel" Width="120" GotKeyboardFocus="NumericBoxGotKeyboardFocusEvent">
+                                <TextBox.Text>
+                                    <Binding Path="StrongLevel.Value" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"
                 							Source="{x:Static data:GlobalData.Wireline}">
-                                            <Binding.ValidationRules>
-                                                <validationRule:StringValidationRule />
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
-                                </TextBox>
-                            </WrapPanel>
-                            <WrapPanel Margin="0,0,0,0" Width="320">
-                                <Grid Width="125" Margin="0,0,5,0">
-                                    <Label x:Name="LblWireLineTwistDirection" Content="{DynamicResource LblWireLineTwistDirection}" HorizontalAlignment="Right"/>
-                                </Grid>
-                                <TextBox x:Name="TxtWireLineTwistDirection" Width="120" GotKeyboardFocus="NumericBoxGotKeyboardFocusEvent">
-                                    <TextBox.Text>
-                                        <Binding Path="TwistDirection.Value" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"
+                                        <Binding.ValidationRules>
+                                            <validationRule:StringValidationRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                        </WrapPanel>
+                        <WrapPanel Margin="0,10,0,0" Width="360">
+                            <Grid Width="125" Margin="0,0,5,0">
+                                <Label x:Name="LblWireLineTwistDirection" Content="{DynamicResource LblWireLineTwistDirection}" HorizontalAlignment="Right"/>
+                            </Grid>
+                            <TextBox x:Name="TxtWireLineTwistDirection" Width="120" GotKeyboardFocus="NumericBoxGotKeyboardFocusEvent">
+                                <TextBox.Text>
+                                    <Binding Path="TwistDirection.Value" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"
                 							Source="{x:Static data:GlobalData.Wireline}">
-                                            <Binding.ValidationRules>
-                                                <validationRule:StringValidationRule />
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
-                                </TextBox>
-                            </WrapPanel>
-                            <WrapPanel Margin="0,0,0,0" Width="320">
-                                <Grid Width="125" Margin="0,0,5,0">
-                                    <Label x:Name="LblWireLineOrderLength" Content="{DynamicResource LblWireLineOrderLength}" HorizontalAlignment="Right"/>
-                                </Grid>
-                                <TextBox x:Name="TxtWireLineOrderLength" Width="120" MaxLength="10" InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent" GotKeyboardFocus="NumericBoxGotKeyboardFocusEvent">
-                                    <TextBox.Text>
-                                        <Binding Path="OrderLength.Value" Converter="{StaticResource CurrentConfigValueConverter}"
+                                        <Binding.ValidationRules>
+                                            <validationRule:StringValidationRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                        </WrapPanel>
+                        <WrapPanel Margin="0,10,0,0" Width="360">
+                            <Grid Width="125" Margin="0,0,5,0">
+                                <Label x:Name="LblWireLineOrderLength" Content="{DynamicResource LblWireLineOrderLength}" HorizontalAlignment="Right"/>
+                            </Grid>
+                            <TextBox x:Name="TxtWireLineOrderLength" Width="120" MaxLength="10" InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent" GotKeyboardFocus="NumericBoxGotKeyboardFocusEvent">
+                                <TextBox.Text>
+                                    <Binding Path="OrderLength.Value" Converter="{StaticResource CurrentConfigValueConverter}"
                                                  Mode="TwoWay" Source="{x:Static data:GlobalData.Wireline}" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <validationRule:DecimalValidationRule />
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
-                                </TextBox>
-                                <Label>
-                                    <Binding Path="Value" Source="{x:Static data:UnitData.Metre}"></Binding>
-                                </Label>
-                            </WrapPanel>
+                                        <Binding.ValidationRules>
+                                            <validationRule:DecimalValidationRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <Label>
+                                <Binding Path="Value" Source="{x:Static data:UnitData.Metre}"></Binding>
+                            </Label>
                         </WrapPanel>
-                    </DockPanel>
+                    </WrapPanel>
                 </Border>
             </Expander>
             <Expander Header="{DynamicResource GroupCommonCoefficientTitle}" DockPanel.Dock="Top" BorderBrush="#FFD5DFE5" Background="#FF3598DC" 
@@ -438,7 +432,7 @@
                         </Label>
                         <WrapPanel DockPanel.Dock="Top" Margin="0,10,0,10">
                             <WrapPanel Margin="49,0,0,0">
-                                <Grid Width="125" Margin="0,0,5,0">
+                                <Grid Margin="0,0,5,0">
                                     <Label x:Name="LblFluidDensity" Content="{DynamicResource LblFluidDensity}" HorizontalAlignment="Right"/>
                                 </Grid>
                                 <TextBox x:Name="TxtFluidDensity" Width="120" MaxLength="10" InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent" GotKeyboardFocus="NumericBoxGotKeyboardFocusEvent">
@@ -661,11 +655,11 @@
                                         </WrapPanel>
                                     </Grid>
                                     <StackPanel>
-                                        <WrapPanel Margin="0,0,0,0" Width="310" HorizontalAlignment="Center">
-                                            <Grid Width="120" Margin="0,0,5,0">
+                                        <WrapPanel Margin="0,0,0,0" HorizontalAlignment="Center">
+                                            <Grid Margin="0,0,5,0">
                                                 <Label x:Name="LblBushingHeight" Content="{DynamicResource LblBushingHeight}" HorizontalAlignment="Right"/>
                                             </Grid>
-                                            <TextBox x:Name="TxtBushingHeight" Width="120" MaxLength="10" InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent" GotKeyboardFocus="NumericBoxGotKeyboardFocusEvent">
+                                            <TextBox x:Name="TxtBushingHeight" Width="60" MaxLength="10" InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="DecimalBoxPreviewKeyDownEvent" GotKeyboardFocus="NumericBoxGotKeyboardFocusEvent">
                                                 <TextBox.Text>
                                                     <Binding Path="BushingHeight.Value" Converter="{StaticResource CurrentConfigValueConverter}" Mode="TwoWay"
                                              Source="{StaticResource WindowDataKey}" UpdateSourceTrigger="PropertyChanged">
