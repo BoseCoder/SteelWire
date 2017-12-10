@@ -43,7 +43,8 @@ namespace SteelWire.Windows
         {
             try
             {
-                this.TxtSerialNumber.Text = IntelliLock.Licensing.HardwareID.GetHardwareID(true, true, true, true, true, false);
+                // 去除License限制
+                // this.TxtSerialNumber.Text = IntelliLock.Licensing.HardwareID.GetHardwareID(true, true, true, true, true, false);
 
                 if (!GlobalData.IsSignIn && DatabaseConfigManager.OnceInstance.DatabaseType == DatabaseType.SqlServer)
                 {

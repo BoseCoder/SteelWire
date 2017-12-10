@@ -357,7 +357,6 @@
 		<row><td>ISX_DEFAULTCOMPONENT7</td><td>{64B07905-DB0E-4475-B42A-32B6725D0661}</td><td>ZH_HANS</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT8</td><td>{57A8697E-357B-4383-92C0-684924330787}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT9</td><td>{8F1911AF-9DE5-4E66-80C3-AD1B1131F959}</td><td>AppDataFolder</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>IntelliLock.Licensing.dll</td><td>{818E86BF-C512-42C9-B4A3-4E693311B159}</td><td>INSTALLDIR</td><td>2</td><td/><td>intellilock.licensing.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>Microsoft.ReportViewer.Common.dll</td><td>{21EC7A2F-85C1-4371-B69F-500B3D5B8C0B}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.reportviewer.commo</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>Microsoft.ReportViewer.DataVisualization.DLL</td><td>{D0DD0A43-6DC4-4BF0-B6C4-9932FAB67A75}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.reportviewer.datav</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>Microsoft.ReportViewer.ProcessingObjectModel.DLL</td><td>{D72886E0-2E99-4EAD-8783-6CAEC5E7133C}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.reportviewer.proce</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
@@ -1102,7 +1101,6 @@
 		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT7</td></row>
 		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT8</td></row>
 		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT9</td></row>
-		<row><td>INSTALLDIR</td><td>IntelliLock.Licensing.dll</td></row>
 		<row><td>INSTALLDIR</td><td>Microsoft.ReportViewer.Common.dll</td></row>
 		<row><td>INSTALLDIR</td><td>Microsoft.ReportViewer.DataVisualization.DLL</td></row>
 		<row><td>INSTALLDIR</td><td>Microsoft.ReportViewer.ProcessingObjectModel.DLL</td></row>
@@ -1972,7 +1970,6 @@
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT7</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT8</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT9</td></row>
-		<row><td>AlwaysInstall</td><td>IntelliLock.Licensing.dll</td></row>
 		<row><td>AlwaysInstall</td><td>Microsoft.ReportViewer.Common.dll</td></row>
 		<row><td>AlwaysInstall</td><td>Microsoft.ReportViewer.DataVisualization.DLL</td></row>
 		<row><td>AlwaysInstall</td><td>Microsoft.ReportViewer.ProcessingObjectModel.DLL</td></row>
@@ -2013,7 +2010,6 @@
 		<row><td>entityframework.sqlserver.re</td><td>EntityFramework.SqlServer.resources.dll</td><td>ENTITY~1.DLL|EntityFramework.SqlServer.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire\SteelWire.Git\trunk\SteelWire\SteelWire\bin\App\zh-Hans\EntityFramework.SqlServer.resources.dll</td><td>1</td><td/></row>
 		<row><td>entityframework.sqlserver.xm</td><td>ISX_DEFAULTCOMPONENT8</td><td>ENTITY~1.XML|EntityFramework.SqlServer.xml</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire\SteelWire.Git\trunk\SteelWire\SteelWire\bin\App\EntityFramework.SqlServer.xml</td><td>1</td><td/></row>
 		<row><td>entityframework.xml</td><td>ISX_DEFAULTCOMPONENT8</td><td>ENTITY~1.XML|EntityFramework.xml</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire\SteelWire.Git\trunk\SteelWire\SteelWire\bin\App\EntityFramework.xml</td><td>1</td><td/></row>
-		<row><td>intellilock.licensing.dll</td><td>IntelliLock.Licensing.dll</td><td>INTELL~1.DLL|IntelliLock.Licensing.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire\SteelWire.Git\trunk\SteelWire\SteelWire\bin\App\IntelliLock.Licensing.dll</td><td>1</td><td/></row>
 		<row><td>log4net.config</td><td>ISX_DEFAULTCOMPONENT8</td><td>LOG4NE~1.CON|log4net.config</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire\SteelWire.Git\trunk\SteelWire\SteelWire\bin\App\log4net.config</td><td>1</td><td/></row>
 		<row><td>log4net.dll</td><td>log4net.dll</td><td>log4net.dll</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire\SteelWire.Git\trunk\SteelWire\SteelWire\bin\App\log4net.dll</td><td>1</td><td/></row>
 		<row><td>log4net.xml</td><td>ISX_DEFAULTCOMPONENT8</td><td>log4net.xml</td><td>0</td><td/><td/><td/><td>1</td><td>F:\Projects\Workshop\GitHub\SteelWire\SteelWire.Git\trunk\SteelWire\SteelWire\bin\App\log4net.xml</td><td>1</td><td/></row>
@@ -2197,7 +2193,6 @@
 		<row><td>ISX_DEFAULTCOMPONENT7</td><td/><td/><td>_259C8EE1_1486_4DEB_A874_849200272997_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT8</td><td/><td/><td>_5F4E0237_EC92_4824_AF3F_1D45E6405E52_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT9</td><td/><td/><td>_3930EB5F_765F_4BA6_B05C_50E2CBB40BB5_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>IntelliLock.Licensing.dll</td><td/><td/><td>_DFFF1EE4_0235_4F29_AB14_D12631E2B2B0_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>Microsoft.ReportViewer.Common.dll</td><td/><td/><td>_D18D24FC_D186_403D_AE10_AE56AEBB9AF2_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>Microsoft.ReportViewer.DataVisualization.DLL</td><td/><td/><td>_4F81BE41_A63E_42C8_A624_5AF63937B4EE_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>Microsoft.ReportViewer.ProcessingObjectModel.DLL</td><td/><td/><td>_2A5F3C58_FE0D_45BC_A629_AB6D6D8B8E1B_FILTER</td><td/><td/><td/><td/></row>
@@ -4169,7 +4164,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>ISTheme</td><td>InstallShield Blue.theme</td></row>
 		<row><td>ISUSLock</td><td>{A4778217-24A5-48C3-A021-2899868D4315}</td></row>
 		<row><td>ISUSSignature</td><td>{3D9FAFB1-1374-4134-913B-EB877D76EB57}</td></row>
-		<row><td>ISVisitedViews</td><td>viewAssistant,viewISToday,viewAppFiles</td></row>
+		<row><td>ISVisitedViews</td><td>viewAssistant,viewISToday,viewAppFiles,viewProject</td></row>
 		<row><td>Limited</td><td>1</td></row>
 		<row><td>LockPermissionMode</td><td>1</td></row>
 		<row><td>MsiExecCmdLineOptions</td><td/></row>
@@ -4547,7 +4542,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>PROGRAMFILETOLAUNCHATEND</td><td>[INSTALLDIR]SteelWire.exe</td><td/></row>
 		<row><td>ProductCode</td><td>{CFFD2A60-B445-4B64-ACF1-8CEB0D4DD34C}</td><td/></row>
 		<row><td>ProductName</td><td>SteelWire</td><td/></row>
-		<row><td>ProductVersion</td><td>2.1.1.0</td><td/></row>
+		<row><td>ProductVersion</td><td>2.1.0.3</td><td/></row>
 		<row><td>ProgressType0</td><td>install</td><td/></row>
 		<row><td>ProgressType1</td><td>Installing</td><td/></row>
 		<row><td>ProgressType2</td><td>installed</td><td/></row>

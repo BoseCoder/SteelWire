@@ -13,7 +13,7 @@ using System.Configuration;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
-using IntelliLock.Licensing;
+// 去除License限制 using IntelliLock.Licensing;
 using SteelWire.AppCode.Data;
 using SteelWire.Business.Config;
 using SteelWire.Language;
@@ -97,12 +97,16 @@ namespace SteelWire.WindowData
 
         public Main()
         {
+            this.WindowTitle = DependencyLanguage.Generate(() =>
+                $"{LanguageManager.GetLocalResourceStringLeft("AppTitle")} {GlobalData.AppVersion} {LanguageManager.GetLocalResourceStringLeft("Welcome")}{GlobalData.UserDisplay.Value}");
+
+            /* 去除License限制
             const string license = "License";
             const string trial = "Trial";
             const string trialRemoveDay = "TrialRemoveDay";
+             {(CurrentLicense.License.LicenseStatus == LicenseStatus.Licensed ? null : CurrentLicense.License.ExpirationDays_Enabled ? $"[{LanguageManager.GetLocalResourceStringRight(license, trial)} {CurrentLicense.License.ExpirationDays}{LanguageManager.GetLocalResourceStringRight(license, trialRemoveDay)}]" : $"[{LanguageManager.GetLocalResourceStringRight(license, trial)}]")}
+             */
 
-            this.WindowTitle = DependencyLanguage.Generate(() =>
-                $"{LanguageManager.GetLocalResourceStringLeft("AppTitle")} {GlobalData.AppVersion} {LanguageManager.GetLocalResourceStringLeft("Welcome")}{GlobalData.UserDisplay.Value} {(CurrentLicense.License.LicenseStatus == LicenseStatus.Licensed ? null : CurrentLicense.License.ExpirationDays_Enabled ? $"[{LanguageManager.GetLocalResourceStringRight(license, trial)} {CurrentLicense.License.ExpirationDays}{LanguageManager.GetLocalResourceStringRight(license, trialRemoveDay)}]" : $"[{LanguageManager.GetLocalResourceStringRight(license, trial)}]")}");
             this.WelcomeText = DependencyLanguage.Generate(
                 () => $"{LanguageManager.GetLocalResourceStringLeft("Welcome")}{GlobalData.UserDisplay.Value}");
             this.SummaryText = DependencyLanguage.Generate(() =>

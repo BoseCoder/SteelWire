@@ -24,7 +24,7 @@
                 <TabItem Header="{DynamicResource OptionTabSystem}">
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                         <Grid HorizontalAlignment="Right">
-                            <WrapPanel>
+                            <WrapPanel Visibility="Collapsed">
                                 <Label Content="{DynamicResource LblSerialNumber}" />
                                 <TextBox Name="TxtSerialNumber" IsReadOnly="True" Padding="10,5,10,0" BorderThickness="0,0,0,1" Foreground="#FF666666">
                                     <TextBox.BorderBrush>
@@ -35,7 +35,7 @@
                                 </TextBox>
                             </WrapPanel>
                         </Grid>
-                        <Grid Margin="0,20,0,0">
+                        <Grid Margin="0,0,0,0">
                             <Label Content="{DynamicResource LblOptionLanguage}" HorizontalAlignment="Right" Margin="0,0,205,0"/>
                             <ComboBox Name="CboLanguage" Width="200" HorizontalAlignment="Right" SelectedValuePath="Key" DisplayMemberPath="Value.Value">
                                 <ComboBox.SelectedValue>

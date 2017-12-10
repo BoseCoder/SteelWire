@@ -29,7 +29,7 @@ namespace SteelWire.Business.Config
                     {
                         FluidDensityCoefficient = 0.015M,
                         LeftDenominatorCoefficient = 10560000M,
-                        RightDenominatorCoefficient = 250000M
+                        RightDenominatorCoefficient = 2640000M
                     }
                 }
             };

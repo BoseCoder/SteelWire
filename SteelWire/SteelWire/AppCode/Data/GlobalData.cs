@@ -5,7 +5,7 @@ namespace SteelWire.AppCode.Data
 {
     public static class GlobalData
     {
-        public static string AppVersion { get; } = "2.1";
+        public static string AppVersion { get; } = "2.1.0.3";
 
         public static DependencyObject<LanguageEnum> Language { get; } = new DependencyObject<LanguageEnum>();
 
